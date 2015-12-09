@@ -1,0 +1,25 @@
+{
+  "name": "mapadai",
+  "version": "1.0.0",
+  "authors": [
+    "el coruco <el.coruco@gmail.com>"
+  ],
+  "description": "Visualizador del uso del POT y otras herramientas",
+  "main": "main.js",
+  "moduleType": [],
+  "keywords": [
+    "mapadai",
+    "pot",
+    "infomex",
+    "inai"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
