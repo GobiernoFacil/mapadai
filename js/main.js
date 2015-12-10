@@ -1,6 +1,6 @@
 // INAI - Diagnósitco MapaDAImx
 // date     : 23/10/2015
-// @package : promexico
+// @package : INAI
 // @file    : main.js
 // @version : 1.0.0
 // @author  : Gobierno fácil <howdy@gobiernofacil.com>
@@ -26,21 +26,24 @@ require.config({
 var app, current_controller;
 
 switch(CONFIG.section){
-  case "users":
-    current_controller = "controller";
+  case "home":
+    current_controller = "controller_main";
     break;
-  case "companies":
-    current_controller = "companies_controller"; 
+  case "infomex":
+    current_controller = "controller_infomex"; 
+    break;
+  case "pot":
+    current_controller = "controller_pot"; 
+    break;
+  case "recursos":
+    current_controller = "controller_recursos"; 
     break;
   default:
-    current_controller = "controller";
+    current_controller = "controller_main";
     break;
 }
 
-/*
+
 require([current_controller], function(controller){ 
   app = new controller();
 });
-*/
-
-console.log(":D");
