@@ -1,5 +1,5 @@
 // INAI - Diagnósitco MapaDAImx
-// @package  : promexico
+// @package  : INAI
 // @location : /js/common_views
 // @file     : main_svg_view.js
 // @author   : Gobierno fácil <howdy@gobiernofacil.com>

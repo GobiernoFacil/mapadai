@@ -11,21 +11,25 @@ define(function(require){
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //
-  var Backbone  = require('backbone'),
-      d3        = require("d3"),
-      SVG       = require("common_views/main_svg_view"),
+  var Backbone = require('backbone'),
+      d3       = require("d3"),
+      SVG      = require("common_views/main_svg_view"),
+      Scales   = require("common_views/heat_map_scales_view"),
+      Axis     = require("common_views/heat_map_axis_view"), 
 
   //
   // D E F I N E   C O N S T A N T 'S
   // --------------------------------------------------------------------------------
   //
   Margins = {
-    width  : 600,
-    height : 600,
-    top    : 20,
-    right  : 30,
-    bottom : 100, 
-    left   : 100
+    width    : 600,
+    height   : 600,
+    top      : 20,
+    right    : 30,
+    bottom   : 100, 
+    left     : 30,
+    padding  : 0,
+    oPadding : 15
   };
 
   //
@@ -56,7 +60,9 @@ define(function(require){
     //
     //
     initialize : function(){
-   
+      this.svg    = new SVG(this.el, Margins);
+      this.scales = new Scales(Margins);
+      this.axis   = new Axis(this.svg, this.scales, Margins);
     },
 
   });

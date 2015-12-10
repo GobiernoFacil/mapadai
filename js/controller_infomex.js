@@ -50,7 +50,10 @@ define(function(require){
     //
     //
     initialize : function(){
-   
+      this.heatmap_a = new HeatMap({
+        controller : this,
+        el         : "#heatmap-a"
+      });
     },
 
   });
