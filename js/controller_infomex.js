@@ -14,7 +14,6 @@ define(function(require){
   var Backbone  = require('backbone'),
       d3        = require("d3"),
       HeatMap   = require("common_views/heat_map_view");
-
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
