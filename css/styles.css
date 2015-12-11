@@ -770,6 +770,13 @@ input:focus, select:focus, textarea:focus {
 
 /* =Main content and comment content
 -------------------------------------------------------------- */
+html.home {
+  background: url(img/inai-bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
 .gobiernofacil {
