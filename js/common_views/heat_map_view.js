@@ -66,6 +66,8 @@ define(function(require){
       this.svg    = new SVG(this.el, Margins);
       this.scales = new Scales(Margins);
       this.axis   = new Axis(this.svg, this.scales, Margins);
+
+      this.render();
     },
 
     render : function(){
@@ -90,7 +92,6 @@ define(function(require){
             .attr("width", width)
             .attr("height", height)
             .attr("fill", color(datum.count));
-            console.log(datum);
           count++;
         }, this);
       }, this);
