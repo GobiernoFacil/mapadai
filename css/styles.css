@@ -896,6 +896,25 @@ footer {
     -moz-opacity: 0.7;
     opacity: 0.7; }
 
+.year_nav li {
+  float: left;
+  list-style: none;
+  width: 20%; }
+  .year_nav li:last-child {
+    width: 40%; }
+    .year_nav li:last-child a {
+      font: 300 50px/1.5 'kelson_sans', Helvetica, Arial, sans-serif; }
+  .year_nav li a {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font: 500 60px/1.5 'kelson_sans', Helvetica, Arial, sans-serif;
+    padding: 70px 0 0;
+    min-height: 280px;
+    color: white;
+    display: block;
+    text-align: center; }
+    .year_nav li a:hover {
+      background: rgba(0, 0, 0, 0.5); }
+
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
 .gobiernofacil {
