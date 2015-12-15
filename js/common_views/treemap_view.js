@@ -31,7 +31,7 @@ define(function(require){
   },
   Width  = Margins.width,
   Height = Margins.height - Margins.top,
-  URL    = "/js/data/treedata.json",
+  URL    = "/js/data/treedata_.json",
   Transitioning;
 
   //
@@ -109,7 +109,7 @@ grandparent.append("text")
     .attr("dy", ".75em");
 
 /* load in data, display root */
-d3.json("/js/data/treedata.json", function(root) {
+d3.json(URL, function(root) {
 
   console.log(root);
   initialize(root);

@@ -1,0 +1,30 @@
+{"name":"Marina","children":[
+  {"name":"SECRETARÍA DE MARINA","children":[
+    {"name":"Sin respuesta por ley","children":[
+      {"name":"Información parcialmente reservada o confidencial","total":53,"value":56.1320754716981132},
+      {"name":"No es de competencia de la unidad de enlace","total":505,"value":12.5445544554455446},
+      {"name":"Negativa por ser reservada o confidencial","total":59,"value":52.2033898305084746},
+      {"name":"No se dará trámite a la solicitud","total":184,"value":7.1032608695652174},
+      {"name":"Inexistencia de la información solicitada","total":427,"value":47.5480093676814988}
+    ]},
+    {"name":"Sin respuesta por ciudadano","children":[
+      {"name":"Notificación de cambio de tipo de solicitud","total":1,"value":1.00000000000000000000},
+      {"name":"Notificación de prórroga","total":53,"value":31.1320754716981132},
+      {"name":"Requerimiento de información adicional","total":219,"value":10.7442922374429224}
+    ]},
+    {"name":"Informacion disponible","children":[
+      {"name":"Entrega de información en medio electrónico","total":4544,"value":46.4518045774647887},
+      {"name":"Notificación de pago","total":1,"value":113.0000000000000000},
+      {"name":"Notificación de disponibilidad de información","total":347,"value":82.8155619596541787},
+      {"name":"Notificación de envío","total":51,"value":79.4901960784313725},
+      {"name":"Respuesta del solicitante a la notificación de entrega de información con  costo","total":65,"value":72.0153846153846154},
+      {"name":"La información está disponible públicamente","total":962,"value":15.6694386694386694},
+      {"name":"Respuesta del solicitante a la notificación de entrega de información sin costo","total":4,"value":396.7500000000000000},
+      {"name":"Notificación lugar y fecha de entrega","total":94,"value":69.9787234042553191}
+    ]},
+    {"name":"Sin respuesta","children":[
+      {"name":"La solicitud no corresponde al marco de la Ley ","total":15,"value":9.6666666666666667},
+      {"name":"Sin respuesta","total":156,"value":0.00000000000000000000}
+    ]}
+  ]}
+]}
