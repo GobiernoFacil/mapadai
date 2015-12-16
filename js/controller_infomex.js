@@ -14,6 +14,7 @@ define(function(require){
   var Backbone = require('backbone'),
       d3       = require("d3"),
       HeatMap  = require("common_views/heat_map_view"),
+      Top10bar = require("common_views/top10chart_view"),
       TreeMap  = require("common_views/treemap_view"); 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -58,6 +59,11 @@ define(function(require){
       this.treemap_a = new TreeMap({
         controller : this,
         el : "#treemap-a"
+      });
+
+      this.top10bars = new Top10bar({
+        controller : this,
+        el : "#top10bar"
       });
     },
 
