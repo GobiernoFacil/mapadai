@@ -15,7 +15,7 @@ define(function(require){
       d3       = require("d3"),
       SVG      = require("common_views/main_svg_view"),
       Scale    = require("common_views/linear_scale_view"),
-      Bar      = require("text!templates/bar.html"),
+      //Bar      = require("text!templates/bar.html"),
       //Axis     = require("common_views/heat_map_axis_view"), 
       //Color_r  = ["white", "green"],
       Dummy    = [{"dependencia":"INSTITUTO MEXICANO DEL SEGURO SOCIAL","total":"25375"},{"dependencia":"SECRETARÃA DE EDUCACIÃ“N PÃšBLICA","total":"6238"},{"dependencia":"INSTITUTO DE SEGURIDAD Y SERVICIOS SOCIALES DE LOS TRABAJADORES DEL ESTADO","total":"5766"},{"dependencia":"SECRETARÃA DE SALUD","total":"4806"},{"dependencia":"PROCURADURÃA GENERAL DE LA REPÃšBLICA","total":"3793"},{"dependencia":"SECRETARÃA DE GOBERNACIÃ“N (INCLUYE LA ENTONCES SECRETARÃA DE SEGURIDAD PÃšBLICA)","total":"3754"},{"dependencia":"SECRETARÃA DE MEDIO AMBIENTE Y RECURSOS NATURALES","total":"3491"},{"dependencia":"SECRETARÃA DE COMUNICACIONES Y TRANSPORTES","total":"3123"},{"dependencia":"COMISIÃ“N FEDERAL PARA LA PROTECCIÃ“N CONTRA RIESGOS SANITARIOS","total":"2949"},{"dependencia":"PETRÃ“LEOS MEXICANOS","total":"2755"}];
@@ -57,7 +57,7 @@ define(function(require){
     //
     // [ DEFINE THE TEMPLATES ]
     //
-    bar : _.template(Bar),
+    //bar : _.template(Bar),
 
     //
     // [ THE INITIALIZE FUNCTION ]
@@ -97,7 +97,7 @@ define(function(require){
             background : "grey",
             height : "30px",
             width : function(d){
-              console.log(d, that.x_scale(d.total));
+              //console.log(d, that.x_scale(d.total));
               return that.x_scale(d.total) + "px";
             }
         });

@@ -111,7 +111,7 @@ grandparent.append("text")
 /* load in data, display root */
 d3.json(URL, function(root) {
 
-  console.log(root);
+  //console.log(root);
   initialize(root);
   accumulate(root);
   layout(root);

@@ -15,6 +15,7 @@ define(function(require){
       d3       = require("d3"),
       HeatMap  = require("common_views/heat_map_view"),
       Top10bar = require("common_views/top10chart_view"),
+      Timeline = require("common_views/timelines_view"), 
       TreeMap  = require("common_views/treemap_view"); 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -64,6 +65,11 @@ define(function(require){
       this.top10bars = new Top10bar({
         controller : this,
         el : "#top10bar"
+      });
+
+      this.timeline_a = new Timeline({
+        controller : this,
+        el : "#timeline-a"
       });
     },
 

@@ -1,7 +1,7 @@
 // INAI - Diagnósitco MapaDAImx
 // @package  : INAI
 // @location : /js/common_views
-// @file     : top10chart_view.js
+// @file     : timelines_view.js
 // @author   : Gobierno fácil <howdy@gobiernofacil.com>
 // @url      : http://gobiernofacil.com
 
@@ -43,7 +43,7 @@ define(function(require){
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
   // --------------------------------------------------------------------------------
   //
-  var heatMap = Backbone.View.extend({
+  var timeline = Backbone.View.extend({
     
     //
     // [ DEFINE THE EVENTS ]
@@ -55,51 +55,27 @@ define(function(require){
     //
     // [ DEFINE THE TEMPLATES ]
     //
-    bar : _.template(Bar),
 
     //
     // [ THE INITIALIZE FUNCTION ]
     //
     //
     initialize : function(){
-      //this.svg     = new SVG(this.el, Margins);
-      this.x_scale = new Scale(Dummy, Margins, "total", "x");
-      this.render();
+      this.svg     = new SVG(this.el, Margins);
+      //this.x_scale = new Scale(Dummy, Margins, "total", "x");
+      //this.render();
       //this.scales = new Scales(Margins);
       //this.axis   = new Axis(this.svg, this.scales, Margins);
 
       //this.render();
     },
 
-    render : function(){
-      /*
-      Dummy.forEach(function(d){
-        this.$el.append(this.bar(d));
-      }, this);
-      */
-      var that = this,
-          divs = d3.select(this.el).selectAll("div")
-        .data(Dummy)
-        .enter()
-        .append("div")
-        .attr("class", "container");
-
-      divs.append("p")
-      .html(function(d){
-        return d.dependencia;
-      });
-
-      divs.append("div")
-        .attr("class", "bar")
-        .style({
-            background : "grey",
-            height : "30px",
-            width : function(d){
-              console.log(d, that.x_scale(d.total));
-              return that.x_scale(d.total) + "px";
-            }
-        });
-    }
+    set_scales : function(data){
+      var max = d3.max(data, function(d, i){
+        return +d.total;
+      }),
+      x = d3.scale.linear().domain([0, max]).range()
+    } 
 
   });
 
@@ -107,5 +83,5 @@ define(function(require){
   // R E T U R N   T H E   B A C K B O N E   " C O N T R O L L E R "
   // --------------------------------------------------------------------------------
   //
-  return heatMap;
+  return timeline;
 });
