@@ -61,7 +61,14 @@ define(function(require){
     //
     //
     initialize : function(){
-      this.svg     = new SVG(this.el, Margins);
+      var that = this;
+      this.svg = new SVG(this.el, Margins);
+
+      d3.json(URL, function(data){
+        var d = data.data;
+        that.prepare_data(d);
+        that.set_scales(d);
+      });
       //this.x_scale = new Scale(Dummy, Margins, "total", "x");
       //this.render();
       //this.scales = new Scales(Margins);
@@ -71,10 +78,29 @@ define(function(require){
     },
 
     set_scales : function(data){
+
       var max = d3.max(data, function(d, i){
         return +d.total;
       }),
-      x = d3.scale.linear().domain([0, max]).range()
+      ext = d3.extent(data, function(d){
+        return d.date;
+      }),
+      y = d3.scale.linear()
+            .domain([0, max])
+            .range([Margins.height - Margins.bottom, Margins.top ]),
+      x = d3.time.scale()
+            .domain(ext)
+            .range([Margins.left, Margins.width - Margins.left - Margins.right]);
+            //.ticks(d3.time.year, 1);
+
+      this.scales = [x, y];
+    },
+
+    prepare_data : function(data){
+      data.map(function(d, i){
+        d.total = +d.total;
+        d.date  = new Date(d.year, d.month, 1);
+      }, this);
     } 
 
   });
