@@ -22,6 +22,7 @@ define(function(require){
   // D E F I N E   C O N S T A N T 'S
   // --------------------------------------------------------------------------------
   //
+  Categories = [],
   Margins = {
     width    : 600,
     height   : 600,
@@ -64,18 +65,15 @@ define(function(require){
       var that = this;
       this.svg = new SVG(this.el, Margins);
 
+      // LOAD THE DATA FOR THE FISRT TIME
       d3.json(URL, function(data){
         var d = data.data;
         that.prepare_data(d);
         that.set_scales(d);
         that.set_axis();
+        that.get_line_generator();
+        that.draw_lines(d);
       });
-      //this.x_scale = new Scale(Dummy, Margins, "total", "x");
-      //this.render();
-      //this.scales = new Scales(Margins);
-      //this.axis   = new Axis(this.svg, this.scales, Margins);
-
-      //this.render();
     },
 
     set_scales : function(data){
@@ -116,11 +114,47 @@ define(function(require){
          .call(y_axis);
     },
 
+    get_line_generator : function(){
+      var that = this,
+          line = d3.svg.line()
+                   .x(function(d){
+                    return that.scales[0](d.date);
+                   })
+                   .y(function(d){
+                    return that.scales[1](d.total);
+                   });
+      this.line = line;
+    },
+
+    draw_lines : function(data){
+      Categories.forEach(function(cat, i){
+        var m    = _.where(data, {dependencia : cat}),
+            cn   = this.svg.append("g").attr("class", "line-container"),
+            line = cn.append("path").attr("d", this.line(m))
+                     .attr("fill", "none")
+                     .attr("stroke", "black")
+                     .attr("stroke-width", 1);
+      }, this);
+    },
+
     prepare_data : function(data){
       data.map(function(d, i){
+        if(Categories.indexOf(d.dependencia) == -1){
+          Categories.push(d.dependencia);
+        }
         d.total = +d.total;
         d.date  = new Date(d.year, d.month, 1);
       }, this);
+
+      /*
+      this.svg.select(".main_container")
+                  .append("path").attr("d", this.line(this.data))
+                    .attr("fill", "rgba(236,0,140,0")
+                    .attr("stroke", "#ec008c")
+                    .attr("stroke-width", 1);
+      */
+
+      console.log(Categories);
     } 
 
   });
