@@ -68,6 +68,7 @@ define(function(require){
         var d = data.data;
         that.prepare_data(d);
         that.set_scales(d);
+        that.set_axis();
       });
       //this.x_scale = new Scale(Dummy, Margins, "total", "x");
       //this.render();
@@ -94,6 +95,25 @@ define(function(require){
             //.ticks(d3.time.year, 1);
 
       this.scales = [x, y];
+    },
+
+    set_axis : function(){
+      var x_axis = d3.svg.axis()
+                     .scale(this.scales[0])
+                     .orient("bottom")
+                     .tickValues(this.scales[0].ticks(d3.time.year, 1)),
+          y_axis = d3.svg.axis()
+                     .scale(this.scales[1])
+                     .orient("left")
+                     .tickFormat(d3.format("d")),
+      Time = this.svg.append("g")
+         .attr("class", "x_axis")
+         .attr("transform", "translate(0," + (Margins.height - Margins.bottom )+")")
+         .call(x_axis),
+      Value = this.svg.append("g")
+         .attr("class", "y_axis")
+         .attr("transform", "translate(" + (Margins.left) +", 0)")
+         .call(y_axis);
     },
 
     prepare_data : function(data){
