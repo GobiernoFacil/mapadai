@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="home" lang="es-MX"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+  <title>MapaDAImx</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="page">
+
+	<input type="radio" id="nav-expand" name="nav" class="invis" />
+    <nav class="nav-side">
+      <label for="nav-collapse" class="close">
+        &times;
+      </label>
+      <label for="nav-expand" class="btn-label">
+        <span class="top"></span><span class="middle"></span><span class="bottom"></span>      
+       </label>
+
+      <ul class="menu-list">
+        <li>
+          <a href="#!" title="Home">
+            Inicio
+          </a>
+        </li>
+         <li>
+          <a href="infomex.php" title="INFOMEX">
+            Infomex
+          </a>
+        </li>
+        <li>
+          <a href="#!" title="POT">
+            POT
+          </a>
+        </li>
+        <li>
+          <a href="#!" title="Solicitud de información">
+            Solicitud de información 
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <input type="radio" id="nav-collapse" name="nav" checked="checked" class="invis" />
