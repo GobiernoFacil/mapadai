@@ -2,12 +2,26 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="home" lang="es-MX"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html <?php echo !$body_class ? "" : 'class="' . $body_class .'"';?> lang="es-MX"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
-  <title>MapaDAImx</title>
+	<title><?php echo !$title ? "" :  $title ;?></title>
+	<meta name="description" content="<?php echo !$description ? "" :  $description ;?>">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/styles.css">
+<!--
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
+.oPYo.        8       o                              ooooo     .o         o 8 
+8    8        8                                      8                      8 
+8      .oPYo. 8oPYo. o8 .oPYo. oPYo. odYo. .oPYo.   o8oo   .oPYo. .oPYo. o8 8 
+8   oo 8    8 8    8  8 8oooo8 8  `' 8' `8 8    8    8     .oooo8 8    '  8 8 
+8    8 8    8 8    8  8 8.     8     8   8 8    8    8     8    8 8    .  8 8 
+`YooP8 `YooP' `YooP'  8 `Yooo' 8     8   8 `YooP'    8     `YooP8 `YooP'  8 8 
+:....8 :.....::.....::..:.....:..::::..::..:.....::::..:::::.....::.....::....
+:::::8 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::..:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+-->
 </head>
 <body>
 <div class="page">
@@ -23,7 +37,7 @@
 
       <ul class="menu-list">
         <li>
-          <a href="#!" title="Home">
+          <a href="/" title="Home">
             Inicio
           </a>
         </li>
