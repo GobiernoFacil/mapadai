@@ -1,4 +1,8 @@
-<?php include "templates/header.php";?>
+<?php 
+	$body_class 	= "home";
+	$title 			= "MapaDaiMx";
+	$description 	= "";
+	include "templates/header.php";?>
     
     <main class="main-base" role="main">
 	<header>
