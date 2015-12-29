@@ -10,12 +10,47 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+ <div class="page">
+
+	 <input type="radio" id="nav-expand" name="nav" class="invis" />
+    <nav class="nav-side">
+      <label for="nav-collapse" class="close">
+        &times;
+      </label>
+      <label for="nav-expand" class="btn-label">
+        <span class="top"></span><span class="middle"></span><span class="bottom"></span>      
+       </label>
+
+      <ul class="menu-list">
+        <li>
+          <a href="#!" title="Home">
+            Inicio
+          </a>
+        </li>
+        <li>
+          <a href="#!" title="POT">
+            POT
+          </a>
+        </li>
+        <li>
+          <a href="#!" title="Solicitud de información">
+            Solicitud de información 
+          </a>
+        </li>
+        <li>
+          <a href="#!" title="Contacto ">
+            Contacto
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <input type="radio" id="nav-collapse" name="nav" checked="checked" class="invis" />
+    
+    <main class="main-base" role="main">
 	<header>
 		<div class="col-sm-6">
 			<h1 class="inai">INAI.  Instituto Nacional de Transparencia Acceso a la Información y Protección de Datos Personales </h1>
-		</div>
-		<div class="col-sm-3 col-sm-offset-3">
-			<a href="#">--</a>
 		</div>
 		<div  class="clearfix"></div>
 	</header>
@@ -108,7 +143,9 @@ Cuculco, Delegación Coyoacán C.P. 04530</p>
 			</div>
 		</div>
 	</div>
-	
+	 <label for="nav-collapse" class="overlay"></label>
+    </main>
+ </div>
 	<script data-main="/js/main" src="/js/bower_components/requirejs/require.js"></script>
 
 <script>
