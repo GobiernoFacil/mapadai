@@ -910,20 +910,25 @@ footer {
   left: 0; }
   .btn-label .top, .btn-label .middle, .btn-label .bottom {
     height: 6px;
-    background-color: #fff;
-    position: absolute; }
+    background-color: white;
+    position: absolute;
+    transition: all 0.3s; }
+  .btn-label:hover .top, .btn-label:hover .middle, .btn-label:hover .bottom {
+    background-color: #00c1a5;
+    width: 30px;
+    left: 15px; }
   .btn-label .top {
     top: 12px;
     left: 2px;
     right: 2px;
     width: 56px; }
   .btn-label .middle {
-    top: 23px;
+    top: 24px;
     left: 7px;
     right: 7px;
     width: 46px; }
   .btn-label .bottom {
-    top: 34px;
+    top: 36px;
     left: 12px;
     right: 12px;
     width: 36px; }
