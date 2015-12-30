@@ -809,12 +809,19 @@ input:focus, select:focus, textarea:focus {
 
 /* =Main content and comment content
 -------------------------------------------------------------- */
-html.home {
-  background: url(img/inai-bg.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover; }
+html {
+  background: #d8d8d8; }
+  html.home {
+    background: url(img/inai-bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; }
+    html.home header {
+      background: transparent;
+      position: relative; }
+    html.home section {
+      padding: 0; }
 
 body {
   overflow-x: hidden; }
@@ -833,8 +840,17 @@ body {
   width: 395px;
   height: 65px; }
 
+.mapa {
+  color: white;
+  font: 500 21px 'kelson_sans', Helvetica, Arial, sans-serif;
+  padding: 30px 0 0; }
+
 header {
-  padding: 20px 0; }
+  background: #732181;
+  padding: 20px 0;
+  position: fixed;
+  width: 100%;
+  z-index: 10; }
 
 footer {
   background: #2e2e2e;
@@ -1122,6 +1138,61 @@ footer {
     text-align: center; }
     .year_nav li a:hover {
       background: rgba(0, 0, 0, 0.5); }
+
+/* =SECTIONS infomex
+-------------------------------------------------------------- */
+section:first-of-type {
+  padding: 20px 0; }
+
+.sub {
+  background: #e6e6e6;
+  min-height: 301px;
+  padding-top: 105px; }
+  .sub h2 {
+    color: #5c5c5c;
+    font: 700 120px 'kelson_sans', Helvetica, Arial, sans-serif;
+    padding: 40px 0; }
+  .sub h3 {
+    background: #3e3a3f;
+    color: white;
+    font: 700 24px 'kelson_sans', Helvetica, Arial, sans-serif;
+    padding: 24px 35px; }
+
+.nav {
+  padding: 60px 0; }
+  .nav h2 {
+    color: #5c5c5c;
+    font: 500 60px/1 'kelson_sans', Helvetica, Arial, sans-serif;
+    text-align: center; }
+    .nav h2 span {
+      color: purple;
+      display: block;
+      font: 500 16px 'kelson_sans', Helvetica, Arial, sans-serif; }
+  .nav ul {
+    margin: 40px 0; }
+    .nav ul li {
+      list-style: none;
+      text-align: right; }
+    .nav ul a {
+      display: block;
+      font: 500 15px 'kelson_sans', Helvetica, Arial, sans-serif;
+      margin-right: -15px;
+      padding: 25px; }
+      .nav ul a.current, .nav ul a.current:hover {
+        background: #f2f2f2;
+        color: #732181;
+        font-weight: 700; }
+      .nav ul a:hover {
+        background: rgba(255, 255, 255, 0.3); }
+
+.viz {
+  background: #f2f2f2;
+  padding: 60px 35px; }
+  .viz h3 {
+    color: #732181; }
+  .viz svg {
+    display: block;
+    margin: 0 auto; }
 
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
