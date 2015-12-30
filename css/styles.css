@@ -233,21 +233,18 @@ text {
 text {
   pointer-events: none; }
 
-.grandparent text {
-  /* header text */
-  font-weight: bold;
-  font-size: medium;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif; }
-
 #treemap-a rect {
-  fill: grey;
-  stroke: #fff; }
+  fill: #00c1a5;
+  stroke: #007564; }
 
 rect.parent, .grandparent rect {
   stroke-width: 2px; }
 
-.grandparent rect {
-  fill: #fff; }
+#treemap-a .grandparent rect {
+  fill: #007564; }
+#treemap-a .grandparent text {
+  fill: #00c1a5;
+  font: 500 14px 'kelson_sans', Helvetica, Arial, sans-serif; }
 
 .children rect.parent, .grandparent rect {
   cursor: pointer; }
@@ -262,7 +259,7 @@ rect.parent {
   /* text in the boxes */
   font-size: medium;
   padding: 5px;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif; }
+  font-family: 'kelson_sans', Helvetica, Arial, sans-serif; }
 
 .wrapper, .wrap {
   width: 90%;
@@ -1213,7 +1210,7 @@ section:first-of-type {
     color: #732181; }
   .viz svg {
     display: block;
-    margin: 0 auto; }
+    margin: 0 auto !important; }
 
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
