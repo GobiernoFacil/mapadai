@@ -132,7 +132,7 @@ define(function(require){
             cn   = this.svg.append("g").attr("class", "line-container"),
             line = cn.append("path").attr("d", this.line(m))
                      .attr("fill", "none")
-                     .attr("stroke", "rgba(115,33,129,0.7)")
+                     .attr("stroke", "rgba(0,193,165,0.7)")
                      .attr("stroke-width", 1);
       }, this);
     },
