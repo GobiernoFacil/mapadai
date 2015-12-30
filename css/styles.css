@@ -214,6 +214,17 @@ text {
     stroke-width: 2px;
     stroke: #ccc; }
 
+.content-top p {
+  color: #9C9C9C;
+  font: 500 14px 'kelson_sans', Helvetica, Arial, sans-serif;
+  margin: 0; }
+.content-top .bar {
+  margin-bottom: 10px; }
+.content-top:hover p {
+  color: #666; }
+.content-top:hover .bar {
+  background: #007564 !important; }
+
 #chart {
   width: 620px;
   height: 500px;
