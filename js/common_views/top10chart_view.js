@@ -84,7 +84,7 @@ define(function(require){
         .data(Dummy)
         .enter()
         .append("div")
-        .attr("class", "container");
+        .attr("class", "content-top");
 
       divs.append("p")
       .html(function(d){
