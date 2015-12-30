@@ -204,6 +204,16 @@ input[type="search"]::-webkit-search-decoration {
   font-weight: normal;
   font-style: normal; }
 
+text {
+  fill: #999;
+  font: 500 12px 'kelson_sans', Helvetica, Arial, sans-serif; }
+
+.x_axis, .y_axis {
+  fill: #eee; }
+  .x_axis path, .y_axis path {
+    stroke-width: 2px;
+    stroke: #ccc; }
+
 #chart {
   width: 620px;
   height: 500px;

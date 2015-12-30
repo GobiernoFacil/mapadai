@@ -27,6 +27,7 @@
 				<li><a href="#">Gráfica 4</a></li>
 			</ul>
 		</div>
+		<!--timeline-->
 		<div class="col-sm-10">
 			<div class="viz">
 				<h3>Top 10 de sujetos obligados por número de solicitudes</h3>
