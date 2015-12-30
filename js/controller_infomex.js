@@ -22,7 +22,12 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   
-    
+    // CONTAINERS
+  	timeContainer  	   = document.querySelector("#time"),
+  	topContainer   	   = document.querySelector("#top"),
+  	treemapContainer   = document.querySelector("#treemap"),
+  	heatmapContainer   = document.querySelector("#heatmap");
+  	
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
   // --------------------------------------------------------------------------------
@@ -33,7 +38,10 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-		
+		"click #show_time"        	 : "show_time",
+		"click #show_top"        	 : "show_top",
+		"click #show_treemap"        : "show_treemap",
+		"click #show_heatmap"        : "show_heatmap"
     },
 
     //
@@ -52,6 +60,8 @@ define(function(require){
     //
     //
     initialize : function(){
+	  this.hide_stuff();
+	  
       this.heatmap_a = new HeatMap({
         controller : this,
         el         : "#heatmap-a"
@@ -71,6 +81,57 @@ define(function(require){
         controller : this,
         el : "#timeline-a"
       });
+    },
+    
+    hide_stuff : function(){
+		topContainer.style.display= "none";
+		treemapContainer.style.display = "none";
+		heatmapContainer.style.display = "none";
+    },
+    
+    //
+    // L O C A L   T R A N S I T I O N S
+    // --------------------------------------------------------------------------------
+    //
+    
+    show_time : function(e){
+	   e.preventDefault();
+	   timeContainer.style.display 		= "block";
+	   topContainer.style.display       = "none";
+	   treemapContainer.style.display 	= "none";
+	   heatmapContainer.style.display 	= "none";
+	   $(".nav a").removeClass("current");
+	   $("#show_time").addClass("current");
+    },
+    
+    show_top : function(e){
+	   e.preventDefault();
+	   topContainer.style.display       = "block";
+	   timeContainer.style.display 		= "none";
+	   treemapContainer.style.display 	= "none";
+	   heatmapContainer.style.display 	= "none";
+	   $(".nav a").removeClass("current");
+	   $("#show_top").addClass("current");
+    },
+    
+    show_treemap : function(e){
+	   e.preventDefault();
+	   topContainer.style.display       = "none";
+	   timeContainer.style.display 		= "none";
+	   treemapContainer.style.display 	= "block";
+	   heatmapContainer.style.display 	= "none";
+	   $(".nav a").removeClass("current");
+	   $("#show_treemap").addClass("current");
+    },
+    
+    show_heatmap : function(e){
+	   e.preventDefault();
+	   topContainer.style.display       = "none";
+	   timeContainer.style.display 		= "none";
+	   treemapContainer.style.display 	= "none";
+	   heatmapContainer.style.display 	= "block";
+	   $(".nav a").removeClass("current");
+	   $("#show_heatmap").addClass("current");
     },
 
   });
