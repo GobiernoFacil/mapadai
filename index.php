@@ -4,13 +4,7 @@
 	$description 	= "";
 	include "templates/header.php";?>
     
-    <main class="main-base" role="main">
-	<header>
-		<div class="col-sm-6">
-			<h1 class="inai">INAI.  Instituto Nacional de Transparencia Acceso a la Información y Protección de Datos Personales </h1>
-		</div>
-		<div  class="clearfix"></div>
-	</header>
+   
 	<!-- intro-->
 	<section class="i-intro">
 		<div class="years_title">
