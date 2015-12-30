@@ -60,3 +60,16 @@
     </nav>
 
     <input type="radio" id="nav-collapse" name="nav" checked="checked" class="invis" />
+    
+     <main class="main-base" role="main">
+	<header>
+		<div class="col-sm-5">
+			<h1 class="inai">INAI.  Instituto Nacional de Transparencia Acceso a la Información y Protección de Datos Personales </h1>
+		</div>
+		<?php if ($body_class != "home"):?>
+		<div class="col-sm-6">
+			<h2 class="mapa">#Mapa<strong>DAI</strong>mx</h2>
+		</div>
+		<?php endif;?>
+		<div  class="clearfix"></div>
+	</header>
