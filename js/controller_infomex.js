@@ -33,7 +33,7 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-   
+		
     },
 
     //
