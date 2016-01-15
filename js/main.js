@@ -13,7 +13,8 @@ require.config({
     backbone   : "bower_components/backbone/backbone",
     underscore : "bower_components/underscore/underscore-min",
     text       : "bower_components/text/text",
-    d3         : "bower_components/d3/d3"
+    d3         : "bower_components/d3/d3",
+    nouislider : "bower_components/nouislider/distribute/nouislider.min"
   },
   shim : {
     backbone : {
