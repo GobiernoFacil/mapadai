@@ -23,10 +23,10 @@ define(function(require){
   //
   
     // CONTAINERS
-  	timeContainer  	   = document.querySelector("#time"),
-  	topContainer   	   = document.querySelector("#top"),
-  	treemapContainer   = document.querySelector("#treemap"),
-  	heatmapContainer   = document.querySelector("#heatmap");
+  	timeContainer  	 = document.querySelector("#time"),
+  	topContainer   	 = document.querySelector("#top"),
+  	treemapContainer = document.querySelector("#treemap"),
+  	heatmapContainer = document.querySelector("#heatmap");
   	
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
@@ -38,10 +38,10 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-		"click #show_time"        	 : "show_time",
-		"click #show_top"        	 : "show_top",
-		"click #show_treemap"        : "show_treemap",
-		"click #show_heatmap"        : "show_heatmap"
+		"click #show_time"    : "show_time",
+		"click #show_top"     : "show_top",
+		"click #show_treemap" : "show_treemap",
+		"click #show_heatmap" : "show_heatmap"
     },
 
     //
