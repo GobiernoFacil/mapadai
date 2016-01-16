@@ -9,6 +9,7 @@
 	<meta name="description" content="<?php echo !$description ? "" :  $description ;?>">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="/js/bower_components/nouislider/distribute/nouislider.min.css">
 <!--
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	

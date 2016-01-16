@@ -50,21 +50,8 @@
 			<!--heatmap-->
 			<div id="heatmap" class="viz">
 				<h3>Top 10 de sujetos obligados por número de solicitudes</h3>
+				<div id="slider"></div>
 				<section id="heatmap-a">
-				  <form method="GET" id="infomex-heatmap-a" class="row">
-				   <div class="col-sm-6">
-				    <p>
-				      <label>from:</label>
-				      <input type="date" name="from">
-				    </p>
-				   </div>
-				   <div class="col-sm-6">
-				    <p>
-				      <label>to:</label>
-				      <input type="date" name="to">
-				    </p>
-				   </div>
-				  </form>
 				</section>
 			</div>
 		</div>
