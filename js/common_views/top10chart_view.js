@@ -84,7 +84,7 @@ define(function(require){
         .data(Dummy)
         .enter()
         .append("div")
-        .attr("class", "container");
+        .attr("class", "content-top");
 
       divs.append("p")
       .html(function(d){
@@ -94,7 +94,7 @@ define(function(require){
       divs.append("div")
         .attr("class", "bar")
         .style({
-            background : "grey",
+            background : "#00c1a5",
             height : "30px",
             width : function(d){
               //console.log(d, that.x_scale(d.total));

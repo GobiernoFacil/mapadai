@@ -29,7 +29,7 @@ define(function(require){
     top      : 20,
     right    : 30,
     bottom   : 40, 
-    left     : 30,
+    left     : 40,
     padding  : 0,
     oPadding : 15
   };
@@ -132,7 +132,7 @@ define(function(require){
             cn   = this.svg.append("g").attr("class", "line-container"),
             line = cn.append("path").attr("d", this.line(m))
                      .attr("fill", "none")
-                     .attr("stroke", "black")
+                     .attr("stroke", "rgba(0,193,165,0.7)")
                      .attr("stroke-width", 1);
       }, this);
     },
