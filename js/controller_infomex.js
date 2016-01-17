@@ -13,7 +13,7 @@ define(function(require){
   //
   var Backbone = require('backbone'),
       d3       = require("d3"),
-      noUiSlider = require("nouislider"),
+      
       HeatMap  = require("common_views/heat_map_view"),
       Top10bar = require("common_views/top10chart_view"),
       Timeline = require("common_views/timelines_view"), 
@@ -62,17 +62,6 @@ define(function(require){
     //
     initialize : function(){
 
-      console.log(noUiSlider);
-      var slider = document.getElementById('slider');
-
-noUiSlider.create(slider, {
-  start: [20, 80],
-  connect: true,
-  range: {
-    'min': 0,
-    'max': 100
-  }
-});
 
 	  this.hide_stuff();
 	  

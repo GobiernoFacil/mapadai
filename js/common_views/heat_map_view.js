@@ -11,9 +11,10 @@ define(function(require){
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //
-  var Backbone = require('backbone'),
-      d3       = require("d3"),
-      Color_r  = ["white", "green"],
+  var Backbone   = require('backbone'),
+      d3         = require("d3"),
+      noUiSlider = require("nouislider"),
+      Color_r    = ["white", "green"],
 
   //
   // D E F I N E   C O N S T A N T 'S
@@ -63,6 +64,28 @@ define(function(require){
     //
     //
     initialize : function(){
+      var slider = document.getElementById('slider');
+      noUiSlider.create(slider, {
+        start: [2006, 2015],
+        step : 1,
+        connect: true,
+        behaviour: 'tap',
+        range: {
+          'min': 2006,
+          'max': 2015
+        },
+        pips : {
+          mode : "values",
+          values : d3.range(2006, 2016, 1),
+          density : 12,
+          stepped : true
+        }
+      });
+
+      slider.noUiSlider.on("end", function(){
+        console.log(this.get());
+      });
+      this.slider = slider;
       this.svg    = this.make_svg(Margins);
       this.scales = this.make_scales(Margins);
       this.axis   = this.make_axis(this.svg, this.scales, Margins);
