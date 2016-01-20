@@ -1172,9 +1172,10 @@ section:first-of-type {
     font: 700 60px 'kelson_sans', Helvetica, Arial, sans-serif;
     padding: 40px 0; }
   .sub h2 {
-    color: #5c5c5c;
-    font: 700 120px 'kelson_sans', Helvetica, Arial, sans-serif;
-    padding: 40px 0; }
+    color: #00c1a5;
+    font: 300 50px 'kelson_sans', Helvetica, Arial, sans-serif;
+    padding: 55px 0 0;
+    text-align: right; }
   .sub h3 {
     background: #3e3a3f;
     color: white;
@@ -1183,10 +1184,33 @@ section:first-of-type {
 
 .selector_year {
   background: #00c1a5;
-  min-height: 60px; }
+  min-height: 140px;
+  padding: 40px 0 15px; }
+  .selector_year .noUi-connect {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: none; }
+  .selector_year .noUi-background {
+    background: #00b79f;
+    box-shadow: none; }
+  .selector_year div#slider {
+    border: 0;
+    box-shadow: none; }
+  .selector_year .noUi-marker-large, .selector_year .noUi-marker-sub {
+    background: rgba(255, 255, 255, 0.5); }
+  .selector_year .noUi-marker-horizontal.noUi-marker {
+    width: 1px; }
+  .selector_year .noUi-value {
+    color: white;
+    font: 500 14px 'kelson_sans', Helvetica, Arial, sans-serif; }
+
+.content_graph {
+  background: #f2f2f2; }
 
 .nav {
-  padding: 0; }
+  background: #f2f2f2;
+  margin: 40px 0 0;
+  padding: 0;
+  height: 100%; }
   .nav h2 {
     color: #5c5c5c;
     font: 500 60px/1 'kelson_sans', Helvetica, Arial, sans-serif;
@@ -1195,28 +1219,40 @@ section:first-of-type {
       color: purple;
       display: block;
       font: 500 16px 'kelson_sans', Helvetica, Arial, sans-serif; }
+  .nav h3 {
+    color: #999;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 25px 10px 0;
+    text-transform: uppercase; }
   .nav ul {
-    margin: 0; }
+    margin: 20px 0 0; }
     .nav ul li {
       list-style: none;
-      text-align: right; }
+      text-align: left; }
     .nav ul a {
+      background: white;
+      border-top: 1px dotted #ccc;
       display: block;
       font: 500 15px 'kelson_sans', Helvetica, Arial, sans-serif;
-      margin-right: -15px;
       padding: 25px; }
       .nav ul a.current, .nav ul a.current:hover {
-        background: #f2f2f2;
-        color: #732181;
+        background: #732181;
+        border: 0;
+        color: white;
         font-weight: 700; }
       .nav ul a:hover {
-        background: rgba(255, 255, 255, 0.3); }
+        background: rgba(0, 0, 0, 0.08); }
 
 .viz {
   background: #f2f2f2;
-  padding: 60px 35px; }
+  margin: 40px 0;
+  padding: 25px 35px; }
   .viz h3 {
-    color: #732181; }
+    color: #732181;
+    font: 700 24px 'kelson_sans', Helvetica, Arial, sans-serif;
+    margin-bottom: 30px;
+    text-align: center; }
   .viz svg {
     display: block;
     margin: 0 auto !important; }
