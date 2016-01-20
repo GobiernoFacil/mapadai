@@ -44,17 +44,22 @@
         </li>
          <li>
           <a href="infomex.php" title="INFOMEX">
-            Infomex
+            Solicitudes de información
           </a>
         </li>
         <li>
           <a href="#!" title="POT">
-            POT
+            Portal de obligaciones y transparencia
+          </a>
+        </li>
+         <li>
+          <a href="#!" title="Usuarios">
+            Perfil de usuarios
           </a>
         </li>
         <li>
           <a href="#!" title="Solicitud de información">
-            Solicitud de información 
+            Recursos de revisión
           </a>
         </li>
       </ul>

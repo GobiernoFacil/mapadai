@@ -966,9 +966,9 @@ footer {
     border-bottom: 1px solid #eee;
     color: #fff;
     display: block;
-    font: 700 21px 'kelson_sans', Helvetica, Arial, sans-serif;
-    line-height: 130px;
-    padding: 12px 8px;
+    font: 700 21px/1.4 'kelson_sans', Helvetica, Arial, sans-serif;
+    min-height: 130px;
+    padding: 50px 8px;
     text-align: center; }
     .menu-list a:hover {
       background: rgba(0, 0, 0, 0.5); }
@@ -1098,12 +1098,11 @@ footer {
       background: rgba(255, 255, 255, 0.9); }
 
 .years {
-  position: absolute;
-  left: 50px;
+  position: relative;
   color: #007564;
   font: 700 580px/580px 'kelson_sans', Helvetica, Arial, sans-serif;
-  margin: 0 auto;
-  top: 30px; }
+  margin: 30px auto;
+  text-align: center; }
 
 .btn.proceso {
   background: rgba(115, 33, 129, 0.7);
