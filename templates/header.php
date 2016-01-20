@@ -74,7 +74,7 @@
 		</div>
 		<?php if ($body_class != "home"):?>
 		<div class="col-sm-6">
-			<h2 class="mapa">#Mapa<strong>DAI</strong>mx</h2>
+			<h2 class="mapa"><a href="/">#Mapa<strong>DAI</strong>mx</a></h2>
 		</div>
 		<?php endif;?>
 		<div  class="clearfix"></div>

@@ -6,20 +6,20 @@
 <div class="sub">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4">
-				<h2>2008</h2>
-			</div>
-			<div class="col-sm-4">
-				<h3>INFOMEX</h3>
+			<div class="col-sm-12">
+				<h1>Solicitudes de información</h1>
 			</div>
 		</div>
 	</div>
 </div>
-
+<div class="selector_year">
+	<div class="container">
+		<div id="slider"></div>
+	</div>
+</div>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-2 nav">
-			<h2>340 <span>respuestas</span></h2>
 			<ul>
 				<li><a href="#" id="show_time" class="current">Gráfica 1</a></li>
 				<li><a href="#" id="show_top">Gráfica 2</a></li>
@@ -50,7 +50,7 @@
 			<!--heatmap-->
 			<div id="heatmap" class="viz">
 				<h3>Top 10 de sujetos obligados por número de solicitudes</h3>
-				<div id="slider"></div>
+				
 				<section id="heatmap-a">
 				</section>
 			</div>
