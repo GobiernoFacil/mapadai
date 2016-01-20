@@ -21,7 +21,8 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   // /api/heatmap?from=2015-01-01&to=2015-02-01&table=conteo_infomex_publico
-  Endpoint = "/api/heatmap",
+  URL = "http://inai.skalas.mx/api/",
+  Endpoint = URL + "heatmap",
   Table    = "conteo_infomex_publico", 
   Fake     = false,
   FakeData = "/js/data/heatmap.json",
@@ -89,7 +90,7 @@ define(function(require){
       this.svg    = this.make_svg(Margins);
       this.scales = this.make_scales(Margins);
       this.axis   = this.make_axis(this.svg, this.scales, Margins);
-      this.get_data();
+      this.get_data(this.slider.noUiSlider.get());
     },
 
     //
@@ -138,21 +139,21 @@ define(function(require){
       url = FakeData;
     }
     else if(range.length === 1){
-      from  = "from=" + range[0] + "-01-01";
-      to    = "to=" + range[0] + "-12-31";
+      from  = "from=" + parseInt(range[0]) + "-01-01";
+      to    = "to=" + parseInt(range[0]) + "-12-31";
       table = "table=" + Table;
       url = Endpoint + "?" + from + "&" + to + "&" + table;
     }
     else{
-      from  = "from=" + range[0] + "-01-01";
-      to    = "to=" + range[1] + "-12-31";
+      from  = "from=" + parseInt(range[0]) + "-01-01";
+      to    = "to=" + parseInt(range[1]) + "-12-31";
       table = "table=" + Table;
       url = Endpoint + "?" + from + "&" + to + "&" + table;
     }
 
     d3.json(url, function(error, json){
       if(error){
-        that.show_error();
+        that.show_error(error);
       }
       else{
         that.render(json.data);
@@ -164,7 +165,8 @@ define(function(require){
   // [ ALERT THE USER IF THE API DOESN'T WORK ]
   //
   //
-  show_error : function(){
+  show_error : function(error){
+    console.log("error heatmap: ", error);
     alert("no se puede establecer conexión con el servidor");
   },
 
