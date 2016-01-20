@@ -44,17 +44,22 @@
         </li>
          <li>
           <a href="infomex.php" title="INFOMEX">
-            Infomex
+            Solicitudes de información
           </a>
         </li>
         <li>
           <a href="#!" title="POT">
-            POT
+            Portal de obligaciones y transparencia
+          </a>
+        </li>
+         <li>
+          <a href="#!" title="Usuarios">
+            Perfil de usuarios
           </a>
         </li>
         <li>
           <a href="#!" title="Solicitud de información">
-            Solicitud de información 
+            Recursos de revisión
           </a>
         </li>
       </ul>
@@ -69,7 +74,7 @@
 		</div>
 		<?php if ($body_class != "home"):?>
 		<div class="col-sm-6">
-			<h2 class="mapa">#Mapa<strong>DAI</strong>mx</h2>
+			<h2 class="mapa"><a href="/">#Mapa<strong>DAI</strong>mx</a></h2>
 		</div>
 		<?php endif;?>
 		<div  class="clearfix"></div>
