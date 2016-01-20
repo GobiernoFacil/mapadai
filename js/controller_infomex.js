@@ -13,6 +13,7 @@ define(function(require){
   //
   var Backbone = require('backbone'),
       d3       = require("d3"),
+      
       HeatMap  = require("common_views/heat_map_view"),
       Top10bar = require("common_views/top10chart_view"),
       Timeline = require("common_views/timelines_view"), 
@@ -60,6 +61,8 @@ define(function(require){
     //
     //
     initialize : function(){
+
+
 	  this.hide_stuff();
 	  
       this.heatmap_a = new HeatMap({
