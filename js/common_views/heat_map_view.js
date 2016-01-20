@@ -104,7 +104,10 @@ define(function(require){
           max    = d3.max(data, function(n){
             return n.count;
           }),
-          color  = d3.scale.linear().domain([0, max]).range(Color_r); 
+          min    = d3.min(data, function(n){
+            return n.count;
+          }),
+          color  = d3.scale.linear().domain([min, max]).range(Color_r); 
 
       days.forEach(function(day, i){
         hours.forEach(function(hour, j){
@@ -156,7 +159,7 @@ define(function(require){
         that.show_error(error);
       }
       else{
-        that.render(json.data);
+        that.render(json);
       }
     });
   },
@@ -166,7 +169,6 @@ define(function(require){
   //
   //
   show_error : function(error){
-    console.log("error heatmap: ", error);
     alert("no se puede establecer conexión con el servidor");
   },
 
