@@ -65,7 +65,8 @@ define(function(require){
     //
     //
     initialize : function(){
-      var slider = document.getElementById('slider');
+      var that   = this,
+          slider = document.getElementById('slider');
       noUiSlider.create(slider, {
         start: [2006, 2015],
         step : 1,
@@ -85,6 +86,7 @@ define(function(require){
 
       slider.noUiSlider.on("end", function(){
         console.log(this.get());
+        that.get_data(this.get());
       });
       this.slider = slider;
       this.svg    = this.make_svg(Margins);
@@ -154,6 +156,7 @@ define(function(require){
       url = Endpoint + "?" + from + "&" + to + "&" + table;
     }
 
+    console.log(url);
     d3.json(url, function(error, json){
       if(error){
         that.show_error(error);
