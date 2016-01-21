@@ -14,7 +14,7 @@ define(function(require){
   var Backbone   = require('backbone'),
       d3         = require("d3"),
       noUiSlider = require("nouislider"),
-      Color_r    = ["white", "green"],
+      Color_r    = ["#eee", "#00C186", "#004138"],
 
   //
   // D E F I N E   C O N S T A N T 'S
@@ -123,6 +123,7 @@ define(function(require){
             .attr("y", y)
             .attr("width", width)
             .attr("height", height)
+            .attr("stroke", "rgba(255,255,255,0.5)")
             .attr("fill", color(datum.count));
           count++;
         }, this);
@@ -202,7 +203,7 @@ define(function(require){
   //
   make_scales : function(){
     var x_scale = d3.scale.ordinal()
-      .domain(["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"])
+      .domain(["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"])
       .rangeBands([Margins.left, Margins.width - Margins.right]),
         y_scale = d3.scale.ordinal()
       .domain(d3.range(24))
@@ -226,8 +227,8 @@ define(function(require){
          .attr("transform", "translate(" + (layout.left) +", 0)")
          .call(y_axis);
 
-    svg.selectAll("path.domain").style("fill", "none").style("stroke", "black");
-    svg.selectAll("line").style("stroke", "black");
+    svg.selectAll("path.domain").style("fill", "none").style("stroke", "#f2f2f2");
+    svg.selectAll("line").style("stroke", "#f2f2f2");
 
   }
 });
