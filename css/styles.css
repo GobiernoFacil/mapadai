@@ -1254,7 +1254,7 @@ section:first-of-type {
   .viz h3 {
     color: #732181;
     font: 700 24px 'kelson_sans', Helvetica, Arial, sans-serif;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     text-align: center; }
   .viz .legend {
     margin: 50px 0 0; }
@@ -1292,6 +1292,18 @@ section:first-of-type {
   margin: 20px auto;
   display: block;
   width: 600px; }
+
+.download {
+  border-top: 1px dotted #732181;
+  display: block;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  padding: 10px 0;
+  text-align: right;
+  text-transform: uppercase; }
+  .download:hover {
+    color: #732181; }
 
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
