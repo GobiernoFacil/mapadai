@@ -6,22 +6,10 @@
 <div class="sub">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-9">
+			<div class="col-sm-12">
 				<h1>Solicitudes de información</h1>
 			</div>
-			<div class="col-sm-3">
-				<h2>2006 - 2015</h2>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- year selector-->
-<div class="selector_year">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-10 col-sm-offset-1">
-				<div id="slider"></div>
-			</div>
+			
 		</div>
 	</div>
 </div>
@@ -42,9 +30,10 @@
 			<div class="col-sm-10">
 				<!--timeline-->
 				<div id="time" class="viz">
-					<h3>Top 10 de sujetos obligados por número de solicitudes</h3>
 					<div class="row">
 						<div class="col-sm-10 col-sm-offset-1">
+							<h3>Top 10 de sujetos obligados por número de solicitudes: <span>2012 - 2015</span></h3>
+							<a href="#" class="download" download>Descargar datos</a>
 							<p>Integer lectus purus, efficitur efficitur massa ut, pharetra cursus dolor. In hac habitasse platea dictumst. Vivamus quis neque ut neque eleifend volutpat. Curabitur lorem mauris, sagittis maximus ultrices ac, aliquam non ex. Donec congue maximus justo, sit amet euismod leo venenatis ac. Vivamus venenatis, risus vitae rutrum laoreet, purus nibh rutrum ex, sed convallis enim urna a ligula. Donec lorem leo, vulputate vel porttitor et, ornare in sapien.</p>							
 						</div>
 					</div>
@@ -53,9 +42,10 @@
 				
 				<!--top10bar-->
 				<div id="top" class="viz">
-					<h3>Top 10 de sujetos obligados por número de solicitudes</h3>
 					<div class="row">
 						<div class="col-sm-10 col-sm-offset-1">
+							<h3>Top 10 de sujetos obligados por número de solicitudes: <span>2012 - 2015</span></h3>
+							<a href="#" class="download" download>Descargar datos</a>
 							<p>Integer lectus purus, efficitur efficitur massa ut, pharetra cursus dolor. In hac habitasse platea dictumst. Vivamus quis neque ut neque eleifend volutpat. Curabitur lorem mauris, sagittis maximus ultrices ac, aliquam non ex. Donec congue maximus justo, sit amet euismod leo venenatis ac. Vivamus venenatis, risus vitae rutrum laoreet, purus nibh rutrum ex, sed convallis enim urna a ligula. Donec lorem leo, vulputate vel porttitor et, ornare in sapien.</p>							
 						</div>
 					</div>
@@ -64,9 +54,9 @@
 				
 				<!--treemap-->
 				<div id="treemap" class="viz">
-					<h3>Top 10 de sujetos obligados por número de solicitudes</h3>
 					<div class="row">
 						<div class="col-sm-10 col-sm-offset-1">
+							<h3>Top 10 de sujetos obligados por número de solicitudes: <span>2012 - 2015</span></h3>
 							<a href="#" class="download" download>Descargar datos</a>
 							<p>Integer lectus purus, efficitur efficitur massa ut, pharetra cursus dolor. In hac habitasse platea dictumst. Vivamus quis neque ut neque eleifend volutpat. Curabitur lorem mauris, sagittis maximus ultrices ac, aliquam non ex. Donec congue maximus justo, sit amet euismod leo venenatis ac. Vivamus venenatis, risus vitae rutrum laoreet, purus nibh rutrum ex, sed convallis enim urna a ligula. Donec lorem leo, vulputate vel porttitor et, ornare in sapien.</p>							
 						</div>
@@ -76,13 +66,16 @@
 				
 				<!--heatmap-->
 				<div id="heatmap" class="viz">
-					<h3>Peticiones por hora por día de la semana</h3>
-					
 					<div class="row">
 						<div class="col-sm-10 col-sm-offset-1">
+										<h3>Peticiones por hora por día de la semana: <span>2012 - 2015</span></h3>
 							<a href="#" class="download" download>Descargar datos</a>
 							<p>Integer lectus purus, efficitur efficitur massa ut, pharetra cursus dolor. In hac habitasse platea dictumst. Vivamus quis neque ut neque eleifend volutpat. Curabitur lorem mauris, sagittis maximus ultrices ac, aliquam non ex. Donec congue maximus justo, sit amet euismod leo venenatis ac. Vivamus venenatis, risus vitae rutrum laoreet, purus nibh rutrum ex, sed convallis enim urna a ligula. Donec lorem leo, vulputate vel porttitor et, ornare in sapien.</p>							
 						</div>
+						
+					</div>
+					
+					<div class="row">
 						<div class="col-sm-1 col-sm-offset-2">
 							<div class="legend">
 								<p>Horas</p>
@@ -95,15 +88,26 @@
 								<li class="max"><b></b> 100</li>
 							</ul>
 						</div>
+						
 					</div>
 					<section id="heatmap-a"></section>
+					
 				</div>
 			</div>
 		</div>
 	</div>
-
 </div>
 
+<!-- year selector-->
+<div class="selector_year_out">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
 
-
+							<p class="small"><strong>Período a mostrar</strong></p>
+								<div id="slider"></div>
+			</div>
+		</div>
+	</div>
+</div>
 <?php include "templates/footer.php";?>

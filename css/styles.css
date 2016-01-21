@@ -1181,7 +1181,8 @@ section:first-of-type {
   .sub h1 {
     color: #5c5c5c;
     font: 700 60px 'kelson_sans', Helvetica, Arial, sans-serif;
-    padding: 40px 0; }
+    padding: 40px 0;
+    text-align: center; }
   .sub h2 {
     color: #00c1a5;
     font: 300 50px 'kelson_sans', Helvetica, Arial, sans-serif;
@@ -1213,6 +1214,47 @@ section:first-of-type {
   .selector_year .noUi-value {
     color: white;
     font: 500 14px 'kelson_sans', Helvetica, Arial, sans-serif; }
+
+.small {
+  font-size: 12px;
+  text-align: center; }
+
+.selector_year_out, .selector_year_in {
+  margin: 0;
+  background: #00c1a5;
+  min-height: 155px;
+  padding: 25px 0; }
+  .selector_year_out .small, .selector_year_in .small {
+    color: rgba(255, 255, 255, 0.8);
+    font: 500 14px 'kelson_sans', Helvetica, Arial, sans-serif;
+    text-transform: uppercase; }
+  .selector_year_out .noUi-connect, .selector_year_in .noUi-connect {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: none; }
+  .selector_year_out .noUi-background, .selector_year_in .noUi-background {
+    background: #00b79f;
+    box-shadow: none; }
+  .selector_year_out div#slider, .selector_year_in div#slider {
+    border: 0;
+    box-shadow: none; }
+  .selector_year_out .noUi-marker-large, .selector_year_out .noUi-marker-sub, .selector_year_in .noUi-marker-large, .selector_year_in .noUi-marker-sub {
+    background: rgba(255, 255, 255, 0.5); }
+  .selector_year_out .noUi-marker-horizontal.noUi-marker, .selector_year_in .noUi-marker-horizontal.noUi-marker {
+    width: 1px; }
+  .selector_year_out .noUi-value, .selector_year_in .noUi-value {
+    color: white;
+    font: 500 14px 'kelson_sans', Helvetica, Arial, sans-serif; }
+
+.selector_year_in {
+  background: #f2f2f2; }
+  .selector_year_in .noUi-connect {
+    background: #00c1a5; }
+  .selector_year_in .noUi-background {
+    background: #ccc; }
+  .selector_year_in .noUi-marker-large, .selector_year_in .noUi-marker-sub {
+    background: #00c1a5; }
+  .selector_year_in .noUi-value, .selector_year_in .small {
+    color: #00c1a5; }
 
 .content_graph {
   background: #f2f2f2; }
@@ -1257,13 +1299,17 @@ section:first-of-type {
 
 .viz {
   background: #f2f2f2;
-  margin: 40px 0;
-  padding: 25px 35px; }
+  margin: 40px 0 10px;
+  padding: 25px 35px 0; }
   .viz h3 {
     color: #732181;
-    font: 700 24px 'kelson_sans', Helvetica, Arial, sans-serif;
+    font: 700 31px 'kelson_sans', Helvetica, Arial, sans-serif;
     margin-bottom: 20px;
     text-align: center; }
+    .viz h3 span {
+      color: #00c1a5;
+      font-weight: 500;
+      display: block; }
   .viz .legend {
     margin: 50px 0 0; }
     .viz .legend li {
