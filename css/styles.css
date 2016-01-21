@@ -1259,22 +1259,20 @@ section:first-of-type {
 .content_graph {
   background: #f2f2f2; }
 
-.nav.re {
-  background: #007564; }
-  .nav.re ul {
-    margin: 0;
-    text-align: center; }
-  .nav.re li {
-    display: inline-block; }
-  .nav.re a:link, .nav.re a:visited {
-    color: rgba(255, 255, 255, 0.7);
-    display: block;
-    padding: 15px 30px; }
-    .nav.re a:link.current, .nav.re a:link.current:hover, .nav.re a:visited.current, .nav.re a:visited.current:hover {
-      background: #00c1a5;
-      color: white; }
-    .nav.re a:link:hover, .nav.re a:visited:hover {
-      color: white; }
+.nav.re ul {
+  margin: 0;
+  text-align: center; }
+.nav.re li {
+  display: inline-block; }
+.nav.re a:link, .nav.re a:visited {
+  color: #999;
+  display: block;
+  padding: 15px 30px; }
+  .nav.re a:link.current, .nav.re a:link.current:hover, .nav.re a:visited.current, .nav.re a:visited.current:hover {
+    background: #00c1a5;
+    color: white; }
+  .nav.re a:link:hover, .nav.re a:visited:hover {
+    color: #555; }
 
 .viz {
   background: #f2f2f2;
