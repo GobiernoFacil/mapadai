@@ -1288,6 +1288,11 @@ section:first-of-type {
     display: block;
     margin: 0 auto !important; }
 
+#top10bar {
+  margin: 20px auto;
+  display: block;
+  width: 600px; }
+
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
 .gobiernofacil {
