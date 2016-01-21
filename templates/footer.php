@@ -23,7 +23,7 @@
 					<li><a href="#" class="tw">Twitter Inai</a></li>
 					<li><a href="#" class="yt">YouTube Inai</a></li>
 				</ul>
-				<a href="" class="btn val">Evaluar sitio</a>
+				<!--<a href="" class="btn val">Evaluar sitio</a>-->
 			</div>
 			<div class="col-sm-4">
 				<h4>Horarios</h4>
