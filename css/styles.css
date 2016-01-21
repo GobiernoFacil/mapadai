@@ -1282,6 +1282,8 @@ section:first-of-type {
   .viz p {
     color: #666;
     line-height: 1.4; }
+  .viz section {
+    padding: 0; }
   .viz svg {
     display: block;
     margin: 0 auto !important; }
