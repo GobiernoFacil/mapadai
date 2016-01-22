@@ -13,7 +13,7 @@ define(function(require){
   //
   var Backbone   = require('backbone'),
       d3         = require("d3"),
-      noUiSlider = require("nouislider"),
+      //noUiSlider = require("nouislider"),
       Color_r    = ["#eee", "#00C186", "#004138"],
 
   //
@@ -21,11 +21,11 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   // /api/heatmap?from=2015-01-01&to=2015-02-01&table=conteo_infomex_publico
-  URL = "http://inai.skalas.mx/api/",
-  Endpoint = URL + "heatmap",
-  Table    = "conteo_infomex_publico", 
-  Fake     = false,
-  FakeData = "/js/data/heatmap.json",
+  //URL = "http://inai.skalas.mx/api/",
+  //Endpoint = URL + "heatmap",
+  //Table    = "conteo_infomex_publico", 
+  //Fake     = false,
+  //FakeData = "/js/data/heatmap.json",
   Margins = {
     width    : 600,
     height   : 600,
@@ -65,34 +65,11 @@ define(function(require){
     //
     //
     initialize : function(){
-      var that   = this,
-          slider = document.getElementById('slider');
-      noUiSlider.create(slider, {
-        start: [2006, 2015],
-        step : 1,
-        connect: true,
-        behaviour: 'tap',
-        range: {
-          'min': 2006,
-          'max': 2015
-        },
-        pips : {
-          mode : "values",
-          values : d3.range(2006, 2016, 1),
-          density : 12,
-          stepped : true
-        }
-      });
-
-      slider.noUiSlider.on("end", function(){
-        console.log(this.get());
-        that.get_data(this.get());
-      });
-      this.slider = slider;
+      var that    = this;
       this.svg    = this.make_svg(Margins);
       this.scales = this.make_scales(Margins);
       this.axis   = this.make_axis(this.svg, this.scales, Margins);
-      this.get_data(this.slider.noUiSlider.get());
+      //this.get_data(this.slider.noUiSlider.get());
     },
 
     //
@@ -134,7 +111,7 @@ define(function(require){
   // D A T A   H A N D L E   F U N C T I O N S
   // --------------------------------------------------------------------------------
   //
-
+/*
   //
   // [ CALL THE API (OR LOAD THE FAKE STUFF ) ]
   //
@@ -157,7 +134,6 @@ define(function(require){
       url = Endpoint + "?" + from + "&" + to + "&" + table;
     }
 
-    console.log(url);
     d3.json(url, function(error, json){
       if(error){
         that.show_error(error);
@@ -166,7 +142,7 @@ define(function(require){
         that.render(json);
       }
     });
-  },
+  */  
 
   //
   // [ ALERT THE USER IF THE API DOESN'T WORK ]

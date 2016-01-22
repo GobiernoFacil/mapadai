@@ -73,7 +73,7 @@ define(function(require){
       //this.render();
     },
 
-    render : function(){
+    render : function(data){
       /*
       Dummy.forEach(function(d){
         this.$el.append(this.bar(d));
@@ -101,6 +101,8 @@ define(function(require){
               return that.x_scale(d.total) + "px";
             }
         });
+    }, get_data : function(){
+      
     }
 
   });

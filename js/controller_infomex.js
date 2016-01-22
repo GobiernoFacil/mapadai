@@ -11,23 +11,37 @@ define(function(require){
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //
-  var Backbone = require('backbone'),
-      d3       = require("d3"),
-      
-      HeatMap  = require("common_views/heat_map_view"),
-      Top10bar = require("common_views/top10chart_view"),
-      Timeline = require("common_views/timelines_view"), 
-      TreeMap  = require("common_views/treemap_view"); 
+  var Backbone   = require('backbone'),
+      d3         = require("d3"),
+      noUiSlider = require("nouislider"),
+      HeatMap    = require("common_views/heat_map_view"),
+      Top10bar   = require("common_views/top10chart_view"),
+      Timeline   = require("common_views/timelines_view"), 
+      TreeMap    = require("common_views/treemap_view"),
+
+  //
+  // S E T U P   V A R S
+  // --------------------------------------------------------------------------------
+  //
+  BASE_URL  = "http://inai.skalas.mx/api/",
+  Endpoints = ["heatmap", "treemap", "top10line", "top10"],
+  Table     = "table=conteo_infomex_publico&", 
+  URLS      = {
+    heatmap   : BASE_URL + Endpoints[0] + "?" + Table,
+    treemap   : BASE_URL + Endpoints[1] + "?",
+    timeline  : BASE_URL + Endpoints[2] + "?",
+    top10bars : BASE_URL + Endpoints[3] + "?",
+  },
+
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
   //
-  
-    // CONTAINERS
-  	timeContainer  	 = document.querySelector("#time"),
-  	topContainer   	 = document.querySelector("#top"),
-  	treemapContainer = document.querySelector("#treemap"),
-  	heatmapContainer = document.querySelector("#heatmap");
+  timeContainer  	 = document.querySelector("#time"),
+  topContainer   	 = document.querySelector("#top"),
+  treemapContainer = document.querySelector("#treemap"),
+  heatmapContainer = document.querySelector("#heatmap"),
+  Slider           = document.getElementById('slider');
   	
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
@@ -61,15 +75,21 @@ define(function(require){
     //
     //
     initialize : function(){
+      // [1] hide the UI stuff
+	    this.hide_stuff();
 
+      // [2] setup the SLIDER
+      
 
-	  this.hide_stuff();
-	  
+      this.slider = this.setup_slider();
+
+      // [3] create the graphs
       this.heatmap_a = new HeatMap({
         controller : this,
         el         : "#heatmap-a"
       });
 
+      /*
       this.treemap_a = new TreeMap({
         controller : this,
         el : "#treemap-a"
@@ -84,21 +104,96 @@ define(function(require){
         controller : this,
         el : "#timeline-a"
       });
+      */
+
+      // [4] set the current graph and endpoint
+      this.current_graph = this.timeline_a;
+      this.current_url   = URLS.timeline;
+
+      this.get_data([2006, 2015], this.heatmap_a, URLS.heatmap);
     },
     
-    hide_stuff : function(){
-		topContainer.style.display= "none";
-		treemapContainer.style.display = "none";
-		heatmapContainer.style.display = "none";
+    
+
+    get_data : function(range, graph, url){
+      var endpoint, from, to, tbl, that = this;
+      if(range.length === 1){
+        from     = "from=" + parseInt(range[0]) + "-01-01";
+        to       = "to="   + parseInt(range[0]) + "-12-31";
+        endpoint = url + from + "&" + to;
+      }
+      else{
+        from     = "from=" + parseInt(range[0]) + "-01-01";
+        to       = "to="   + parseInt(range[1]) + "-12-31";
+        endpoint = url + from + "&" + to;
+      }
+
+      d3.json(endpoint, function(error, json){
+        if(error){
+          that.show_error(error);
+        }
+        else{
+          graph.render(json); //////////////////////////////////////
+        }
+      });
     },
+
+    //
+    // [ ALERT THE USER IF THE API DOESN'T WORK ]
+    //
+    //
+    show_error : function(error){
+      alert("no se puede establecer conexión con el servidor");
+    },
+
+    //
+    // [ SETUP THE SLIDER ]
+    //
+    //
+    setup_slider : function(){
+      var that   = this,
+          slider = Slider;
+      
+      noUiSlider.create(slider, {
+        start: [2006, 2015],
+        step : 1,
+        connect: true,
+        // behaviour: 'tap',
+        range: {
+          'min': 2006,
+          'max': 2015
+        },
+        pips : {
+          mode : "values",
+          values : d3.range(2006, 2016, 1),
+          density : 12,
+          stepped : true
+        }
+      });
+
+      slider.noUiSlider.on("end", function(){
+        that.get_data(this.get(), that.current_graph, that.current_url);
+      });
+
+      return slider;
+    },
+
     
     //
     // L O C A L   T R A N S I T I O N S
     // --------------------------------------------------------------------------------
     //
+    hide_stuff : function(){
+      topContainer.style.display= "none";
+      treemapContainer.style.display = "none";
+      heatmapContainer.style.display = "none";
+    },
     
     show_time : function(e){
-	   e.preventDefault();
+      e.preventDefault();
+      this.current_graph = this.timeline_a;
+      this.current_url   = URLS.timeline;
+
 	   timeContainer.style.display 		= "block";
 	   topContainer.style.display       = "none";
 	   treemapContainer.style.display 	= "none";
@@ -108,6 +203,8 @@ define(function(require){
     },
     
     show_top : function(e){
+      this.current_graph = this.top10bars;
+      this.current_url   = URLS.top10bars;
 	   e.preventDefault();
 	   topContainer.style.display       = "block";
 	   timeContainer.style.display 		= "none";
@@ -118,6 +215,8 @@ define(function(require){
     },
     
     show_treemap : function(e){
+      this.current_graph = this.treemap_a;
+      this.current_url   = URLS.treemap;
 	   e.preventDefault();
 	   topContainer.style.display       = "none";
 	   timeContainer.style.display 		= "none";
@@ -128,6 +227,8 @@ define(function(require){
     },
     
     show_heatmap : function(e){
+      this.current_graph = this.heatmap_a;
+      this.current_url   = URLS.heatmap;
 	   e.preventDefault();
 	   topContainer.style.display       = "none";
 	   timeContainer.style.display 		= "none";

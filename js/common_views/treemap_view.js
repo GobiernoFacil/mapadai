@@ -109,8 +109,8 @@ grandparent.append("text")
     .attr("dy", ".75em");
 
 /* load in data, display root */
-d3.json(URL, function(root) {
-
+d3.json(URL, function(r) {
+  root = {name : "mapadai", children: r[0].mapadai};
   console.log(URL, root);
   //console.log(root);
   initialize(root);
