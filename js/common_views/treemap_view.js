@@ -31,7 +31,7 @@ define(function(require){
   },
   Width  = Margins.width,
   Height = Margins.height - Margins.top,
-  URL    = "/js/data/treedata_.json",
+  URL    = "http://inai.skalas.mx/api/treemap?from=2015-01-01&to=2015-05-06",
   Transitioning;
 
   //
@@ -111,6 +111,7 @@ grandparent.append("text")
 /* load in data, display root */
 d3.json(URL, function(root) {
 
+  console.log(URL, root);
   //console.log(root);
   initialize(root);
   accumulate(root);
