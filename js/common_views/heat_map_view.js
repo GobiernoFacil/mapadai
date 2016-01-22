@@ -14,7 +14,7 @@ define(function(require){
   var Backbone   = require('backbone'),
       d3         = require("d3"),
       noUiSlider = require("nouislider"),
-      Color_r    = ["white", "green"],
+      Color_r    = ["#eee", "#00C186", "#004138"],
 
   //
   // D E F I N E   C O N S T A N T 'S
@@ -65,7 +65,8 @@ define(function(require){
     //
     //
     initialize : function(){
-      var slider = document.getElementById('slider');
+      var that   = this,
+          slider = document.getElementById('slider');
       noUiSlider.create(slider, {
         start: [2006, 2015],
         step : 1,
@@ -85,6 +86,7 @@ define(function(require){
 
       slider.noUiSlider.on("end", function(){
         console.log(this.get());
+        that.get_data(this.get());
       });
       this.slider = slider;
       this.svg    = this.make_svg(Margins);
@@ -104,7 +106,10 @@ define(function(require){
           max    = d3.max(data, function(n){
             return n.count;
           }),
-          color  = d3.scale.linear().domain([0, max]).range(Color_r); 
+          min    = d3.min(data, function(n){
+            return n.count;
+          }),
+          color  = d3.scale.linear().domain([min, max]).range(Color_r); 
 
       days.forEach(function(day, i){
         hours.forEach(function(hour, j){
@@ -118,6 +123,7 @@ define(function(require){
             .attr("y", y)
             .attr("width", width)
             .attr("height", height)
+            .attr("stroke", "rgba(255,255,255,0.5)")
             .attr("fill", color(datum.count));
           count++;
         }, this);
@@ -151,12 +157,13 @@ define(function(require){
       url = Endpoint + "?" + from + "&" + to + "&" + table;
     }
 
+    console.log(url);
     d3.json(url, function(error, json){
       if(error){
         that.show_error(error);
       }
       else{
-        that.render(json.data);
+        that.render(json);
       }
     });
   },
@@ -166,7 +173,6 @@ define(function(require){
   //
   //
   show_error : function(error){
-    console.log("error heatmap: ", error);
     alert("no se puede establecer conexión con el servidor");
   },
 
@@ -197,7 +203,7 @@ define(function(require){
   //
   make_scales : function(){
     var x_scale = d3.scale.ordinal()
-      .domain(["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"])
+      .domain(["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"])
       .rangeBands([Margins.left, Margins.width - Margins.right]),
         y_scale = d3.scale.ordinal()
       .domain(d3.range(24))
@@ -221,8 +227,8 @@ define(function(require){
          .attr("transform", "translate(" + (layout.left) +", 0)")
          .call(y_axis);
 
-    svg.selectAll("path.domain").style("fill", "none").style("stroke", "black");
-    svg.selectAll("line").style("stroke", "black");
+    svg.selectAll("path.domain").style("fill", "none").style("stroke", "#f2f2f2");
+    svg.selectAll("line").style("stroke", "#f2f2f2");
 
   }
 });
