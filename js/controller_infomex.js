@@ -79,32 +79,13 @@ define(function(require){
 	    this.hide_stuff();
 
       // [2] setup the SLIDER
-      
-
       this.slider = this.setup_slider();
 
       // [3] create the graphs
-      this.heatmap_a = new HeatMap({
-        controller : this,
-        el         : "#heatmap-a"
-      });
-
-      this.top10bars = new Top10bar({
-        controller : this,
-        el : "#top10bar"
-      });
-
-      this.timeline_a = new Timeline({
-        controller : this,
-        el : "#timeline-a"
-      });
-
-      /*
-      this.treemap_a = new TreeMap({
-        controller : this,
-        el : "#treemap-a"
-      });
-      */
+      this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
+      this.top10bars  = new Top10bar({controller : this, el : "#top10bar"});
+      this.timeline_a = new Timeline({controller : this, el : "#timeline-a"});
+      this.treemap_a  = new TreeMap({controller  : this, el : "#treemap-a"});
 
       // [4] set the current graph and endpoint
       this.current_graph = this.timeline_a;
@@ -114,6 +95,7 @@ define(function(require){
       this.get_data([2006, 2015], this.heatmap_a, URLS.heatmap);
       this.get_data([2006, 2015], this.top10bars, URLS.top10bars);
       this.get_data([2006, 2015], this.timeline_a, URLS.timeline);
+      this.get_data([2006, 2015], this.treemap_a, URLS.treemap);
     },
     
     

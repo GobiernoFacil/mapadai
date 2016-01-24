@@ -14,9 +14,6 @@ define(function(require){
   var Backbone = require('backbone'),
       d3       = require("d3"),
       SVG      = require("common_views/main_svg_view"),
-      //Scale    = require("common_views/linear_scale_view"),
-      //Axis     = require("common_views/heat_map_axis_view"), 
-      //Color_r  = ["white", "green"],
       URL      = "/js/data/timeline.json",
   //
   // D E F I N E   C O N S T A N T 'S
@@ -64,18 +61,6 @@ define(function(require){
     initialize : function(){
       var that = this;
       this.svg = new SVG(this.el, Margins);
-
-      /*
-      // LOAD THE DATA FOR THE FISRT TIME
-      d3.json(URL, function(data){
-        var d = data.data;
-        that.prepare_data(d);
-        that.set_scales(d);
-        that.set_axis();
-        that.get_line_generator();
-        that.draw_lines(d);
-      });
-*/
     },
 
     render : function(data){
@@ -156,16 +141,6 @@ define(function(require){
         d.total = +d.total;
         d.date  = new Date(d.year, d.month, 1);
       }, this);
-
-      /*
-      this.svg.select(".main_container")
-                  .append("path").attr("d", this.line(this.data))
-                    .attr("fill", "rgba(236,0,140,0")
-                    .attr("stroke", "#ec008c")
-                    .attr("stroke-width", 1);
-      */
-
-      console.log(Categories);
     } 
 
   });
