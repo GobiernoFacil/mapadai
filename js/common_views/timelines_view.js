@@ -65,6 +65,7 @@ define(function(require){
       var that = this;
       this.svg = new SVG(this.el, Margins);
 
+      /*
       // LOAD THE DATA FOR THE FISRT TIME
       d3.json(URL, function(data){
         var d = data.data;
@@ -74,6 +75,16 @@ define(function(require){
         that.get_line_generator();
         that.draw_lines(d);
       });
+*/
+    },
+
+    render : function(data){
+      var d = data;
+        this.prepare_data(d);
+        this.set_scales(d);
+        this.set_axis();
+        this.get_line_generator();
+        this.draw_lines(d);
     },
 
     set_scales : function(data){

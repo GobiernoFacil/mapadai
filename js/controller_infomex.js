@@ -89,12 +89,6 @@ define(function(require){
         el         : "#heatmap-a"
       });
 
-      /*
-      this.treemap_a = new TreeMap({
-        controller : this,
-        el : "#treemap-a"
-      });
-
       this.top10bars = new Top10bar({
         controller : this,
         el : "#top10bar"
@@ -104,13 +98,22 @@ define(function(require){
         controller : this,
         el : "#timeline-a"
       });
+
+      /*
+      this.treemap_a = new TreeMap({
+        controller : this,
+        el : "#treemap-a"
+      });
       */
 
       // [4] set the current graph and endpoint
       this.current_graph = this.timeline_a;
       this.current_url   = URLS.timeline;
 
+      // [5] load the data
       this.get_data([2006, 2015], this.heatmap_a, URLS.heatmap);
+      this.get_data([2006, 2015], this.top10bars, URLS.top10bars);
+      this.get_data([2006, 2015], this.timeline_a, URLS.timeline);
     },
     
     

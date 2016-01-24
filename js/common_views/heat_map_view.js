@@ -69,7 +69,6 @@ define(function(require){
       this.svg    = this.make_svg(Margins);
       this.scales = this.make_scales(Margins);
       this.axis   = this.make_axis(this.svg, this.scales, Margins);
-      //this.get_data(this.slider.noUiSlider.get());
     },
 
     //
@@ -106,52 +105,6 @@ define(function(require){
         }, this);
       }, this);
     },
-
-  //
-  // D A T A   H A N D L E   F U N C T I O N S
-  // --------------------------------------------------------------------------------
-  //
-/*
-  //
-  // [ CALL THE API (OR LOAD THE FAKE STUFF ) ]
-  //
-  //
-  get_data : function(range){
-    var url, from, to, table, that = this;
-    if(!range || Fake){
-      url = FakeData;
-    }
-    else if(range.length === 1){
-      from  = "from=" + parseInt(range[0]) + "-01-01";
-      to    = "to=" + parseInt(range[0]) + "-12-31";
-      table = "table=" + Table;
-      url = Endpoint + "?" + from + "&" + to + "&" + table;
-    }
-    else{
-      from  = "from=" + parseInt(range[0]) + "-01-01";
-      to    = "to=" + parseInt(range[1]) + "-12-31";
-      table = "table=" + Table;
-      url = Endpoint + "?" + from + "&" + to + "&" + table;
-    }
-
-    d3.json(url, function(error, json){
-      if(error){
-        that.show_error(error);
-      }
-      else{
-        that.render(json);
-      }
-    });
-  */  
-
-  //
-  // [ ALERT THE USER IF THE API DOESN'T WORK ]
-  //
-  //
-  show_error : function(error){
-    alert("no se puede establecer conexión con el servidor");
-  },
-
 
   //
   // U I / U X   F U N C T I O N S
