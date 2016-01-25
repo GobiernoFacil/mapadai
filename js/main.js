@@ -39,6 +39,9 @@ switch(CONFIG.section){
   case "recursos":
     current_controller = "controller_recursos"; 
     break;
+  case "usuarios":
+    current_controller = "controller_usuarios"; 
+    break;
   default:
     current_controller = "controller_main";
     break;
