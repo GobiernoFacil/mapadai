@@ -59,10 +59,13 @@ define(function(require){
     //
     //
     initialize : function(){
-      var that = this;
       this.svg = new SVG(this.el, Margins);
     },
 
+    //
+    // [ RENDER THE GRAPH ]
+    //
+    //
     render : function(data){
       var d = data;
         this.prepare_data(d);
@@ -72,6 +75,29 @@ define(function(require){
         this.draw_lines(d);
     },
 
+    //
+    // [ DATA CONFIG ]
+    //
+    //
+    prepare_data : function(data){
+      data.map(function(d, i){
+        if(Categories.indexOf(d.dependencia) == -1){
+          Categories.push(d.dependencia);
+        }
+        d.total = +d.total;
+        d.date  = new Date(d.year, d.month, 1);
+      }, this);
+    } 
+
+    //
+    // U I / U X   F U N C T I O N S
+    // --------------------------------------------------------------------------------
+    //
+
+    //
+    // [ GENERATE THE SCALES ]
+    //
+    //
     set_scales : function(data){
 
       var max = d3.max(data, function(d, i){
@@ -91,6 +117,10 @@ define(function(require){
       this.scales = [x, y];
     },
 
+    //
+    // [ GENERATE THE AXIS ]
+    //
+    //
     set_axis : function(){
       var x_axis = d3.svg.axis()
                      .scale(this.scales[0])
@@ -110,6 +140,10 @@ define(function(require){
          .call(y_axis);
     },
 
+    //
+    // [ GENERATE THE LINE FUNCTION ]
+    //
+    //
     get_line_generator : function(){
       var that = this,
           line = d3.svg.line()
@@ -122,6 +156,10 @@ define(function(require){
       this.line = line;
     },
 
+    //
+    // [ DRAW LINES ]
+    //
+    //
     draw_lines : function(data){
       Categories.forEach(function(cat, i){
         var m    = _.where(data, {dependencia : cat}),
@@ -133,16 +171,13 @@ define(function(require){
       }, this);
     },
 
-    prepare_data : function(data){
-      data.map(function(d, i){
-        if(Categories.indexOf(d.dependencia) == -1){
-          Categories.push(d.dependencia);
-        }
-        d.total = +d.total;
-        d.date  = new Date(d.year, d.month, 1);
-      }, this);
-    } 
-
+    //
+    // [ DRAW USERS LIST ]
+    //
+    //
+    draw_list : function(){
+      console.log(Categories);
+    }
   });
 
   //
