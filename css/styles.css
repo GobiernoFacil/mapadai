@@ -1389,6 +1389,20 @@ section:first-of-type {
     font-size: 18px;
     min-height: 40px;
     padding: 30px 0; }
+  .sub h1 {
+    font-size: 32px;
+    padding: 20px 0; }
+  .nav.re a:link, .nav.re a:visited {
+    font-size: 14px;
+    padding: 15px 10px; }
+  .viz {
+    padding: 15px 0; }
+    .viz h3 {
+      font-size: 21px; }
+    .viz p {
+      font-size: 13px; }
+    .viz svg {
+      display: none; }
   footer {
     text-align: center; }
     footer .center {
