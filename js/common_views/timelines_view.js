@@ -20,7 +20,8 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   Categories = [],
-  Margins = {
+  Data       = null,
+  Margins    = {
     width    : 800,
     height   : 600,
     top      : 20,
@@ -31,12 +32,13 @@ define(function(require){
     dates    : 0,
     padding  : 0,
     oPadding : 15
-  };
+  },
 
   //
-  // C A C H E   T H E   C O M M O N   E L E M E N T S
+  // C A C H E   T H E   C O M M O N   E L E M E N T S   A N D   T E M P L A T E S
   // --------------------------------------------------------------------------------
   //
+  LI = "<li><a class='category-toggle' data-category='<%=name%>' href='#'><%=name%></a></li>";
   
     
   //
@@ -49,12 +51,13 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-   
+      'click .category-toggle' : 'update_lines'
     },
 
     //
     // [ DEFINE THE TEMPLATES ]
     //
+    li : _.template(LI),
 
     //
     // [ THE INITIALIZE FUNCTION ]
@@ -70,14 +73,36 @@ define(function(require){
     //
     //
     render : function(data){
+      Data  = data;
       var d = data;
         this.prepare_data(d);
         this.set_scales(d);
         this.set_axis();
         this.get_line_generator();
         this.draw_lines(d);
+        this.draw_list();
     },
 
+    //
+    // I N T E R A C T I O N   F U N C T I O N S
+    // --------------------------------------------------------------------------------
+    //
+    update_lines : function(e){
+      e.preventDefault();
+
+      if(e.currentTarget.classList.toggle("disabled")){
+        // hide the line
+      }
+      else{
+        // show the line
+      }
+    },
+
+
+    //
+    // D A T A   F U N C T I O N S
+    // --------------------------------------------------------------------------------
+    //
     //
     // [ DATA CONFIG ]
     //
@@ -91,6 +116,7 @@ define(function(require){
         d.date  = new Date(d.year, d.month, 1);
       }, this);
     }, 
+
 
     //
     // U I / U X   F U N C T I O N S
@@ -180,8 +206,23 @@ define(function(require){
     //
     draw_list : function(){
       console.log(Categories);
+      console.log(Data);
+
+      var ul = document.createElement("ul");
+      ul.setAttribute("id", "timeline-office-selector");
+
+      Categories.forEach(function(cat){
+        var dt = {name : cat};
+        $(ul).append(this.li(dt));
+      }, this);
+      this.el.appendChild(ul);
+
     },
 
+    //
+    // [ DRAW GRAPH AXIS LABELS ]
+    //
+    //
     draw_labels : function(svg){
 
       svg.append("text")
@@ -197,17 +238,6 @@ define(function(require){
         .attr("fill", "black")
         .attr("transform", "translate("+ Margins.width/2 + ", " + (Margins.height - Margins.dates) + ")")
         .text("Año");
-      /*
-      // now add titles to the axes
-        vis.append("text")
-            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-            .attr("transform", "translate("+ (padding/2) +","+(height/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
-            .text("Value");
-        vis.append("text")
-            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-            .attr("transform", "translate("+ (width/2) +","+(height-(padding/3))+")")  // centre below axis
-            .text("Date");
-      */
     }
   });
 
