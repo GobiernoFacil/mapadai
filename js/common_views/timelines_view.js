@@ -26,7 +26,9 @@ define(function(require){
     top      : 20,
     right    : 30,
     bottom   : 40, 
-    left     : 40,
+    left     : 70,
+    numbers  : 10,
+    dates    : 0,
     padding  : 0,
     oPadding : 15
   };
@@ -183,10 +185,18 @@ define(function(require){
     draw_labels : function(svg){
 
       svg.append("text")
+        .attr("class", "y-label")
         .attr("text-anchor", "middle")
-        .attr("stroke", "black")
-        //.attr("transform", )
+        .attr("fill", "black")
+        .attr("transform", "translate("+ Margins.numbers + ", " + Margins.height/2 + ")rotate(-90)")
         .text("Peticiones");
+
+      svg.append("text")
+        .attr("class", "x-label")
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .attr("transform", "translate("+ Margins.width/2 + ", " + (Margins.height - Margins.dates) + ")")
+        .text("Año");
       /*
       // now add titles to the axes
         vis.append("text")
