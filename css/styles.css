@@ -1385,6 +1385,10 @@ section:first-of-type {
   .years {
     font-size: 130px;
     line-height: 1.4; }
+  .menu-list a {
+    font-size: 18px;
+    min-height: 40px;
+    padding: 30px 0; }
   footer {
     text-align: center; }
     footer .center {
