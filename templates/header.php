@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html <?php echo !$body_class ? "" : 'class="' . $body_class .'"';?> lang="es-MX"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
 	<title><?php echo !$title ? "" :  $title ;?></title>
 	<meta name="description" content="<?php echo !$description ? "" :  $description ;?>">
   <link rel="stylesheet" href="css/normalize.css">
@@ -69,7 +70,7 @@
     
      <main class="main-base" role="main">
 	<header>
-		<div class="col-sm-5">
+		<div class="col-xs-5 col-sm-5">
 			<h1 class="inai">INAI.  Instituto Nacional de Transparencia Acceso a la Información y Protección de Datos Personales </h1>
 		</div>
 		<?php if ($body_class != "home"):?>
