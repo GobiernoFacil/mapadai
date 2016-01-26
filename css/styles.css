@@ -1332,8 +1332,20 @@ section:first-of-type {
   padding: 10px 0;
   text-align: right;
   text-transform: uppercase; }
+  .download b {
+    background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIxNi41NzRweCIgaGVpZ2h0PSIxNS44NTRweCIgdmlld0JveD0iMCAwIDE2LjU3NCAxNS44NTQiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDE2LjU3NCAxNS44NTQiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwYXRoIGZpbGw9IiM0NDQ0NDQiIGQ9Ik0xNS4wNTksMi40ODJsLTEuMTIxLTEuMzY0Yy0wLjE2LTAuMjM4LTAuNDgtMC4zOTgtMC44NzktMC4zOThIMy40NTdjLTAuMzk4LDAtMC43MTgsMC4xNi0wLjk1NywwLjM5OEwxLjQ1NywyLjQ4MkMxLjIxOSwyLjc5OCwxLjA1OSwzLjExOSwxLjA1OSwzLjUyMXYxMGMwLDAuODc5LDAuNzE5LDEuNTk4LDEuNjAyLDEuNTk4aDExLjE5OWMwLjg3OSwwLDEuNTk4LTAuNzE5LDEuNTk4LTEuNTk4di0xMEMxNS40NTcsMy4xMTksMTUuMjk3LDIuNzk4LDE1LjA1OSwyLjQ4MkwxNS4wNTksMi40ODJ6IE04LjEzNywxMy4xMDJMNC43MzksOC42OTlINi41NFY1LjEwMmgzLjE5OXYzLjU5N2gxLjgwMUw4LjEzNywxMy4xMDJ6IE0yLjczOSwyLjMyM2wwLjY0LTAuODAxaDkuNjAybDAuNzE5LDAuODAxSDIuNzM5eiBNMi43MzksMi4zMjMiLz48L2c+PC9zdmc+') no-repeat;
+    background-size: auto 13px;
+    display: inline-block;
+    margin-right: 5px;
+    width: 13px;
+    height: 13px;
+    vertical-align: bottom; }
   .download:hover {
     color: #732181; }
+    .download:hover b {
+      -webkit-opacity: 0.8;
+      -moz-opacity: 0.8;
+      opacity: 0.8; }
 
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
@@ -1353,7 +1365,54 @@ section:first-of-type {
 
 /* =Media queries
 -------------------------------------------------------------- */
-@media screen and (max-width: 480px) { }
+@media screen and (max-width: 480px) {
+  .inai {
+    width: 100%; }
+  .i-intro {
+    min-height: 300px; }
+    .i-intro .years_title {
+      min-height: 180px; }
+    .i-intro h1 {
+      font-size: 36px;
+      margin: 60px 0 0; }
+    .i-intro p {
+      font-size: 14px; }
+    .i-intro a.btn {
+      font-size: 17px; }
+  .btn.proceso {
+    font-size: 14px;
+    line-height: 55px; }
+  .years {
+    font-size: 130px;
+    line-height: 1.4; }
+  .menu-list a {
+    font-size: 18px;
+    min-height: 40px;
+    padding: 30px 0; }
+  .sub h1 {
+    font-size: 32px;
+    padding: 20px 0; }
+  .nav.re a:link, .nav.re a:visited {
+    font-size: 14px;
+    padding: 15px 10px; }
+  .viz {
+    padding: 15px 0; }
+    .viz h3 {
+      font-size: 21px; }
+    .viz p {
+      font-size: 13px; }
+    .viz svg {
+      display: none; }
+  footer {
+    text-align: center; }
+    footer .center {
+      min-height: 30px; }
+    footer .inai {
+      background-position: 50%;
+      width: 100%; }
+  .author .codeando, .author .gobiernofacil {
+    float: none;
+    margin: 0 auto 30px; } }
 
 @media screen and (min-width: 481px) and (max-width: 767px) { }
 

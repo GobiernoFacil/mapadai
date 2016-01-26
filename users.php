@@ -1,9 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Usuarios</title>
-</head>
-<body>
+<?php 
+	$body_class 	= "usuarios";
+	$title 			= "Usuarios";
+	$description 	= "";
+	include "templates/header.php";?>
+<div class="sub">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1>Usuarios</h1>
+			</div>
+			
+		</div>
+	</div>
+</div>
   <div id="users-by-gender"></div>
   <div id="users-by-occupation"></div>
   <div id="users-by-age"></div>
@@ -13,6 +22,4 @@
   CONFIG = { section : "usuarios" };
   
 </script>
-  <script data-main="/js/main" src="/js/bower_components/requirejs/require.js"></script>
-</body>
-</html>
+<?php include "templates/footer.php";?>
