@@ -21,7 +21,7 @@ define(function(require){
   //
   Categories = [],
   Margins = {
-    width    : 600,
+    width    : 800,
     height   : 600,
     top      : 20,
     right    : 30,
@@ -60,6 +60,7 @@ define(function(require){
     //
     initialize : function(){
       this.svg = new SVG(this.el, Margins);
+      this.draw_labels(this.svg);
     },
 
     //
@@ -87,7 +88,7 @@ define(function(require){
         d.total = +d.total;
         d.date  = new Date(d.year, d.month, 1);
       }, this);
-    } 
+    }, 
 
     //
     // U I / U X   F U N C T I O N S
@@ -177,6 +178,26 @@ define(function(require){
     //
     draw_list : function(){
       console.log(Categories);
+    },
+
+    draw_labels : function(svg){
+
+      svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("stroke", "black")
+        //.attr("transform", )
+        .text("Peticiones");
+      /*
+      // now add titles to the axes
+        vis.append("text")
+            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+            .attr("transform", "translate("+ (padding/2) +","+(height/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+            .text("Value");
+        vis.append("text")
+            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+            .attr("transform", "translate("+ (width/2) +","+(height-(padding/3))+")")  // centre below axis
+            .text("Date");
+      */
     }
   });
 
