@@ -145,7 +145,7 @@ define(function(require){
       this.set_scales(Current_data);
       this.get_line_generator();
       this.set_axis(true);
-      this.draw_lines(d, true);
+      this.draw_lines(Current_data, true);
       /*
       *this.set_scales(d);
       this.set_axis();
@@ -241,26 +241,30 @@ define(function(require){
     //
     //
     draw_lines : function(data, update){
-      var data_lines = [],
-          container  = this.svg.append("g").attr("class", "main_container");
-      
+      var data_lines = [];
       Categories.forEach(function(cat, i){
         var m    = _.where(data, {dependencia : cat});
         data_lines.push(m);
       }, this);
 
       if(!update){
-        this.lines = container.selectAll("path");
-        this.lines.data(data_lines).enter().append("path").attr("d", this.line)
+        console.log("create!!!!");
+        var container = this.svg.append("g").attr("class", "main_container");
+        this.lines = container.selectAll("path").data(data_lines).enter().append("path").attr("d", this.line)
           .attr("fill", "none")
           .attr("stroke", "rgba(0,193,165,0.7)")
           .attr("stroke-width", 1);
       }
       else{
         console.log("update!!!!");
-        this.lines = this.svg.select(".main_container").selectAll("path").data(data_lines);
+        //console.log(this.lines);
+        //return;
+        //this.lines = this.svg.select(".main_container").selectAll("path");//.data(data_lines);
+        console.log("size: ", this.lines.size());
+        this.lines.data(data_lines);
         this.lines.transition().duration(1500).ease("sin-in-out").attr("d", this.line);
 
+        /*
         this.lines.enter().append("path").attr("d", this.line)
           .attr("fill", "none")
           .attr("stroke", "rgba(139,167,192,0.25)")
@@ -269,6 +273,7 @@ define(function(require){
           .attr("cursor", "pointer");
 
         this.lines.exit().remove();
+        */
       }
       
     },
