@@ -27,7 +27,7 @@ define(function(require){
   Current_data = null,
   Margins    = {
     width    : 800,
-    height   : 600,
+    height   : 500,
     top      : 20,
     right    : 30,
     bottom   : 40, 
@@ -160,6 +160,14 @@ define(function(require){
       this.update_render();
     },
 
+    //
+    // [ PREPARE THE DATA FOR THE VERTICAL HOVER ]
+    //
+    //
+    prepare_vertical_labels_data : function(){
+      console.log("ss");
+    },
+
 
 
 
@@ -217,10 +225,10 @@ define(function(require){
       }
       else{
         this.svg.select(".x_axis")
-        .transition().duration(1500).ease("sin-in-out")
+        .transition().duration(500).ease("sin-in-out")
         .call(x_axis); 
         this.svg.select(".y_axis")
-        .transition().duration(1500).ease("sin-in-out")
+        .transition().duration(500).ease("sin-in-out")
         .call(y_axis); 
       }
     },
@@ -268,21 +276,38 @@ define(function(require){
       }
       else{
         this.lines.data(data_lines);
-        this.lines.transition().duration(1500).ease("sin-in-out").attr("d", this.line);
+        this.lines.transition().duration(500).ease("sin-in-out").attr("d", this.line);
       }
 
       this.lines.on("mouseover", function(d){
-        d3.select(this)
-         // ya jala con clases que se cambian en mousenter & mouseleave
-         // .attr("stroke-width", 3)
-         // .attr("stroke", "#015383")
-            that.draw_tooltips(d);
-          });
+        that.draw_tooltips(d);
+      })
+      this.lines.on("mouseout", function(d){
+        that.svg.selectAll(".amount").remove();
+      });
       
     },
 
+    draw_vertical_labels : function(update){
+      var data = this.prepare_vertical_labels_data();
+      //this.svg.selectAll
+    },
+
     draw_tooltips : function(data){
-      console.log(data);
+      var that   = this,
+          format = d3.format(","),
+          labels = this.svg.selectAll(".amount").data(data).enter()
+                     .append("g")
+                       .attr("class", "amount")
+                       .attr("transform", function(d){
+                         var x   = that.scales[0](d.date),
+                             y   = that.scales[1](d.total),
+                             txt = "translate(" + x + ", " + y + ")"; 
+                         return txt;
+                       });
+      labels.append("text").text(function(d){
+        return format(d.total);
+      });
     },
 
     //

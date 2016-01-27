@@ -135,7 +135,7 @@ define(function(require){
           that.show_error(error);
         }
         else{
-          graph.render(json); //////////////////////////////////////
+          graph.render(json); 
         }
       });
     },
