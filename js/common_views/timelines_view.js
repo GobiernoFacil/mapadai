@@ -259,7 +259,7 @@ define(function(require){
           }
          )
           .attr("stroke-width", 1.5)
-          .attr("opacity", 0.8);
+          .attr("opacity", 0.5);
       }
       else{
         console.log("update!!!!");
