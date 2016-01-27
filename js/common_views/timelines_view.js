@@ -40,7 +40,7 @@ define(function(require){
   // C A C H E   T H E   C O M M O N   E L E M E N T S   A N D   T E M P L A T E S
   // --------------------------------------------------------------------------------
   //
-  LI = "<li><a class='category-toggle' data-category='<%=name%>' href='#'><%=name%></a></li>";
+  LI = "<li><a class='category-toggle' data-category='<%=name%>' href='#'><b></b><%=name%></a></li>";
   
     
   //
@@ -258,14 +258,23 @@ define(function(require){
       console.log(Categories);
       console.log(Data);
 
-      var ul = document.createElement("ul");
+      var divrow 	= document.createElement("div"),
+      	  divcol 	= document.createElement("div"),
+       	  ul 		= document.createElement("ul");
+       	  
+      divrow.setAttribute("class", "row"); 	  
+      divcol.setAttribute("class", "col-sm-8 col-sm-offset-2"); 	
       ul.setAttribute("id", "timeline-office-selector");
+      ul.setAttribute("class", "timeline list");
+	  
+	  $(divrow).append(divcol);
+	  $(divcol).append(ul);
 
       Categories.forEach(function(cat){
         var dt = {name : cat};
         $(ul).append(this.li(dt));
       }, this);
-      this.el.appendChild(ul);
+      this.el.appendChild(divrow);
 
     },
 
