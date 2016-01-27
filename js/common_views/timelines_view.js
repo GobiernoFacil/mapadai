@@ -15,6 +15,8 @@ define(function(require){
       d3       = require("d3"),
       SVG      = require("common_views/main_svg_view"),
       URL      = "/js/data/timeline.json",
+      Color_r  = ["#00C186","#2C3ABA", "#ED9720", "#004138", "#B30342",  "#138DED", "#FF4D78","#7B20ED", "#C3A35F", "#84BA00"],
+
   //
   // D E F I N E   C O N S T A N T 'S
   // --------------------------------------------------------------------------------
@@ -40,7 +42,7 @@ define(function(require){
   // C A C H E   T H E   C O M M O N   E L E M E N T S   A N D   T E M P L A T E S
   // --------------------------------------------------------------------------------
   //
-  LI = "<li><a class='category-toggle' data-category='<%=name%>' href='#'><b></b><%=name%></a></li>";
+  LI = "<li class='col-sm-4'><a class='category-toggle' data-category='<%=name%>' href='#'><b style='background:<%=i%>'></b><%=name%></a></li>";
   
     
   //
@@ -252,8 +254,12 @@ define(function(require){
         var container = this.svg.append("g").attr("class", "main_container");
         this.lines = container.selectAll("path").data(data_lines).enter().append("path").attr("d", this.line)
           .attr("fill", "none")
-          .attr("stroke", "rgba(0,193,165,0.7)")
-          .attr("stroke-width", 1);
+          .attr("stroke", function (d, i) {
+	          	return  Color_r[i];    		    
+          }
+         )
+          .attr("stroke-width", 1.5)
+          .attr("opacity", 0.8);
       }
       else{
         console.log("update!!!!");
@@ -287,16 +293,16 @@ define(function(require){
       	  divcol 	= document.createElement("div"),
        	  ul  		= document.createElement("ul");
        	  
-      divrow.setAttribute("class", "row"); 	  
-      divcol.setAttribute("class", "col-sm-8 col-sm-offset-2"); 	
+    /*  divrow.setAttribute("class", "row"); 	  
+      divcol.setAttribute("class", "col-sm-12"); */	
       ul.setAttribute("id", "timeline-office-selector");
-      ul.setAttribute("class", "timeline list");
+      ul.setAttribute("class", "row timeline list");
 	  
 	    $(divrow).append(divcol);
 	    $(divcol).append(ul);
 
-      Categories.forEach(function(cat){
-        var dt = {name : cat};
+      Categories.forEach(function(cat, i){
+        var dt = {name : cat, i : Color_r[i]};
         $(ul).append(this.li(dt));
       }, this);
       this.el.appendChild(divrow);
