@@ -19,8 +19,10 @@ define(function(require){
   // D E F I N E   C O N S T A N T 'S
   // --------------------------------------------------------------------------------
   //
+  First_time = true,
   Categories = [],
   Data       = null,
+  Current_data = null,
   Margins    = {
     width    : 800,
     height   : 600,
@@ -75,12 +77,13 @@ define(function(require){
     render : function(data){
       Data  = data;
       var d = data;
-        this.prepare_data(d);
-        this.set_scales(d);
-        this.set_axis();
-        this.get_line_generator();
-        this.draw_lines(d);
-        this.draw_list();
+      this.prepare_data(d);
+      this.set_scales(d);
+      this.set_axis();
+      this.get_line_generator();
+      this.draw_lines(d);
+      this.draw_list();
+      First_time = false;
     },
 
     //
@@ -92,9 +95,11 @@ define(function(require){
 
       if(e.currentTarget.classList.toggle("disabled")){
         // hide the line
+        this.update_data(e.currentTarget.getAttribute("data-category"), true);
       }
       else{
         // show the line
+        this.update_data(e.currentTarget.getAttribute("data-category"), true);
       }
     },
 
@@ -103,6 +108,7 @@ define(function(require){
     // D A T A   F U N C T I O N S
     // --------------------------------------------------------------------------------
     //
+
     //
     // [ DATA CONFIG ]
     //
@@ -115,7 +121,40 @@ define(function(require){
         d.total = +d.total;
         d.date  = new Date(d.year, d.month, 1);
       }, this);
-    }, 
+
+      Current_data = data;
+    },
+
+    //
+    // [ UPDATE DATA ]
+    //
+    //
+    update_data : function(category, add){
+      // [1] update the data
+      if(add && !_.findWhere(Current_data, {dependencia : category})){
+        var d = _.where(Data, {dependencia : category});
+        Current_data = Current_data.concat(d);
+      }
+      else{
+        Current_data = _.filter(Current_data, function(val){
+          return val.dependencia != category;
+        });
+      }
+
+      // [2] generate the helpers again
+      this.set_scales(Current_data);
+      this.get_line_generator();
+      this.set_axis(true);
+      /*
+      *this.set_scales(d);
+      this.set_axis();
+      *this.get_line_generator();
+      this.draw_lines(d);
+      this.draw_list();
+      */
+    },
+
+
 
 
     //
@@ -150,7 +189,7 @@ define(function(require){
     // [ GENERATE THE AXIS ]
     //
     //
-    set_axis : function(){
+    set_axis : function(update){
       var x_axis = d3.svg.axis()
                      .scale(this.scales[0])
                      .orient("bottom")
@@ -158,15 +197,26 @@ define(function(require){
           y_axis = d3.svg.axis()
                      .scale(this.scales[1])
                      .orient("left")
-                     .tickFormat(d3.format("d")),
-      Time = this.svg.append("g")
+                     .tickFormat(d3.format("d"));
+
+      if(!update){
+        var Time = this.svg.append("g")
          .attr("class", "x_axis")
          .attr("transform", "translate(0," + (Margins.height - Margins.bottom )+")")
          .call(x_axis),
-      Value = this.svg.append("g")
+            Value = this.svg.append("g")
          .attr("class", "y_axis")
          .attr("transform", "translate(" + (Margins.left) +", 0)")
          .call(y_axis);
+      }
+      else{
+        this.svg.select(".x_axis")
+        .transition().duration(1500).ease("sin-in-out")
+        .call(x_axis); 
+        this.svg.select(".y_axis")
+        .transition().duration(1500).ease("sin-in-out")
+        .call(y_axis); 
+      }
     },
 
     //
