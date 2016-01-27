@@ -23,10 +23,11 @@ define(function(require){
   // S E T U P   V A R S
   // --------------------------------------------------------------------------------
   //
-  BASE_URL  = "http://inai.skalas.mx/api/",
-  Endpoints = ["heatmap", "treemap", "top10line", "top10"],
-  Table     = "table=conteo_infomex_publico&", 
-  URLS      = {
+  First_year = 2003,
+  BASE_URL   = "http://inai.skalas.mx/api/",
+  Endpoints  = ["heatmap", "treemap", "top10line", "top10"],
+  Table      = "table=conteo_infomex_publico&", 
+  URLS       = {
     heatmap   : BASE_URL + Endpoints[0] + "?" + Table,
     treemap   : BASE_URL + Endpoints[1] + "?",
     timeline  : BASE_URL + Endpoints[2] + "?",
@@ -83,7 +84,7 @@ define(function(require){
 	    this.hide_stuff();
 
       // [2] setup the SLIDER
-      this.slider = this.setup_slider(2006);
+      this.slider = this.setup_slider(First_year, 3);
       var time = this.slider.noUiSlider.get();
       time[0] = +time[0];
       time[1] = +time[1];
@@ -99,10 +100,10 @@ define(function(require){
       this.current_url   = URLS.timeline;
 
       // [5] load the data
-      this.get_data([2006, 2015], this.heatmap_a, URLS.heatmap);
-      this.get_data([2006, 2015], this.top10bars, URLS.top10bars);
+      this.get_data(time, this.heatmap_a, URLS.heatmap);
+      this.get_data(time, this.top10bars, URLS.top10bars);
       this.get_data(time, this.timeline_a, URLS.timeline);
-      this.get_data([2006, 2015], this.treemap_a, URLS.treemap);
+      this.get_data(time, this.treemap_a, URLS.treemap);
       
       // [6] add a listener for the scroll, the ugly hack way
       this.year_menu = $.proxy(this.year_menu, this);
@@ -151,7 +152,7 @@ define(function(require){
     // [ SETUP THE SLIDER ]
     //
     //
-    setup_slider : function(first_year){
+    setup_slider : function(first_year, years_to_last){
       var that   = this,
           slider = Slider,
           now    = new Date();
@@ -162,18 +163,18 @@ define(function(require){
         connect: true,
         // behaviour: 'tap',
         range: {
-          'min': 2006,
-          'max': 2015
+          'min': first_year,
+          'max': now.getFullYear()
         },
         pips : {
           mode : "values",
-          values : d3.range(2006, 2016, 1),
+          values : d3.range(first_year, now.getFullYear() + 1, 1),
           density : 12,
           stepped : true
         }
       });
       console.log([now.getFullYear() - 2, now.getFullYear()]);
-      slider.noUiSlider.set([now.getFullYear() - 2, now.getFullYear()]);
+      slider.noUiSlider.set([now.getFullYear() - years_to_last, now.getFullYear()]);
       slider.noUiSlider.on("end", function(){
         that.get_data(this.get(), that.current_graph, that.current_url);
       });
