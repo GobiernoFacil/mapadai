@@ -145,6 +145,7 @@ define(function(require){
       this.set_scales(Current_data);
       this.get_line_generator();
       this.set_axis(true);
+      this.draw_lines(d, true);
       /*
       *this.set_scales(d);
       this.set_axis();
@@ -239,15 +240,37 @@ define(function(require){
     // [ DRAW LINES ]
     //
     //
-    draw_lines : function(data){
+    draw_lines : function(data, update){
+      var data_lines = [],
+          container  = this.svg.append("g").attr("class", "main_container");
+      
       Categories.forEach(function(cat, i){
-        var m    = _.where(data, {dependencia : cat}),
-            cn   = this.svg.append("g").attr("class", "line-container"),
-            line = cn.append("path").attr("d", this.line(m))
-                     .attr("fill", "none")
-                     .attr("stroke", "rgba(0,193,165,0.7)")
-                     .attr("stroke-width", 1);
+        var m    = _.where(data, {dependencia : cat});
+        data_lines.push(m);
       }, this);
+
+      if(!update){
+        this.lines = container.selectAll("path");
+        this.lines.data(data_lines).enter().append("path").attr("d", this.line)
+          .attr("fill", "none")
+          .attr("stroke", "rgba(0,193,165,0.7)")
+          .attr("stroke-width", 1);
+      }
+      else{
+        console.log("update!!!!");
+        this.lines = this.svg.select(".main_container").selectAll("path").data(data_lines);
+        this.lines.transition().duration(1500).ease("sin-in-out").attr("d", this.line);
+
+        this.lines.enter().append("path").attr("d", this.line)
+          .attr("fill", "none")
+          .attr("stroke", "rgba(139,167,192,0.25)")
+          .attr("stroke-width", 1.5)
+          .attr("stroke-linejoin", "round")
+          .attr("cursor", "pointer");
+
+        this.lines.exit().remove();
+      }
+      
     },
 
     //
@@ -255,27 +278,23 @@ define(function(require){
     //
     //
     draw_list : function(){
-      console.log(Categories);
-      console.log(Data);
-
       var divrow 	= document.createElement("div"),
       	  divcol 	= document.createElement("div"),
-       	  ul 		= document.createElement("ul");
+       	  ul  		= document.createElement("ul");
        	  
       divrow.setAttribute("class", "row"); 	  
       divcol.setAttribute("class", "col-sm-8 col-sm-offset-2"); 	
       ul.setAttribute("id", "timeline-office-selector");
       ul.setAttribute("class", "timeline list");
 	  
-	  $(divrow).append(divcol);
-	  $(divcol).append(ul);
+	    $(divrow).append(divcol);
+	    $(divcol).append(ul);
 
       Categories.forEach(function(cat){
         var dt = {name : cat};
         $(ul).append(this.li(dt));
       }, this);
       this.el.appendChild(divrow);
-
     },
 
     //
