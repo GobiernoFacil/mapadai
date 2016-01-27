@@ -56,7 +56,11 @@ define(function(require){
 		"click #show_time"    : "show_time",
 		"click #show_top"     : "show_top",
 		"click #show_treemap" : "show_treemap",
-		"click #show_heatmap" : "show_heatmap"
+		"click #show_heatmap" : "show_heatmap",
+		
+		/// dataviz
+		'mouseenter svg .main_container path' : 'hover_path',
+		'mouseleave svg .main_container path' : 'leave_path',
     },
 
     //
@@ -192,7 +196,23 @@ define(function(require){
       }
     },
     
-    
+    // -----------------
+    // ROLLOVER SVG PATH 
+    // -----------------
+    //
+	hover_path : function(e) { 
+		$('svg .main_container path').attr("class","path_out");
+		$(e.currentTarget).attr("class","path_hover");
+	},
+	
+	// -----------------
+    // ROLLOUT SVG PATH 
+    // -----------------
+    //
+	leave_path : function(e) { 
+		$('svg .main_container path').attr("class","");
+		$(e.currentTarget).attr("class","");
+	},
     
     //
     // L O C A L   T R A N S I T I O N S

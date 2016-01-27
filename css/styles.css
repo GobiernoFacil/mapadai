@@ -1348,15 +1348,16 @@ section:first-of-type {
     display: block;
     margin: 0 auto !important; }
     .viz svg .main_container path:hover {
-      cursor: pointer;
+      cursor: pointer; }
+    .viz svg .main_container path.path_hover {
       -webkit-opacity: 1;
       -moz-opacity: 1;
       opacity: 1;
       stroke-width: 3px; }
-      .viz svg .main_container path:hover ~ path {
-        -webkit-opacity: 0.1;
-        -moz-opacity: 0.1;
-        opacity: 0.1; }
+    .viz svg .main_container path.path_out {
+      -webkit-opacity: 0.1;
+      -moz-opacity: 0.1;
+      opacity: 0.1; }
 
 #top10bar {
   margin: 20px auto;
