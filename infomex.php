@@ -1,8 +1,10 @@
 <?php 
 	$body_class 	= "infomex";
 	$title 			= "Infomex";
+	$section_name	= "Solicitudes de Información";
 	$description 	= "";
 	include "templates/header.php";?>
+
 <div class="sub">
 	<div class="container">
 		<div class="row">
@@ -13,27 +15,30 @@
 		</div>
 	</div>
 </div>
-<!-- nav-->
-<div class="nav re">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-10 col-sm-offset-1">
-				<ul>
-					<li><a href="#" id="show_time" class="current">Top 10</a></li>
-					<li><a href="#" id="show_top">Top 5</a></li>
-					<li><a href="#" id="show_treemap">Topor</a></li>
-					<li><a href="#" id="show_heatmap">Peticiones por hora</a></li>
-				</ul>
+
+<div class="infomex_menu">
+	<!-- nav-->
+	<div class="nav re">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<ul>
+						<li><a href="#" id="show_time" class="current">Top 10</a></li>
+						<li><a href="#" id="show_top">Top 5</a></li>
+						<li><a href="#" id="show_treemap">Topor</a></li>
+						<li><a href="#" id="show_heatmap">Peticiones por hora</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>	
-<!-- year selector-->
-<div class="selector_year">
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">
-				<div id="slider"></div>
+	</div>	
+	<!-- year selector-->
+	<div class="selector_year">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">
+					<div id="slider"></div>
+				</div>
 			</div>
 		</div>
 	</div>
