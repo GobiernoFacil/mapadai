@@ -23,7 +23,7 @@
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
 					<ul>
-						<li><a href="#" id="show_time" class="current">Top 10</a></li>
+						<li><a href="#" id="show_time" class="current">Dependencias</a></li>
 						<li><a href="#" id="show_top">Top 5</a></li>
 						<li><a href="#" id="show_treemap">Topor</a></li>
 						<li><a href="#" id="show_heatmap">Peticiones por hora</a></li>
@@ -55,7 +55,7 @@
 				<div id="time" class="viz">
 					<div class="row">
 						<div class="col-sm-10 col-sm-offset-1">
-							<h3>Top 10 de sujetos obligados por número de solicitudes: <span>2012 - 2015</span></h3>
+							<h3>Peticiones por dependencia: <span>2007 - 2015</span></h3>
 							<a href="#" class="download" download><b></b>Descargar datos</a>
 							<p>Integer lectus purus, efficitur efficitur massa ut, pharetra cursus dolor. In hac habitasse platea dictumst. Vivamus quis neque ut neque eleifend volutpat. Curabitur lorem mauris, sagittis maximus ultrices ac, aliquam non ex. Donec congue maximus justo, sit amet euismod leo venenatis ac. Vivamus venenatis, risus vitae rutrum laoreet, purus nibh rutrum ex, sed convallis enim urna a ligula. Donec lorem leo, vulputate vel porttitor et, ornare in sapien.</p>							
 						</div>
