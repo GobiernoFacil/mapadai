@@ -1380,6 +1380,10 @@ section:first-of-type {
         width: 10px; }
       .timeline.list li a:hover {
         background: rgba(0, 0, 0, 0.05); }
+      .timeline.list li a.disabled {
+        -webkit-opacity: 0.3;
+        -moz-opacity: 0.3;
+        opacity: 0.3; }
 
 .download {
   border-top: 1px dotted #732181;
