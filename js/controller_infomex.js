@@ -83,7 +83,7 @@ define(function(require){
 	    this.hide_stuff();
 
       // [2] setup the SLIDER
-      this.slider = this.setup_slider();
+      this.slider = this.setup_slider(2006);
       var time = this.slider.noUiSlider.get();
       time[0] = +time[0];
       time[1] = +time[1];
@@ -151,12 +151,13 @@ define(function(require){
     // [ SETUP THE SLIDER ]
     //
     //
-    setup_slider : function(){
+    setup_slider : function(first_year){
       var that   = this,
-          slider = Slider;
+          slider = Slider,
+          now    = new Date();
       
       noUiSlider.create(slider, {
-        start: [2006, 2015],
+        start: [first_year, now.getFullYear()],
         step : 1,
         connect: true,
         // behaviour: 'tap',
@@ -171,7 +172,8 @@ define(function(require){
           stepped : true
         }
       });
-
+      console.log([now.getFullYear() - 2, now.getFullYear()]);
+      slider.noUiSlider.set([now.getFullYear() - 2, now.getFullYear()]);
       slider.noUiSlider.on("end", function(){
         that.get_data(this.get(), that.current_graph, that.current_url);
       });
