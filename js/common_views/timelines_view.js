@@ -80,12 +80,26 @@ define(function(require){
       Data  = data;
       var d = data;
       this.prepare_data(d);
-      this.set_scales(d);
-      this.set_axis();
+
+      if(First_time){
+        this.set_scales(d);
+        this.set_axis();
+        this.get_line_generator();
+        this.draw_lines(d);
+        this.draw_list();
+        First_time = false;
+      }
+      else{
+        this.update_render();
+      }
+    },
+
+    update_render : function(){
+      // [1] generate the helpers again
+      this.set_scales(Current_data);
       this.get_line_generator();
-      this.draw_lines(d);
-      this.draw_list();
-      First_time = false;
+      this.set_axis(true);
+      this.draw_lines(Current_data, true);
     },
 
     //
@@ -143,18 +157,7 @@ define(function(require){
         });
       }
 
-      // [2] generate the helpers again
-      this.set_scales(Current_data);
-      this.get_line_generator();
-      this.set_axis(true);
-      this.draw_lines(Current_data, true);
-      /*
-      *this.set_scales(d);
-      this.set_axis();
-      *this.get_line_generator();
-      this.draw_lines(d);
-      this.draw_list();
-      */
+      this.update_render();
     },
 
 
@@ -250,7 +253,6 @@ define(function(require){
       }, this);
 
       if(!update){
-        console.log("create!!!!");
         var container = this.svg.append("g").attr("class", "main_container");
         this.lines = container.selectAll("path").data(data_lines).enter().append("path").attr("d", this.line)
           .attr("fill", "none")
@@ -262,11 +264,9 @@ define(function(require){
           .attr("opacity", 0.5);
       }
       else{
-        console.log("update!!!!");
         //console.log(this.lines);
         //return;
         //this.lines = this.svg.select(".main_container").selectAll("path");//.data(data_lines);
-        console.log("size: ", this.lines.size());
         this.lines.data(data_lines);
         this.lines.transition().duration(1500).ease("sin-in-out").attr("d", this.line);
 
