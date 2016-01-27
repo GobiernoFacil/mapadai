@@ -56,7 +56,8 @@ define(function(require){
 		"click #show_time"    : "show_time",
 		"click #show_top"     : "show_top",
 		"click #show_treemap" : "show_treemap",
-		"click #show_heatmap" : "show_heatmap"
+		"click #show_heatmap" : "show_heatmap",
+		"scroll" 			: "detect_scroll"
     },
 
     //
@@ -96,6 +97,15 @@ define(function(require){
       this.get_data([2006, 2015], this.top10bars, URLS.top10bars);
       this.get_data([2006, 2015], this.timeline_a, URLS.timeline);
       this.get_data([2006, 2015], this.treemap_a, URLS.treemap);
+      
+      // [6] add a listener for the scroll, the ugly hack way
+      this.year_menu = $.proxy(this.year_menu, this);
+      this.setupScrollEvents = $.proxy(this.setupScrollEvents, this);
+      this.fullExperiencieMobile = $.proxy(this.fullExperiencieMobile, this);
+      
+      window.onscroll   = this.year_menu;
+      
+      
     },
     
     
@@ -162,7 +172,24 @@ define(function(require){
 
       return slider;
     },
-
+	
+	
+	// ----------------------
+    // FIXED YEAR MENU
+    // ----------------------
+    //
+    year_menu : function(e){
+      if($(window).scrollTop() > 155){
+        $('.infomex_menu').addClass('fix-year');
+        $('.section_name').removeClass('hide');
+      }
+      else{
+        $('.infomex_menu').removeClass('fix-year');
+        $('.section_name').addClass('hide');
+      }
+    },
+    
+    
     
     //
     // L O C A L   T R A N S I T I O N S
