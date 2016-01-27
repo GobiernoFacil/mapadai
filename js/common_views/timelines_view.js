@@ -42,7 +42,7 @@ define(function(require){
   // C A C H E   T H E   C O M M O N   E L E M E N T S   A N D   T E M P L A T E S
   // --------------------------------------------------------------------------------
   //
-  LI = "<li class='col-sm-4'><a class='category-toggle' data-category='<%=name%>' href='#'><b style='background:<%=i%>'></b><%=name%></a></li>";
+  LI = "<li><a class='category-toggle' data-category='<%=name%>' href='#'><b style='background:<%=i%>'></b><%=name%></a></li>";
   
     
   //
@@ -293,8 +293,8 @@ define(function(require){
       	  divcol 	= document.createElement("div"),
        	  ul  		= document.createElement("ul");
        	  
-    /*  divrow.setAttribute("class", "row"); 	  
-      divcol.setAttribute("class", "col-sm-12"); */	
+     divrow.setAttribute("class", "row"); 	  
+      divcol.setAttribute("class", "col-sm-10 col-sm-offset-1"); 
       ul.setAttribute("id", "timeline-office-selector");
       ul.setAttribute("class", "row timeline list");
 	  

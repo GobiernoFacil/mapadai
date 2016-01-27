@@ -44,18 +44,24 @@
             Inicio
           </a>
         </li>
-         <li>
-          <a href="infomex.php" title="INFOMEX">
+        <li>
+          <a href="/infomex.php" title="INFOMEX">
             Solicitudes de información
           </a>
         </li>
-        <li>
+         <li>
+          <a href="/que-es.php" title="#MapaDAImx">
+            ¿Qué es #MapaDAImx?
+          </a>
+        </li>
+        <!--
+	    <li>
           <a href="#!" title="POT">
             Portal de obligaciones y transparencia
           </a>
         </li>
          <li>
-          <a href="#!" title="Usuarios">
+          <a href="users.php" title="Usuarios">
             Perfil de usuarios
           </a>
         </li>
@@ -63,7 +69,7 @@
           <a href="#!" title="Solicitud de información">
             Recursos de revisión
           </a>
-        </li>
+        </li>-->
       </ul>
     </nav>
 

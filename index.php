@@ -15,7 +15,7 @@
 			<div class="row">
 				<div class="col-sm-6 col-sm-offset-3">
 					<p>Conoce la historia del derecho al acceso a la información en México, visualiza por año todos los datos del INAI.</p>
-					<a href="#" class="btn">NAVEGAR DATOS</a>
+					<a href="/infomex.php" class="btn">NAVEGAR DATOS</a>
 				</div>
 			</div>
 		</div>
@@ -26,6 +26,6 @@
 	<div class="clearfix"></div>
 	
 	<!--CTA-->
-	<a href="#" class="btn proceso">CONOCE EL PROCESO DE SOLICITUD DE INFORMACIÓN</a>
+	<a href="/que-es.php" class="btn proceso">¿Qué es el <strong>#MapaDAImx</strong>?</a>
 	
 <?php include "templates/footer.php";?>
