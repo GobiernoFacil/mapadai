@@ -84,6 +84,9 @@ define(function(require){
 
       // [2] setup the SLIDER
       this.slider = this.setup_slider();
+      var time = this.slider.noUiSlider.get();
+      time[0] = +time[0];
+      time[1] = +time[1];
 
       // [3] create the graphs
       this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
@@ -98,7 +101,7 @@ define(function(require){
       // [5] load the data
       this.get_data([2006, 2015], this.heatmap_a, URLS.heatmap);
       this.get_data([2006, 2015], this.top10bars, URLS.top10bars);
-      this.get_data([2006, 2015], this.timeline_a, URLS.timeline);
+      this.get_data(time, this.timeline_a, URLS.timeline);
       this.get_data([2006, 2015], this.treemap_a, URLS.treemap);
       
       // [6] add a listener for the scroll, the ugly hack way

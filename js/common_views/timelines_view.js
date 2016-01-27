@@ -246,7 +246,8 @@ define(function(require){
     //
     //
     draw_lines : function(data, update){
-      var data_lines = [];
+      var that       = this,
+          data_lines = [];
       Categories.forEach(function(cat, i){
         var m    = _.where(data, {dependencia : cat});
         data_lines.push(m);
@@ -254,34 +255,33 @@ define(function(require){
 
       if(!update){
         var container = this.svg.append("g").attr("class", "main_container");
-        this.lines = container.selectAll("path").data(data_lines).enter().append("path").attr("d", this.line)
-          .attr("fill", "none")
-          .attr("stroke", function (d, i) {
+        this.lines = container.selectAll("path")
+          .data(data_lines).enter()
+            .append("path")
+            .attr("d", this.line)
+            .attr("fill", "none")
+            .attr("stroke", function (d, i) {
 	          	return  Color_r[i];    		    
-          }
-         )
-          .attr("stroke-width", 1.5)
-          .attr("opacity", 0.5);
+            })
+            .attr("stroke-width", 1.5)
+            .attr("opacity", 0.5);
       }
       else{
-        //console.log(this.lines);
-        //return;
-        //this.lines = this.svg.select(".main_container").selectAll("path");//.data(data_lines);
         this.lines.data(data_lines);
         this.lines.transition().duration(1500).ease("sin-in-out").attr("d", this.line);
-
-        /*
-        this.lines.enter().append("path").attr("d", this.line)
-          .attr("fill", "none")
-          .attr("stroke", "rgba(139,167,192,0.25)")
-          .attr("stroke-width", 1.5)
-          .attr("stroke-linejoin", "round")
-          .attr("cursor", "pointer");
-
-        this.lines.exit().remove();
-        */
       }
+
+      this.lines.on("mouseover", function(d){
+        d3.select(this)
+          .attr("stroke-width", 3)
+          .attr("stroke", "#015383")
+            that.draw_tooltips(d);
+          });
       
+    },
+
+    draw_tooltips : function(data){
+      console.log(data);
     },
 
     //
@@ -305,7 +305,7 @@ define(function(require){
         var dt = {name : cat, i : Color_r[i]};
         $(ul).append(this.li(dt));
       }, this);
-      this.el.appendChild(divrow);
+      this.el.insertBefore(divrow, this.el.firstChild);
     },
 
     //
