@@ -56,8 +56,7 @@ define(function(require){
 		"click #show_time"    : "show_time",
 		"click #show_top"     : "show_top",
 		"click #show_treemap" : "show_treemap",
-		"click #show_heatmap" : "show_heatmap",
-		"scroll" 			: "detect_scroll"
+		"click #show_heatmap" : "show_heatmap"
     },
 
     //
@@ -180,10 +179,14 @@ define(function(require){
     //
     year_menu : function(e){
       if($(window).scrollTop() > 155){
+	    $('header').addClass('fixed_header');
+	    $('.nav-side').addClass('fixed_nav');
         $('.infomex_menu').addClass('fix-year');
         $('.section_name').removeClass('hide');
       }
       else{
+	    $('header').removeClass('fixed_header');
+	    $('.nav-side').removeClass('fixed_nav');
         $('.infomex_menu').removeClass('fix-year');
         $('.section_name').addClass('hide');
       }

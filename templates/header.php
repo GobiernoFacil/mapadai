@@ -70,7 +70,7 @@
     <input type="radio" id="nav-collapse" name="nav" checked="checked" class="invis" />
     
      <main class="main-base" role="main">
-	<header>
+	<header class="main_header">
 		<div class="col-xs-5 col-sm-5">
 			<h1 class="inai">INAI.  Instituto Nacional de Transparencia Acceso a la Información y Protección de Datos Personales </h1>
 		</div>

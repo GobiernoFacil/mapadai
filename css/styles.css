@@ -871,12 +871,20 @@ body {
   .mapa:hover, .mapa a:hover {
     color: rgba(255, 255, 255, 0.7); }
 
-header {
+header.main_header {
   background: #732181;
   padding: 20px 0;
   position: fixed;
   width: 100%;
+  transition: all 0.3s;
   z-index: 10; }
+  header.main_header.fixed_header {
+    padding: 0; }
+    header.main_header.fixed_header .inai {
+      background-size: auto 48px; }
+    header.main_header.fixed_header .mapa, header.main_header.fixed_header .mapa a {
+      font-size: 18px;
+      padding: 25px 0 0; }
 
 footer {
   background: #2e2e2e;
@@ -970,6 +978,8 @@ footer {
   transition: all 0.3s;
   width: 60px;
   z-index: 9999999999; }
+  .nav-side.fixed_nav {
+    top: 10px; }
 
 .menu-list {
   height: 0%;
@@ -1199,7 +1209,7 @@ section:first-of-type {
 
 .infomex_menu.fix-year {
   position: fixed;
-  top: 105px;
+  top: 65px;
   width: 100%;
   z-index: 99; }
   .infomex_menu.fix-year .selector_year {
@@ -1277,7 +1287,7 @@ section:first-of-type {
   background: #f2f2f2; }
 
 .fix-year + .content_graph {
-  padding-top: 150px; }
+  padding-top: 110px; }
 
 .nav.re ul {
   margin: 0;
