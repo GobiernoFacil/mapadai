@@ -69,9 +69,9 @@ define(function(require){
     },
 
     render : function(r){
-      var margin = {top: 20, right: 0, bottom: 0, left: 0},
-          width = 620,
-          height = 500 - margin.top - margin.bottom,
+      var margin = {top: Margins.top, right: Margins.right, bottom: Margins.bottom, left: Margins.left},
+          width  = Margins.width,
+          height = Margins.height - Margins.top - Margins.bottom,
           formatNumber = d3.format(",d"),
           transitioning;
           
@@ -115,10 +115,10 @@ define(function(require){
 /* load in data, display root */
   function xxx(r) {
   root = {name : "mapadai", children: r[0].mapadai};
-  console.log(URL, root);
-  //console.log(root);
+  console.log("initialize", root);
   initialize(root);
   accumulate(root);
+  accumulate2(root);
   layout(root);
   display(root);
 
@@ -135,6 +135,12 @@ define(function(require){
     return d.children
         ? d.value = d.children.reduce(function(p, v) { return p + accumulate(v); }, 0)
         : d.value;
+  }
+
+  function accumulate2(d) {
+    return d.children
+        ? d.total = d.children.reduce(function(p, v) { return p + accumulate2(v); }, 0)
+        : d.total;
   }
 
   // Compute the treemap layout recursively such that each group of siblings
@@ -196,7 +202,8 @@ define(function(require){
         /* Chrome displays this on top */
         .on("click", function(d) { 
             if(!d.children){
-                window.open(d.url); 
+                // window.open(d.url); 
+                console.log("last child",d);
             }
         })
       .append("title")
@@ -220,6 +227,7 @@ define(function(require){
 
     /* create transition function for transitions */
     function transition(d) {
+      console.log("transition", d);
       if (transitioning || !d) return;
       transitioning = true;
 
@@ -285,9 +293,7 @@ define(function(require){
   }
 
   function name(d) {
-    return d.parent
-        ? name(d.parent) + "." + d.name
-        : d.name;
+    return d.parent ? name(d.parent) + "." + d.name : d.name;
   }
 }
 
