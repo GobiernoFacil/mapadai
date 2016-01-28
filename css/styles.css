@@ -233,10 +233,12 @@ text {
 text {
   pointer-events: none; }
 
-#treemap-a rect {
-  stroke: #f2f2f2; }
-  #treemap-a rect:hover + .foreignobj .textdiv {
-    color: rgba(0, 0, 0, 0.6); }
+#treemap-a {
+  margin: 40px auto; }
+  #treemap-a rect {
+    stroke: #f2f2f2; }
+    #treemap-a rect:hover + .foreignobj .textdiv {
+      color: rgba(0, 0, 0, 0.6); }
 
 rect.parent, .grandparent rect {
   stroke-width: 2px; }
