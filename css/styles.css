@@ -242,12 +242,13 @@ rect.parent, .grandparent rect {
   stroke-width: 2px; }
 
 #treemap-a .grandparent rect {
-  fill: #ccc; }
+  fill: rgba(0, 0, 0, 0.17);
+  transition: all 0.3s; }
 #treemap-a .grandparent text {
   fill: white;
   font: 500 14px 'kelson_sans', Helvetica, Arial, sans-serif; }
 #treemap-a .grandparent:hover rect {
-  fill: #555; }
+  fill: #777; }
 
 .children rect.parent, .grandparent rect {
   cursor: pointer; }
@@ -1423,7 +1424,8 @@ a.download {
   margin-left: -15px;
   margin-right: -15px;
   text-align: right;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  transition: all 0.3s; }
   a.download b {
     background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIxNi41NzRweCIgaGVpZ2h0PSIxNS44NTRweCIgdmlld0JveD0iMCAwIDE2LjU3NCAxNS44NTQiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDE2LjU3NCAxNS44NTQiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwYXRoIGZpbGw9IiM0NDQ0NDQiIGQ9Ik0xNS4wNTksMi40ODJsLTEuMTIxLTEuMzY0Yy0wLjE2LTAuMjM4LTAuNDgtMC4zOTgtMC44NzktMC4zOThIMy40NTdjLTAuMzk4LDAtMC43MTgsMC4xNi0wLjk1NywwLjM5OEwxLjQ1NywyLjQ4MkMxLjIxOSwyLjc5OCwxLjA1OSwzLjExOSwxLjA1OSwzLjUyMXYxMGMwLDAuODc5LDAuNzE5LDEuNTk4LDEuNjAyLDEuNTk4aDExLjE5OWMwLjg3OSwwLDEuNTk4LTAuNzE5LDEuNTk4LTEuNTk4di0xMEMxNS40NTcsMy4xMTksMTUuMjk3LDIuNzk4LDE1LjA1OSwyLjQ4MkwxNS4wNTksMi40ODJ6IE04LjEzNywxMy4xMDJMNC43MzksOC42OTlINi41NFY1LjEwMmgzLjE5OXYzLjU5N2gxLjgwMUw4LjEzNywxMy4xMDJ6IE0yLjczOSwyLjMyM2wwLjY0LTAuODAxaDkuNjAybDAuNzE5LDAuODAxSDIuNzM5eiBNMi43MzksMi4zMjMiLz48L2c+PC9zdmc+') no-repeat;
     background-size: auto 13px;
@@ -1433,7 +1435,7 @@ a.download {
     height: 13px;
     vertical-align: bottom; }
   a.download:hover {
-    background: #777;
+    background: rgba(0, 0, 0, 0.2);
     border-color: rgba(0, 0, 0, 0.17);
     color: white; }
     a.download:hover b {
