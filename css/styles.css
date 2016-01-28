@@ -234,17 +234,20 @@ text {
   pointer-events: none; }
 
 #treemap-a rect {
-  fill: #00c1a5;
-  stroke: #007564; }
+  stroke: #f2f2f2; }
+  #treemap-a rect:hover + .foreignobj .textdiv {
+    color: rgba(0, 0, 0, 0.6); }
 
 rect.parent, .grandparent rect {
   stroke-width: 2px; }
 
 #treemap-a .grandparent rect {
-  fill: #007564; }
+  fill: #ccc; }
 #treemap-a .grandparent text {
-  fill: #00c1a5;
+  fill: white;
   font: 500 14px 'kelson_sans', Helvetica, Arial, sans-serif; }
+#treemap-a .grandparent:hover rect {
+  fill: #555; }
 
 .children rect.parent, .grandparent rect {
   cursor: pointer; }
@@ -255,11 +258,17 @@ rect.parent {
 .children:hover rect.child, .grandparent:hover rect {
   fill: #aaa; }
 
+.foreignobj {
+  overflow: hidden; }
+
 .textdiv {
   /* text in the boxes */
-  font-size: medium;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 13px;
   padding: 5px;
   font-family: 'kelson_sans', Helvetica, Arial, sans-serif; }
+  .textdiv:hover {
+    color: rgba(0, 0, 0, 0.6); }
 
 .wrapper, .wrap {
   width: 90%;
