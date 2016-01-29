@@ -36,7 +36,7 @@ define(function(require){
   Width  = Margins.width,
   Height = Margins.height - Margins.top,
   Format = d3.format(","),
-  URL    = "http://inai.skalas.mx/api/treemap?from=2015-01-01&to=2015-05-06",
+  FirstTime = true,
   Transitioning;
 
   //
@@ -70,7 +70,8 @@ define(function(require){
     },
 
     render : function(r){
-      var margin = {top: Margins.top, right: Margins.right, bottom: Margins.bottom, left: Margins.left},
+      var that   = this,
+          margin = {top: Margins.top, right: Margins.right, bottom: Margins.bottom, left: Margins.left},
           width  = Margins.width,
           height = Margins.height - Margins.top - Margins.bottom,
           formatNumber = d3.format(",d"),
@@ -117,32 +118,12 @@ define(function(require){
   function xxx(r) {
   root = {name : "mapadai", children: r[0].mapadai};
   console.log("initialize", root);
-  initialize(root);
-  accumulate2(root);
-  accumulate(root);
+  that.initialize_treemap(root);
+  that.accumulate(root, "total");
+  that.accumulate(root, "value");
   layout(root);
   display(root);
-
-  function initialize(root) {
-    root.x = root.y = 0;
-    root.dx = width;
-    root.dy = height;
-    root.depth = 0;
-  }
-
-  // Aggregate the values for internal nodes. This is normally done by the
-  // treemap layout, but not here because of our custom implementation.
-
-  function accumulate2(d) {
-    var ac = d.children ? d.total = d.children.reduce(function(p, v) { return p + accumulate2(v); }, 0) : (d.total? d.total : 0);
-    return ac;
-  }
-
-
-  function accumulate(d) {
-    var ac = d.children ? d.value = d.children.reduce(function(p, v) { return p + accumulate(v); }, 0) : (d.value? d.value : 0);
-    return ac;
-  }
+  FirstTime = false;
 
   // Compute the treemap layout recursively such that each group of siblings
   // uses the same size (1×1) rather than the dimensions of the parent cell.
@@ -300,6 +281,23 @@ define(function(require){
 } //endfunc xxx
 
 xxx(r);
+    },
+
+    initialize_treemap : function(root) {
+      root.x     = root.y = 0;
+      root.dx    = Margins.width;
+      root.dy    = Margins.height - Margins.top - Margins.bottom;
+      root.depth = 0;
+    },
+
+    // Aggregate the values for internal nodes. This is normally done by the
+    // treemap layout, but not here because of our custom implementation.
+    accumulate : function(d, key) {
+      var that = this;
+      var ac = d.children ? d[key] = d.children.reduce(function(p, v){
+        return p + that.accumulate(v, key);
+      }, 0) : (d[key] ? d[key] : 0);
+      return ac;
     }
   });
 
