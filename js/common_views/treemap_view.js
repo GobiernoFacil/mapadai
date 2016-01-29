@@ -67,9 +67,24 @@ define(function(require){
     //
     //
     initialize : function(){
+      this.svg     = null;
+      this.treemap = null;
+      this.scales  = null;
+      this.set_scales();
+    },
+
+    _remove : function(){
+      if(this.svg){
+        // return d3(this.svg.remove();
+        return d3.select(this.svg.node().parentNode).remove();
+      }
+      else{
+        return null;
+      }
     },
 
     render : function(r){
+      if(this.svg) this._remove();
       var that   = this,
           margin = {top: Margins.top, right: Margins.right, bottom: Margins.bottom, left: Margins.left},
           width  = Margins.width,
@@ -91,6 +106,7 @@ define(function(require){
                       .sort(function(a, b) { return a.value - b.value; })
                       .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
                       .round(false);
+      this.treemap = treemap;
 
       /* create svg */
       var svg = d3.select(this.el).append("svg")
@@ -101,6 +117,8 @@ define(function(require){
                   .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
                     .style("shape-rendering", "crispEdges");
+      this.svg = svg;
+
       var grandparent = svg.append("g")
                           .attr("class", "grandparent");
 
@@ -121,33 +139,12 @@ define(function(require){
   that.initialize_treemap(root);
   that.accumulate(root, "total");
   that.accumulate(root, "value");
-  layout(root);
+  that.layout(root);
   display(root);
   FirstTime = false;
 
-  // Compute the treemap layout recursively such that each group of siblings
-  // uses the same size (1×1) rather than the dimensions of the parent cell.
-  // This optimizes the layout for the current zoom state. Note that a wrapper
-  // object is created for the parent node for each group of siblings so that
-  // the parent’s dimensions are not discarded as we recurse. Since each group
-  // of sibling was laid out in 1×1, we must rescale to fit using absolute
-  // coordinates. This lets us use a viewport to zoom.
-  function layout(d) {
-    if (d.children) {
-      treemap.nodes({children: d.children});
-      d.children.forEach(function(c) {
-        c.x = d.x + c.x * d.dx;
-        c.y = d.y + c.y * d.dy;
-        c.dx *= d.dx;
-        c.dy *= d.dy;
-        c.parent = d;
-        layout(c);
-      });
-    }
-  }
-
   /* display show the treemap and writes the embedded transition function */
-  function display(d) {
+  function display(d){
     /* create grandparent bar at top */
     grandparent
         .datum(d.parent)
@@ -233,8 +230,8 @@ define(function(require){
       g2.selectAll("foreignObject div").style("display", "none"); /*added*/
 
       // Transition to the new view.
-      t1.selectAll("text").call(text).style("fill-opacity", 0);
-      t2.selectAll("text").call(text).style("fill-opacity", 1);
+      t1.selectAll("text").call(that.text).style("fill-opacity", 0);
+      t2.selectAll("text").call(that.text).style("fill-opacity", 1);
       t1.selectAll("rect").call(rect);
       t2.selectAll("rect").call(rect);
       
@@ -255,17 +252,12 @@ define(function(require){
     return g;
   } //endfunc display
 
-  function text(text) {
-    text.attr("x", function(d) { return x(d.x) + 6; })
-        .attr("y", function(d) { return y(d.y) + 6; });
-  }
-
   function rect(rect) {
     rect.attr("x", function(d) { return x(d.x); })
         .attr("y", function(d) { return y(d.y); })
         .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
         .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); })   
-        .attr("fill", function(d, i) {console.log(i, d); return Color_r[i]})
+        .attr("fill", function(d, i) {return Color_r[i]})
   }
 
   function foreign(foreign){  /* added */
@@ -280,9 +272,13 @@ define(function(require){
   }
 } //endfunc xxx
 
-xxx(r);
+      xxx(r);
     },
 
+    //
+    // D E F I N E   T H E   T R E E M A P   H E L P E R S
+    // --------------------------------------------------------------------------------
+    //
     initialize_treemap : function(root) {
       root.x     = root.y = 0;
       root.dx    = Margins.width;
@@ -298,6 +294,46 @@ xxx(r);
         return p + that.accumulate(v, key);
       }, 0) : (d[key] ? d[key] : 0);
       return ac;
+    },
+
+    // Compute the treemap layout recursively such that each group of siblings
+    // uses the same size (1×1) rather than the dimensions of the parent cell.
+    // This optimizes the layout for the current zoom state. Note that a wrapper
+    // object is created for the parent node for each group of siblings so that
+    // the parent’s dimensions are not discarded as we recurse. Since each group
+    // of sibling was laid out in 1×1, we must rescale to fit using absolute
+    // coordinates. This lets us use a viewport to zoom.
+    layout : function(d){
+      var that = this;
+      if(d.children){
+        this.treemap.nodes({children: d.children});
+        d.children.forEach(function(c) {
+          c.x = d.x + c.x * d.dx;
+          c.y = d.y + c.y * d.dy;
+          c.dx *= d.dx;
+          c.dy *= d.dy;
+          c.parent = d;
+          that.layout(c);
+        });
+      }
+    },
+
+    text : function(text){
+      var that = this;
+      text.attr("x", function(d) { return that[0](d.x) + 6; })
+          .attr("y", function(d) { return that[1](d.y) + 6; });
+    },
+
+
+    set_scales : function(){
+      var x = d3.scale.linear()
+               .domain([0, Margins.width])
+               .range([0, Margins.width]);
+      
+      var y = d3.scale.linear()
+                .domain([0, Margins.height - Margins.top - Margins.bottom])
+                .range([0, Margins.height - Margins.top - Margins.bottom]);
+      this.scales = [x, y];
     }
   });
 
