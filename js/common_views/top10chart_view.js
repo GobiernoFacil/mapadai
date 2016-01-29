@@ -61,7 +61,6 @@ define(function(require){
     },
 
     render : function(data){
-      console.log("yahooo");
       var x_scale = new Scale(data, Margins, "total", "x"),
           divs    = d3.select(this.el).selectAll("div")
                       .data(data)

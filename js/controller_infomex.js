@@ -173,7 +173,6 @@ define(function(require){
           stepped : true
         }
       });
-      console.log([now.getFullYear() - 2, now.getFullYear()]);
       slider.noUiSlider.set([now.getFullYear() - years_to_last, now.getFullYear()]);
       slider.noUiSlider.on("end", function(){
         that.get_data(this.get(), that.current_graph, that.current_url);

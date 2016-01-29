@@ -35,6 +35,7 @@ define(function(require){
   },
   Width  = Margins.width,
   Height = Margins.height - Margins.top,
+  Format = d3.format(","),
   URL    = "http://inai.skalas.mx/api/treemap?from=2015-01-01&to=2015-05-06",
   Transitioning;
 
@@ -117,8 +118,8 @@ define(function(require){
   root = {name : "mapadai", children: r[0].mapadai};
   console.log("initialize", root);
   initialize(root);
-  accumulate(root);
   accumulate2(root);
+  accumulate(root);
   layout(root);
   display(root);
 
@@ -131,16 +132,16 @@ define(function(require){
 
   // Aggregate the values for internal nodes. This is normally done by the
   // treemap layout, but not here because of our custom implementation.
-  function accumulate(d) {
-    return d.children
-        ? d.value = d.children.reduce(function(p, v) { return p + accumulate(v); }, 0)
-        : d.value;
-  }
 
   function accumulate2(d) {
-    return d.children
-        ? d.total = d.children.reduce(function(p, v) { return p + accumulate2(v); }, 0)
-        : d.total;
+    var ac = d.children ? d.total = d.children.reduce(function(p, v) { return p + accumulate2(v); }, 0) : (d.total? d.total : 0);
+    return ac;
+  }
+
+
+  function accumulate(d) {
+    var ac = d.children ? d.value = d.children.reduce(function(p, v) { return p + accumulate(v); }, 0) : (d.value? d.value : 0);
+    return ac;
   }
 
   // Compute the treemap layout recursively such that each group of siblings
@@ -206,8 +207,8 @@ define(function(require){
                 console.log("last child",d);
             }
         })
-      .append("title")
-        .text(function(d) { return formatNumber(d.value); });
+      //.append("title")
+        //.text(function(d) { return formatNumber(d.value); });
     
     /* Adding a foreign object instead of a text object, allows for text wrapping */
     g.append("foreignObject")
@@ -216,13 +217,14 @@ define(function(require){
         /* Firefox displays this on top */
         .on("click", function(d) { 
             if(!d.children){
-                window.open(d.url); 
+                //window.open(d.url); 
+                console.log("last child",d);
             }
         })
         .attr("class","foreignobj")
         .append("xhtml:div") 
             .attr("dy", ".75em")
-            .html(function(d) { return d.name; })
+            .html(function(d) { return d.name + ": " + Format(d.total); })
             .attr("class","textdiv"); //textdiv class allows us to style the text easily with CSS
 
     /* create transition function for transitions */
@@ -270,7 +272,7 @@ define(function(require){
 
     
     return g;
-  }
+  } //endfunc display
 
   function text(text) {
     text.attr("x", function(d) { return x(d.x) + 6; })
@@ -282,7 +284,7 @@ define(function(require){
         .attr("y", function(d) { return y(d.y); })
         .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
         .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); })   
-        .attr("fill", function(d, i) { return Color_r[i]})
+        .attr("fill", function(d, i) {console.log(i, d); return Color_r[i]})
   }
 
   function foreign(foreign){  /* added */
@@ -295,13 +297,9 @@ define(function(require){
   function name(d) {
     return d.parent ? name(d.parent) + "." + d.name : d.name;
   }
-}
+} //endfunc xxx
 
 xxx(r);
-
-
-
-//////////////////////////
     }
   });
 
