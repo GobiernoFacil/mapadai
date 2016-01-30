@@ -15,13 +15,14 @@ define(function(require){
       d3       = require("d3"),
       SVG      = require("common_views/main_svg_view"),
       Scale    = require("common_views/linear_scale_view"),
-      Dummy    = [{"dependencia":"INSTITUTO MEXICANO DEL SEGURO SOCIAL","total":"25375"},{"dependencia":"SECRETARÃA DE EDUCACIÃ“N PÃšBLICA","total":"6238"},{"dependencia":"INSTITUTO DE SEGURIDAD Y SERVICIOS SOCIALES DE LOS TRABAJADORES DEL ESTADO","total":"5766"},{"dependencia":"SECRETARÃA DE SALUD","total":"4806"},{"dependencia":"PROCURADURÃA GENERAL DE LA REPÃšBLICA","total":"3793"},{"dependencia":"SECRETARÃA DE GOBERNACIÃ“N (INCLUYE LA ENTONCES SECRETARÃA DE SEGURIDAD PÃšBLICA)","total":"3754"},{"dependencia":"SECRETARÃA DE MEDIO AMBIENTE Y RECURSOS NATURALES","total":"3491"},{"dependencia":"SECRETARÃA DE COMUNICACIONES Y TRANSPORTES","total":"3123"},{"dependencia":"COMISIÃ“N FEDERAL PARA LA PROTECCIÃ“N CONTRA RIESGOS SANITARIOS","total":"2949"},{"dependencia":"PETRÃ“LEOS MEXICANOS","total":"2755"}];
 
   //
   // D E F I N E   C O N S T A N T 'S
   // --------------------------------------------------------------------------------
   //
-  Margins = {
+  First_time = true,
+  Format     = d3.format(","),
+  Margins    = {
     width    : 600,
     height   : 600,
     top      : 20,
@@ -56,24 +57,24 @@ define(function(require){
     //
     //
     initialize : function(){
-      //this.x_scale = new Scale(Dummy, Margins, "total", "x");
-      //this.render();
+      this.divs = null;
     },
 
     render : function(data){
-      var x_scale = new Scale(data, Margins, "total", "x"),
-          divs    = d3.select(this.el).selectAll("div")
+      var x_scale = this.scale(data);
+
+      if(First_time){
+        this.divs = d3.select(this.el).selectAll("div")
                       .data(data)
                       .enter()
                       .append("div")
                       .attr("class", "content-top");
 
-      divs.append("p")
-        .html(function(d){
-          return d.dependencia;
-        });
-
-      divs.append("div")
+        this.divs.append("p")
+          .html(function(d){
+            return d.dependencia + ": " + Format(d.total);
+          });
+        this.divs.append("div")
         .attr("class", "bar")
         .style({
           background : "#00c1a5",
@@ -82,6 +83,32 @@ define(function(require){
             return x_scale(d.total) + "px";
           }
         });
+        First_time = false;
+      }
+      else{
+        this.divs.data(data);
+        this.divs.select(".bar").transition().duration(500).ease("sin-in-out").style({
+          width : function(d){
+            return x_scale(d.total) + "px";
+          }
+        });
+        this.divs.select("p")
+          .html(function(d){
+            return d.dependencia + ": " + Format(d.total);
+          });
+      }
+      
+    },
+
+    scale : function(data){
+      var x      = [Margins.left, Margins.width - Margins.left - Margins.right],
+          extent = d3.extent(data, function(d){
+            return +d.total;
+          }),
+          scale = d3.scale.linear()
+                    .domain(extent)
+                    .range(x);
+      return scale;
     }
   });
 
