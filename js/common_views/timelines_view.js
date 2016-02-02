@@ -87,6 +87,7 @@ define(function(require){
         this.set_axis();
         this.get_line_generator();
         this.draw_lines(d);
+        this.draw_dots(d);
         this.draw_list();
         First_time = false;
       }
@@ -290,6 +291,25 @@ define(function(require){
         that.svg.selectAll(".amount").remove();
       });
       
+    },
+
+    draw_dots : function(data){
+      var that = this;
+      this.svg.selectAll(".dot").remove();
+      this.svg.selectAll(".dot").data(data).enter()
+        .append("circle")
+          .attr("class", "dot")
+          .attr("r", "6")
+          .attr("cx", function(d){
+            return that.scales[0](d.date);
+          })
+          .attr("cy", function(d){
+            return that.scales[1](d.total);
+          })
+          .style({
+            opacity : 0,
+            cursor : "pointer"
+          });
     },
 
     draw_vertical_labels : function(update){

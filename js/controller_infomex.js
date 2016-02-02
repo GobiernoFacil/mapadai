@@ -190,7 +190,6 @@ define(function(require){
     update_time_ui : function(r){
       this.$(".year-range").html((+r[0]) + " - " + (+r[1]));
       this.slider.noUiSlider.set(r);
-      console.log(r);
     },
 	
 	
