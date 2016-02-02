@@ -103,8 +103,6 @@ define(function(require){
       }
       else{
         this.update_render();
-        this.remove_dots();
-        this.draw_dots(d);
       }
 
       Current_range = range;
@@ -116,6 +114,8 @@ define(function(require){
       this.get_line_generator();
       this.set_axis(true);
       this.draw_lines(Current_data, true);
+      this.remove_dots();
+      this.draw_dots(Current_data);
     },
 
     //
