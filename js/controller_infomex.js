@@ -18,6 +18,7 @@ define(function(require){
       Top10bar   = require("common_views/top10chart_view"),
       Timeline   = require("common_views/timelines_view"), 
       TreeMap    = require("common_views/treemap_view"),
+      Tooltip    = require("text!templates/tooltip-a.html"),
 
   //
   // S E T U P   V A R S
@@ -67,7 +68,7 @@ define(function(require){
     //
     // [ DEFINE THE TEMPLATES ]
     //
-
+    tooltip : _.template(Tooltip), 
 
     //
     // [ SET THE CONTAINER ]
@@ -143,14 +144,6 @@ define(function(require){
     },
 
     //
-    // [ ALERT THE USER IF THE API DOESN'T WORK ]
-    //
-    //
-    show_error : function(error){
-      alert("no se puede establecer conexión con el servidor");
-    },
-
-    //
     // [ SETUP THE SLIDER ]
     //
     //
@@ -190,6 +183,37 @@ define(function(require){
     update_time_ui : function(r){
       this.$(".year-range").html((+r[0]) + " - " + (+r[1]));
       this.slider.noUiSlider.set(r);
+    },
+
+    //
+    // [ ALERT THE USER IF THE API DOESN'T WORK ]
+    //
+    //
+    show_error : function(error){
+      alert("no se puede establecer conexión con el servidor");
+    },
+
+    //
+    // [ SHOW THE TOOLTIP ]
+    //
+    //
+    create_tooltip : function(data){
+      var el = $(this.tooltip(data));
+      el.css({
+        left : d3.event.pageX + "px",
+        top  : d3.event.pageY + "px",
+        position: "absolute"
+      });
+
+      this.$el.append(el);
+    },
+
+    //
+    // [ BYE TOOLTIP! ]
+    //
+    //
+    remove_tooltip : function(){
+      $(".tooltip-container").remove();
     },
 	
 	

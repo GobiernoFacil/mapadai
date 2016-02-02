@@ -21,6 +21,7 @@ define(function(require){
   // D E F I N E   C O N S T A N T 'S
   // --------------------------------------------------------------------------------
   //
+  Format        = d3.format(","),
   Data          = null,
   First_time    = true,
   Categories    = [],
@@ -37,6 +38,14 @@ define(function(require){
     dates    : 0,
     padding  : 0,
     oPadding : 15
+  },
+  Dot_style = {
+    opacity : 0,
+    cursor : "pointer"
+  },
+  DotHover_style = {
+    opacity : 1,
+    fill : "red"
   },
 
   //
@@ -68,7 +77,8 @@ define(function(require){
     // [ THE INITIALIZE FUNCTION ]
     //
     //
-    initialize : function(){
+    initialize : function(settings){
+      this.controller = settings.controller;
       this.svg = new SVG(this.el, Margins);
       this.draw_labels(this.svg);
     },
@@ -93,6 +103,8 @@ define(function(require){
       }
       else{
         this.update_render();
+        this.remove_dots();
+        this.draw_dots(d);
       }
 
       Current_range = range;
@@ -293,6 +305,10 @@ define(function(require){
       
     },
 
+    //
+    //
+    //
+    //
     draw_dots : function(data){
       var that = this;
       this.svg.selectAll(".dot").remove();
@@ -306,20 +322,41 @@ define(function(require){
           .attr("cy", function(d){
             return that.scales[1](d.total);
           })
-          .style({
-            opacity : 0,
-            cursor : "pointer"
-          });
+          .style(Dot_style)
+          .on("mouseover", function(d){
+            console.log(d);
+            d3.select(this).style(DotHover_style);
+            that.controller.create_tooltip({
+              title   : d.dependencia,
+              content : "peticiones : " + Format(d.total) + " | fecha : " + (d.date.getMonth()+1) + "/" + d.date.getFullYear()
+            });
+          })
+          .on("mouseout", function(d){
+            d3.select(this).style(Dot_style);
+            that.controller.remove_tooltip();
+          })
     },
 
+    remove_dots : function(){
+      d3.selectAll(".dot").remove();
+    },
+
+
+    //
+    //
+    //
+    //
     draw_vertical_labels : function(update){
       var data = this.prepare_vertical_labels_data();
       //this.svg.selectAll
     },
 
+    //
+    //
+    //
+    //
     draw_tooltips : function(data){
       var that   = this,
-          format = d3.format(","),
           labels = this.svg.selectAll(".amount").data(data).enter()
                      .append("g")
                        .attr("class", "amount")
@@ -330,7 +367,7 @@ define(function(require){
                          return txt;
                        });
       labels.append("text").text(function(d){
-        return format(d.total);
+        return Format(d.total);
       });
     },
 
