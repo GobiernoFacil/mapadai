@@ -45,7 +45,7 @@ define(function(require){
   },
   DotHover_style = {
     opacity : 1,
-    fill : "red"
+    fill : "rgba(0,0,0,0.3)"
   },
 
   //
@@ -284,6 +284,9 @@ define(function(require){
           .data(data_lines).enter()
             .append("path")
             .attr("d", this.line)
+            .attr("id",  function (d, i) {
+	          	return  "g-" + [i];    		    
+            })
             .attr("fill", "none")
             .attr("stroke", function (d, i) {
 	          	return  Color_r[i];    		    
@@ -295,13 +298,13 @@ define(function(require){
         this.lines.data(data_lines);
         this.lines.transition().duration(500).ease("sin-in-out").attr("d", this.line);
       }
-
+/*
       this.lines.on("mouseover", function(d){
         that.draw_tooltips(d);
       })
       this.lines.on("mouseout", function(d){
         that.svg.selectAll(".amount").remove();
-      });
+      });*/
       
     },
 
@@ -315,7 +318,7 @@ define(function(require){
       this.svg.selectAll(".dot").data(data).enter()
         .append("circle")
           .attr("class", "dot")
-          .attr("r", "6")
+          .attr("r", "4")
           .attr("cx", function(d){
             return that.scales[0](d.date);
           })
@@ -326,13 +329,22 @@ define(function(require){
           .on("mouseover", function(d){
             console.log(d);
             d3.select(this).style(DotHover_style);
+            $('svg .main_container path').attr("class","path_out");
+            Categories.forEach(function(cat, i){
+	            if(cat == d.dependencia) {
+				$('svg .main_container path#g-'+ [i]).attr("class","path_hover");
+				console.log([i]);
+	            }
+            });
+          //  $(d.currentTarget).attr("class","path_hover");
             that.controller.create_tooltip({
               title   : d.dependencia,
-              content : "peticiones : " + Format(d.total) + " | fecha : " + (d.date.getMonth()+1) + "/" + d.date.getFullYear()
+              content : "Peticiones : <strong>" + Format(d.total) + "</strong> | Fecha : " + (d.date.getMonth()+1) + "/" + d.date.getFullYear()
             });
           })
           .on("mouseout", function(d){
             d3.select(this).style(Dot_style);
+		  $('svg .main_container path').attr("class","");
             that.controller.remove_tooltip();
           })
     },

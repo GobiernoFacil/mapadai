@@ -214,6 +214,17 @@ text {
     stroke-width: 2px;
     stroke: #ccc; }
 
+.tooltip-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px 10px 0;
+  z-index: 9; }
+  .tooltip-container .tooltip-title {
+    color: #999;
+    font: 700 11px 'kelson_sans', Helvetica, Arial, sans-serif; }
+  .tooltip-container .tooltip-content {
+    color: #666;
+    font: 500 11px 'kelson_sans', Helvetica, Arial, sans-serif; }
+
 .content-top p {
   color: #9C9C9C;
   font: 500 14px 'kelson_sans', Helvetica, Arial, sans-serif;
