@@ -19,6 +19,7 @@ define(function(require){
   // D E F I N E   C O N S T A N T 'S
   // --------------------------------------------------------------------------------
   //
+  Format        = d3.format(","),
   Current_range = null,
   Margins = {
     width    : 600,
@@ -67,11 +68,12 @@ define(function(require){
     // [ THE INITIALIZE FUNCTION ]
     //
     //
-    initialize : function(){
+    initialize : function(settings){
       var that    = this;
       this.svg    = this.make_svg(Margins);
       this.scales = this.make_scales(Margins);
       this.axis   = this.make_axis(this.svg, this.scales, Margins);
+      this.controller = settings.controller;
     },
 
     //
@@ -112,17 +114,13 @@ define(function(require){
             .attr("stroke", "rgba(255,255,255,0.5)")
             .attr("fill", color(datum.count))
             .on("mouseover", function(d){
-              console.log(datum, day, hour, Current_range);
-              //d3.select(this).style(DotHover_style);
-              /*
               that.controller.create_tooltip({
-                title   : d.dependencia,
-                content : "peticiones : " + Format(d.total) + " | fecha : " + (d.date.getMonth()+1) + "/" + d.date.getFullYear()
-              });*/
+                title   : day + ", " + (hour < 10? "0".concat(hour) : hour) + ":00",
+                content : "peticiones : " + Format(datum.count) + " | fecha : " + Current_range[0] + " - " + Current_range[1]
+              });
             })
             .on("mouseout", function(d){
-              //d3.select(this).style(Dot_style);
-              //that.controller.remove_tooltip();
+              that.controller.remove_tooltip();
             });
           count++;
         }, this);
