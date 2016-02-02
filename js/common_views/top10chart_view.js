@@ -22,6 +22,7 @@ define(function(require){
   //
   First_time = true,
   Format     = d3.format(","),
+  Current_range = null,
   Margins    = {
     width    : 600,
     height   : 600,
@@ -60,8 +61,9 @@ define(function(require){
       this.divs = null;
     },
 
-    render : function(data){
-      var x_scale = this.scale(data);
+    render : function(data, range){
+      Current_range = range;
+      var x_scale   = this.scale(data);
 
       if(First_time){
         this.divs = d3.select(this.el).selectAll("div")
@@ -109,6 +111,10 @@ define(function(require){
                     .domain(extent)
                     .range(x);
       return scale;
+    },
+
+    get_range : function(){
+      return Current_range;
     }
   });
 

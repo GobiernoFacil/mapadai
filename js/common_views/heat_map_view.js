@@ -11,21 +11,15 @@ define(function(require){
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //
-  var Backbone   = require('backbone'),
-      d3         = require("d3"),
-      //noUiSlider = require("nouislider"),
-      Color_r    = ["#eee", "#00C186", "#004138"],
+  var Backbone = require('backbone'),
+      d3       = require("d3"),
+      Color_r  = ["#eee", "#00C186", "#004138"],
 
   //
   // D E F I N E   C O N S T A N T 'S
   // --------------------------------------------------------------------------------
   //
-  // /api/heatmap?from=2015-01-01&to=2015-02-01&table=conteo_infomex_publico
-  //URL = "http://inai.skalas.mx/api/",
-  //Endpoint = URL + "heatmap",
-  //Table    = "conteo_infomex_publico", 
-  //Fake     = false,
-  //FakeData = "/js/data/heatmap.json",
+  Current_range = null,
   Margins = {
     width    : 600,
     height   : 600,
@@ -75,7 +69,8 @@ define(function(require){
     // [ RENDER THE HEATMAP ]
     //
     //
-    render : function(data){
+    render : function(data, range){
+      Current_range = range;
       var count  = 0,
           days   = this.scales[0].domain(),
           hours  = this.scales[1].domain(),
@@ -159,6 +154,10 @@ define(function(require){
     svg.selectAll("path.domain").style("fill", "none").style("stroke", "#f2f2f2");
     svg.selectAll("line").style("stroke", "#f2f2f2");
 
+  },
+
+  get_range : function(){
+    return Current_range;
   }
 });
 

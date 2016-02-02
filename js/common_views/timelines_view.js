@@ -21,11 +21,12 @@ define(function(require){
   // D E F I N E   C O N S T A N T 'S
   // --------------------------------------------------------------------------------
   //
-  First_time = true,
-  Categories = [],
-  Data       = null,
-  Current_data = null,
-  Margins    = {
+  Data          = null,
+  First_time    = true,
+  Categories    = [],
+  Current_data  = null,
+  Current_range = null,
+  Margins       = {
     width    : 800,
     height   : 500,
     top      : 20,
@@ -76,7 +77,7 @@ define(function(require){
     // [ RENDER THE GRAPH ]
     //
     //
-    render : function(data){
+    render : function(data, range){
       Data  = data;
       var d = data;
       this.prepare_data(d);
@@ -92,6 +93,8 @@ define(function(require){
       else{
         this.update_render();
       }
+
+      Current_range = range;
     },
 
     update_render : function(){
@@ -168,8 +171,9 @@ define(function(require){
       console.log("ss");
     },
 
-
-
+    get_range : function(){
+      return Current_range;
+    },
 
     //
     // U I / U X   F U N C T I O N S

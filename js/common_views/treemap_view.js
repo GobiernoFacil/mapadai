@@ -37,6 +37,7 @@ define(function(require){
   Height = Margins.height - Margins.top,
   Format = d3.format(","),
   FirstTime = true,
+  Current_range = null,
   Transitioning;
 
   //
@@ -83,15 +84,14 @@ define(function(require){
       }
     },
 
-    render : function(r){
+    render : function(r, range){
+      Current_range = range;
       if(this.svg) this._remove();
       var that   = this,
           margin = {top: Margins.top, right: Margins.right, bottom: Margins.bottom, left: Margins.left},
           width  = Margins.width,
           height = Margins.height - Margins.top - Margins.bottom,
-          formatNumber = d3.format(",d"),
-          transitioning;
-          
+          formatNumber = d3.format(",d");          
       /* create x and y scales */
       var x = d3.scale.linear()
                .domain([0, width])
@@ -208,8 +208,8 @@ define(function(require){
     /* create transition function for transitions */
     function transition(d) {
       console.log("transition", d);
-      if (transitioning || !d) return;
-      transitioning = true;
+      if (Transitioning || !d) return;
+      Transitioning = true;
 
       var g2 = display(d),
           t1 = g1.transition().duration(750),
@@ -243,7 +243,7 @@ define(function(require){
       // Remove the old node when the transition is finished.
       t1.remove().each("end", function() {
         svg.style("shape-rendering", "crispEdges");
-        transitioning = false;               
+        Transitioning = false;               
       });
       
     }//endfunc transition
@@ -334,6 +334,10 @@ define(function(require){
                 .domain([0, Margins.height - Margins.top - Margins.bottom])
                 .range([0, Margins.height - Margins.top - Margins.bottom]);
       this.scales = [x, y];
+    },
+
+    get_range : function(){
+      return Current_range;
     }
   });
 

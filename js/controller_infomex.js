@@ -114,11 +114,13 @@ define(function(require){
       
       
     },
-    
-    
 
+    //
+    // [ RENDER THE CURRENT GRAPH ]
+    //
+    //
     get_data : function(range, graph, url){
-      var endpoint, from, to, tbl, that = this;
+      var endpoint, from, to, that = this;
       if(range.length === 1){
         from     = "from=" + parseInt(range[0]) + "-01-01";
         to       = "to="   + parseInt(range[0]) + "-12-31";
@@ -135,7 +137,7 @@ define(function(require){
           that.show_error(error);
         }
         else{
-          graph.render(json); 
+          graph.render(json, range); 
         }
       });
     },
@@ -180,9 +182,19 @@ define(function(require){
 
       return slider;
     },
+
+    //
+    // UPDATE TIME UI
+    //
+    //
+    update_time_ui : function(r){
+      this.$(".year-range").html((+r[0]) + " - " + (+r[1]));
+      this.slider.noUiSlider.set(r);
+      console.log(r);
+    },
 	
 	
-	// ----------------------
+	  // ----------------------
     // FIXED YEAR MENU
     // ----------------------
     //
@@ -205,19 +217,19 @@ define(function(require){
     // ROLLOVER SVG PATH 
     // -----------------
     //
-	hover_path : function(e) { 
-		$('svg .main_container path').attr("class","path_out");
-		$(e.currentTarget).attr("class","path_hover");
-	},
+	  hover_path : function(e) { 
+		  $('svg .main_container path').attr("class","path_out");
+		  $(e.currentTarget).attr("class","path_hover");
+	  },
 	
-	// -----------------
+	  // -----------------
     // ROLLOUT SVG PATH 
     // -----------------
     //
-	leave_path : function(e) { 
-		$('svg .main_container path').attr("class","");
-		$(e.currentTarget).attr("class","");
-	},
+	  leave_path : function(e) { 
+		  $('svg .main_container path').attr("class","");
+		  $(e.currentTarget).attr("class","");
+	  },
     
     //
     // L O C A L   T R A N S I T I O N S
@@ -240,6 +252,8 @@ define(function(require){
 	   heatmapContainer.style.display 	= "none";
 	   $(".nav a").removeClass("current");
 	   $("#show_time").addClass("current");
+
+     this.update_time_ui(this.timeline_a.get_range());
     },
     
     show_top : function(e){
@@ -252,6 +266,8 @@ define(function(require){
 	   heatmapContainer.style.display 	= "none";
 	   $(".nav a").removeClass("current");
 	   $("#show_top").addClass("current");
+
+     this.update_time_ui(this.top10bars.get_range());
     },
     
     show_treemap : function(e){
@@ -264,6 +280,8 @@ define(function(require){
 	   heatmapContainer.style.display 	= "none";
 	   $(".nav a").removeClass("current");
 	   $("#show_treemap").addClass("current");
+
+     this.update_time_ui(this.treemap_a.get_range());
     },
     
     show_heatmap : function(e){
@@ -276,6 +294,8 @@ define(function(require){
 	   heatmapContainer.style.display 	= "block";
 	   $(".nav a").removeClass("current");
 	   $("#show_heatmap").addClass("current");
+
+     this.update_time_ui(this.heatmap_a.get_range());
     },
 
   });
