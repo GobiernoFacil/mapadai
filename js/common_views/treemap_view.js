@@ -67,10 +67,11 @@ define(function(require){
     // [ THE INITIALIZE FUNCTION ]
     //
     //
-    initialize : function(){
-      this.svg     = null;
-      this.treemap = null;
-      this.scales  = null;
+    initialize : function(settings){
+      this.svg        = null;
+      this.treemap    = null;
+      this.scales     = null;
+      this.controller = settings.controller; 
       this.set_scales();
     },
 
@@ -185,6 +186,15 @@ define(function(require){
                 console.log("last child",d);
             }
         })
+        .on("mouseover", function(d){
+          that.controller.create_tooltip({
+            title   : d.name,
+            content : "peticiones : " + Format(d.total) + " | fecha : " + Current_range[0] + " - " + Current_range[1]
+          });
+        })
+        .on("mouseout", function(d){
+          that.controller.remove_tooltip();
+        });
       //.append("title")
         //.text(function(d) { return formatNumber(d.value); });
     
@@ -198,6 +208,15 @@ define(function(require){
                 //window.open(d.url); 
                 console.log("last child",d);
             }
+        })
+        .on("mouseover", function(d){
+          that.controller.create_tooltip({
+            title   : d.name,
+            content : "peticiones : " + Format(d.total) + " | fecha : " + Current_range[0] + " - " + Current_range[1]
+          });
+        })
+        .on("mouseout", function(d){
+          that.controller.remove_tooltip();
         })
         .attr("class","foreignobj")
         .append("xhtml:div") 

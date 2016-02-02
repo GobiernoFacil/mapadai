@@ -113,9 +113,9 @@
 						</div>
 						<div class="col-sm-7">
 							<ul class="legend right">
-								<li class="zero"><b></b> 0</li>
-								<li class="fifty"><b></b> 50</li>
-								<li class="max"><b></b> 100</li>
+								<li class="zero"><b></b> <span>0</span></li>
+								<li class="fifty"><b></b> <span>50</span></li>
+								<li class="max"><b></b> <span>100</span></li>
 							</ul>
 						</div>
 						
