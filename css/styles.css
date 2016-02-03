@@ -204,6 +204,32 @@ input[type="search"]::-webkit-search-decoration {
   font-weight: normal;
   font-style: normal; }
 
+/* ROTATE*/
+/* = IMAGE REPLACEMENT & HIDDEN CONTENT */
+.clearfix {
+  clear: both; }
+
+.clearfix:after, .wrapper:after {
+  content: ".";
+  display: block;
+  height: 0 !important;
+  clear: both;
+  visibility: hidden;
+  overflow: hidden; }
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border: 1px solid black; }
+
+.clear {
+  clear: both; }
+
+/* = ACCESSIBILITY */
+.accessibility {
+  position: absolute;
+  top: -999em;
+  left: -999em; }
+
 text {
   fill: #999;
   font: 500 12px 'kelson_sans', Helvetica, Arial, sans-serif; }
@@ -226,15 +252,24 @@ text {
     font: 500 11px 'kelson_sans', Helvetica, Arial, sans-serif; }
 
 .content-top p {
-  color: #9C9C9C;
-  font: 500 14px 'kelson_sans', Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.2) !important;
+  font: 500 13px/1.2 'kelson_sans', Helvetica, Arial, sans-serif !important;
   margin: 0; }
+  .content-top p strong {
+    color: #999; }
 .content-top .bar {
-  margin-bottom: 10px; }
+  margin-bottom: 5px;
+  -webkit-opacity: 0.8;
+  -moz-opacity: 0.8;
+  opacity: 0.8; }
 .content-top:hover p {
-  color: #666; }
+  color: rgba(0, 0, 0, 0.5) !important; }
+  .content-top:hover p strong {
+    color: #333; }
 .content-top:hover .bar {
-  background: #007564 !important; }
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1; }
 
 #chart {
   width: 620px;
@@ -1242,7 +1277,10 @@ section:first-of-type {
   z-index: 99; }
   .infomex_menu.fix-year .selector_year {
     padding: 20px 0 0;
-    min-height: 100px; }
+    min-height: 90px; }
+    .infomex_menu.fix-year .selector_year .noUi-value {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 11px; }
   .infomex_menu.fix-year .nav.re {
     background: #d8d8d8; }
     .infomex_menu.fix-year .nav.re a:link, .infomex_menu.fix-year .nav.re a:visited {
@@ -1315,7 +1353,7 @@ section:first-of-type {
   background: #f2f2f2; }
 
 .fix-year + .content_graph {
-  padding-top: 110px; }
+  padding-top: 100px; }
 
 .nav.re ul {
   margin: 0;
@@ -1340,6 +1378,7 @@ section:first-of-type {
     color: #732181;
     font: 700 31px 'kelson_sans', Helvetica, Arial, sans-serif;
     margin-bottom: 20px;
+    padding-bottom: 20px;
     text-align: center; }
     .viz h3 span {
       color: #00c1a5;
@@ -1408,7 +1447,7 @@ p.source {
     margin: 5px 15px 10px; }
   .timeline.list li {
     display: inline-block;
-    margin: 0 0 0 5px;
+    margin: 0;
     font-size: 11px;
     list-style: none; }
     .timeline.list li a {
