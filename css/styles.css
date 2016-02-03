@@ -290,13 +290,13 @@ rect.parent, .grandparent rect {
   stroke-width: 2px; }
 
 #treemap-a .grandparent rect {
-  fill: rgba(0, 0, 0, 0.17);
+  fill: #777;
   transition: all 0.3s; }
 #treemap-a .grandparent text {
   fill: white;
   font: 500 14px 'kelson_sans', Helvetica, Arial, sans-serif; }
 #treemap-a .grandparent:hover rect {
-  fill: #777; }
+  fill: #333; }
 
 .children rect.parent, .grandparent rect {
   cursor: pointer; }
