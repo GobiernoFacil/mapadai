@@ -23,9 +23,9 @@
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
 					<ul>
-						<li><a href="#" id="show_time" class="current">Dependencias</a></li>
-						<li><a href="#" id="show_top">Top 5</a></li>
-						<li><a href="#" id="show_treemap">Topor</a></li>
+						<li><a href="#" id="show_time" class="current">Histórico</a></li>
+						<li><a href="#" id="show_top">Total</a></li>
+						<li><a href="#" id="show_treemap">Dependencias</a></li>
 						<li><a href="#" id="show_heatmap">Peticiones por hora</a></li>
 					</ul>
 				</div>
@@ -54,9 +54,10 @@
 				<!--timeline-->
 				<div id="time" class="viz">
 					<div class="row">
-						<div class="col-sm-12">
-							<h3>Peticiones por dependencia: <span class="year-range">2007 - 2015</span></h3>
-							<a href="#" class="download" download><b></b>Descargar datos</a>
+						<div class="col-sm-10 col-sm-offset-1">
+							<h3>Histórico de peticiones de información en las 10 principales dependencias: <span class="year-range">2013 - 2015</span></h3>
+												<a href="#" class="download" download><b></b>Descargar datos</a>
+
 						<!--	<p>Integer lectus purus, efficitur efficitur massa ut, pharetra cursus dolor. In hac habitasse platea dictumst. Vivamus quis neque ut neque eleifend volutpat. Curabitur lorem mauris, sagittis maximus ultrices ac, aliquam non ex. Donec congue maximus justo, sit amet euismod leo venenatis ac. Vivamus venenatis, risus vitae rutrum laoreet, purus nibh rutrum ex, sed convallis enim urna a ligula. Donec lorem leo, vulputate vel porttitor et, ornare in sapien.</p>	-->						
 						</div>
 					</div>
@@ -64,7 +65,7 @@
 					<div class="row">
 						<div class="col-sm-10 col-sm-offset-1">
 							<p class="source">
-								Fuente: INAI 2003
+								Fuente: INAI 2016
 							</p>
 						</div>
 					</div>
@@ -74,12 +75,19 @@
 				<div id="top" class="viz">
 					<div class="row">
 						<div class="col-sm-10 col-sm-offset-1">
-							<h3>Top 10 de sujetos obligados por número de solicitudes: <span class="year-range">2012 - 2015</span></h3>
-							<a href="#" class="download" download><b></b>Descargar datos</a>
-							<p>Integer lectus purus, efficitur efficitur massa ut, pharetra cursus dolor. In hac habitasse platea dictumst. Vivamus quis neque ut neque eleifend volutpat. Curabitur lorem mauris, sagittis maximus ultrices ac, aliquam non ex. Donec congue maximus justo, sit amet euismod leo venenatis ac. Vivamus venenatis, risus vitae rutrum laoreet, purus nibh rutrum ex, sed convallis enim urna a ligula. Donec lorem leo, vulputate vel porttitor et, ornare in sapien.</p>							
+							<h3>Total de peticiones de información  en las 10 principales dependencias: <span class="year-range">2013 - 2015</span></h3>
+							<!--<a href="#" class="download" download><b></b>Descargar datos</a>
+							<p>Integer lectus purus, efficitur efficitur massa ut, pharetra cursus dolor. In hac habitasse platea dictumst. Vivamus quis neque ut neque eleifend volutpat. Curabitur lorem mauris, sagittis maximus ultrices ac, aliquam non ex. Donec congue maximus justo, sit amet euismod leo venenatis ac. Vivamus venenatis, risus vitae rutrum laoreet, purus nibh rutrum ex, sed convallis enim urna a ligula. Donec lorem leo, vulputate vel porttitor et, ornare in sapien.</p>			-->				
 						</div>
 					</div>
 					<section id="top10bar"></section>
+					<div class="row">
+						<div class="col-sm-10 col-sm-offset-1">
+							<p class="source">
+								Fuente: INAI 2016
+							</p>
+						</div>
+					</div>
 				</div>
 				
 				<!--treemap-->
