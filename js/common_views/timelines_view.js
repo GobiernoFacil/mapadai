@@ -15,7 +15,7 @@ define(function(require){
       d3       = require("d3"),
       SVG      = require("common_views/main_svg_view"),
       URL      = "/js/data/timeline.json",
-      Color_r  = ["#00C186","#2C3ABA", "#ED9720", "#004138", "#B30342",  "#138DED", "#FF4D78","#7B20ED", "#C3A35F", "#84BA00"],
+      Color_r  = ["#225378","#3498DB", "#1695A3" , "#EB7F00", "#FF6138",  "#CE003C", "#79BD8F", "#00A388","#7E8AA2", "#2C3E50"],
 
   //
   // D E F I N E   C O N S T A N T 'S

@@ -15,7 +15,7 @@ define(function(require){
       d3       = require("d3"),
       SVG      = require("common_views/main_svg_view"),
       Scale    = require("common_views/linear_scale_view"),
-      Color_r  = ["#225378","#1695A3", "#ACF0F2", "#EB7F00", "#FF6138",  "#FFFF9D", "#BEEB9F","#79BD8F", "#00A388", "#2C3E50"],
+      Color_r  = ["#225378","#3498DB", "#1695A3" , "#EB7F00", "#FF6138",  "#CE003C", "#79BD8F", "#00A388","#7E8AA2", "#2C3E50"],
 
   //
   // D E F I N E   C O N S T A N T 'S
