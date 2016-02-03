@@ -393,7 +393,7 @@ define(function(require){
        	  ul  		= document.createElement("ul");
        	  
      divrow.setAttribute("class", "row"); 	  
-      divcol.setAttribute("class", "col-sm-12"); 
+      divcol.setAttribute("class", "col-sm-10 col-sm-offset-1"); 
       ul.setAttribute("id", "timeline-office-selector");
       ul.setAttribute("class", "row timeline list");
 	  
