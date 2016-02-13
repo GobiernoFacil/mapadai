@@ -1270,6 +1270,35 @@ section:first-of-type {
     font: 700 24px 'kelson_sans', Helvetica, Arial, sans-serif;
     padding: 24px 35px; }
 
+p.lead {
+  background: rgba(0, 0, 0, 0.05);
+  font-size: 21px;
+  font-weight: 300;
+  padding: 10px 0;
+  text-align: center; }
+  p.lead.info {
+    font-size: 13px;
+    text-transform: uppercase; }
+
+p.instructions {
+  color: #999 !important;
+  font-size: 14px; }
+  p.instructions::before {
+    content: "i";
+    background: #777;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    color: white;
+    display: inline-block;
+    font-size: 12px;
+    font-style: italic;
+    height: 15px;
+    margin-right: 5px;
+    text-align: center;
+    width: 15px; }
+
 .infomex_menu.fix-year {
   position: fixed;
   top: 65px;
@@ -1381,8 +1410,9 @@ section:first-of-type {
     padding-bottom: 20px;
     text-align: center; }
     .viz h3 span {
-      color: #00c1a5;
       font-weight: 500; }
+      .viz h3 span.year-range {
+        color: #00c1a5; }
   .viz .legend {
     margin: 50px 0 0; }
     .viz .legend li {
@@ -1425,6 +1455,31 @@ section:first-of-type {
       -webkit-opacity: 0.1;
       -moz-opacity: 0.1;
       opacity: 0.1; }
+  .viz ul.info li {
+    color: #999;
+    font-size: 13px;
+    list-style: none;
+    position: relative; }
+    .viz ul.info li strong {
+      display: block;
+      color: #555; }
+    .viz ul.info li ol, .viz ul.info li ul {
+      margin-left: 20px; }
+    .viz ul.info li li {
+      list-style: inherit; }
+      .viz ul.info li li:after {
+        background: transparent; }
+    .viz ul.info li:last-child:after {
+      background: transparent; }
+    .viz ul.info li:after {
+      content: "";
+      background: #ccc;
+      display: inline-block;
+      position: absolute;
+      right: 0;
+      width: 1px;
+      height: 50px;
+      top: 0; }
 
 #top10bar {
   margin: 20px auto;

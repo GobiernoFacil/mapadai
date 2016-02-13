@@ -260,7 +260,7 @@ define(function(require){
     //
     hide_stuff : function(){
       topContainer.style.display= "none";
-      treemapContainer.style.display = "none";
+      timeContainer.style.display = "none";
       heatmapContainer.style.display = "none";
     },
     

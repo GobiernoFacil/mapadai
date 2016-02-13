@@ -23,9 +23,9 @@
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
 					<ul>
-						<li><a href="#" id="show_time" class="current">Histórico</a></li>
+						<li><a href="#" id="show_treemap" class="current">Por sujeto obligado</a></li>
 						<li><a href="#" id="show_top">Total</a></li>
-						<li><a href="#" id="show_treemap">Por tema</a></li>
+						<li><a href="#" id="show_time">Histórico</a></li>
 						<li><a href="#" id="show_heatmap">Por hora</a></li>
 					</ul>
 				</div>
@@ -52,24 +52,7 @@
 			
 			<div class="col-sm-12">
 				<!--timeline-->
-				<div id="time" class="viz">
-					<div class="row">
-						<div class="col-sm-10 col-sm-offset-1">
-							<h3>Histórico de peticiones de información en las 10 principales dependencias: <span class="year-range">2013 - 2015</span></h3>
-							<!--						<a href="#" class="download" download><b></b>Descargar datos</a>
-
-						<p>Integer lectus purus, efficitur efficitur massa ut, pharetra cursus dolor. In hac habitasse platea dictumst. Vivamus quis neque ut neque eleifend volutpat. Curabitur lorem mauris, sagittis maximus ultrices ac, aliquam non ex. Donec congue maximus justo, sit amet euismod leo venenatis ac. Vivamus venenatis, risus vitae rutrum laoreet, purus nibh rutrum ex, sed convallis enim urna a ligula. Donec lorem leo, vulputate vel porttitor et, ornare in sapien.</p>	-->						
-						</div>
-					</div>
-					<section id="timeline-a"></section>
-					<div class="row">
-						<div class="col-sm-10 col-sm-offset-1">
-							<p class="source">
-								Fuente: INAI 2016
-							</p>
-						</div>
-					</div>
-				</div>
+				<?php include "includes/infomex/time.php";?>
 				
 				<!--top10bar-->
 				<div id="top" class="viz">
@@ -93,11 +76,15 @@
 				<!--treemap-->
 				<div id="treemap" class="viz">
 					<div class="row">
-						<div class="col-sm-10 col-sm-offset-1">
-							<h3>Solicitudes por tema: <span class="year-range">2012 - 2015</span></h3>
+						<div class="col-sm-12">
+							<h3>Volumen de solicitudes por sector, por sujeto obligado y por tipo de solicitud <span>(acceso a la información, 
+								acceso a datos personales y corrección de datos personales)</span>: <span class="year-range">2012 - 2015</span></h3>
+								<p class="lead">Solicitudes que se realizan por sujeto obligado, tanto de acceso a la información como de datos personales</p>
 							<!--<a href="#" class="download" download><b></b>Descargar datos</a>-->	
-							<p>Da clic sobre un tema para observar la distribución del número de peticiones por tema y dependencias. Para regresar,
-								da clic sobre el área gris en la parte superior de la gráfica.
+						</div>
+						<div class="col-sm-10 col-sm-offset-1">
+							<p class="instructions">Da clic sobre un sector para observar la distribución del número de solicitudes por sujeto obligado 
+								y tipo de solicitud. Para regresar, da clic sobre el área gris en la parte superior de la gráfica.
 							</p>						
 						</div>
 					</div>
@@ -106,8 +93,21 @@
 					<div class="row">
 						<div class="col-sm-10 col-sm-offset-1">
 							<p class="source">
-								Fuente: INAI 2016
+								Fuente: INAI 2003
 							</p>
+							<p class="lead info">Distribución de la gráfica</p>
+							<ul class="info row">
+								<li class="col-sm-3">Primer nivel: <strong>Sector</strong></li>
+								<li class="col-sm-3">Segundo nivel: <strong>Sujeto obligado</strong></li>
+								<li class="col-sm-3">Tercer nivel: <strong>Tipo de solicitud</strong>
+									<ol>
+										<li>Acceso a la información pública</li> 
+										<li>Datos personales</li> 
+										<li>Corrección de datos personales</li>
+									</ol>
+								</li>
+								<li class="col-sm-3">Tamaño: <strong>Número de solicitudes</strong></li>
+							</ul>
 						</div>
 					</div>
 				</div>
