@@ -1497,7 +1497,7 @@ p.source {
   border-top: 1px solid #ccc;
   padding: 10px 0 20px; }
   .timeline.list:before {
-    content: "Filtra dependencias";
+    content: "Filtra sujeto obligado";
     color: rgba(0, 0, 0, 0.3);
     font-size: 11px;
     margin: 5px 15px 10px; }
