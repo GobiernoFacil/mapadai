@@ -23,8 +23,8 @@
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
 					<ul id="viz_nav">
-						<li><a href="#" id="btn_obligee" class="current">Sesiones y usuarios</a></li>
-						<li><a href="#" id="btn_t_response">Consultas al POT</a></li>
+						<li><a href="#" id="btn_sessions" class="current" data-container="sessions">Sesiones y usuarios</a></li>
+						<li><a href="#" id="btn_request"  data-container="request">Consultas al POT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -45,41 +45,47 @@
 <!-- content-->
 <div class="content_graph">
 	
-	<!-- sujeto obligado-->
-	<div id="obligee">
+	<!-- Sesiones y usuarios-->
+	<div id="sessions" class="content-tab">
 		<nav class="nav subnav re">
-			<ul id="sub_nav">
-				<li><a href="#" id="show_treemap"class="current">Por sujeto</a></li>
-				<li><a href="#" id="show_time" >Histórico</a></li>
-				<li><a href="#" id="show_top">Total</a></li>
-			<!--	<li><a href="#" id="show_heatmap">Por hora</a></li>-->
+			<ul class="sub_nav">
+				<li><a href="#" class="current" data-container="sessions_number">Número de sesiones</a></li>
+				<li><a href="#" data-container="sessions_day">Por día y hora</a></li>
+				<li><a href="#" data-container="sessions_time">Tiempo por sesión</a></li>
 			</ul>
 		</nav>
 		
 		<div class="container">
 			<div class="row">			
 				<div class="col-sm-12">
-					<!--timeline-->
-					<?php include "includes/infomex/time.php";?>
+					<!--sessions_number-->
+					<?php include "includes/pot/sessions/number.php";?>
 					
-					<!--top10bar-->
-					<?php include "includes/infomex/bar.php";?>
+					<!--sessions_day-->
+					<?php include "includes/pot/sessions/day.php";?>
 
-					<!--treemap-->
-					<?php include "includes/infomex/treemap.php";?>
+					<!--sessions_time-->
+					<?php include "includes/pot/sessions/time.php";?>
 				</div>
 			</div>
 		</div>
 	</div>
 			
-	<!--tipo de respuesta -->
-	<div id="t_response">
-	</div>
 
-	<!--perfil del solicitante-->
-	<div id="applicant_profile">
-		<!--heatmap-->
-		<?php include "includes/infomex/heatmap.php";?>
+	<!--Consultas al POT-->
+	<div id="request" class="content-tab hide">
+		<nav class="nav subnav re">
+			<ul class="sub_nav">
+				<li><a href="#" id="show_something" class="current" data-container="sessions_number">Número de sesiones</a></li>
+			</ul>
+		</nav>
+		<div class="container">
+			<div class="row">			
+				<div class="col-sm-12">
+				
+				</div>
+			</div>
+		</div>
 	</div>				
 			
 </div>
