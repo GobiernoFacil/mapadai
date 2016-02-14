@@ -9,9 +9,8 @@
 	<section id="top10bar"></section>
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
-			<p class="source">
-				Fuente: INAI 2016
-			</p>
+			<!--source-->
+			<?php include "templates/source.php";?>
 		</div>
 	</div>
 </div>
