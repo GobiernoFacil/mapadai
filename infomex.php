@@ -1,8 +1,8 @@
 <?php 
 	$body_class 	= "infomex";
 	$title 			= "Infomex";
-	$section_name	= "Solicitudes de Información";
-	$description 	= "";
+	$section_name	= "Solicitudes de Información | #MapaDAImx | INAI";
+	$description 	= "Estadísticas de Solicitudes de Información del INAI, 2003 - 2016. INAI";
 	include "templates/header.php";?>
 
 <div class="sub">
