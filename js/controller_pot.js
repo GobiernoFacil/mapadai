@@ -60,6 +60,10 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
+	    /// new
+	    "click #viz_nav a"		: "doit",
+	    
+	    
 		//top nav
 		"click #btn_obligee"  	: "show_obligee",
 		"click #btn_applicant"  : "show_applicant",
@@ -270,14 +274,24 @@ define(function(require){
     // --------------------------------------------------------------------------------
     //
     hide_stuff : function(){
-      t_responseContainer.style.display = "none";
-      applicantContainer.style.display = "none";
-      
-      topContainer.style.display       = "none";
-	   timeContainer.style.display 		= "none";
-	   treemapContainer.style.display 	= "block";
-	   heatmapContainer.style.display 	= "none";
+     
     },
+    
+    doit : function(e){
+    	e.preventDefault();
+	    var name = $(e.target).data('container');
+	    
+	    ///show/hide container tab 
+	    $(".content-tab").addClass("hide");
+	    $("#" +  name).removeClass("hide");
+	    
+	    ///add class to current tab
+	   $("#viz_nav a").removeClass("current");
+	   $(e.target).addClass('current');
+	   
+	    
+    },
+    
     
     show_obligee : function(e){
       e.preventDefault();
