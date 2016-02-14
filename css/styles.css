@@ -1398,6 +1398,14 @@ p.instructions {
     color: white; }
   .nav.re a:link:hover, .nav.re a:visited:hover {
     color: #555; }
+.nav.re.subnav {
+  background: #d8d8d8; }
+  .nav.re.subnav a:link, .nav.re.subnav a:visited {
+    font-size: 13px;
+    padding: 10px 20px; }
+    .nav.re.subnav a:link.current, .nav.re.subnav a:link.current:hover, .nav.re.subnav a:visited.current, .nav.re.subnav a:visited.current:hover {
+      background: #f2f2f2;
+      color: #00c1a5; }
 
 .viz {
   background: #f2f2f2;
