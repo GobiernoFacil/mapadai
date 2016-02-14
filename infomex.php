@@ -50,10 +50,10 @@
 	<div id="obligee">
 		<nav class="nav subnav re">
 			<ul id="sub_nav">
-				<li><a href="#" id="show_treemap"class="current">Por tema</a></li>
+				<li><a href="#" id="show_treemap"class="current">Por sujeto</a></li>
 				<li><a href="#" id="show_time" >Histórico</a></li>
 				<li><a href="#" id="show_top">Total</a></li>
-				<li><a href="#" id="show_heatmap">Por hora</a></li>
+			<!--	<li><a href="#" id="show_heatmap">Por hora</a></li>-->
 			</ul>
 		</nav>
 		

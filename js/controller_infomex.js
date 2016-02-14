@@ -304,13 +304,24 @@ define(function(require){
     
     show_applicant : function(e){
       e.preventDefault();
-	   obligeeContainer.style.display 			= "none";
+	   obligeeContainer.style.display 		= "none";
+	   t_responseContainer.style.display    = "none";
+	   applicantContainer.style.display 	= "block";
+	   
+	   $("#viz_nav a").removeClass("current");
+	   $("#sub_nav a").removeClass("current");
+	   $("#btn_applicant").addClass("current");	   
+    },
+    
+     show_t_response : function(e){
+      e.preventDefault();
+	   obligeeContainer.style.display 		= "none";
 	   t_responseContainer.style.display    = "block";
 	   applicantContainer.style.display 	= "none";
 	   
 	   $("#viz_nav a").removeClass("current");
 	   $("#sub_nav a").removeClass("current");
-	   $("#btn_applicant").addClass("current");	   
+	   $("#btn_t_response").addClass("current");	   
     },
     
     
