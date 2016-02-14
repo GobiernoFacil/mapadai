@@ -1,15 +1,15 @@
 <?php 
-	$body_class 	= "infomex";
-	$title 			= "Solicitudes de Información Infomex | #MapaDAImx | INAI";
-	$description 	= "Estadísticas de Solicitudes de Información del INAI, 2003 - 2016. INAI";
-	$section_name	= "Solicitudes de Información";
+	$body_class 	= "pot";
+	$title 			= "POT | #MapaDAImx | INAI";
+	$description 	= "POT INAI, 2003 - 2016. INAI";
+	$section_name	= "POT";
 	include "templates/header.php";?>
 
 <div class="sub">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<h1>Solicitudes de información</h1>
+				<h1>POT</h1>
 			</div>
 			
 		</div>
@@ -23,9 +23,8 @@
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
 					<ul id="viz_nav">
-						<li><a href="#" id="btn_obligee" class="current">Por sujeto obligado</a></li>
-						<li><a href="#" id="btn_t_response">Por tipo de respuesta</a></li>
-						<li><a href="#" id="btn_applicant">Perfil del solicitante</a></li>
+						<li><a href="#" id="btn_obligee" class="current">Sesiones y usuarios</a></li>
+						<li><a href="#" id="btn_t_response">Consultas al POT</a></li>
 					</ul>
 				</div>
 			</div>
