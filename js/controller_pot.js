@@ -60,22 +60,13 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-	    /// new
+	    /// new top nav
 	    "click #viz_nav a"		: "doit",
 	    
+	    /// sub_nav
+	    "click .sub_nav a"		: "dothat",
 	    
-		//top nav
-		"click #btn_obligee"  	: "show_obligee",
-		"click #btn_applicant"  : "show_applicant",
-		"click #btn_t_response" : "show_t_response",
-	    
-	    ///
-		"click #show_time"    : "show_time",
-		"click #show_top"     : "show_top",
-		"click #show_treemap" : "show_treemap",
-		"click #show_heatmap" : "show_heatmap",
-		
-		/// dataviz
+	    /// dataviz
 		'mouseenter svg .main_container path' : 'hover_path',
 		'mouseleave svg .main_container path' : 'leave_path',
     },
@@ -274,21 +265,36 @@ define(function(require){
     // --------------------------------------------------------------------------------
     //
     hide_stuff : function(){
-     
+    	// ahora se oculta con clases
     },
     
     doit : function(e){
     	e.preventDefault();
-	    var name = $(e.target).data('container');
+	    var name_container = $(e.target).data('container');
 	    
 	    ///show/hide container tab 
 	    $(".content-tab").addClass("hide");
-	    $("#" +  name).removeClass("hide");
+	    $("#" +  name_container).removeClass("hide");
 	    
 	    ///add class to current tab
 	   $("#viz_nav a").removeClass("current");
 	   $(e.target).addClass('current');
 	   
+	    
+    },
+    
+    
+    dothat : function(e) {
+	    e.preventDefault();
+	    var name_container = $(e.target).data('container');
+	   
+		///show/hide container  
+	    $(".viz").addClass("hide");
+	    $("#" +  name_container).removeClass("hide");
+	    
+		///add class to current tab
+		$(".sub_nav a").removeClass("current");
+		$(e.target).addClass('current');
 	    
     },
     
@@ -371,13 +377,8 @@ define(function(require){
     show_treemap : function(e){
       this.current_graph = this.treemap_a;
       this.current_url   = URLS.treemap;
-	   e.preventDefault();
-	   topContainer.style.display       = "none";
-	   timeContainer.style.display 		= "none";
-	   treemapContainer.style.display 	= "block";
-	   heatmapContainer.style.display 	= "none";
-	   $("#sub_nav a").removeClass("current");
-	   $("#show_treemap").addClass("current");
+	  e.preventDefault();
+	 
 
      this.update_time_ui(this.treemap_a.get_range());
     },
