@@ -292,25 +292,29 @@ define(function(require){
 	   
 		switch (viz_type) {
 			case "timeline":
-				var viz_type = "timeline_a";
-				var viz_url  = "timeline";
+				var viz_type = this.current_graph = this.timeline_a; 
+				var viz_url  = URLS.timeline;
+				var time_ui  = this.timeline_a.get_range();
 				break;
 			case "bar":
-				var viz_type = "top10bars";
-				var viz_url  = "top10bars";
+				var viz_type = this.current_graph = this.top10bars; 
+				var viz_url  = URLS.top10bars;
+				var time_ui  = this.top10bars.get_range();
 				break;
 			case "heatmap":
-				var viz_type = "heatmap_a";
-				var viz_url  = "heatmap";
+				var viz_type = this.current_graph = this.heatmap_a; 
+				var viz_url  = URLS.heatmap;
+				var time_ui  = this.heatmap_a.get_range();
 				break;
 			case "treemap":
-				var viz_type = "treemap_a";
-				var viz_url  = "treemap";
+				var viz_type = this.current_graph = this.treemap_a; 
+				var viz_url  = URLS.treemap;
+				var time_ui  = this.treemap_a.get_range();
 				break;
 		}
 		
-		this.current_graph = this.viz_type;
-		this.current_url   = URLS.viz_url;
+		this.current_graph = viz_type;
+		this.current_url   = viz_url;
 	   
 		///show/hide container  
 	    $(".viz").addClass("hide");
@@ -320,7 +324,7 @@ define(function(require){
 		$(".sub_nav a").removeClass("current");
 		$(e.target).addClass('current');
 		
-		this.update_time_ui(this.viz_type.get_range());
+		this.update_time_ui(time_ui);
     },
  
 
