@@ -1,4 +1,4 @@
-<div id="sessions_day" class="viz hide">
+<div id="sessions_day" class="viz hide" data-viz="heatmap">
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
 			<h3>Peticiones por hora por día de la semana: <span class="year-range">2012 - 2015</span></h3>

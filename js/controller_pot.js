@@ -286,7 +286,31 @@ define(function(require){
     
     dothat : function(e) {
 	    e.preventDefault();
-	    var name_container = $(e.target).data('container');
+	    var name_container  = $(e.target).data('container');
+	    	viz_type		= $("#" + name_container).data('viz'),
+	    	viz_url			= "";
+	   
+		switch (viz_type) {
+			case "timeline":
+				var viz_type = "timeline_a";
+				var viz_url  = "timeline";
+				break;
+			case "bar":
+				var viz_type = "top10bars";
+				var viz_url  = "top10bars";
+				break;
+			case "heatmap":
+				var viz_type = "heatmap_a";
+				var viz_url  = "heatmap";
+				break;
+			case "treemap":
+				var viz_type = "treemap_a";
+				var viz_url  = "treemap";
+				break;
+		}
+		
+		this.current_graph = this.viz_type;
+		this.current_url   = URLS.viz_url;
 	   
 		///show/hide container  
 	    $(".viz").addClass("hide");
@@ -295,63 +319,10 @@ define(function(require){
 		///add class to current tab
 		$(".sub_nav a").removeClass("current");
 		$(e.target).addClass('current');
-	    
+		
+		this.update_time_ui(this.viz_type.get_range());
     },
-    
-
-    
-    
-    show_time : function(e){
-      e.preventDefault();
-      this.current_graph = this.timeline_a;
-      this.current_url   = URLS.timeline;
-
-	   timeContainer.style.display 		= "block";
-	   topContainer.style.display       = "none";
-	   treemapContainer.style.display 	= "none";
-	   heatmapContainer.style.display 	= "none";
-	   $("#sub_nav a").removeClass("current");
-	   $("#show_time").addClass("current");
-
-     this.update_time_ui(this.timeline_a.get_range());
-    },
-    
-    show_top : function(e){
-      this.current_graph = this.top10bars;
-      this.current_url   = URLS.top10bars;
-	   e.preventDefault();
-	   topContainer.style.display       = "block";
-	   timeContainer.style.display 		= "none";
-	   treemapContainer.style.display 	= "none";
-	   heatmapContainer.style.display 	= "none";
-	   $("#sub_nav a").removeClass("current");
-	   $("#show_top").addClass("current");
-
-     this.update_time_ui(this.top10bars.get_range());
-    },
-    
-    show_treemap : function(e){
-      this.current_graph = this.treemap_a;
-      this.current_url   = URLS.treemap;
-	  e.preventDefault();
-	 
-
-     this.update_time_ui(this.treemap_a.get_range());
-    },
-    
-    show_heatmap : function(e){
-      this.current_graph = this.heatmap_a;
-      this.current_url   = URLS.heatmap;
-	   e.preventDefault();
-	   topContainer.style.display       = "none";
-	   timeContainer.style.display 		= "none";
-	   treemapContainer.style.display 	= "none";
-	   heatmapContainer.style.display 	= "block";
-	   $("#sub_nav a").removeClass("current");
-	   $("#show_heatmap").addClass("current");
-
-     this.update_time_ui(this.heatmap_a.get_range());
-    },
+ 
 
   });
 
