@@ -1,4 +1,4 @@
-<div id="time" class="viz">
+<div id="sessions_number" class="viz">
 	<div class="row">
 		<div class="col-sm-12">
 			<h3>Top 10 histórico de sujetos obligados por solicitudes de acceso a la información y datos personales: 
