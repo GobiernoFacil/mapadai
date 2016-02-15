@@ -298,51 +298,7 @@ define(function(require){
 	    
     },
     
-    
-    show_obligee : function(e){
-      e.preventDefault();
-	  this.current_graph = this.treemap_a;
-      this.current_url   = URLS.treemap;
-	   obligeeContainer.style.display 			= "block";
-	   t_responseContainer.style.display    = "none";
-	   applicantContainer.style.display 	= "none";
-	   
-	   topContainer.style.display       = "none";
-	   timeContainer.style.display 		= "none";
-	   treemapContainer.style.display 	= "block";
-	   heatmapContainer.style.display 	= "none";
-	   
-	   $("#sub_nav a").removeClass("current");
-	   $("#viz_nav a").removeClass("current");
-	   $("#btn_obligee").addClass("current");
-	   $("#show_treemap").addClass("current");
-	   
-	   this.update_time_ui(this.heatmap_a.get_range());
-    },
-    
-    
-    
-    show_applicant : function(e){
-      e.preventDefault();
-	   obligeeContainer.style.display 		= "none";
-	   t_responseContainer.style.display    = "none";
-	   applicantContainer.style.display 	= "block";
-	   
-	   $("#viz_nav a").removeClass("current");
-	   $("#sub_nav a").removeClass("current");
-	   $("#btn_applicant").addClass("current");	   
-    },
-    
-     show_t_response : function(e){
-      e.preventDefault();
-	   obligeeContainer.style.display 		= "none";
-	   t_responseContainer.style.display    = "block";
-	   applicantContainer.style.display 	= "none";
-	   
-	   $("#viz_nav a").removeClass("current");
-	   $("#sub_nav a").removeClass("current");
-	   $("#btn_t_response").addClass("current");	   
-    },
+
     
     
     show_time : function(e){
