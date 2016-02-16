@@ -39,6 +39,11 @@ define(function(require){
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
   //
+  obligeeContainer  	 = document.querySelector("#obligee"),
+  t_responseContainer	 = document.querySelector("#t_response"),
+  applicantContainer	 = document.querySelector("#applicant_profile"),
+
+  /// 
   timeContainer  	 = document.querySelector("#time"),
   topContainer   	 = document.querySelector("#top"),
   treemapContainer = document.querySelector("#treemap"),
@@ -55,6 +60,12 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
+		//top nav
+		"click #btn_obligee"  	: "show_obligee",
+		"click #btn_applicant"  : "show_applicant",
+		"click #btn_t_response" : "show_t_response",
+	    
+	    ///
 		"click #show_time"    : "show_time",
 		"click #show_top"     : "show_top",
 		"click #show_treemap" : "show_treemap",
@@ -259,10 +270,60 @@ define(function(require){
     // --------------------------------------------------------------------------------
     //
     hide_stuff : function(){
-      topContainer.style.display= "none";
-      treemapContainer.style.display = "none";
-      heatmapContainer.style.display = "none";
+      t_responseContainer.style.display = "none";
+      applicantContainer.style.display = "none";
+      
+      topContainer.style.display       = "none";
+	   timeContainer.style.display 		= "none";
+	   treemapContainer.style.display 	= "block";
+	   heatmapContainer.style.display 	= "none";
     },
+    
+    show_obligee : function(e){
+      e.preventDefault();
+	  this.current_graph = this.treemap_a;
+      this.current_url   = URLS.treemap;
+	   obligeeContainer.style.display 			= "block";
+	   t_responseContainer.style.display    = "none";
+	   applicantContainer.style.display 	= "none";
+	   
+	   topContainer.style.display       = "none";
+	   timeContainer.style.display 		= "none";
+	   treemapContainer.style.display 	= "block";
+	   heatmapContainer.style.display 	= "none";
+	   
+	   $("#sub_nav a").removeClass("current");
+	   $("#viz_nav a").removeClass("current");
+	   $("#btn_obligee").addClass("current");
+	   $("#show_treemap").addClass("current");
+	   
+	   this.update_time_ui(this.heatmap_a.get_range());
+    },
+    
+    
+    
+    show_applicant : function(e){
+      e.preventDefault();
+	   obligeeContainer.style.display 		= "none";
+	   t_responseContainer.style.display    = "none";
+	   applicantContainer.style.display 	= "block";
+	   
+	   $("#viz_nav a").removeClass("current");
+	   $("#sub_nav a").removeClass("current");
+	   $("#btn_applicant").addClass("current");	   
+    },
+    
+     show_t_response : function(e){
+      e.preventDefault();
+	   obligeeContainer.style.display 		= "none";
+	   t_responseContainer.style.display    = "block";
+	   applicantContainer.style.display 	= "none";
+	   
+	   $("#viz_nav a").removeClass("current");
+	   $("#sub_nav a").removeClass("current");
+	   $("#btn_t_response").addClass("current");	   
+    },
+    
     
     show_time : function(e){
       e.preventDefault();
@@ -273,7 +334,7 @@ define(function(require){
 	   topContainer.style.display       = "none";
 	   treemapContainer.style.display 	= "none";
 	   heatmapContainer.style.display 	= "none";
-	   $(".nav a").removeClass("current");
+	   $("#sub_nav a").removeClass("current");
 	   $("#show_time").addClass("current");
 
      this.update_time_ui(this.timeline_a.get_range());
@@ -287,7 +348,7 @@ define(function(require){
 	   timeContainer.style.display 		= "none";
 	   treemapContainer.style.display 	= "none";
 	   heatmapContainer.style.display 	= "none";
-	   $(".nav a").removeClass("current");
+	   $("#sub_nav a").removeClass("current");
 	   $("#show_top").addClass("current");
 
      this.update_time_ui(this.top10bars.get_range());
@@ -301,7 +362,7 @@ define(function(require){
 	   timeContainer.style.display 		= "none";
 	   treemapContainer.style.display 	= "block";
 	   heatmapContainer.style.display 	= "none";
-	   $(".nav a").removeClass("current");
+	   $("#sub_nav a").removeClass("current");
 	   $("#show_treemap").addClass("current");
 
      this.update_time_ui(this.treemap_a.get_range());
@@ -315,7 +376,7 @@ define(function(require){
 	   timeContainer.style.display 		= "none";
 	   treemapContainer.style.display 	= "none";
 	   heatmapContainer.style.display 	= "block";
-	   $(".nav a").removeClass("current");
+	   $("#sub_nav a").removeClass("current");
 	   $("#show_heatmap").addClass("current");
 
      this.update_time_ui(this.heatmap_a.get_range());

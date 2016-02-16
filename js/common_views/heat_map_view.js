@@ -19,6 +19,7 @@ define(function(require){
   // D E F I N E   C O N S T A N T 'S
   // --------------------------------------------------------------------------------
   //
+  Format        = d3.format(","),
   Current_range = null,
   Margins = {
     width    : 600,
@@ -29,13 +30,22 @@ define(function(require){
     left     : 30,
     padding  : 0,
     oPadding : 15
-  };
+  },
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
   //
-  
+  /*
+  <ul class="legend right">
+                <li class="zero"><b></b> 0</li>
+                <li class="fifty"><b></b> 50</li>
+                <li class="max"><b></b> 100</li>
+              </ul>
+  */
+  Zero_label  = document.querySelector("ul.legend li.zero span"),
+  Fifty_label = document.querySelector("ul.legend li.fifty span"),
+  Max_label   = document.querySelector("ul.legend li.max span");
     
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
@@ -58,11 +68,12 @@ define(function(require){
     // [ THE INITIALIZE FUNCTION ]
     //
     //
-    initialize : function(){
+    initialize : function(settings){
       var that    = this;
       this.svg    = this.make_svg(Margins);
       this.scales = this.make_scales(Margins);
       this.axis   = this.make_axis(this.svg, this.scales, Margins);
+      this.controller = settings.controller;
     },
 
     //
@@ -71,16 +82,22 @@ define(function(require){
     //
     render : function(data, range){
       Current_range = range;
-      var count  = 0,
-          days   = this.scales[0].domain(),
-          hours  = this.scales[1].domain(),
-          max    = d3.max(data, function(n){
-            return n.count;
+      var that  = this,
+          count = 0,
+          days  = this.scales[0].domain(),
+          hours = this.scales[1].domain(),
+          max   = d3.max(data, function(n){
+            return +n.count;
           }),
-          min    = d3.min(data, function(n){
-            return n.count;
+          min   = d3.min(data, function(n){
+            return +n.count;
           }),
-          color  = d3.scale.linear().domain([min, max]).range(Color_r); 
+          color = d3.scale.linear().domain([min, max]).range(Color_r);
+
+          // update labels
+          Zero_label.innerHTML  = min;
+          Fifty_label.innerHTML = Math.round((max + min)/2);
+          Max_label.innerHTML   = max; 
 
       days.forEach(function(day, i){
         hours.forEach(function(hour, j){
@@ -95,7 +112,16 @@ define(function(require){
             .attr("width", width)
             .attr("height", height)
             .attr("stroke", "rgba(255,255,255,0.5)")
-            .attr("fill", color(datum.count));
+            .attr("fill", color(datum.count))
+            .on("mouseover", function(d){
+              that.controller.create_tooltip({
+                title   : day + ", " + (hour < 10? "0".concat(hour) : hour) + ":00",
+                content : "peticiones : " + Format(datum.count) + " | fecha : " + Current_range[0] + " - " + Current_range[1]
+              });
+            })
+            .on("mouseout", function(d){
+              that.controller.remove_tooltip();
+            });
           count++;
         }, this);
       }, this);
@@ -105,6 +131,26 @@ define(function(require){
   // U I / U X   F U N C T I O N S
   // --------------------------------------------------------------------------------
   //
+
+    //
+    // [ DRAW TOOLTIPS ]
+    //
+    //
+    draw_tooltips : function(data){
+      var that   = this,
+          labels = this.svg.selectAll(".amount").data(data).enter()
+                     .append("g")
+                       .attr("class", "amount")
+                       .attr("transform", function(d){
+                         var x   = that.scales[0](d.date),
+                             y   = that.scales[1](d.total),
+                             txt = "translate(" + x + ", " + y + ")"; 
+                         return txt;
+                       });
+      labels.append("text").text(function(d){
+        return Format(d.total);
+      });
+    },
 
   //
   // [ GENERATE THE CONTAINER ]

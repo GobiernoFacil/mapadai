@@ -17,6 +17,7 @@ define(function(require){
       Color_r  = ["#242B40","#1AB6D9", "#1AC6D9", "#D9A74A", "#BF612A",  "#DF3190", "#A69203","#10E684", "#F4A775", "#DB5F3E",
       			  "#F95E20","#8C84D4", "#9560AD", "#AE585D", "#ECAA8F",  "#DDDCC8", "#6B8EBE","#46BDBF", "#F2684B", "#F2385A",
       			  "#F5A402","#EBF2E1", "#4AD9D9", "#36B2BF", "#B30342",  "#138DED", "#FF4D78","#7B20ED", "#C3A35F", "#84BA00"],
+      color_s = ["#9DDCED","#91C9E8","#67B8DE","#00A6DE"],
 
 
   //
@@ -67,10 +68,11 @@ define(function(require){
     // [ THE INITIALIZE FUNCTION ]
     //
     //
-    initialize : function(){
-      this.svg     = null;
-      this.treemap = null;
-      this.scales  = null;
+    initialize : function(settings){
+      this.svg        = null;
+      this.treemap    = null;
+      this.scales     = null;
+      this.controller = settings.controller; 
       this.set_scales();
     },
 
@@ -100,7 +102,12 @@ define(function(require){
       var y = d3.scale.linear()
                 .domain([0, height])
                 .range([0, height]);
-
+	  
+	  // adding a color scale
+	  var color = d3.scale.linear()
+	  				.domain([0, 110000])
+	  				.range(color_s);
+    
       var treemap = d3.layout.treemap()
                       .children(function(d, depth) { return  d.children; })
                       .sort(function(a, b) { return a.value - b.value; })
@@ -185,6 +192,15 @@ define(function(require){
                 console.log("last child",d);
             }
         })
+        .on("mouseover", function(d){
+          that.controller.create_tooltip({
+            title   : d.name,
+            content : "peticiones : " + Format(d.total) + " | fecha : " + Current_range[0] + " - " + Current_range[1]
+          });
+        })
+        .on("mouseout", function(d){
+          that.controller.remove_tooltip();
+        });
       //.append("title")
         //.text(function(d) { return formatNumber(d.value); });
     
@@ -198,6 +214,15 @@ define(function(require){
                 //window.open(d.url); 
                 console.log("last child",d);
             }
+        })
+        .on("mouseover", function(d){
+          that.controller.create_tooltip({
+            title   : d.name,
+            content : "peticiones : " + Format(d.total) + " | fecha : " + Current_range[0] + " - " + Current_range[1]
+          });
+        })
+        .on("mouseout", function(d){
+          that.controller.remove_tooltip();
         })
         .attr("class","foreignobj")
         .append("xhtml:div") 
@@ -257,7 +282,7 @@ define(function(require){
         .attr("y", function(d) { return y(d.y); })
         .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
         .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); })   
-        .attr("fill", function(d, i) {return Color_r[i]})
+        .attr("fill", function(d, i) {return color(d.total)})
   }
 
   function foreign(foreign){  /* added */

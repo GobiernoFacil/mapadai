@@ -15,6 +15,7 @@ define(function(require){
       d3       = require("d3"),
       SVG      = require("common_views/main_svg_view"),
       Scale    = require("common_views/linear_scale_view"),
+      Color_r  = ["#225378","#3498DB", "#1695A3" , "#EB7F00", "#FF6138",  "#CE003C", "#79BD8F", "#00A388","#7E8AA2", "#2C3E50"],
 
   //
   // D E F I N E   C O N S T A N T 'S
@@ -74,12 +75,14 @@ define(function(require){
 
         this.divs.append("p")
           .html(function(d){
-            return d.dependencia + ": " + Format(d.total);
+            return d.dependencia + ": <strong>" + Format(d.total) +"</strong>";
           });
         this.divs.append("div")
         .attr("class", "bar")
         .style({
-          background : "#00c1a5",
+          background : function (d, i) {
+	          	return  Color_r[i];    		    
+            },
           height : "30px",
           width : function(d){
             return x_scale(d.total) + "px";
@@ -96,7 +99,7 @@ define(function(require){
         });
         this.divs.select("p")
           .html(function(d){
-            return d.dependencia + ": " + Format(d.total);
+            return d.dependencia + ": <strong>" + Format(d.total)+"</strong>";
           });
       }
       
