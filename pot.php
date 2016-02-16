@@ -1,15 +1,15 @@
 <?php 
 	$body_class 	= "pot";
-	$title 			= "POT | #MapaDAImx | INAI";
-	$description 	= "POT INAI, 2003 - 2016. INAI";
-	$section_name	= "POT";
+	$title 			= "Portal de Obligaciones de Transparencia | #MapaDAImx | INAI";
+	$description 	= "Estadísticas del Portal de Obligaciones de Transparencia. INAI, 2003 - 2016. INAI";
+	$section_name	= "Portal de Obligaciones de Transparencia";
 	include "templates/header.php";?>
 
 <div class="sub">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-12">
-				<h1>POT</h1>
+			<div class="col-sm-10 col-sm-offset-1">
+				<h1>Portal de Obligaciones de Transparencia (POT)</h1>
 			</div>
 			
 		</div>
@@ -23,8 +23,8 @@
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
 					<ul id="viz_nav">
-						<li><a href="#" id="btn_sessions" class="current" data-container="sessions">Sesiones y usuarios</a></li>
-						<li><a href="#" id="btn_request"  data-container="request">Consultas al POT</a></li>
+						<li><a href="#" class="current" data-container="sessions">Sesiones y usuarios</a></li>
+						<li><a href="#" data-container="pot_c">Consultas al POT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -73,16 +73,21 @@
 			
 
 	<!--Consultas al POT-->
-	<div id="request" class="content-tab hide">
+	<div id="pot_c" class="content-tab hide">
 		<nav class="nav subnav re">
 			<ul class="sub_nav">
-				<li><a href="#" id="show_something" class="current" data-container="sessions_number">Número de sesiones</a></li>
+				<li><a href="#" data-container="pot_volumen">Volumen de consultas</a></li>
+				<li><a href="#" data-container="pot_historico">Histórico</a></li>
+				<li><a href="#" data-container="pot_total">Total</a></li>
 			</ul>
 		</nav>
 		<div class="container">
 			<div class="row">			
 				<div class="col-sm-12">
-				
+					<!--pot_volumen-->
+					<?php include "includes/pot/request/volumen.php";?>
+					
+					
 				</div>
 			</div>
 		</div>

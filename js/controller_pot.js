@@ -276,6 +276,11 @@ define(function(require){
 	    $(".content-tab").addClass("hide");
 	    $("#" +  name_container).removeClass("hide");
 	    
+	    $("#" + name_container).find(".viz").filter(":first").removeClass("hide");
+	    ///add class to current subtab
+		$(".sub_nav a").removeClass("current");
+	    $("#" + name_container).find(".sub_nav li a").filter(":first").addClass("current");
+	    
 	    ///add class to current tab
 	   $("#viz_nav a").removeClass("current");
 	   $(e.target).addClass('current');
