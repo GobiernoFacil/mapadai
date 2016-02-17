@@ -1,4 +1,4 @@
-<div id="treemap" class="viz">
+<div id="obligee_sujeto" class="viz" data-viz="treemap">
 	<div class="row">
 		<div class="col-sm-12">
 			<h3>Volumen de solicitudes por sector, por sujeto obligado y por tipo de solicitud <span>(acceso a la información, 

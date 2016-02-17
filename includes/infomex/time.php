@@ -1,4 +1,4 @@
-<div id="time" class="viz">
+<div id="obligee_historico" class="viz hide" data-viz="timeline">
 	<div class="row">
 		<div class="col-sm-12">
 			<h3>Top 10 histórico de sujetos obligados por solicitudes de acceso a la información y datos personales: 

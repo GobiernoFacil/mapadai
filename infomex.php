@@ -23,9 +23,9 @@
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
 					<ul id="viz_nav">
-						<li><a href="#" id="btn_obligee" class="current">Por sujeto obligado</a></li>
-						<li><a href="#" id="btn_t_response">Por tipo de respuesta</a></li>
-						<li><a href="#" id="btn_applicant">Perfil del solicitante</a></li>
+						<li><a href="#" class="current" data-container="obligee">Por sujeto obligado</a></li>
+						<li><a href="#" data-container="respuesta">Por tipo de respuesta</a></li>
+						<li><a href="#" data-container="solicitante">Perfil del solicitante</a></li>
 					</ul>
 				</div>
 			</div>
@@ -47,12 +47,12 @@
 <div class="content_graph">
 	
 	<!-- sujeto obligado-->
-	<div id="obligee">
+	<div id="obligee" class="content-tab">
 		<nav class="nav subnav re">
-			<ul id="sub_nav">
-				<li><a href="#" id="show_treemap"class="current">Por sujeto</a></li>
-				<li><a href="#" id="show_time" >Histórico</a></li>
-				<li><a href="#" id="show_top">Total</a></li>
+			<ul class="sub_nav">
+				<li><a href="#" class="current" data-container="obligee_sujeto">Por sujeto</a></li>
+				<li><a href="#"  data-container="obligee_historico">Histórico</a></li>
+				<li><a href="#" data-container="obligee_total">Total</a></li>
 			<!--	<li><a href="#" id="show_heatmap">Por hora</a></li>-->
 			</ul>
 		</nav>
