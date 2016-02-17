@@ -34,6 +34,7 @@ define(function(require){
   Rect = {
     height : 5,
     fill   : "black",
+    fillw  : "red",
     slot   : 30, // el espacio entre rectángulo y rectángulo
     empty  : "sin especificar" 
   };
@@ -113,12 +114,25 @@ define(function(require){
           .attr("x", 0)
           .attr("y", Margins.height - Margins.bottom);
 
-      this.bars = this.svg.selectAll("rect").data(data).enter()
+      this.bars = this.svg.selectAll(".occupation-rect-men").data(data).enter()
         .append("rect")
-          .attr("class", "occupation-rect")
+          .attr("class", "occupation-rect-men")
           .attr("fill", Rect.fill)
           .attr("width", function(d){
             return x_scale(+d.suma);
+          })
+          .attr("height", Rect.height)
+          .attr("x", Margins.left)
+          .attr("y", function(d, i){
+            return (Rect.slot * i) + Margins.top + 5;
+          });
+
+      this.bars2 = this.svg.selectAll(".occupation-rect-women").data(data).enter()
+        .append("rect")
+          .attr("class", "2occupation-rect-women")
+          .attr("fill", Rect.fillw)
+          .attr("width", function(d){
+            return x_scale(+d.suma)/2;
           })
           .attr("height", Rect.height)
           .attr("x", Margins.left)
