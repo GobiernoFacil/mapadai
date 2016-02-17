@@ -19,15 +19,15 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   First_time = true,
-  Format     = d3.format(","),
+  Format     = d3.format(",s"),
   Current_range = null,
   Margins    = {
-    width    : 600,
+    width    : 800,
     height   : 600,
     top      : 40,
-    right    : 30,
+    right    : 100,
     bottom   : 20, 
-    left     : 30,
+    left     : 100,
     padding  : 0,
     oPadding : 15
   },
@@ -68,23 +68,35 @@ define(function(require){
     },
 
     render : function(data, range){
-      console.log(data, range);
-      return;
-      // update SVG size
-      Margins.height = (data.length * Rect.slot) + Margins.top + Margins.bottom; 
-      Current_range = range;
-      var data = _.sortBy(data, function(d){return d.ocupacion;});
+      console.log(data, _.uniq(_.pluck(data,"grupo_edad")), range);
+      Margins.height = (_.uniq(_.pluck(data,"grupo_edad")).length * Rect.slot) + Margins.top + Margins.bottom; 
+      Current_range  = range;
       if(!this.svg){
         this.svg = this.make_svg(Margins);
       }
 
-      var x_scale = this.scale(data);
+      var ages    = ["0 a 17", "18 a 25", "26 a 35", "36 a 45", "46 a 60", "61 a 80", "Mayor de 80", "No especificado"],
+          y_scale = d3.scale.ordinal()
+            .domain(ages)
+            .rangePoints([Margins.top, Margins.height - Margins.bottom]),
+          r_scale = d3.scale.linear().domain(d3.extent(data, function(d){
+            return +d.suma;
+          })).range([0, (Margins.width/2) - Margins.right]);
+          wx_scale = this.scale(data, true),
+          mx_scale = this.scale(data, false);
 
-      this.ticks = this.svg.selectAll("g").data(x_scale.ticks()).enter()
+      // WOMEN STUFF
+      var right_axis = d3.svg.axis().scale(y_scale).orient("right");
+      this.svg.append("g")
+         .attr("class", "right_axis")
+         .attr("transform", "translate(" + (Margins.width - Margins.right) +", 0)")
+         .call(right_axis);
+      
+      this.wticks = this.svg.selectAll(".women-gender-ticks").data(wx_scale.ticks(5)).enter()
         .append("g")
-        .attr("class", "occupation-ticks")
+        .attr("class", "women-gender-ticks")
         .attr("transform", function(d){
-          return "translate(" + x_scale(d) + ", 0)";
+          return "translate(" + wx_scale(d) + ", 0)";
         })
           .append("line")
             .attr("x0", 0)
@@ -92,22 +104,12 @@ define(function(require){
             .attr("y0", 30)
             .attr("y1", Margins.height - Margins.bottom )
             .style({
-              "stroke" : "#ddd",
+              "stroke" : "#f00",
               "stroke-width" : 1
             });
 
-      this.svg.selectAll(".occupation-ticks").append("text")
-          .attr("class", "occupation-tick-label")
-          .attr("fill", "black")
-          .attr("text-anchor", "middle")
-          .text(function(d){
-            return Format(d);
-          })
-          .attr("x", 0)
-          .attr("y", 10);
-
-      this.svg.selectAll(".occupation-ticks").append("text")
-          .attr("class", "occupation-tick-label")
+      this.svg.selectAll(".women-gender-ticks").append("text")
+          .attr("class", "women-gender-tick-label")
           .attr("fill", "black")
           .attr("text-anchor", "middle")
           .text(function(d){
@@ -116,50 +118,72 @@ define(function(require){
           .attr("x", 0)
           .attr("y", Margins.height - Margins.bottom);
 
-      this.bars = this.svg.selectAll(".occupation-rect-men").data(data).enter()
+      this.wbars = this.svg.selectAll(".gender-rect-women").data(_.where(data, {genero : "Mujer"})).enter()
         .append("rect")
-          .attr("class", "occupation-rect-men")
-          .attr("fill", Rect.fill)
+          .attr("class", "gender-rect-women")
+          .attr("fill", "#f00")
           .attr("width", function(d){
-            return x_scale(+d.suma);
+            return r_scale(+d.suma);
           })
           .attr("height", Rect.height)
-          .attr("x", Margins.left)
+          .attr("x", Margins.width/2)
           .attr("y", function(d, i){
-            return (Rect.slot * i) + Margins.top + 5;
+            return y_scale(d.grupo_edad);
           });
 
-      this.bars2 = this.svg.selectAll(".occupation-rect-women").data(data).enter()
-        .append("rect")
-          .attr("class", "2occupation-rect-women")
-          .attr("fill", Rect.fillw)
-          .attr("width", function(d){
-            return x_scale(+d.suma)/2;
-          })
-          .attr("height", Rect.height)
-          .attr("x", Margins.left)
-          .attr("y", function(d, i){
-            return (Rect.slot * i) + Margins.top + 5;
-          });
+      // MEN STUFF
+      var left_axis = d3.svg.axis().scale(y_scale).orient("left");
+      this.svg.append("g")
+         .attr("class", "left_axis")
+         .attr("transform", "translate(" + (Margins.left) +", 0)")
+         .call(left_axis);
 
-      this.svg.selectAll(".occupation-label").data(data).enter()
-        .append("text")
-          .attr("class", "occupation-label")
+      this.mticks = this.svg.selectAll(".men-gender-ticks").data(wx_scale.ticks(5)).enter()
+        .append("g")
+        .attr("class", "men-gender-ticks")
+        .attr("transform", function(d){
+          return "translate(" + mx_scale(d) + ", 0)";
+        })
+          .append("line")
+            .attr("x0", 0)
+            .attr("x1",0)
+            .attr("y0", 30)
+            .attr("y1", Margins.height - Margins.bottom )
+            .style({
+              "stroke" : "#00f",
+              "stroke-width" : 1
+            });
+
+      this.svg.selectAll(".men-gender-ticks").append("text")
+          .attr("class", "men-gender-tick-label")
           .attr("fill", "black")
+          .attr("text-anchor", "middle")
           .text(function(d){
-            return d.ocupacion.trim() ? d.ocupacion : Rect.empty;
+            return Format(d);
           })
-          .attr("x", Margins.left)
-          .attr("y", function(d, i){
-            return (Rect.slot * i) + Margins.top;
-          });
-      console.log(data, range);
-      return;
+          .attr("x", 0)
+          .attr("y", Margins.height - Margins.bottom);
 
+      this.mbars = this.svg.selectAll(".gender-rect-men").data(_.where(data, {genero : "Hombre"})).enter()
+        .append("rect")
+          .attr("class", "gender-rect-men")
+          .attr("fill", "#00f")
+          .attr("width", function(d){
+            return r_scale(+d.suma);
+          })
+          .attr("height", Rect.height)
+          .attr("x", function(d){
+            return Margins.width/2 - r_scale(+d.suma);
+          })
+          .attr("y", function(d, i){
+            return y_scale(d.grupo_edad);
+          });
+
+      return;
     },
 
-    scale : function(data){
-      var x      = [Margins.left, Margins.width - Margins.left - Margins.right],
+    scale : function(data, women){
+      var x      = women ? [Margins.width/2, Margins.width - Margins.right] : [Margins.width/2, Margins.left],
           extent = d3.extent(data, function(d){
             return +d.suma;
           }),
