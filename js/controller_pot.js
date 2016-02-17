@@ -28,9 +28,10 @@ define(function(require){
   BASE_URL   = "http://inai.skalas.mx/api/",
   Endpoints  = ["heatmap", "treemap", "top10line", "top10"],
   Table      = "table=conteo_infomex_publico&", 
+  RR         = "rr=2&",
   URLS       = {
     heatmap   : BASE_URL + Endpoints[0] + "?" + Table,
-    treemap   : BASE_URL + Endpoints[1] + "?",
+    treemap   : BASE_URL + Endpoints[1] + "?" + RR,
     timeline  : BASE_URL + Endpoints[2] + "?",
     top10bars : BASE_URL + Endpoints[3] + "?",
   },
@@ -39,15 +40,8 @@ define(function(require){
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
   //
-  obligeeContainer  	 = document.querySelector("#obligee"),
-  t_responseContainer	 = document.querySelector("#t_response"),
-  applicantContainer	 = document.querySelector("#applicant_profile"),
 
-  /// 
-  timeContainer  	 = document.querySelector("#time"),
-  topContainer   	 = document.querySelector("#top"),
-  treemapContainer = document.querySelector("#treemap"),
-  heatmapContainer = document.querySelector("#heatmap"),
+
   Slider           = document.getElementById('slider');
   	
   //
@@ -100,6 +94,7 @@ define(function(require){
       this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
       this.top10bars  = new Top10bar({controller : this, el : "#top10bar"});
       this.timeline_a = new Timeline({controller : this, el : "#timeline-a"});
+      this.timeline_b = new Timeline({controller : this, el : "#timeline-b"});
       this.treemap_a  = new TreeMap({controller  : this, el : "#treemap-a"});
 
       // [4] set the current graph and endpoint
@@ -110,6 +105,7 @@ define(function(require){
       this.get_data(time, this.heatmap_a, URLS.heatmap);
       this.get_data(time, this.top10bars, URLS.top10bars);
       this.get_data(time, this.timeline_a, URLS.timeline);
+      this.get_data(time, this.timeline_b, URLS.timeline);
       this.get_data(time, this.treemap_a, URLS.treemap);
       
       // [6] add a listener for the scroll, the ugly hack way
@@ -300,6 +296,10 @@ define(function(require){
 				var viz_type = this.current_graph = this.timeline_a; 
 				var viz_url  = URLS.timeline;
 				var time_ui  = this.timeline_a.get_range();
+			case "timeline-b":
+				var viz_type = this.current_graph = this.timeline_b; 
+				var viz_url  = URLS.timeline;
+				var time_ui  = this.timeline_b.get_range();
 				break;
 			case "bar":
 				var viz_type = this.current_graph = this.top10bars; 
