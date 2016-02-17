@@ -96,13 +96,13 @@ define(function(require){
         .append("g")
         .attr("class", "women-gender-ticks")
         .attr("transform", function(d){
-          return "translate(" + wx_scale(d) + ", 0)";
+          return "translate(" + wx_scale(d) + ", " + Margins.top + ")";
         })
           .append("line")
             .attr("x0", 0)
             .attr("x1",0)
-            .attr("y0", 30)
-            .attr("y1", Margins.height - Margins.bottom )
+            .attr("y0", 0)
+            .attr("y1", Margins.height - Margins.bottom - Margins.top )
             .style({
               "stroke" : "#f00",
               "stroke-width" : 1
@@ -116,7 +116,7 @@ define(function(require){
             return Format(d);
           })
           .attr("x", 0)
-          .attr("y", Margins.height - Margins.bottom);
+          .attr("y", Margins.height - Margins.bottom - Margins.top + 15 /*lucky number!*/);
 
       this.wbars = this.svg.selectAll(".gender-rect-women").data(_.where(data, {genero : "Mujer"})).enter()
         .append("rect")
