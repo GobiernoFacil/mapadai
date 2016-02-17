@@ -281,6 +281,8 @@ define(function(require){
 	    ///show/hide container tab 
 	    $(".content-tab").addClass("hide");
 	    $("#" +  name_container).removeClass("hide");
+
+	    $(".viz").addClass("hide");
 	    
 	    $("#" + name_container).find(".viz").filter(":first").removeClass("hide");
 	    ///add class to current subtab
@@ -309,11 +311,7 @@ define(function(require){
 				var viz_url  = URLS.top10bars;
 				var time_ui  = this.top10bars.get_range();
 				break;
-			case "bar-b":
-				var viz_type = this.current_graph = this.top10bars_b; 
-				var viz_url  = URLS.top10bars;
-				var time_ui  = this.top10bars_b.get_range();
-				break;
+
 			case "heatmap":
 				var viz_type = this.current_graph = this.heatmap_a; 
 				var viz_url  = URLS.heatmap;
