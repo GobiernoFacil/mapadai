@@ -24,7 +24,7 @@
 				<div class="col-sm-10 col-sm-offset-1">
 					<ul id="viz_nav">
 						<li><a href="#" class="current" data-container="obligee">Por sujeto obligado</a></li>
-						<li><a href="#" data-container="respuesta">Por tipo de respuesta</a></li>
+						<li><a href="#" data-container="t_response">Por tipo de respuesta</a></li>
 						<li><a href="#" data-container="applicant_profile">Perfil del solicitante</a></li>
 					</ul>
 				</div>
@@ -73,7 +73,23 @@
 	</div>
 			
 	<!--tipo de respuesta -->
-	<div id="t_response"  class="content-tab hide">>
+	<div id="t_response"  class="content-tab hide">
+		<nav class="nav subnav re">
+			<ul class="sub_nav">
+				<li><a href="#" class="current" data-container="t_response_media">Medio de entrega</a></li>
+				<li><a href="#"  data-container="t_response_obligee">Por sujeto</a></li>
+			</ul>
+		</nav>
+		<div class="container">
+			<div class="row">			
+				<div class="col-sm-12">
+					<!--profile_genre-->
+					<?php include "includes/infomex/response/media.php";?>
+					<!--occupation-->
+					<?php include "includes/infomex/response/obligee.php";?>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<!--perfil del solicitante-->
