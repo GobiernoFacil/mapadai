@@ -57,13 +57,34 @@ define(function(require){
     //
     initialize : function(){
       this.divs = null;
+      this.svg  = null;
     },
 
     render : function(data, range){
       console.log(data, range);
-      return;
+      // update SVG size
+      Margins.height = data.length * 25; 
       Current_range = range;
-      var x_scale   = this.scale(data);
+
+      if(!this.svg){
+        this.svg = this.make_svg(Margins);
+      }
+
+      var x_scale = this.scale(data);
+      console.log(x_scale);
+      this.bars = this.svg.selectAll("rect").data(data).enter()
+        .append("rect")
+          .attr("class", "occupation-rect")
+          .attr("fill", "black")
+          .attr("width", function(d){
+            return x_scale(+d.suma);
+          })
+          .attr("height", 5)
+          .attr("x", Margins.left)
+          .attr("y", function(d, i){
+            return 20 * i;
+          });
+      return;
 
       if(First_time){
         this.divs = d3.select(this.el).selectAll("div")
@@ -105,7 +126,7 @@ define(function(require){
     scale : function(data){
       var x      = [Margins.left, Margins.width - Margins.left - Margins.right],
           extent = d3.extent(data, function(d){
-            return +d.total;
+            return +d.suma;
           }),
           scale = d3.scale.linear()
                     .domain(extent)
@@ -115,6 +136,21 @@ define(function(require){
 
     get_range : function(){
       return Current_range;
+    },
+
+    //
+    // [ GENERATE THE CONTAINER ]
+    //
+    //
+    make_svg : function(){
+      var svg = d3.select(this.el).append("svg")
+        .attr("width", Margins.width)
+        .attr("height", Margins.height)
+        .attr("class", "main_graph")
+        .append("g")
+          .attr("class", "main_container");
+
+      return svg;
     }
   });
 
