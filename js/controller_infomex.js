@@ -64,16 +64,11 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-		//top nav
-		"click #btn_obligee"  	: "show_obligee",
-		"click #btn_applicant"  : "show_applicant",
-		"click #btn_t_response" : "show_t_response",
+		 /// new top nav
+	    "click #viz_nav a"		: "doit",
 	    
-	    ///
-		"click #show_time"    : "show_time",
-		"click #show_top"     : "show_top",
-		"click #show_treemap" : "show_treemap",
-		"click #show_heatmap" : "show_heatmap",
+	    /// sub_nav
+	    "click .sub_nav a"		: "dothat",
 		
 		/// dataviz
 		'mouseenter svg .main_container path' : 'hover_path',
@@ -276,117 +271,76 @@ define(function(require){
     // --------------------------------------------------------------------------------
     //
     hide_stuff : function(){
-      t_responseContainer.style.display = "none";
-      applicantContainer.style.display = "none";
-      
-      topContainer.style.display       = "none";
-	   timeContainer.style.display 		= "none";
-	   treemapContainer.style.display 	= "block";
-	   heatmapContainer.style.display 	= "none";
+
     },
     
-    show_obligee : function(e){
-      e.preventDefault();
-	  this.current_graph = this.treemap_a;
-      this.current_url   = URLS.treemap;
-	   obligeeContainer.style.display 			= "block";
-	   t_responseContainer.style.display    = "none";
-	   applicantContainer.style.display 	= "none";
-	   
-	   topContainer.style.display       = "none";
-	   timeContainer.style.display 		= "none";
-	   treemapContainer.style.display 	= "block";
-	   heatmapContainer.style.display 	= "none";
-	   
-	   $("#sub_nav a").removeClass("current");
+    doit : function(e){
+    	e.preventDefault();
+	    var name_container = $(e.target).data('container');
+	    
+	    ///show/hide container tab 
+	    $(".content-tab").addClass("hide");
+	    $("#" +  name_container).removeClass("hide");
+	    
+	    $("#" + name_container).find(".viz").filter(":first").removeClass("hide");
+	    ///add class to current subtab
+		$(".sub_nav a").removeClass("current");
+	    $("#" + name_container).find(".sub_nav li a").filter(":first").addClass("current");
+	    
+	    ///add class to current tab
 	   $("#viz_nav a").removeClass("current");
-	   $("#btn_obligee").addClass("current");
-	   $("#show_treemap").addClass("current");
+	   $(e.target).addClass('current');
+	},
+    
+    dothat : function(e) {
+	    e.preventDefault();
+	    var name_container  = $(e.target).data('container');
+	    	viz_type		= $("#" + name_container).data('viz'),
+	    	viz_url			= "";
 	   
-	   this.update_time_ui(this.heatmap_a.get_range());
-    },
-    
-    
-    
-    show_applicant : function(e){
-      e.preventDefault();
-	   obligeeContainer.style.display 		= "none";
-	   t_responseContainer.style.display    = "none";
-	   applicantContainer.style.display 	= "block";
+		switch (viz_type) {
+			case "timeline":
+				var viz_type = this.current_graph = this.timeline_a; 
+				var viz_url  = URLS.timeline;
+				var time_ui  = this.timeline_a.get_range();
+			
+			case "bar":
+				var viz_type = this.current_graph = this.top10bars; 
+				var viz_url  = URLS.top10bars;
+				var time_ui  = this.top10bars.get_range();
+				break;
+			case "bar-b":
+				var viz_type = this.current_graph = this.top10bars_b; 
+				var viz_url  = URLS.top10bars;
+				var time_ui  = this.top10bars_b.get_range();
+				break;
+			case "heatmap":
+				var viz_type = this.current_graph = this.heatmap_a; 
+				var viz_url  = URLS.heatmap;
+				var time_ui  = this.heatmap_a.get_range();
+				break;
+			case "treemap":
+				var viz_type = this.current_graph = this.treemap_a; 
+				var viz_url  = URLS.treemap;
+				var time_ui  = this.treemap_a.get_range();
+				break;
+		}
+		
+		this.current_graph = viz_type;
+		this.current_url   = viz_url;
 	   
-	   $("#viz_nav a").removeClass("current");
-	   $("#sub_nav a").removeClass("current");
-	   $("#btn_applicant").addClass("current");	   
+		///show/hide container  
+	    $(".viz").addClass("hide");
+	    $("#" +  name_container).removeClass("hide");
+	    
+		///add class to current tab
+		$(".sub_nav a").removeClass("current");
+		$(e.target).addClass('current');
+		
+		this.update_time_ui(time_ui);
     },
-    
-     show_t_response : function(e){
-      e.preventDefault();
-	   obligeeContainer.style.display 		= "none";
-	   t_responseContainer.style.display    = "block";
-	   applicantContainer.style.display 	= "none";
-	   
-	   $("#viz_nav a").removeClass("current");
-	   $("#sub_nav a").removeClass("current");
-	   $("#btn_t_response").addClass("current");	   
-    },
-    
-    
-    show_time : function(e){
-      e.preventDefault();
-      this.current_graph = this.timeline_a;
-      this.current_url   = URLS.timeline;
 
-	   timeContainer.style.display 		= "block";
-	   topContainer.style.display       = "none";
-	   treemapContainer.style.display 	= "none";
-	   heatmapContainer.style.display 	= "none";
-	   $("#sub_nav a").removeClass("current");
-	   $("#show_time").addClass("current");
 
-     this.update_time_ui(this.timeline_a.get_range());
-    },
-    
-    show_top : function(e){
-      this.current_graph = this.top10bars;
-      this.current_url   = URLS.top10bars;
-	   e.preventDefault();
-	   topContainer.style.display       = "block";
-	   timeContainer.style.display 		= "none";
-	   treemapContainer.style.display 	= "none";
-	   heatmapContainer.style.display 	= "none";
-	   $("#sub_nav a").removeClass("current");
-	   $("#show_top").addClass("current");
-
-     this.update_time_ui(this.top10bars.get_range());
-    },
-    
-    show_treemap : function(e){
-      this.current_graph = this.treemap_a;
-      this.current_url   = URLS.treemap;
-	   e.preventDefault();
-	   topContainer.style.display       = "none";
-	   timeContainer.style.display 		= "none";
-	   treemapContainer.style.display 	= "block";
-	   heatmapContainer.style.display 	= "none";
-	   $("#sub_nav a").removeClass("current");
-	   $("#show_treemap").addClass("current");
-
-     this.update_time_ui(this.treemap_a.get_range());
-    },
-    
-    show_heatmap : function(e){
-      this.current_graph = this.heatmap_a;
-      this.current_url   = URLS.heatmap;
-	   e.preventDefault();
-	   topContainer.style.display       = "none";
-	   timeContainer.style.display 		= "none";
-	   treemapContainer.style.display 	= "none";
-	   heatmapContainer.style.display 	= "block";
-	   $("#sub_nav a").removeClass("current");
-	   $("#show_heatmap").addClass("current");
-
-     this.update_time_ui(this.heatmap_a.get_range());
-    },
 
   });
 
