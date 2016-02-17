@@ -24,9 +24,9 @@ define(function(require){
   Margins    = {
     width    : 600,
     height   : 600,
-    top      : 20,
+    top      : 40,
     right    : 30,
-    bottom   : 100, 
+    bottom   : 20, 
     left     : 30,
     padding  : 0,
     oPadding : 15
@@ -34,7 +34,7 @@ define(function(require){
   Rect = {
     height : 5,
     fill   : "black",
-    slot   : 25, // el espacio entre rectángulo y rectángulo
+    slot   : 30, // el espacio entre rectángulo y rectángulo
     empty  : "sin especificar" 
   };
 
@@ -76,7 +76,43 @@ define(function(require){
       }
 
       var x_scale = this.scale(data);
-      console.log(x_scale);
+
+      this.ticks = this.svg.selectAll("g").data(x_scale.ticks()).enter()
+        .append("g")
+        .attr("class", "occupation-ticks")
+        .attr("transform", function(d){
+          return "translate(" + x_scale(d) + ", 0)";
+        })
+          .append("line")
+            .attr("x0", 0)
+            .attr("x1",0)
+            .attr("y0", 30)
+            .attr("y1", Margins.height - Margins.bottom )
+            .style({
+              "stroke" : "#ddd",
+              "stroke-width" : 1
+            });
+
+      this.svg.selectAll(".occupation-ticks").append("text")
+          .attr("class", "occupation-tick-label")
+          .attr("fill", "black")
+          .attr("text-anchor", "middle")
+          .text(function(d){
+            return Format(d);
+          })
+          .attr("x", 0)
+          .attr("y", 10);
+
+      this.svg.selectAll(".occupation-ticks").append("text")
+          .attr("class", "occupation-tick-label")
+          .attr("fill", "black")
+          .attr("text-anchor", "middle")
+          .text(function(d){
+            return Format(d);
+          })
+          .attr("x", 0)
+          .attr("y", Margins.height - Margins.bottom);
+
       this.bars = this.svg.selectAll("rect").data(data).enter()
         .append("rect")
           .attr("class", "occupation-rect")
@@ -89,7 +125,8 @@ define(function(require){
           .attr("y", function(d, i){
             return (Rect.slot * i) + Margins.top + 5;
           });
-      this.svg.selectAll("text").data(data).enter()
+
+      this.svg.selectAll(".occupation-label").data(data).enter()
         .append("text")
           .attr("class", "occupation-label")
           .attr("fill", "black")
