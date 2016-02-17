@@ -14,11 +14,12 @@ define(function(require){
   var Backbone   = require('backbone'),
       d3         = require("d3"),
       noUiSlider = require("nouislider"),
-      HeatMap    = require("common_views/heat_map_view"),
+      //HeatMap    = require("common_views/heat_map_view"),
       Top10bar   = require("common_views/top10chart_view"),
       Timeline   = require("common_views/timelines_view"), 
       TreeMap    = require("common_views/treemap_view"),
       Occupation = require("common_views/occupation_chart_view"),
+      Gender     = require("common_views/gender_chart_view"),
       Tooltip    = require("text!templates/tooltip-a.html"),
 
   //
@@ -27,15 +28,16 @@ define(function(require){
   //
   First_year = 2003,
   BASE_URL   = "http://inai.skalas.mx/api/",
-  Endpoints  = ["heatmap", "treemap", "top10line", "top10", "usuarios/ocupacion"],
+  Endpoints  = ["heatmap", "treemap", "top10line", "top10", "usuarios/ocupacion", "usuarios/sexo-edad"],
   Table      = "table=conteo_infomex_publico&", 
   RR         = "rr=2&",
   URLS       = {
-    heatmap   : BASE_URL + Endpoints[0] + "?" + Table,
+    //heatmap   : BASE_URL + Endpoints[0] + "?" + Table,
     treemap   : BASE_URL + Endpoints[1] + "?" + RR,
     timeline  : BASE_URL + Endpoints[2] + "?",
     top10bars : BASE_URL + Endpoints[3] + "?",
     occupation: BASE_URL + Endpoints[4] + "?",
+    gender    : BASE_URL + Endpoints[5] + "?"
   },
 
   //
@@ -50,7 +52,7 @@ define(function(require){
   timeContainer  	    = document.querySelector("#time"),
   topContainer   	    = document.querySelector("#top"),
   treemapContainer    = document.querySelector("#treemap"),
-  heatmapContainer    = document.querySelector("#heatmap"),
+  //heatmapContainer    = document.querySelector("#heatmap"),
   occupationContainer = document.querySelector("#occupation"),
   Slider              = document.getElementById('slider');
   	
@@ -101,22 +103,24 @@ define(function(require){
       time[1] = +time[1];
 
       // [3] create the graphs
-      this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
+      //this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
       this.top10bars  = new Top10bar({controller : this, el : "#top10bar"});
       this.timeline_a = new Timeline({controller : this, el : "#timeline-a"});
       this.treemap_a  = new TreeMap({controller  : this, el : "#treemap-a"});
       this.occupation = new Occupation({controller : this, el : "#occupation-bar"});
+      this.gender     = new Gender({controller : this, el : "#gender-bar"});
 
       // [4] set the current graph and endpoint
       this.current_graph = this.timeline_a;
       this.current_url   = URLS.timeline;
 
       // [5] load the data
-      this.get_data(time, this.heatmap_a, URLS.heatmap);
+      //this.get_data(time, this.heatmap_a, URLS.heatmap);
       this.get_data(time, this.top10bars, URLS.top10bars);
       this.get_data(time, this.timeline_a, URLS.timeline);
       this.get_data(time, this.treemap_a, URLS.treemap);
       this.get_data(time, this.occupation, URLS.occupation);
+      this.get_data(time, this.gender, URLS.gender);
       
       // [6] add a listener for the scroll, the ugly hack way
       this.year_menu = $.proxy(this.year_menu, this);

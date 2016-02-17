@@ -67,6 +67,9 @@
 
 					<!--treemap-->
 					<?php include "includes/infomex/treemap.php";?>
+
+					<!--profile_genre-->
+					<?php include "includes/infomex/profile/genre.php";?>
 				</div>
 			</div>
 		</div>
@@ -104,7 +107,7 @@
 			<div class="row">			
 				<div class="col-sm-12">
 					<!--profile_genre-->
-					<?php include "includes/infomex/profile/genre.php";?>
+					<?php //include "includes/infomex/profile/genre.php";?>
 					<!--occupation-->
 					<?php include "includes/infomex/profile/occupation.php";?>
 				</div>

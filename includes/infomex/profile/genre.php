@@ -6,6 +6,7 @@
       <p class="lead">Perfil de los solicitantes</p>  
     </div>
   </div>
+  <section id="gender-bar"></section>
   <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
       <!--source-->
