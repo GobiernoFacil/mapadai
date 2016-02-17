@@ -18,6 +18,7 @@ define(function(require){
       Top10bar   = require("common_views/top10chart_view"),
       Timeline   = require("common_views/timelines_view"), 
       TreeMap    = require("common_views/treemap_view"),
+      Occupation = require("common_views/occupation_chart_view"),
       Tooltip    = require("text!templates/tooltip-a.html"),
 
   //
@@ -26,13 +27,15 @@ define(function(require){
   //
   First_year = 2003,
   BASE_URL   = "http://inai.skalas.mx/api/",
-  Endpoints  = ["heatmap", "treemap", "top10line", "top10"],
+  Endpoints  = ["heatmap", "treemap", "top10line", "top10", "usuarios/ocupacion"],
   Table      = "table=conteo_infomex_publico&", 
+  RR         = "rr=2&",
   URLS       = {
     heatmap   : BASE_URL + Endpoints[0] + "?" + Table,
-    treemap   : BASE_URL + Endpoints[1] + "?",
+    treemap   : BASE_URL + Endpoints[1] + "?" + RR,
     timeline  : BASE_URL + Endpoints[2] + "?",
     top10bars : BASE_URL + Endpoints[3] + "?",
+    occupation: BASE_URL + Endpoints[4] + "?",
   },
 
   //
@@ -44,11 +47,12 @@ define(function(require){
   applicantContainer	 = document.querySelector("#applicant_profile"),
 
   /// 
-  timeContainer  	 = document.querySelector("#time"),
-  topContainer   	 = document.querySelector("#top"),
-  treemapContainer = document.querySelector("#treemap"),
-  heatmapContainer = document.querySelector("#heatmap"),
-  Slider           = document.getElementById('slider');
+  timeContainer  	    = document.querySelector("#time"),
+  topContainer   	    = document.querySelector("#top"),
+  treemapContainer    = document.querySelector("#treemap"),
+  heatmapContainer    = document.querySelector("#heatmap"),
+  occupationContainer = document.querySelector("#occupation"),
+  Slider              = document.getElementById('slider');
   	
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
@@ -106,6 +110,7 @@ define(function(require){
       this.top10bars  = new Top10bar({controller : this, el : "#top10bar"});
       this.timeline_a = new Timeline({controller : this, el : "#timeline-a"});
       this.treemap_a  = new TreeMap({controller  : this, el : "#treemap-a"});
+      this.occupation = new Occupation({controller : this, el : "#occupation-bar"});
 
       // [4] set the current graph and endpoint
       this.current_graph = this.timeline_a;
@@ -116,6 +121,7 @@ define(function(require){
       this.get_data(time, this.top10bars, URLS.top10bars);
       this.get_data(time, this.timeline_a, URLS.timeline);
       this.get_data(time, this.treemap_a, URLS.treemap);
+      this.get_data(time, this.occupation, URLS.occupation);
       
       // [6] add a listener for the scroll, the ugly hack way
       this.year_menu = $.proxy(this.year_menu, this);

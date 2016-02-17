@@ -68,6 +68,9 @@
 
 					<!--treemap-->
 					<?php include "includes/infomex/treemap.php";?>
+
+					<!--occupation-->
+					<?php include "includes/infomex/occupation.php";?>
 				</div>
 			</div>
 		</div>

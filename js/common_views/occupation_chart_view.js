@@ -1,7 +1,7 @@
 // INAI - Diagnósitco MapaDAImx
 // @package  : INAI
 // @location : /js/common_views
-// @file     : top10chart_view.js
+// @file     : occupation_chart_view.js
 // @author   : Gobierno fácil <howdy@gobiernofacil.com>
 // @url      : http://gobiernofacil.com
 
@@ -13,8 +13,6 @@ define(function(require){
   //
   var Backbone = require('backbone'),
       d3       = require("d3"),
-      SVG      = require("common_views/main_svg_view"),
-      Scale    = require("common_views/linear_scale_view"),
 
   //
   // D E F I N E   C O N S T A N T 'S
@@ -44,7 +42,7 @@ define(function(require){
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
   // --------------------------------------------------------------------------------
   //
-  var top10 = Backbone.View.extend({
+  var occupation = Backbone.View.extend({
     
     //
     // [ DEFINE THE EVENTS ]
@@ -62,6 +60,8 @@ define(function(require){
     },
 
     render : function(data, range){
+      console.log(data, range);
+      return;
       Current_range = range;
       var x_scale   = this.scale(data);
 
@@ -122,5 +122,5 @@ define(function(require){
   // R E T U R N   T H E   B A C K B O N E   " C O N T R O L L E R "
   // --------------------------------------------------------------------------------
   //
-  return top10;
+  return occupation;
 });
