@@ -45,9 +45,16 @@
             Inicio
           </a>
         </li>
+        <!--INFOMEX-->
         <li>
           <a href="/infomex.php" title="INFOMEX">
             Solicitudes de información
+          </a>
+        </li>
+        <!--pot-->
+        <li>
+          <a href="/pot.php" title="POT">
+            Portal de obligaciones y transparencia
           </a>
         </li>
          <li>
@@ -55,12 +62,9 @@
             ¿Qué es #MapaDAImx?
           </a>
         </li>
+        
+	   
         <!--
-	    <li>
-          <a href="#!" title="POT">
-            Portal de obligaciones y transparencia
-          </a>
-        </li>
          <li>
           <a href="users.php" title="Usuarios">
             Perfil de usuarios
