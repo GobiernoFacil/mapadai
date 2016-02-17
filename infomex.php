@@ -25,7 +25,7 @@
 					<ul id="viz_nav">
 						<li><a href="#" class="current" data-container="obligee">Por sujeto obligado</a></li>
 						<li><a href="#" data-container="respuesta">Por tipo de respuesta</a></li>
-						<li><a href="#" data-container="solicitante">Perfil del solicitante</a></li>
+						<li><a href="#" data-container="applicant_profile">Perfil del solicitante</a></li>
 					</ul>
 				</div>
 			</div>
@@ -53,7 +53,6 @@
 				<li><a href="#" class="current" data-container="obligee_sujeto">Por sujeto</a></li>
 				<li><a href="#"  data-container="obligee_historico">Histórico</a></li>
 				<li><a href="#" data-container="obligee_total">Total</a></li>
-			<!--	<li><a href="#" id="show_heatmap">Por hora</a></li>-->
 			</ul>
 		</nav>
 		
@@ -68,22 +67,33 @@
 
 					<!--treemap-->
 					<?php include "includes/infomex/treemap.php";?>
-
-					<!--occupation-->
-					<?php include "includes/infomex/occupation.php";?>
 				</div>
 			</div>
 		</div>
 	</div>
 			
 	<!--tipo de respuesta -->
-	<div id="t_response">
+	<div id="t_response"  class="content-tab hide">>
 	</div>
 
 	<!--perfil del solicitante-->
-	<div id="applicant_profile">
-		<!--heatmap-->
-		<?php include "includes/infomex/heatmap.php";?>
+	<div id="applicant_profile" class="content-tab hide">
+		<nav class="nav subnav re">
+			<ul class="sub_nav">
+				<li><a href="#" class="current" data-container="profile_genre">Por sexo y grupo de edad</a></li>
+				<li><a href="#"  data-container="profile_occupation">Por ocupación</a></li>
+			</ul>
+		</nav>
+		<div class="container">
+			<div class="row">			
+				<div class="col-sm-12">
+					<!--profile_genre-->
+					<?php include "includes/infomex/profile/genre.php";?>
+					<!--occupation-->
+					<?php include "includes/infomex/profile/occupation.php";?>
+				</div>
+			</div>
+		</div>
 	</div>				
 			
 </div>
