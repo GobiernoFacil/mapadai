@@ -30,6 +30,12 @@ define(function(require){
     left     : 30,
     padding  : 0,
     oPadding : 15
+  },
+  Rect = {
+    height : 5,
+    fill   : "black",
+    slot   : 25, // el espacio entre rectángulo y rectángulo
+    empty  : "sin especificar" 
   };
 
   //
@@ -61,11 +67,10 @@ define(function(require){
     },
 
     render : function(data, range){
-      console.log(data, range);
       // update SVG size
-      Margins.height = data.length * 25; 
+      Margins.height = (data.length * Rect.slot) + Margins.top + Margins.bottom; 
       Current_range = range;
-
+      var data = _.sortBy(data, function(d){return d.ocupacion;});
       if(!this.svg){
         this.svg = this.make_svg(Margins);
       }
@@ -75,15 +80,27 @@ define(function(require){
       this.bars = this.svg.selectAll("rect").data(data).enter()
         .append("rect")
           .attr("class", "occupation-rect")
-          .attr("fill", "black")
+          .attr("fill", Rect.fill)
           .attr("width", function(d){
             return x_scale(+d.suma);
           })
-          .attr("height", 5)
+          .attr("height", Rect.height)
           .attr("x", Margins.left)
           .attr("y", function(d, i){
-            return 20 * i;
+            return (Rect.slot * i) + Margins.top + 5;
           });
+      this.svg.selectAll("text").data(data).enter()
+        .append("text")
+          .attr("class", "occupation-label")
+          .attr("fill", "black")
+          .text(function(d){
+            return d.ocupacion.trim() ? d.ocupacion : Rect.empty;
+          })
+          .attr("x", Margins.left)
+          .attr("y", function(d, i){
+            return (Rect.slot * i) + Margins.top;
+          });
+      console.log(data, range);
       return;
 
       if(First_time){
