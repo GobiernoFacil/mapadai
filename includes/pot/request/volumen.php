@@ -5,11 +5,7 @@
 				<p class="lead">Solicitudes que se realizan por sujeto obligado, tanto de acceso a la información como de datos personales</p>
 			<!--<a href="#" class="download" download><b></b>Descargar datos</a>-->	
 		</div>
-		<div class="col-sm-10 col-sm-offset-1">
-			<p class="instructions">Da clic sobre un sector para observar la distribución del número de solicitudes por sujeto obligado 
-				y tipo de solicitud. Para regresar, da clic sobre el área gris en la parte superior de la gráfica.
-			</p>						
-		</div>
+
 	</div>
 	<section id="treemap-a"></section>
 	<!--source-->

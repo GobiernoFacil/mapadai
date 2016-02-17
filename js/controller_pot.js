@@ -91,11 +91,12 @@ define(function(require){
       time[1] = +time[1];
 
       // [3] create the graphs
-      this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
-      this.top10bars  = new Top10bar({controller : this, el : "#top10bar"});
-      this.timeline_a = new Timeline({controller : this, el : "#timeline-a"});
-      this.timeline_b = new Timeline({controller : this, el : "#timeline-b"});
-      this.treemap_a  = new TreeMap({controller  : this, el : "#treemap-a"});
+      this.heatmap_a  	= new HeatMap({controller  : this, el : "#heatmap-a"});
+      this.top10bars  	= new Top10bar({controller : this, el : "#top10bar"});
+      this.top10bars_b  = new Top10bar({controller : this, el : "#top10bar-b"});
+      this.timeline_a 	= new Timeline({controller : this, el : "#timeline-a"});
+      this.timeline_b 	= new Timeline({controller : this, el : "#timeline-b"});
+      this.treemap_a  	= new TreeMap({controller  : this, el : "#treemap-a"});
 
       // [4] set the current graph and endpoint
       this.current_graph = this.timeline_a;
@@ -104,6 +105,7 @@ define(function(require){
       // [5] load the data
       this.get_data(time, this.heatmap_a, URLS.heatmap);
       this.get_data(time, this.top10bars, URLS.top10bars);
+      this.get_data(time, this.top10bars_b, URLS.top10bars);
       this.get_data(time, this.timeline_a, URLS.timeline);
       this.get_data(time, this.timeline_b, URLS.timeline);
       this.get_data(time, this.treemap_a, URLS.treemap);
@@ -305,6 +307,11 @@ define(function(require){
 				var viz_type = this.current_graph = this.top10bars; 
 				var viz_url  = URLS.top10bars;
 				var time_ui  = this.top10bars.get_range();
+				break;
+			case "bar-b":
+				var viz_type = this.current_graph = this.top10bars_b; 
+				var viz_url  = URLS.top10bars;
+				var time_ui  = this.top10bars_b.get_range();
 				break;
 			case "heatmap":
 				var viz_type = this.current_graph = this.heatmap_a; 

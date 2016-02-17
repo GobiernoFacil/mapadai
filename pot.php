@@ -81,13 +81,17 @@
 				<li><a href="#" data-container="pot_total">Total</a></li>
 			</ul>
 		</nav>
-		<div class="container">
+		<div class="container">s
 			<div class="row">			
 				<div class="col-sm-12">
 					<!--pot_volumen-->
 					<?php include "includes/pot/request/volumen.php";?>
 					
+					<!--pot_historico-->
+					<?php include "includes/pot/request/historico.php";?>
 					
+					<!--pot_total-->
+					<?php include "includes/pot/request/total.php";?>
 				</div>
 			</div>
 		</div>
