@@ -1407,6 +1407,20 @@ p.instructions {
       background: #f2f2f2;
       color: #00c1a5; }
 
+p.legend_o {
+  color: #999 !important;
+  font-size: 12px;
+  text-align: center; }
+  p.legend_o b {
+    height: 10px;
+    display: inline-block;
+    margin-left: 10px;
+    width: 10px; }
+  p.legend_o b.w {
+    background: #981F7C; }
+  p.legend_o b.h {
+    background: #3498DB; }
+
 .viz {
   background: #f2f2f2;
   margin: 40px 0;

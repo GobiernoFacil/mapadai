@@ -33,8 +33,8 @@ define(function(require){
   },
   Rect = {
     height : 5,
-    fill   : "black",
-    fillw  : "red",
+    fill   : "#3498DB",
+    fillw  : "#981F7C",
     slot   : 30, // el espacio entre rectángulo y rectángulo
     empty  : "sin especificar" 
   };
