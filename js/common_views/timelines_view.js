@@ -81,6 +81,7 @@ define(function(require){
       this.controller = settings.controller;
       this.svg = new SVG(this.el, Margins);
       this.draw_labels(this.svg);
+      this.first_time = true;
     },
 
     //
@@ -92,14 +93,14 @@ define(function(require){
       var d = data;
       this.prepare_data(d);
 
-      if(First_time){
+      if(this.first_time = true){
         this.set_scales(d);
         this.set_axis();
         this.get_line_generator();
         this.draw_lines(d);
         this.draw_dots(d);
         this.draw_list();
-        First_time = false;
+        this.first_time = false;
       }
       else{
         this.update_render();
@@ -271,6 +272,7 @@ define(function(require){
     //
     //
     draw_lines : function(data, update){
+      console.log(update, this.lines, this.el);
       var that       = this,
           data_lines = [];
       Categories.forEach(function(cat, i){

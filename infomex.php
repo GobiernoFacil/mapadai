@@ -70,6 +70,9 @@
 
 					<!--profile_genre-->
 					<?php include "includes/infomex/profile/genre.php";?>
+
+					<!--ejemplo-->
+					<?php include "includes/infomex/time2.php";?>
 				</div>
 			</div>
 		</div>

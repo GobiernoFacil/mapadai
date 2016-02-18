@@ -109,6 +109,7 @@ define(function(require){
       this.treemap_a  = new TreeMap({controller  : this, el : "#treemap-a"});
       this.occupation = new Occupation({controller : this, el : "#occupation-bar"});
       this.gender     = new Gender({controller : this, el : "#gender-bar"});
+      this.xxx = new Timeline({controller : this, el : "#timeline-b"});
 
       // [4] set the current graph and endpoint
       this.current_graph = this.timeline_a;
@@ -121,6 +122,11 @@ define(function(require){
       this.get_data(time, this.treemap_a, URLS.treemap);
       this.get_data(time, this.occupation, URLS.occupation);
       this.get_data(time, this.gender, URLS.gender);
+
+      this.get_data(time, this.xxx, URLS.timeline);
+
+
+
       
       // [6] add a listener for the scroll, the ugly hack way
       this.year_menu = $.proxy(this.year_menu, this);
