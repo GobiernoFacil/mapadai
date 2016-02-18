@@ -46,6 +46,12 @@
 <!-- content-->
 <div class="content_graph">
 	
+	<!---->
+	<div id="date" class="content-tab">
+			<!--ejemplo-->
+					<?php // include "includes/infomex/time2.php";?>
+	</div>
+	
 	<!-- sujeto obligado-->
 	<div id="obligee" class="content-tab">
 		<nav class="nav subnav re">
@@ -67,9 +73,6 @@
 					
 					<!--top10bar-->
 					<?php include "includes/infomex/bar.php";?>
-
-					<!--ejemplo-->
-					<?php include "includes/infomex/time2.php";?>
 				</div>
 			</div>
 		</div>
