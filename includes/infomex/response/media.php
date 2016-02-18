@@ -6,6 +6,7 @@
 			<p class="lead">Medio por el que el solicitante requiere se entregue la información</p>	
 		</div>
 	</div>
+	<section id="top10bar_b"></section>
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
 			<!--source-->

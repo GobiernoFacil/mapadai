@@ -11,6 +11,7 @@
 			</p>						
 		</div>
 	</div>
+	<section id="treemap-b"></section>
 	<!--source-->
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
