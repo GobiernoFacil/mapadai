@@ -60,13 +60,14 @@ define(function(require){
     //
     initialize : function(){
       this.divs = null;
+      this.first_time = true;
     },
 
     render : function(data, range){
       Current_range = range;
       var x_scale   = this.scale(data);
 
-      if(First_time){
+      if(this.first_time = true){
         this.divs = d3.select(this.el).selectAll("div")
                       .data(data)
                       .enter()
@@ -88,7 +89,7 @@ define(function(require){
             return x_scale(d.total) + "px";
           }
         });
-        First_time = false;
+        this.first_time = false;
       }
       else{
         this.divs.data(data);
