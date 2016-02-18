@@ -5,6 +5,9 @@
       <!--<a href="#" class="download" download><b></b>Descargar datos</a>-->     
       <p class="lead">Perfil de los solicitantes</p>  
     </div>
+     <div class="col-sm-4 col-sm-offset-4">
+	    <p class="legend_o">  Hombres <b class="h"></b>  <b class="w"></b> Mujeres</p>
+    </div>
   </div>
   <section id="gender-bar"></section>
   <div class="row">

@@ -59,17 +59,14 @@
 		<div class="container">
 			<div class="row">			
 				<div class="col-sm-12">
+					<!--treemap-->
+					<?php include "includes/infomex/treemap.php";?>
+					
 					<!--timeline-->
 					<?php include "includes/infomex/time.php";?>
 					
 					<!--top10bar-->
 					<?php include "includes/infomex/bar.php";?>
-
-					<!--treemap-->
-					<?php include "includes/infomex/treemap.php";?>
-
-					<!--profile_genre-->
-					<?php include "includes/infomex/profile/genre.php";?>
 
 					<!--ejemplo-->
 					<?php include "includes/infomex/time2.php";?>
@@ -89,7 +86,7 @@
 		<div class="container">
 			<div class="row">			
 				<div class="col-sm-12">
-					<!--profile_genre-->
+					<!--t_response_media-->
 					<?php include "includes/infomex/response/media.php";?>
 					<!--occupation-->
 					<?php include "includes/infomex/response/obligee.php";?>

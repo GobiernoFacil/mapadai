@@ -44,16 +44,7 @@ define(function(require){
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
   //
-  obligeeContainer  	 = document.querySelector("#obligee"),
-  t_responseContainer	 = document.querySelector("#t_response"),
-  applicantContainer	 = document.querySelector("#applicant_profile"),
 
-  /// 
-  timeContainer  	    = document.querySelector("#time"),
-  topContainer   	    = document.querySelector("#top"),
-  treemapContainer    = document.querySelector("#treemap"),
-  //heatmapContainer    = document.querySelector("#heatmap"),
-  occupationContainer = document.querySelector("#occupation"),
   Slider              = document.getElementById('slider');
   	
   //
@@ -104,12 +95,14 @@ define(function(require){
 
       // [3] create the graphs
       //this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
-      this.top10bars  = new Top10bar({controller : this, el : "#top10bar"});
-      this.timeline_a = new Timeline({controller : this, el : "#timeline-a"});
-      this.treemap_a  = new TreeMap({controller  : this, el : "#treemap-a"});
-      this.occupation = new Occupation({controller : this, el : "#occupation-bar"});
-      this.gender     = new Gender({controller : this, el : "#gender-bar"});
-      this.xxx = new Timeline({controller : this, el : "#timeline-b"});
+      this.top10bars 	= new Top10bar({controller : this, el : "#top10bar"});
+      this.top10bars_b  = new Top10bar({controller : this, el : "#top10bar_b"});
+      this.timeline_a 	= new Timeline({controller : this, el : "#timeline-a"});
+      this.treemap_a  	= new TreeMap({controller  : this, el : "#treemap-a"});
+      this.treemap_b  	= new TreeMap({controller  : this, el : "#treemap-b"});
+      this.occupation 	= new Occupation({controller : this, el : "#occupation-bar"});
+      this.gender     	= new Gender({controller : this, el : "#gender-bar"});
+      this.xxx 			= new Timeline({controller : this, el : "#timeline-b"});
 
       // [4] set the current graph and endpoint
       this.current_graph = this.timeline_a;
@@ -120,8 +113,10 @@ define(function(require){
       this.get_data(time, this.top10bars, URLS.top10bars);
       this.get_data(time, this.timeline_a, URLS.timeline);
       this.get_data(time, this.treemap_a, URLS.treemap);
+      this.get_data(time, this.treemap_b, URLS.treemap);
       this.get_data(time, this.occupation, URLS.occupation);
       this.get_data(time, this.gender, URLS.gender);
+      this.get_data(time, this.top10bars_b, URLS.top10bars);
 
       this.get_data(time, this.xxx, URLS.timeline);
 

@@ -33,8 +33,8 @@ define(function(require){
   },
   Rect = {
     height : 5,
-    fill   : "black",
-    fillw  : "red",
+    fill   : "#3498DB",
+    fillw  : "#981F7C",
     slot   : 30, // el espacio entre rectángulo y rectángulo
     empty  : "sin especificar" 
   };
@@ -65,6 +65,7 @@ define(function(require){
     initialize : function(){
       this.divs = null;
       this.svg  = null;
+      this.first_time = true;
     },
 
     render : function(data, range){
@@ -104,7 +105,7 @@ define(function(require){
             .attr("y0", 0)
             .attr("y1", Margins.height - Margins.bottom - Margins.top )
             .style({
-              "stroke" : "#f00",
+              "stroke" : "rgba(0,0,0,0.1)",
               "stroke-width" : 1
             });
 
@@ -121,7 +122,7 @@ define(function(require){
       this.wbars = this.svg.selectAll(".gender-rect-women").data(_.where(data, {genero : "Mujer"})).enter()
         .append("rect")
           .attr("class", "gender-rect-women")
-          .attr("fill", "#f00")
+          .attr("fill", "#981F7C")
           .attr("width", function(d){
             return r_scale(+d.suma);
           })
@@ -142,15 +143,15 @@ define(function(require){
         .append("g")
         .attr("class", "men-gender-ticks")
         .attr("transform", function(d){
-          return "translate(" + mx_scale(d) + ", 0)";
+          return "translate(" + mx_scale(d) + ", " + Margins.top + ")";
         })
           .append("line")
             .attr("x0", 0)
             .attr("x1",0)
-            .attr("y0", 30)
-            .attr("y1", Margins.height - Margins.bottom )
+            .attr("y0", 0)
+            .attr("y1", Margins.height - Margins.bottom - Margins.top + 15 )
             .style({
-              "stroke" : "#00f",
+              "stroke" : "rgba(0,0,0,0.1)",
               "stroke-width" : 1
             });
 
@@ -162,12 +163,12 @@ define(function(require){
             return Format(d);
           })
           .attr("x", 0)
-          .attr("y", Margins.height - Margins.bottom);
+          .attr("y", Margins.height - Margins.bottom  - Margins.top + 15);
 
       this.mbars = this.svg.selectAll(".gender-rect-men").data(_.where(data, {genero : "Hombre"})).enter()
         .append("rect")
           .attr("class", "gender-rect-men")
-          .attr("fill", "#00f")
+          .attr("fill", "#3498DB")
           .attr("width", function(d){
             return r_scale(+d.suma);
           })

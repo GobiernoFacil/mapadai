@@ -271,6 +271,9 @@ text {
   -moz-opacity: 1;
   opacity: 1; }
 
+#gender-bar path {
+  fill: none; }
+
 #chart {
   width: 620px;
   height: 500px;
@@ -1503,7 +1506,7 @@ p.legend_o {
       height: 50px;
       top: 0; }
 
-#top10bar {
+#top10bar, #top10bar_b {
   margin: 20px auto;
   display: block;
   width: 600px; }
