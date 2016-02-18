@@ -99,7 +99,7 @@
 	<div id="applicant_profile" class="content-tab hide">
 		<nav class="nav subnav re">
 			<ul class="sub_nav">
-				<li><a href="#" class="current" data-container="profile_genre">Por sexo y grupo de edad</a></li>
+				<li><a href="#"  data-container="profile_genre_content">Por sexo y grupo de edad</a></li>
 				<li><a href="#"  data-container="profile_occupation">Por ocupación</a></li>
 			</ul>
 		</nav>
@@ -107,7 +107,7 @@
 			<div class="row">			
 				<div class="col-sm-12">
 					<!--profile_genre-->
-					<?php //include "includes/infomex/profile/genre.php";?>
+					<?php include "includes/infomex/profile/genre.php";?>
 					<!--occupation-->
 					<?php include "includes/infomex/profile/occupation.php";?>
 				</div>

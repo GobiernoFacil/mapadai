@@ -286,9 +286,9 @@ define(function(require){
 	    $(".content-tab").addClass("hide");
 	    $("#" +  name_container).removeClass("hide");
 
-	    $(".viz").addClass("hide");
+	    $(".viz").addClass("hide");	    
+	    $("#" + name_container).find(".col-sm-12 .viz").filter(":first").removeClass("hide");
 	    
-	    $("#" + name_container).find(".viz").filter(":first").removeClass("hide");
 	    ///add class to current subtab
 		$(".sub_nav a").removeClass("current");
 	    $("#" + name_container).find(".sub_nav li a").filter(":first").addClass("current");
@@ -300,7 +300,7 @@ define(function(require){
     
     dothat : function(e) {
 	    e.preventDefault();
-	    var name_container  = $(e.target).data('container');
+	    var name_container  = $(e.target).data('container'),
 	    	viz_type		= $("#" + name_container).data('viz'),
 	    	viz_url			= "";
 	   
@@ -325,6 +325,18 @@ define(function(require){
 				var viz_type = this.current_graph = this.treemap_a; 
 				var viz_url  = URLS.treemap;
 				var time_ui  = this.treemap_a.get_range();
+				break;
+			
+			case "gender-bar":
+				var viz_type = this.current_graph = this.gender; 
+				var viz_url  = URLS.gender;
+				var time_ui  = this.gender.get_range();
+				break;
+					
+			case "occupation-bar":
+				var viz_type = this.current_graph = this.occupation; 
+				var viz_url  = URLS.occupation;
+				var time_ui  = this.occupation.get_range();
 				break;
 		}
 		
