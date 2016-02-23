@@ -47,7 +47,7 @@
 <!-- content-->
 <div class="content_graph">
 	
-	<!---->
+	<!--Por fecha-->
 	<div id="bydate" class="content-tab hide">
 		<div class="container">
 			<div class="row">			
@@ -63,7 +63,7 @@
 	<div id="obligee" class="content-tab">
 		<nav class="nav subnav re">
 			<ul class="sub_nav">
-				<li><a href="#" class="current" data-container="obligee_sujeto">Por sujeto</a></li>
+				<li><a href="#" class="current" data-container="obligee_volumen">Volumen de recursos</a></li>
 				<li><a href="#"  data-container="obligee_historico">Histórico</a></li>
 				<li><a href="#" data-container="obligee_total">Total</a></li>
 			</ul>
@@ -73,13 +73,13 @@
 			<div class="row">			
 				<div class="col-sm-12">
 					<!--treemap-->
-					<?php include "includes/infomex/treemap.php";?>
+					<?php include "includes/recursos/obligee/volumen.php";?>
 					
 					<!--timeline-->
-					<?php include "includes/infomex/time.php";?>
+					<?php include "includes/recursos/obligee/historico.php";?>
 					
 					<!--top10bar-->
-					<?php include "includes/infomex/bar.php";?>
+					<?php include "includes/recursos/obligee/total.php";?>
 				</div>
 			</div>
 		</div>
