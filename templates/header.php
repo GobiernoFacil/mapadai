@@ -57,24 +57,18 @@
             Portal de obligaciones y transparencia
           </a>
         </li>
-         <li>
+        <!--Recursos de revisión-->
+        <li>
+          <a href="/recursos.php" title="Recursos de revisión">
+            Recursos de revisión
+          </a>
+        </li>
+        <!--qué es-->
+        <li>
           <a href="/que-es.php" title="#MapaDAImx">
             ¿Qué es #MapaDAImx?
           </a>
         </li>
-        
-	   
-        <!--
-         <li>
-          <a href="users.php" title="Usuarios">
-            Perfil de usuarios
-          </a>
-        </li>
-        <li>
-          <a href="#!" title="Solicitud de información">
-            Recursos de revisión
-          </a>
-        </li>-->
       </ul>
     </nav>
 
