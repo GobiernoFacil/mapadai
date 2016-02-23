@@ -25,7 +25,7 @@
 					<ul id="viz_nav">
 						<li><a href="#" data-container="bydate">Por fecha</a></li>
 						<li><a href="#" class="current" data-container="obligee">Por sujeto obligado</a></li>
-						<li><a href="#" data-container="t_response">Por tipo de respuesta</a></li>
+						<li><a href="#" data-container="commissioner">Por comisionado</a></li>
 						<li><a href="#" data-container="applicant_profile">Perfil del solicitante</a></li>
 					</ul>
 				</div>
@@ -85,21 +85,13 @@
 		</div>
 	</div>
 			
-	<!--tipo de respuesta -->
-	<div id="t_response"  class="content-tab hide">
-		<nav class="nav subnav re">
-			<ul class="sub_nav">
-				<li><a href="#" class="current" data-container="t_response_media">Medio de entrega</a></li>
-				<li><a href="#"  data-container="t_response_obligee">Por sujeto</a></li>
-			</ul>
-		</nav>
+	<!--por comisionado-->
+	<div id="commissioner"  class="content-tab hide">
 		<div class="container">
 			<div class="row">			
 				<div class="col-sm-12">
-					<!--t_response_media-->
-					<?php include "includes/infomex/response/media.php";?>
-					<!--occupation-->
-					<?php include "includes/infomex/response/obligee.php";?>
+					<!--comisionado-->
+					<?php include "includes/recursos/comisionado.php";?>
 				</div>
 			</div>
 		</div>
