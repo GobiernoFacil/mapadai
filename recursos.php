@@ -26,7 +26,7 @@
 						<li><a href="#" data-container="bydate">Por fecha</a></li>
 						<li><a href="#" class="current" data-container="obligee">Por sujeto obligado</a></li>
 						<li><a href="#" data-container="commissioner">Por comisionado</a></li>
-						<li><a href="#" data-container="applicant_profile">Perfil del solicitante</a></li>
+						<li><a href="#" data-container="recurrent_profile">Perfil del recurrente</a></li>
 					</ul>
 				</div>
 			</div>
@@ -97,8 +97,8 @@
 		</div>
 	</div>
 
-	<!--perfil del solicitante-->
-	<div id="applicant_profile" class="content-tab hide">
+	<!--Perfil del recurrente-->
+	<div id="recurrent_profile" class="content-tab hide">
 		<nav class="nav subnav re">
 			<ul class="sub_nav">
 				<li><a href="#"  data-container="profile_genre_content">Por sexo y grupo de edad</a></li>
@@ -109,9 +109,9 @@
 			<div class="row">			
 				<div class="col-sm-12">
 					<!--profile_genre-->
-					<?php include "includes/infomex/profile/genre.php";?>
+					<?php include "includes/recursos/profile/genre.php";?>
 					<!--occupation-->
-					<?php include "includes/infomex/profile/occupation.php";?>
+					<?php include "includes/recursos/profile/occupation.php";?>
 				</div>
 			</div>
 		</div>
