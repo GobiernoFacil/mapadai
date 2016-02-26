@@ -56,6 +56,9 @@
 							<p>También se incluye un apartado respecto del año de 2014, con información de entidades federativas y de los otros 
 								sujetos obligados de la <strong>Ley de Transparencia y Acceso a la Información Pública Gubernamental</strong>. 
 								La información se obtendrá de distintas APIs.</p>
+								
+							<div class="divider"></div>
+							<h3><a href="/glosario.php">Glosario ></a></h3>
 						</div>
 					</div>
 					
