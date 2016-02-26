@@ -9,7 +9,7 @@
 	<section class="i-intro">
 		<div class="years_title">
 			<h1>#MapaDAImx</h1>		
-			<div class="years"><span class="count">2014</span></div>
+			<div class="years"><span class="count">2015</span></div>
 		</div>
 		<div class="container">
 			<div class="row">
