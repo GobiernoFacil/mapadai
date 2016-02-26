@@ -1065,6 +1065,12 @@ footer {
     .menu-list a:hover {
       background: rgba(0, 0, 0, 0.5); }
 
+ol li {
+  margin-bottom: 10px;
+  margin-left: 15px;
+  color: #666;
+  line-height: 1.4; }
+
 .btn-label {
   cursor: pointer;
   display: block;
