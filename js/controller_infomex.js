@@ -165,19 +165,42 @@ define(function(require){
     //
     //
     setup_slider : function(first_year, years_to_last){
+      // setup variables
       var that   = this,
           slider = Slider,
-          now    = new Date();
-      
+          now    = new Date(),
+          years  = now.getFullYear() - first_year,
+          range  = {}; 
+
+      // make range obj
+      for(var i = 0; i <= years; i++){
+        if(i == 0){
+          range['min'] = first_year;
+        }
+        else if(i == years){
+          range['max'] = now.getFullYear();
+        }
+        else{
+          range[((100/years)*i).toString()] = first_year + i;
+        }
+      }
+
+      /*
+      'margin', 'limit', 'step', 'range', 'animate' and 'snap'
+      */
+
+      // make the slider
       noUiSlider.create(slider, {
         start: [first_year, now.getFullYear()],
         step : 1,
         connect: true,
+        //snap : true,
         // behaviour: 'tap',
+        margin : 1,
         range: {
-          'min': first_year,
-          'max': now.getFullYear()
-        },
+          min : first_year,
+          max : now.getFullYear()
+        },//range,
         pips : {
           mode : "values",
           values : d3.range(first_year, now.getFullYear() + 1, 1),
