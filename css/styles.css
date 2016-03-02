@@ -1416,6 +1416,41 @@ p.instructions {
       background: #f2f2f2;
       color: #00c1a5; }
 
+.table_header {
+  background: rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+  padding: 5px 0; }
+  .table_header p {
+    color: #222;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700; }
+
+.table_entidades li {
+  color: #ccc;
+  border-bottom: 1px solid #ccc;
+  display: list-item;
+  margin: 0;
+  line-height: 0.5;
+  list-style-position: inside;
+  padding: 5px 0;
+  font-size: 13px; }
+  .table_entidades li p {
+    margin: 0;
+    padding: 0 0 5px; }
+
+.status_ok {
+  background-color: #8ED6AA;
+  min-height: 25px;
+  width: 100%; }
+  .status_ok a {
+    color: #fff;
+    display: block;
+    line-height: 25px;
+    text-align: center; }
+    .status_ok a:hover {
+      background: rgba(0, 0, 0, 0.1); }
+
 p.legend_o {
   color: #999 !important;
   font-size: 12px;
