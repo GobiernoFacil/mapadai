@@ -989,6 +989,13 @@ footer {
   font: 500 16px 'kelson_sans', Helvetica, Arial, sans-serif;
   padding: 10px 15px;
   margin-top: 30px; }
+.btn.file {
+  background: #732181;
+  color: white;
+  display: block;
+  padding: 10px; }
+  .btn.file:hover {
+    background: #333; }
 
 .tw, .fb, .yt {
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIyMi41cHgiIGhlaWdodD0iMjIuNXB4IiB2aWV3Qm94PSIwIDAgMjIuNSAyMi41IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyMi41IDIyLjUiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0xMS4yNSwwLjM1Yy02LjAyMSwwLTEwLjksNC44ODEtMTAuOSwxMC45czQuODgsMTAuOSwxMC45LDEwLjljNi4wMTksMCwxMC45LTQuODgxLDEwLjktMTAuOVMxNy4yNywwLjM1LDExLjI1LDAuMzV6IE0xNi41OCw5LjM0MmMwLjAwNiwwLjExOSwwLjAwOCwwLjIzNiwwLjAwOCwwLjM1NGMwLDMuNjE2LTIuNzUyLDcuNzg1LTcuNzg1LDcuNzg1Yy0xLjU0NSwwLTIuOTgzLTAuNDU1LTQuMTkzLTEuMjI5YzAuMjEzLDAuMDI0LDAuNDMyLDAuMDM4LDAuNjUyLDAuMDM4YzEuMjgyLDAsMi40NjItMC40MzgsMy4zOTctMS4xNzFjLTEuMTk3LTAuMDIyLTIuMjA3LTAuODEzLTIuNTU2LTEuODk5YzAuMTY3LDAuMDMxLDAuMzM5LDAuMDQ5LDAuNTE2LDAuMDQ5YzAuMjQ4LDAsMC40NS0wLjAzNCwwLjY3OC0wLjA5NmMtMS4yNTEtMC4yNTItMi4yMzUtMS4zNTctMi4yMzUtMi42ODR2LTAuMDM1YzEsMC4yMDYsMC44MzMsMC4zMywxLjI3OSwwLjM0NGMtMC43MzItMC40OS0xLjE5NC0xLjMyOC0xLjE5NC0yLjI3N2MwLTAuNTAyLDAuMTQ2LTAuOTcxLDAuMzgtMS4zNzZjMS4zNSwxLjY1NSwzLjM3MSwyLjc0NSw1LjY0NCwyLjg1OGMtMC4wNDctMC4xOTktMC4wNjctMC40MDgtMC4wNjctMC42MjNjMC0xLjUxLDEuMjI2LTIuNzM1LDIuNzM1LTIuNzM1YzAuNzg3LDAsMS41LDAuMzMxLDIsMC44NjRjMC42MjMtMC4xMjMsMS4yMDctMC4zNTIsMS43MzYtMC42NjVjLTAuMjA1LDAuNjQtMC42MzksMS4xNzUtMS4yMDMsMS41MTRjMC41NTMtMC4wNjUsMS4wOC0wLjIxMywxLjU3Mi0wLjQzMUMxNy41NzYsOC40NzUsMTcuMTEzLDguOTU2LDE2LjU4LDkuMzQyeiIvPjwvc3ZnPg==') no-repeat;
@@ -1419,7 +1426,7 @@ p.instructions {
 .table_header {
   background: rgba(0, 0, 0, 0.1);
   margin: 10px 0;
-  padding: 5px 0; }
+  padding: 10px 0; }
   .table_header p {
     color: #222;
     margin: 0;
