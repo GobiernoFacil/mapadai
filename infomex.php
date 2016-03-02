@@ -23,7 +23,8 @@
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
 					<ul id="viz_nav">
-						<li><a href="#" class="current" data-container="obligee">Por sujeto obligado</a></li>
+						<li><a href="#" class="current" data-container="bydate">Por fecha</a></li>
+						<li><a href="#" data-container="obligee">Por sujeto obligado</a></li>
 						<li><a href="#" data-container="t_response">Por tipo de respuesta</a></li>
 						<li><a href="#" data-container="applicant_profile">Perfil del solicitante</a></li>
 					</ul>
@@ -47,13 +48,19 @@
 <div class="content_graph">
 	
 	<!---->
-	<div id="date" class="content-tab">
+	<div id="bydate" class="content-tab">
+		<div class="container">
+			<div class="row">			
+				<div class="col-sm-12">
 			<!--ejemplo-->
-					<?php // include "includes/infomex/time2.php";?>
+					<?php  include "includes/infomex/time2.php";?>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<!-- sujeto obligado-->
-	<div id="obligee" class="content-tab">
+	<div id="obligee" class="content-tab hide">
 		<nav class="nav subnav re">
 			<ul class="sub_nav">
 				<li><a href="#" class="current" data-container="obligee_sujeto">Por Volumen</a></li>
