@@ -69,6 +69,10 @@
             ¿Qué es #MapaDAImx?
           </a>
         </li>
+        <!--entidades-->
+        <li><a href="/entidades.php" title="Entidades">Entidades Federativas</a> </li>
+         <!--entidades-->
+        <li><a href="/otros-sujetos-obligados.php" title="Entidades">Otros sujetos obligados</a> </li>
       </ul>
     </nav>
 

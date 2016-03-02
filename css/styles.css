@@ -945,7 +945,7 @@ header.main_header {
       background-size: auto 48px; }
     header.main_header.fixed_header .mapa, header.main_header.fixed_header .mapa a {
       font-size: 18px;
-      padding: 25px 0 0; }
+      padding: 15px 0 0; }
 
 footer {
   background: #2e2e2e;
@@ -1066,8 +1066,8 @@ footer {
     color: #fff;
     display: block;
     font: 700 21px/1.4 'kelson_sans', Helvetica, Arial, sans-serif;
-    min-height: 130px;
-    padding: 50px 8px;
+    min-height: 100px;
+    padding: 30px 8px;
     text-align: center; }
     .menu-list a:hover {
       background: rgba(0, 0, 0, 0.5); }
