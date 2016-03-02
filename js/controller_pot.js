@@ -97,6 +97,7 @@ define(function(require){
       this.timeline_a 	= new Timeline({controller : this, el : "#timeline-a"});
       this.timeline_b 	= new Timeline({controller : this, el : "#timeline-b"});
       this.treemap_a  	= new TreeMap({controller  : this, el : "#treemap-a"});
+      this.treemap_b  	= new TreeMap({controller  : this, el : "#treemap-b"});
 
       // [4] set the current graph and endpoint
       this.current_graph = this.timeline_a;
@@ -109,6 +110,7 @@ define(function(require){
       this.get_data(time, this.timeline_a, URLS.timeline);
       this.get_data(time, this.timeline_b, URLS.timeline);
       this.get_data(time, this.treemap_a, URLS.treemap);
+      this.get_data(time, this.treemap_b, URLS.treemap);
       
       // [6] add a listener for the scroll, the ugly hack way
       this.year_menu = $.proxy(this.year_menu, this);
@@ -322,6 +324,11 @@ define(function(require){
 				var viz_type = this.current_graph = this.treemap_a; 
 				var viz_url  = URLS.treemap;
 				var time_ui  = this.treemap_a.get_range();
+				break;
+			case "treemap-b":
+				var viz_type = this.current_graph = this.treemap_b; 
+				var viz_url  = URLS.treemap;
+				var time_ui  = this.treemap_b.get_range();
 				break;
 		}
 		

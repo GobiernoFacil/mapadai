@@ -76,9 +76,10 @@
 	<div id="pot_c" class="content-tab hide">
 		<nav class="nav subnav re">
 			<ul class="sub_nav">
-				<li><a href="#" data-container="pot_volumen">Volumen de consultas</a></li>
-				<li><a href="#" data-container="pot_historico">Histórico</a></li>
-				<li><a href="#" data-container="pot_total">Total</a></li>
+				<li><a href="#" data-container="pot_volumen">Volumen por sujeto obligado</a></li>
+				<li><a href="#" data-container="pot_fraccion">Volumen por fracción</a></li>
+				<li><a href="#" data-container="pot_historico">Top 10</a></li>
+				<li><a href="#" data-container="pot_total">Sujetos Obligados</a></li>
 			</ul>
 		</nav>
 		<div class="container">s
@@ -87,6 +88,9 @@
 					<!--pot_volumen-->
 					<?php include "includes/pot/request/volumen.php";?>
 					
+					<!--pot_fraccion-->
+					<?php include "includes/pot/request/fraccion.php";?>
+						
 					<!--pot_historico-->
 					<?php include "includes/pot/request/historico.php";?>
 					
