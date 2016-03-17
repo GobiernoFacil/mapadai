@@ -55,7 +55,6 @@ Cuculco, Delegación Coyoacán C.P. 04530</p>
   CONFIG = {
     section : "<?php echo !$body_class ? "" :  $body_class ;?>"
   };
-  
 </script>
 	<script data-main="/js/main" src="/js/bower_components/requirejs/require.js"></script>
 </body>
