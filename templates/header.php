@@ -40,39 +40,20 @@
        </label>
 
       <ul class="menu-list">
-        <li>
-          <a href="/" title="Home">
-            Inicio
-          </a>
-        </li>
-        <!--INFOMEX-->
-        <li>
-          <a href="/infomex.php" title="INFOMEX">
-            Solicitudes de información
-          </a>
-        </li>
-        <!--pot-->
-        <li>
-          <a href="/pot.php" title="POT">
-            Portal de obligaciones y transparencia
-          </a>
-        </li>
-        <!--Recursos de revisión-->
-        <li>
-          <a href="/recursos.php" title="Recursos de revisión">
-            Recursos de revisión
-          </a>
-        </li>
+        <!--home-->
+        <li><a href="/" title="Home">Inicio</a> </li>
         <!--qué es-->
-        <li>
-          <a href="/que-es.php" title="#MapaDAImx">
-            ¿Qué es #MapaDAImx?
-          </a>
-        </li>
+        <li><a href="/que-es.php" title="#MapaDAImx">¿Qué es #MapaDAImx?</a></li>
+        <!--pot-->
+        <li><a href="/pot.php" title="POT">Portal de obligaciones y transparencia</a> </li>
+        <!--INFOMEX-->
+        <li><a href="/infomex.php" title="INFOMEX">Solicitudes de información</a></li>
+        <!--Recursos de revisión-->
+        <li><a href="/recursos.php" title="Recursos de revisión"> Recursos de revisión </a> </li>
         <!--entidades-->
         <li><a href="/entidades.php" title="Entidades">Entidades Federativas</a> </li>
          <!--entidades-->
-        <li><a href="/otros-sujetos-obligados.php" title="Entidades">Otros sujetos obligados</a> </li>
+        <li><a href="/otros-sujetos-obligados.php" title="Otros Sujetos Obligados">Otros sujetos obligados</a> </li>
       </ul>
     </nav>
 
