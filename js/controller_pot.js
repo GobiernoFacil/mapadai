@@ -8,6 +8,14 @@
 define(function(require){
 
   //
+  // E N D P O I N T S   L I S T
+  // --------------------------------------------------------------------------------
+  //
+  // api/hits_pot/linechart
+  // api/hits_pot/barchart
+  // api/hits_pot/heatmap
+
+  //
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //

@@ -8,6 +8,21 @@
 define(function(require){
 
   //
+  // E N D P O I N T S   L I S T
+  // --------------------------------------------------------------------------------
+  //
+  // api/heatmap
+  // api/treemap
+  // api/top10
+  // api/top10line
+  // api/usuarios/ocupacion
+  // api/usuarios/edad
+  // api/usuarios/sexo
+  // api/usuarios/sexo-edad
+  //
+
+
+  //
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //
@@ -27,7 +42,7 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   First_year = 2003,
-  BASE_URL   = "http://inai.skalas.mx/api/",
+  BASE_URL   = "http://localhost:8080/api/",//"http://inai.skalas.mx/api/",
   Endpoints  = ["heatmap", "treemap", "top10line", "top10", "usuarios/ocupacion", "usuarios/sexo-edad"],
   Table      = "table=conteo_infomex_publico&", 
   RR         = "rr=2&",
