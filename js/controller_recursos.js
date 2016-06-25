@@ -95,37 +95,37 @@ define(function(require){
 
       // [3] create the graphs
       //this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
-      this.top10bars 	= new Top10bar({controller : this, el : "#top10bar"});
-      this.top10bars_b  = new Top10bar({controller : this, el : "#top10bar_b"});
-      this.timeline_a 	= new Timeline({controller : this, el : "#timeline-a"});
-      this.treemap_a  	= new TreeMap({controller  : this, el : "#treemap-a"});
-      this.treemap_b  	= new TreeMap({controller  : this, el : "#treemap-b"});
-      this.occupation 	= new Occupation({controller : this, el : "#occupation-bar"});
-      this.gender     	= new Gender({controller : this, el : "#gender-bar"});
-      this.xxx 			= new Timeline({controller : this, el : "#timeline-b"});
+      // this.top10bars 	 = new Top10bar({controller : this, el : "#top10bar"});
+      // this.top10bars_b = new Top10bar({controller : this, el : "#top10bar_b"});
+      // this.timeline_a  = new Timeline({controller : this, el : "#timeline-a"});
+      // this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a"});
+      // this.treemap_b   = new TreeMap({controller  : this, el : "#treemap-b"});
+      // this.occupation  = new Occupation({controller : this, el : "#occupation-bar"});
+      // this.gender      = new Gender({controller : this, el : "#gender-bar"});
+      // this.xxx         = new Timeline({controller : this, el : "#timeline-b"});
 
       // [4] set the current graph and endpoint
-      this.current_graph = this.timeline_a;
-      this.current_url   = URLS.timeline;
+      // this.current_graph = this.timeline_a;
+      // this.current_url   = URLS.timeline;
 
       // [5] load the data
-      //this.get_data(time, this.heatmap_a, URLS.heatmap);
-      this.get_data(time, this.top10bars, URLS.top10bars);
-      this.get_data(time, this.timeline_a, URLS.timeline);
-      this.get_data(time, this.treemap_a, URLS.treemap);
-      this.get_data(time, this.treemap_b, URLS.treemap);
-      this.get_data(time, this.occupation, URLS.occupation);
-      this.get_data(time, this.gender, URLS.gender);
-      this.get_data(time, this.top10bars_b, URLS.top10bars);
+      // this.get_data(time, this.heatmap_a, URLS.heatmap);
+      // this.get_data(time, this.top10bars, URLS.top10bars);
+      // this.get_data(time, this.timeline_a, URLS.timeline);
+      // this.get_data(time, this.treemap_a, URLS.treemap);
+      // this.get_data(time, this.treemap_b, URLS.treemap);
+      // this.get_data(time, this.occupation, URLS.occupation);
+      // this.get_data(time, this.gender, URLS.gender);
+      // this.get_data(time, this.top10bars_b, URLS.top10bars);
 
-      this.get_data(time, this.xxx, URLS.timeline);
+      // this.get_data(time, this.xxx, URLS.timeline);
 
 
 
       
       // [6] add a listener for the scroll, the ugly hack way
-      this.year_menu = $.proxy(this.year_menu, this);
-      this.setupScrollEvents = $.proxy(this.setupScrollEvents, this);
+      this.year_menu             = $.proxy(this.year_menu, this);
+      this.setupScrollEvents     = $.proxy(this.setupScrollEvents, this);
       this.fullExperiencieMobile = $.proxy(this.fullExperiencieMobile, this);
       
       window.onscroll   = this.year_menu;
@@ -187,7 +187,7 @@ define(function(require){
       });
       slider.noUiSlider.set([now.getFullYear() - years_to_last, now.getFullYear()]);
       slider.noUiSlider.on("end", function(){
-        that.get_data(this.get(), that.current_graph, that.current_url);
+        //that.get_data(this.get(), that.current_graph, that.current_url);
       });
 
       return slider;
@@ -304,7 +304,8 @@ define(function(require){
 	    var name_container  = $(e.target).data('container'),
 	    	viz_type		= $("#" + name_container).data('viz'),
 	    	viz_url			= "";
-	   
+
+    /*
 		switch (viz_type) {
 			case "timeline":
 				var viz_type = this.current_graph = this.timeline_a; 
@@ -340,9 +341,10 @@ define(function(require){
 				var time_ui  = this.occupation.get_range();
 				break;
 		}
+    */
 		
-		this.current_graph = viz_type;
-		this.current_url   = viz_url;
+		//this.current_graph = viz_type;
+		//this.current_url   = viz_url;
 	   
 		///show/hide container  
 	    $(".viz").addClass("hide");
@@ -352,7 +354,7 @@ define(function(require){
 		$(".sub_nav a").removeClass("current");
 		$(e.target).addClass('current');
 		
-		this.update_time_ui(time_ui);
+		//this.update_time_ui(time_ui);
     },
 
 
