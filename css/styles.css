@@ -947,6 +947,15 @@ header.main_header {
       font-size: 18px;
       padding: 15px 0 0; }
 
+.sorry {
+  background: #00c1a5;
+  padding: 20px 0; }
+  .sorry p {
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center; }
+
 footer {
   background: #2e2e2e;
   color: white;

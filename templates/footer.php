@@ -1,4 +1,13 @@
-	
+	<!-- sorry-->
+	<div class="sorry">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<p>Esta herramienta es un prototipo funcional</p>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- footer-->
 	<footer>
 		<div class="container">
