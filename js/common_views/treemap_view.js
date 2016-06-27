@@ -72,8 +72,10 @@ define(function(require){
       this.svg        = null;
       this.treemap    = null;
       this.scales     = null;
-      this.controller = settings.controller; 
+      this.controller = settings.controller;
+      this.dataURL    = settings.dataURL;
       this.set_scales();
+      
     },
 
     _remove : function(){

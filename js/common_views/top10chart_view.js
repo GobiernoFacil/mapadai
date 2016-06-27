@@ -58,9 +58,11 @@ define(function(require){
     // [ THE INITIALIZE FUNCTION ]
     //
     //
-    initialize : function(){
-      this.divs = null;
+    initialize : function(settings){
+      this.divs       = null;
       this.first_time = true;
+      this.controller = settings.controller;
+      this.dataURL    = settings.dataURL;
     },
 
     render : function(data, range){

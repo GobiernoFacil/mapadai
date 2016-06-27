@@ -62,9 +62,11 @@ define(function(require){
     // [ THE INITIALIZE FUNCTION ]
     //
     //
-    initialize : function(){
+    initialize : function(settings){
       this.divs = null;
       this.svg  = null;
+      this.controller = settings.controller;
+      this.dataURL    = settings.dataURL;
     },
 
     render : function(data, range){
@@ -151,7 +153,6 @@ define(function(require){
           .attr("y", function(d, i){
             return (Rect.slot * i) + Margins.top;
           });
-      console.log(data, range);
       return;
 
       if(First_time){

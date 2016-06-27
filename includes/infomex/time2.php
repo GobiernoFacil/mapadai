@@ -1,4 +1,4 @@
-<div id="obligee_historico_2" class="viz" data-viz="timeline">
+<div id="obligee_historico_2" class="viz" data-viz="timeline" data-graph="timeline-b">
 	<div class="row">
 		<div class="col-sm-12">
 			<h3>Top 10 histórico de sujetos obligados por solicitudes de acceso a la información y datos personales: 

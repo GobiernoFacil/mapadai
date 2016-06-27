@@ -101,11 +101,11 @@ define(function(require){
       // [3] create the graphs
       this.heatmap_a  	= new HeatMap({controller  : this, el : "#heatmap-a"});
       this.top10bars  	= new Top10bar({controller : this, el : "#top10bar"});
-      this.top10bars_b  = new Top10bar({controller : this, el : "#top10bar-b"});
+      // this.top10bars_b  = new Top10bar({controller : this, el : "#top10bar-b"});
       this.timeline_a 	= new Timeline({controller : this, el : "#timeline-a"});
-      this.timeline_b 	= new Timeline({controller : this, el : "#timeline-b"});
-      this.treemap_a  	= new TreeMap({controller  : this, el : "#treemap-a"});
-      this.treemap_b  	= new TreeMap({controller  : this, el : "#treemap-b"});
+      // this.timeline_b 	= new Timeline({controller : this, el : "#timeline-b"});
+      // this.treemap_a  	= new TreeMap({controller  : this, el : "#treemap-a"});
+      // this.treemap_b  	= new TreeMap({controller  : this, el : "#treemap-b"});
 
       // [4] set the current graph and endpoint
       this.current_graph = this.timeline_a;
@@ -114,15 +114,15 @@ define(function(require){
       // [5] load the data
       this.get_data(time, this.heatmap_a, URLS.heatmap);
       this.get_data(time, this.top10bars, URLS.top10bars);
-      this.get_data(time, this.top10bars_b, URLS.top10bars);
+      // this.get_data(time, this.top10bars_b, URLS.top10bars);
       this.get_data(time, this.timeline_a, URLS.timeline);
-      this.get_data(time, this.timeline_b, URLS.timeline);
-      this.get_data(time, this.treemap_a, URLS.treemap);
-      this.get_data(time, this.treemap_b, URLS.treemap);
+      // this.get_data(time, this.timeline_b, URLS.timeline);
+      // this.get_data(time, this.treemap_a, URLS.treemap);
+      // this.get_data(time, this.treemap_b, URLS.treemap);
       
       // [6] add a listener for the scroll, the ugly hack way
-      this.year_menu = $.proxy(this.year_menu, this);
-      this.setupScrollEvents = $.proxy(this.setupScrollEvents, this);
+      this.year_menu             = $.proxy(this.year_menu, this);
+      this.setupScrollEvents     = $.proxy(this.setupScrollEvents, this);
       this.fullExperiencieMobile = $.proxy(this.fullExperiencieMobile, this);
       
       window.onscroll   = this.year_menu;
@@ -308,26 +308,31 @@ define(function(require){
 				var viz_type = this.current_graph = this.timeline_a; 
 				var viz_url  = URLS.timeline;
 				var time_ui  = this.timeline_a.get_range();
+      /*
 			case "timeline-b":
 				var viz_type = this.current_graph = this.timeline_b; 
 				var viz_url  = URLS.timeline;
 				var time_ui  = this.timeline_b.get_range();
 				break;
+      */
 			case "bar":
 				var viz_type = this.current_graph = this.top10bars; 
 				var viz_url  = URLS.top10bars;
 				var time_ui  = this.top10bars.get_range();
 				break;
+      /*
 			case "bar-b":
 				var viz_type = this.current_graph = this.top10bars_b; 
 				var viz_url  = URLS.top10bars;
 				var time_ui  = this.top10bars_b.get_range();
 				break;
+      */
 			case "heatmap":
 				var viz_type = this.current_graph = this.heatmap_a; 
 				var viz_url  = URLS.heatmap;
 				var time_ui  = this.heatmap_a.get_range();
 				break;
+      /*
 			case "treemap":
 				var viz_type = this.current_graph = this.treemap_a; 
 				var viz_url  = URLS.treemap;
@@ -338,10 +343,11 @@ define(function(require){
 				var viz_url  = URLS.treemap;
 				var time_ui  = this.treemap_b.get_range();
 				break;
+      */
 		}
 		
-		this.current_graph = viz_type;
-		this.current_url   = viz_url;
+		//this.current_graph = viz_type;
+		//this.current_url   = viz_url;
 	   
 		///show/hide container  
 	    $(".viz").addClass("hide");

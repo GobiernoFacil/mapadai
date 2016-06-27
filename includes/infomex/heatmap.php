@@ -22,7 +22,7 @@
 		</div>
 		
 	</div>
-	<section id="heatmap-a"></section>
+	<section id="heatmap-a"></section>-->
 	<!--source-->
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">

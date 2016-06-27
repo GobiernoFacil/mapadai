@@ -1,4 +1,4 @@
-<div id="t_response_obligee" class="viz" data-viz="treemap">
+<div id="t_response_obligee" class="viz" data-viz="treemap"  data-graph="treemap-b">
 	<div class="row">
 		<div class="col-sm-12">
 			<h3>Tipo de respuestas por sujetos obligados,  solicitudes y año</span>: <span class="year-range">2012 - 2015</span></h3>

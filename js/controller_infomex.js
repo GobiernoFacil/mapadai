@@ -110,15 +110,17 @@ define(function(require){
 
       // [3] create the graphs
       //this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
-      this.top10bars 	= new Top10bar({controller : this, el : "#top10bar"});
-      this.top10bars_b  = new Top10bar({controller : this, el : "#top10bar_b"});
-      this.timeline_a 	= new Timeline({controller : this, el : "#timeline-a"});
-      this.treemap_a  	= new TreeMap({controller  : this, el : "#treemap-a"});
-      this.treemap_b  	= new TreeMap({controller  : this, el : "#treemap-b"});
-      this.occupation 	= new Occupation({controller : this, el : "#occupation-bar"});
-      this.gender     	= new Gender({controller : this, el : "#gender-bar"});
-      this.xxx 			= new Timeline({controller : this, el : "#timeline-b"});
+      this.top10bars 	 = new Top10bar({controller : this, el : "#top10bar", dataURL : URLS.top10bars});
+      //this.top10bars_b = new Top10bar({controller : this, el : "#top10bar_b", dataURL : URLS.top10bars});
+      this.timeline_a  = new Timeline({controller : this, el : "#timeline-a", dataURL : URLS.timeline});
+      this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a", dataURL : URLS.treemap});
+      //this.treemap_b = new TreeMap({controller  : this, el : "#treemap-b", dataURL : URLS.treemap});
+      this.occupation  = new Occupation({controller : this, el : "#occupation-bar", dataURL : URLS.ocupation});
+      this.gender      = new Gender({controller : this, el : "#gender-bar", dataURL : URLS.gender});
+      this.xxx         = new Timeline({controller : this, el : "#timeline-b", dataURL : URLS.timeline});
 
+      this.graphsCollection = [this.top10bars, this.timeline_a, 
+      this.treemap_a, this.occupation, this.gender, this.xxx];
       // [4] set the current graph and endpoint
       this.current_graph = this.timeline_a;
       this.current_url   = URLS.timeline;
@@ -128,10 +130,10 @@ define(function(require){
       this.get_data(time, this.top10bars, URLS.top10bars);
       this.get_data(time, this.timeline_a, URLS.timeline);
       this.get_data(time, this.treemap_a, URLS.treemap);
-      this.get_data(time, this.treemap_b, URLS.treemap);
+      //this.get_data(time, this.treemap_b, URLS.treemap);
       this.get_data(time, this.occupation, URLS.occupation);
       this.get_data(time, this.gender, URLS.gender);
-      this.get_data(time, this.top10bars_b, URLS.top10bars);
+      //this.get_data(time, this.top10bars_b, URLS.top10bars);
 
       this.get_data(time, this.xxx, URLS.timeline);
 
@@ -225,7 +227,9 @@ define(function(require){
       });
       slider.noUiSlider.set([now.getFullYear() - years_to_last, now.getFullYear()]);
       slider.noUiSlider.on("end", function(){
+
         that.get_data(this.get(), that.current_graph, that.current_url);
+        console.log(this.get(), that.current_graph, that.current_url);
       });
 
       return slider;
@@ -319,7 +323,12 @@ define(function(require){
     
     doit : function(e){
     	e.preventDefault();
-	    var name_container = $(e.target).data('container');
+	    var name_container = e.target.getAttribute("data-container"),
+          container      = document.getElementById(name_container),
+          vizAnchor      = container.querySelector(".col-sm-12 .viz"),
+          vizName        = vizAnchor.getAttribute("data-graph"); 
+
+      this.updateCurrentGraph(vizName);
 	    
 	    ///show/hide container tab 
 	    $(".content-tab").addClass("hide");
@@ -329,72 +338,44 @@ define(function(require){
 	    $("#" + name_container).find(".col-sm-12 .viz").filter(":first").removeClass("hide");
 	    
 	    ///add class to current subtab
-		$(".sub_nav a").removeClass("current");
+		  $(".sub_nav a").removeClass("current");
 	    $("#" + name_container).find(".sub_nav li a").filter(":first").addClass("current");
 	    
 	    ///add class to current tab
 	   $("#viz_nav a").removeClass("current");
 	   $(e.target).addClass('current');
-	},
+	  },
     
     dothat : function(e) {
 	    e.preventDefault();
-	    var name_container  = $(e.target).data('container'),
-	    	viz_type		= $("#" + name_container).data('viz'),
-	    	viz_url			= "";
-	   
-		switch (viz_type) {
-			case "timeline":
-				var viz_type = this.current_graph = this.timeline_a; 
-				var viz_url  = URLS.timeline;
-				var time_ui  = this.timeline_a.get_range();
-			
-			case "bar":
-				var viz_type = this.current_graph = this.top10bars; 
-				var viz_url  = URLS.top10bars;
-				var time_ui  = this.top10bars.get_range();
-				break;
-
-			case "heatmap":
-				var viz_type = this.current_graph = this.heatmap_a; 
-				var viz_url  = URLS.heatmap;
-				var time_ui  = this.heatmap_a.get_range();
-				break;
-			case "treemap":
-				var viz_type = this.current_graph = this.treemap_a; 
-				var viz_url  = URLS.treemap;
-				var time_ui  = this.treemap_a.get_range();
-				break;
-			
-			case "gender-bar":
-				var viz_type = this.current_graph = this.gender; 
-				var viz_url  = URLS.gender;
-				var time_ui  = this.gender.get_range();
-				break;
-					
-			case "occupation-bar":
-				var viz_type = this.current_graph = this.occupation; 
-				var viz_url  = URLS.occupation;
-				var time_ui  = this.occupation.get_range();
-				break;
-		}
-		
-		this.current_graph = viz_type;
-		this.current_url   = viz_url;
-	   
-		///show/hide container  
+      //console.log(e.target);
+	    //var name_container  = $(e.target).data('container'),
+      var name_container = e.target.getAttribute("data-container"),
+          vizType = document.getElementById(name_container),
+          vizName = vizType.getAttribute("data-graph");
+      
+      this.updateCurrentGraph(vizName);
+		  //show/hide container  
 	    $(".viz").addClass("hide");
 	    $("#" +  name_container).removeClass("hide");
 	    
-		///add class to current tab
-		$(".sub_nav a").removeClass("current");
-		$(e.target).addClass('current');
-		
-		this.update_time_ui(time_ui);
+		  //add class to current tab
+		  $(".sub_nav a").removeClass("current");
+		  $(e.target).addClass('current');
     },
+    
+    updateCurrentGraph : function(viz){
+      var g = this.graphsCollection.filter(function(graph){
+        return graph.el.id == viz;
+      });
 
-
-
+      if(g.length){
+        this.current_graph = g[0]; 
+        this.current_url   = g[0].dataURL;
+        this.update_time_ui(this.current_graph.get_range());
+      }
+    }
+    
   });
 
   //

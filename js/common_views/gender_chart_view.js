@@ -62,10 +62,12 @@ define(function(require){
     // [ THE INITIALIZE FUNCTION ]
     //
     //
-    initialize : function(){
-      this.divs = null;
-      this.svg  = null;
+    initialize : function(settings){
+      this.divs       = null;
+      this.svg        = null;
       this.first_time = true;
+      this.controller = settings.controller;
+      this.dataURL    = settings.dataURL;
     },
 
     render : function(data, range){

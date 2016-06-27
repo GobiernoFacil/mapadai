@@ -79,9 +79,10 @@ define(function(require){
     //
     initialize : function(settings){
       this.controller = settings.controller;
-      this.svg = new SVG(this.el, Margins);
+      this.svg        = new SVG(this.el, Margins);
       this.draw_labels(this.svg);
       this.first_time = true;
+      this.dataURL    = settings.dataURL;
     },
 
     //
@@ -182,7 +183,6 @@ define(function(require){
     //
     //
     prepare_vertical_labels_data : function(){
-      console.log("ss");
     },
 
     get_range : function(){
@@ -272,7 +272,6 @@ define(function(require){
     //
     //
     draw_lines : function(data, update){
-      console.log(update, this.lines, this.el);
       var that       = this,
           data_lines = [];
       Categories.forEach(function(cat, i){
@@ -329,13 +328,11 @@ define(function(require){
           })
           .style(Dot_style)
           .on("mouseover", function(d){
-            console.log(d);
             d3.select(this).style(DotHover_style);
             $('svg .main_container path').attr("class","path_out");
             Categories.forEach(function(cat, i){
 	            if(cat == d.dependencia) {
 				$('svg .main_container path#g-'+ [i]).attr("class","path_hover");
-				console.log([i]);
 	            }
             });
           //  $(d.currentTarget).attr("class","path_hover");
