@@ -69,7 +69,7 @@ define(function(require){
       Current_range = range;
       var x_scale   = this.scale(data);
 
-      if(this.first_time = true){
+      if(this.first_time){
         this.divs = d3.select(this.el).selectAll("div")
                       .data(data)
                       .enter()

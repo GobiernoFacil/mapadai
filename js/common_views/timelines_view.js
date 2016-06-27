@@ -94,7 +94,7 @@ define(function(require){
       var d = data;
       this.prepare_data(d);
 
-      if(this.first_time = true){
+      if(this.first_time){
         this.set_scales(d);
         this.set_axis();
         this.get_line_generator();
