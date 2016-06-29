@@ -31,6 +31,7 @@
 					<li><a href="https://twitter.com/INAImexico" class="tw" target="_blank">Twitter Inai</a></li>
 					<li><a href="https://www.youtube.com/user/ifaimexico" class="yt" target="_blank">YouTube Inai</a></li>
 				</ul>
+				<p>Este proyecto es previo al lanzamiento de la <a href="http://www.plataformadetransparencia.org.mx">Plataforma Nacional de Transparencia</a>. Los datos que se reflejan se obtuvieron de las bases de datos abiertas que se publican en <strong>INFOMEX</strong>, y de las bases de datos proporcionadas por el Instituto, no reflejan la <a href="http:://inicio.ifai.org.mx/SitesPages/AIP-Estadisticas.aspx">estadística oficial</a>.</p>
 				<!--<a href="" class="btn val">Evaluar sitio</a>-->
 			</div>
 			<div class="col-sm-4">
