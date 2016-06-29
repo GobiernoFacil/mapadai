@@ -46,18 +46,6 @@ Cuculco, Delegación Coyoacán C.P. 04530</p>
 		</div>
 		
 	</footer>
-	<div class="author">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6">
-					<a href="https://codeandomexico.org/" class="codeando">Codeando México</a>
-				</div>
-				<div class="col-sm-6">
-					<a href="http://gobiernofacil.com/" class="gobiernofacil">Gobierno Fácil</a>
-				</div>
-			</div>
-		</div>
-	</div>
 	 <label for="nav-collapse" class="overlay"></label>
     </main>
  </div>
