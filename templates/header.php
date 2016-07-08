@@ -9,6 +9,9 @@
 	<title><?php echo !$title ? "" :  $title ;?></title>
 	<meta name="description" content="<?php echo !$description ? "" :  $description ;?>">
 	<link rel="shortcut icon" href="/icon_mapadai.png">
+	<?php if ($body_class == "mapadaimx_data"):?>	
+	<link rel="stylesheet" type="text/css" href="js/bower_components/leaflet/dist/leaflet.css">
+	<?php endif;?>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/dev.css">
