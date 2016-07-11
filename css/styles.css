@@ -251,6 +251,16 @@ text {
     color: #666;
     font: 500 11px 'kelson_sans', Helvetica, Arial, sans-serif; }
 
+.mapadaimx_data select {
+  appearance: none;
+  background: #732181;
+  border-color: #732181;
+  font-family: 'kelson_sans', Helvetica, Arial, sans-serif;
+  box-shadow: none;
+  color: white;
+  height: 40px;
+  text-transform: uppercase; }
+
 .content-top p {
   color: rgba(0, 0, 0, 0.2) !important;
   font: 500 13px/1.2 'kelson_sans', Helvetica, Arial, sans-serif !important;
@@ -1010,18 +1020,21 @@ footer {
   padding: 105px 0 0; }
 .mapadaimx_data .selector_year {
   min-height: 86px; }
-.mapadaimx_data .year_list li {
-  display: inline-block;
-  margin-right: 10px; }
-  .mapadaimx_data .year_list li a {
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 500;
-    padding: 10px; }
-    .mapadaimx_data .year_list li a:hover {
-      color: white; }
-    .mapadaimx_data .year_list li a.current {
-      background: white;
-      color: #00c1a5; }
+.mapadaimx_data .year_list {
+  margin-bottom: 0; }
+  .mapadaimx_data .year_list li {
+    display: inline-block;
+    margin-right: 10px; }
+    .mapadaimx_data .year_list li a {
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 500;
+      display: inline-block;
+      padding: 10px; }
+      .mapadaimx_data .year_list li a:hover {
+        color: white; }
+      .mapadaimx_data .year_list li a.current {
+        background: white;
+        color: #00c1a5; }
 .mapadaimx_data .map_container {
   background: #03060b; }
 

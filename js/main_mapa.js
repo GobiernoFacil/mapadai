@@ -25,7 +25,6 @@ var appINAI = {
 
 	  div.appendChild(h5);
       div.appendChild(colors);
-      h3.innerHTML = "hola!";
       div.appendChild(h3);
       div.appendChild(h4);
      
