@@ -14,7 +14,6 @@ define(function(require){
   var Backbone = require('backbone'),
       d3       = require("d3"),
       SVG      = require("common_views/main_svg_view"),
-      URL      = "/js/data/timeline.json",
       Color_r  = ["#225378","#3498DB", "#1695A3" , "#EB7F00", "#FF6138",  "#CE003C", "#79BD8F", "#00A388","#7E8AA2", "#2C3E50"],
 
   //
@@ -83,6 +82,8 @@ define(function(require){
       this.draw_labels(this.svg);
       this.first_time = true;
       this.dataURL    = settings.dataURL;
+      this.currentLabels = [];
+      console.log("cats: ", Categories);
     },
 
     //
@@ -93,6 +94,7 @@ define(function(require){
       Data  = data;
       var d = data;
       this.prepare_data(d);
+      console.log("cats update: ", Categories);
 
       if(this.first_time){
         this.set_scales(d);
