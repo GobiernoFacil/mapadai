@@ -23,11 +23,13 @@ var appINAI = {
           h5     = document.createElement("h5");  // the description
           colors = document.createElement("ul");  // the colors list
 
+	  div.appendChild(h5);
+      div.appendChild(colors);
       h3.innerHTML = "hola!";
       div.appendChild(h3);
       div.appendChild(h4);
-      div.appendChild(h5);
-      div.appendChild(colors);
+     
+      
       return div;
     }
   }),
@@ -43,7 +45,7 @@ var appINAI = {
     {
       key  : "solicitudes_2014",
       year : 2014,
-      title : "solicitud"
+      title : "solicitudes"
     },
     {
       key  : "solicitudes_2013",
@@ -73,7 +75,8 @@ var appINAI = {
     recursos : [
     {
       key  : "recurso_2014",
-      year : 2014
+      year : 2014,
+      title : "recursos"
     },
     {
       key  : "recurso_2013",
@@ -98,7 +101,6 @@ var appINAI = {
     {
       key  : "recurso_2008",
       year : 2008,
-      title : "recurso"
     },
     ],
     indice : [{
@@ -220,7 +222,6 @@ var appINAI = {
     var that = this;
     this._select = select;
     this._menu = menu;
-
     // se crea el mapa de leaflet
     this.map = L.map(this.mapSettings.div).setView([
       this.mapSettings.lat, 
@@ -229,7 +230,7 @@ var appINAI = {
     /// O___o
     L.tileLayer(this.mapSettings.baseURL + this.mapSettings.token, { id : this.mapSettings.id, 
 	    attribution: this.mapSettings.attribution_m}).addTo(that.map);
-   
+
     
     
 
@@ -254,7 +255,7 @@ var appINAI = {
     });
   },
 
-  // [ COMENTAR DESPÚES ]
+  // [ setStates --- COMENTAR DESPÚES ]
   //
   //
   setStates : function(estados){
@@ -283,7 +284,10 @@ var appINAI = {
           },
 
           mouseout  : function(){
+            var   title       = that.panel._container.querySelector("h3");
+            
             layer.setStyle(that.stateStyle);
+            title.innerHTML  = "";
           },
           //click     : this.zoomToFeature.bind(this)
         });
@@ -291,7 +295,7 @@ var appINAI = {
     }).addTo(this.map);
   },
 
-  // [ COMENTAR DESPÚES ]
+  // [ updateInfoPanel --- COMENTAR DESPÚES ]
   //
   //
   updateInfoPanel : function(){
@@ -311,7 +315,7 @@ var appINAI = {
       _color.className = "color-label";
       _color.style.backgroundColor = col;
       _label.className = "num-label";
-      _label.innerHTML = that.format(breaks[ind]) + " - " + that.format(breaks[ind+1]);
+      _label.innerHTML = that.format(breaks[ind]) + " - <br>" + that.format(breaks[ind+1]);
       li.appendChild(_color);
       li.appendChild(_label);
       colorsList.appendChild(li);
@@ -326,8 +330,8 @@ var appINAI = {
     var title = this.panel._container.querySelector("h3"),
         value = this.panel._container.querySelector("h4");
     
-    title.innerHTML       = name;
-    value.innerHTML       = this.format(val);
+    title.innerHTML       = '<span>Entidad Federativa</span> ' + name + ': <strong> ' +  this.format(val) + '</strong>';
+   // value.innerHTML       = this.format(val);
   },
 
   // [ COMENTAR DESPÚES ]
@@ -336,6 +340,12 @@ var appINAI = {
   fillSelect : function(){
     for(var prop in this.dataMap){
       if( this.dataMap.hasOwnProperty( prop ) ) {
+	   /*   switch (prop) {
+		      case "solicitudes":
+		      	prop = "Solicitudes de Información";
+		      	break;
+	      }*/
+	      
         var opt = document.createElement("option");
         opt.innerHTML = prop;
         this._select.appendChild(opt);
@@ -419,13 +429,20 @@ var appINAI = {
       anchor.appendChild(year);
       anchor.href = "#";
       anchor.setAttribute("data-year", years[i]);
-      anchor.className = "year";
+      if (i == 0) {
+	      anchor.className = "year current";
+      }
+      else {
+	      anchor.className = "year";
+      }
       li.appendChild(anchor);
       this._menu.appendChild(li);
     }
     d3.selectAll("a.year")
       .on("click", function(){
         d3.event.preventDefault();
+		$("a.year").removeClass("current");
+	    this.className = "year current";
         console.log(that.index);
         that.updateMap(this.getAttribute("data-year"));
       });
