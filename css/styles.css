@@ -1006,6 +1006,56 @@ footer {
   .btn.file:hover {
     background: #333; }
 
+.mapadaimx_data .infomex_menu {
+  padding: 105px 0 0; }
+.mapadaimx_data .selector_year {
+  min-height: 86px; }
+.mapadaimx_data .year_list li {
+  display: inline-block;
+  margin-right: 10px; }
+  .mapadaimx_data .year_list li a {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    padding: 10px; }
+    .mapadaimx_data .year_list li a:hover {
+      color: white; }
+    .mapadaimx_data .year_list li a.current {
+      background: white;
+      color: #00c1a5; }
+.mapadaimx_data .map_container {
+  background: #03060b; }
+
+span.color-label {
+  display: block;
+  height: 1em;
+  margin-right: 1em;
+  margin-bottom: 3px;
+  width: 100%; }
+
+.leaflet-top.leaflet-right .leaflet-control {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 15px;
+  width: 330px; }
+  .leaflet-top.leaflet-right .leaflet-control h3 span {
+    border-top: 1px solid #ccc;
+    color: gray;
+    display: block;
+    margin-top: 5px;
+    padding-top: 5px;
+    font-size: 12px;
+    text-transform: uppercase; }
+  .leaflet-top.leaflet-right .leaflet-control h5 {
+    text-transform: uppercase; }
+  .leaflet-top.leaflet-right .leaflet-control ul {
+    margin-bottom: 0; }
+  .leaflet-top.leaflet-right .leaflet-control li {
+    color: rgba(0, 0, 0, 0.5);
+    line-height: 1;
+    list-style: none;
+    font-size: 10px;
+    display: inline-block;
+    width: 16.66667%; }
+
 #map {
   width: 90%;
   height: 600px;
