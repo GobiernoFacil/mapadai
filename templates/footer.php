@@ -1,4 +1,13 @@
-	
+	<!-- sorry-->
+	<div class="sorry">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<p>Esta herramienta es un prototipo funcional</p>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- footer-->
 	<footer>
 		<div class="container">
@@ -22,6 +31,7 @@
 					<li><a href="https://twitter.com/INAImexico" class="tw" target="_blank">Twitter Inai</a></li>
 					<li><a href="https://www.youtube.com/user/ifaimexico" class="yt" target="_blank">YouTube Inai</a></li>
 				</ul>
+				<p>Este proyecto es previo al lanzamiento de la <a href="http://www.plataformadetransparencia.org.mx">Plataforma Nacional de Transparencia</a>. Los datos que se reflejan se obtuvieron de las bases de datos abiertas que se publican en <strong>INFOMEX</strong>, y de las bases de datos proporcionadas por el Instituto, no reflejan la <a href="http:://inicio.ifai.org.mx/SitesPages/AIP-Estadisticas.aspx">estadística oficial</a>.</p>
 				<!--<a href="" class="btn val">Evaluar sitio</a>-->
 			</div>
 			<div class="col-sm-4">
@@ -36,26 +46,24 @@ Cuculco, Delegación Coyoacán C.P. 04530</p>
 		</div>
 		
 	</footer>
-	<div class="author">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6">
-					<a href="https://codeandomexico.org/" class="codeando">Codeando México</a>
-				</div>
-				<div class="col-sm-6">
-					<a href="http://gobiernofacil.com/" class="gobiernofacil">Gobierno Fácil</a>
-				</div>
-			</div>
-		</div>
-	</div>
 	 <label for="nav-collapse" class="overlay"></label>
     </main>
  </div>
- <script>
+
+<?php if(!empty($body_class) == "mapadaimx_data" ):?>
+<script src="js/bower_components/d3/d3.js"></script>
+<script src="js/bower_components/leaflet/dist/leaflet.js"></script>
+<script src="js/libs/classybrew/build/classybrew.min.js"></script>
+<script src="js/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="js/main_mapa.js"></script>
+<?php else:?>
+<script>
   CONFIG = {
     section : "<?php echo !$body_class ? "" :  $body_class ;?>"
   };
 </script>
-	<script data-main="/js/main" src="/js/bower_components/requirejs/require.js"></script>
+<script data-main="/js/main" src="/js/bower_components/requirejs/require.js"></script>
+
+<?php endif;?>
 </body>
 </html>
