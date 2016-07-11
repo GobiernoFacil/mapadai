@@ -54,6 +54,7 @@ Cuculco, Delegación Coyoacán C.P. 04530</p>
 <script src="js/bower_components/d3/d3.js"></script>
 <script src="js/bower_components/leaflet/dist/leaflet.js"></script>
 <script src="js/libs/classybrew/build/classybrew.min.js"></script>
+<script src="js/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="js/main_mapa.js"></script>
 <?php else:?>
 <script>
