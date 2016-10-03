@@ -26,18 +26,26 @@ define(function(require){
   // S E T U P   V A R S
   // --------------------------------------------------------------------------------
   //
-  First_year = 2003,
-  BASE_URL   = "http://inai.skalas.mx/api/",
-  Endpoints  = ["heatmap", "treemap", "top10line", "top10", "usuarios/ocupacion", "usuarios/sexo-edad"],
+  First_year = 2011,
+  BASE_URL   = "http://inai.skalas.mx/api/rr/",
+  Endpoints  = ["total", "sujetoObligado", "top10", "top10-total", "comisionado", "sexo-edad", "ocupacion"],
   Table      = "table=conteo_infomex_publico&", 
   RR         = "rr=2&",
   URLS       = {
-    //heatmap   : BASE_URL + Endpoints[0] + "?" + Table,
-    treemap   : BASE_URL + Endpoints[1] + "?" + RR,
-    timeline  : BASE_URL + Endpoints[2] + "?",
-    top10bars : BASE_URL + Endpoints[3] + "?",
-    occupation: BASE_URL + Endpoints[4] + "?",
-    gender    : BASE_URL + Endpoints[5] + "?"
+    // Recursos de revisión por solicitudes de información: 2012 - 2015
+    total          : BASE_URL + Endpoints[0] + "?",
+    // Volumen de recursos de revisión, por sujeto obligado y por sentido de la resolución: 2012 - 2015
+    sujetoObligado : BASE_URL + Endpoints[1] + "?",
+    // Top 10 de sujetos obligados por recursos de revisión: 2013 - 2015 (histórico)
+    top10          : BASE_URL + Endpoints[2] + "?",
+    //  Top 10 de sujetos obligados por recursos de revisión: 2013 - 2015 (total)
+    top10Total     : BASE_URL + Endpoints[3] + "?",
+    // Recursos por comisionado y sentido de la resolución: 2013 - 2015
+    comisionado    : BASE_URL + Endpoints[4] + "?",
+    // Recursos de revisión por sexo y grupo de edad
+    sexoEdad       : BASE_URL + Endpoints[5] + "?",
+    // Recursos de revisión por ocupación y sexo 2013 - 2015
+    ocupacion      : BASE_URL + Endpoints[6] + "?"
   },
 
   //

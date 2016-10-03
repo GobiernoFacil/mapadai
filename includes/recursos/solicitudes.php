@@ -5,6 +5,9 @@
 			<p class="lead">Estadísticas básicas sobre recursos de revisión</p>
 		</div>
 	</div>
+
+	<section id="rr_total"></section>
+
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
 			<!--source-->

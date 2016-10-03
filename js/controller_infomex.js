@@ -42,7 +42,7 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   First_year = 2003,
-  BASE_URL   = "http://localhost:8080/api/",//"http://inai.skalas.mx/api/",
+  BASE_URL   = "http://inai.skalas.mx/api/", //"http://localhost:8080/api/",
   Endpoints  = ["heatmap", "treemap", "top10line", "top10", "usuarios/ocupacion", "usuarios/sexo-edad"],
   Table      = "table=conteo_infomex_publico&", 
   RR         = "rr=2&",

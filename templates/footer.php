@@ -50,7 +50,7 @@ Cuculco, Delegación Coyoacán C.P. 04530</p>
     </main>
  </div>
 
-<?php if(!empty($body_class) == "mapadaimx_data" ):?>
+<?php if($body_class == "mapadaimx_data" ):?>
 <script src="js/bower_components/d3/d3.js"></script>
 <script src="js/bower_components/leaflet/dist/leaflet.js"></script>
 <script src="js/libs/classybrew/build/classybrew.min.js"></script>
