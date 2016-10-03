@@ -65,15 +65,15 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-		 /// new top nav
+		  // new top nav
 	    "click #viz_nav a"		: "doit",
 	    
-	    /// sub_nav
+	    // sub_nav
 	    "click .sub_nav a"		: "dothat",
 		
-		/// dataviz
-		'mouseenter svg .main_container path' : 'hover_path',
-		'mouseleave svg .main_container path' : 'leave_path',
+		  // dataviz
+		  'mouseenter svg .main_container path' : 'hover_path',
+		  'mouseleave svg .main_container path' : 'leave_path',
     },
 
     //
@@ -97,9 +97,9 @@ define(function(require){
 
       // [2] setup the SLIDER
       this.slider = this.setup_slider(First_year, 3);
-      var time = this.slider.noUiSlider.get();
-      time[0] = +time[0];
-      time[1] = +time[1];
+      var time    = this.slider.noUiSlider.get();
+      time[0]     = +time[0];
+      time[1]     = +time[1];
 
       // [3] create the graphs
       //this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
