@@ -1,6 +1,6 @@
 <?php 
-	$body_class 	= "mapadaimx_data";
-	$title 			= "Entidades Federativas | INAI MapaDaiMx";
+	$body_class 	= "entidades";
+	$title 			= "Entidades Federativas | INAI";
 	$description 	= "Para el desarrollo del Diagnóstico #MapaDAImx, el INAI solicitó a los organismos garantes de las entidades federativas su colaboración";
 	include "templates/header.php";?>
 <div class="sub">
@@ -12,46 +12,13 @@
 		</div>
 	</div>
 </div>
-<div class="infomex_menu">
-	<!-- year selector-->
-	<div class="selector_year">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-4">
-					<!-- los controles temporales -->
-					<form>
-					  <select>
-					    <!--
-					    <option value="indice">indice</option>
-					    <option value="presupuesto">presupuesto</option>
-					    <option value="pob_conapo">población conapo</option>
-					    -->
-					  </select>
-					</form>
-				</div>
-				<div class="col-xs-8">
-					  <ul id="year-selector" class="year_list"></ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="map_container">
-  <!-- el mapa! -->
-  <div id="map"></div>
-</div>
-<p class="source right">Estos datos fueron capturados manualmente de documentos obtenidos en la <a href="http://www.plataformadetransparencia.org.mx/documents/10181/39995/Ejercicio+DAIP+en+M%C3%A9xico+2008-2014_PEF2016.pdf/5dc80442-4802-4310-8f59-3565a26eb4a9">Plataforma Nacional de Transparencia</a> por el equipo de <a href="http://gobiernofacil.com/">Gobierno Fácil</a>.</p>
  <div class="content_graph">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				
 				<div class="viz">
-					
 					<div class="row">
 						<div class="col-sm-8 col-sm-offset-2">
-				<h2>Estadísticas</h2>
 							<p>Para el desarrollo del Diagnóstico <strong>#MapaDAImx</strong>, el INAI solicitó a los organismos garantes de las  entidades federativas su colaboración para atender por una parte, un cuestionario sobre solicitudes de información y recursos de revisión recibidos en su ámbito de competencia y, en su caso, sobre información del uso del Portal de Obligaciones de Transparencia en el cual se publican las obligaciones de transparencia por las leyes de las distintas entidades federativas; y, por la otra, las consultas a bases de datos en los casos que los órganos garantes contaran con Infomex, para extraer información sobre solicitudes de acceso y recursos de revisión recibidos en su ámbito de competencia.</p>
 
 							<p>Los cuestionarios sobre solicitudes de acceso y recursos de revisión fueron distintos, en atención 
@@ -107,7 +74,7 @@
 									<div class="col-sm-2">
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"><a href="/files/Entidades_Federativas/BCS/3._BCS_Recursos.xlsx" download>Descargar</a></div>
+										<div class="status_ok"></div>
 									</div>
 								</li>
 								<!--Campeche-->
@@ -143,14 +110,10 @@
 										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok">
-											<a href="/files/Entidades_Federativas/Chihuahua/6._Chihuahua_Solicitudes.xlsx" download>Descargar</a>
-										</div>
+										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok">
-											<a href="/files/Entidades_Federativas/Chihuahua/6._Chihuahua_Recursos.xlsx" download>Descargar</a>
-										</div>
+										<div class="status_ok"></div>
 									</div>
 								</li>
 								<!--Coahuila-->
@@ -272,14 +235,10 @@
 										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok">
-											<a href="/files/Entidades_Federativas/Michoacan/15._Michoacan_Solicitudes.xlsx" download>Descargar</a>
-										</div>
+										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok">
-											<a href="/files/Entidades_Federativas/Michoacan/15._Michoacan_Recursos.xlsx" download>Descargar</a>
-										</div>
+										<div class="status_ok"></div>
 									</div>
 								</li>
 								<!--Morelos-->
@@ -506,10 +465,9 @@
 		</div>
 	</div>
  </div>
-	
-	<div class="clearfix"></div>
-	
-	<!--CTA-->
-	<a href="/que-es.php" class="btn proceso">¿Qué es el <strong>#MapaDAImx</strong>?</a>
-	
+ 
+  <script>
+  CONFIG = { section : "que-es" };
+  
+</script>
 <?php include "templates/footer.php";?>
