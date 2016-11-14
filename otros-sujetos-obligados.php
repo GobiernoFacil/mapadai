@@ -71,10 +71,14 @@
 										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/ASF/3._ASF_Solicitudes.xlsx">Descargar</a>
+										</div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/ASF/3._ASF_Recursos.xlsx">Descargar</a>
+										</div>
 									</div>
 								</li>
 								<!-- Suprema Corte de Justicia de la Nación-->
@@ -98,12 +102,17 @@
 										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/BM/5._BM_Solicitudes.xlsx">Descargar</a>
+										</div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/BM/5._BM_Recursos.xlsx">Descargar</a>
+										</div>
 									</div>
 								</li>
+								
 								<!-- Comisión Nacional de los Derechos Humanos-->
 								<li class="row">
 									<div class="col-sm-6">
@@ -116,6 +125,8 @@
 									<div class="col-sm-2">
 									</div>
 								</li>
+								
+								
 								<!-- Instituto Nacional de Estadística y Geografía-->
 								<li class="row">
 									<div class="col-sm-6">
@@ -125,10 +136,14 @@
 										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/INEGI/7._INEGI_Solicitudes.xlsx">Descargar</a>
+										</div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/INEGI/7._INEGI_Recursos.xlsx">Descargar</a>
+										</div>
 									</div>
 								</li>
 								<!-- Instituto Nacional para la Evaluación de la Educación-->
@@ -140,10 +155,14 @@
 										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/INEE/8._INEE_Solicitudes.xlsx">Descargar</a>
+										</div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/INEE/8._INEE_Recursos.xlsx">Descargar</a>
+										</div>
 									</div>
 								</li>
 								<!-- Comisión Federal de Competencia Económica-->
@@ -158,7 +177,9 @@
 										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/COFECE/9._COFECE_Recursos.xlsx">Descargar</a>
+										</div>
 									</div>
 								</li>
 								<!-- Instituto Federal de Telecomunicaciones-->
@@ -173,7 +194,9 @@
 										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/IFT/10._IFT_Recursos.xlsx">Descargar</a>
+										</div>
 									</div>
 								</li>
 								<!-- Cámara de senadores-->
@@ -197,10 +220,14 @@
 										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/TFJFA/12._TFJFA_Solicitudes.xlsx">Descargar</a>
+										</div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/TFJFA/12._TFJFA_Recursos.xlsx">Descargar</a>
+										</div>
 									</div>
 								</li>
 								<!-- Tribunal Superior Agrario-->
@@ -212,10 +239,14 @@
 										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/TSA/13._TSA_Solicitudes.xlsx">Descargar</a>
+										</div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/TSA/13._TSA_Recursos.xlsx">Descargar</a>
+										</div>
 									</div>
 								</li>
 								<!-- Cámara de Diputados-->
@@ -239,10 +270,14 @@
 										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/TEPJF/14._TEPJF_Solicitudes.xlsx">Descargar</a>
+										</div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/TEPJF/14._TEPJF_Recursos.xlsx">Descargar</a>
+										</div>
 									</div>
 								</li>
 								<!-- Consejo de la Judicatura Federal-->
@@ -293,10 +328,14 @@
 										<div class="status_ok"></div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/INE/19._INE_Solicitudes.xlsx">Descargar</a>
+										</div>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<div class="status_ok">
+											<a href="/files/Respuesta-OSOS/INE/19._INE_Recursos.xlsx">Descargar</a>
+										</div>
 									</div>
 								</li>
 							</ol>
