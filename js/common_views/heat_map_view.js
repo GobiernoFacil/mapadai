@@ -81,6 +81,8 @@ define(function(require){
     //
     //
     render : function(data, range){
+      this._data = data;
+      
       Current_range = range;
       var that  = this,
           count = 0,
@@ -92,7 +94,7 @@ define(function(require){
           min   = d3.min(data, function(n){
             return +n.count;
           }),
-          color = d3.scale.linear().domain([min, max]).range(Color_r);
+          color = d3.scale.linear().domain([min, max/2, max]).range(Color_r);
 
           // update labels
           Zero_label.innerHTML  = min;
@@ -106,17 +108,19 @@ define(function(require){
               y      = this.scales[1](hour),
               width  = this.scales[0].rangeBand(),
               height = this.scales[1].rangeBand();
+
+          //console.log(datum);
           this.svg.append("rect")
             .attr("x", x)
             .attr("y", y)
             .attr("width", width)
             .attr("height", height)
             .attr("stroke", "rgba(255,255,255,0.5)")
-            .attr("fill", color(datum.count))
+            .attr("fill", color(datum ? +datum.count : 0))
             .on("mouseover", function(d){
               that.controller.create_tooltip({
                 title   : day + ", " + (hour < 10? "0".concat(hour) : hour) + ":00",
-                content : "peticiones : " + Format(datum.count) + " | fecha : " + Current_range[0] + " - " + Current_range[1]
+                content : "peticiones : " + Format(datum ? datum.count : 0) + " | fecha : " + Current_range[0] + " - " + Current_range[1]
               });
             })
             .on("mouseout", function(d){
