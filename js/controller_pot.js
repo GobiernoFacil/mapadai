@@ -152,7 +152,7 @@ define(function(require){
       }
       else{
         from     = "from=" + parseInt(range[0]) + "-01-01";
-        to       = "to="   + parseInt(range[1]) + "-12-31";
+        to       = "to="   + (parseInt(range[1])-1) + "-12-31";
         endpoint = url + from + "&" + to;
       }
 
@@ -319,6 +319,7 @@ define(function(require){
 				var viz_type = this.current_graph = this.timeline_a; 
 				var viz_url  = URLS.timeline;
 				var time_ui  = this.timeline_a.get_range();
+        break;
       /*
 			case "timeline-b":
 				var viz_type = this.current_graph = this.timeline_b; 
