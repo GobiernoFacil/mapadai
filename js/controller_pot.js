@@ -32,14 +32,6 @@ define(function(require){
   // S E T U P   V A R S
   // --------------------------------------------------------------------------------
   //
-  /*
-  http://inai.skalas.mx/api/pot/sujetoObligado?from=2015-01-01&to=2015-12-31
-  http://inai.skalas.mx/api/pot/fraccion?from=2015-01-01&to=2015-12-31
-  http://inai.skalas.mx/api/pot/top10?from=2015-01-01&to=2015-12-31
-  http://inai.skalas.mx/api/pot/top10-total?from=2010-01-01&to=2016-01-02
-  http://inai.skalas.mx/api/hits_pot/linechart?from=2015-01-01&to=2015-12-01
-  http://inai.skalas.mx/api/hits_pot/heatmap?from=2015-01-01&to=2015-12-31
-  */
   First_year = 2015,
   BASE_URL   = "http://inai.skalas.mx/api/",
   Endpoints  = ["pot/sujetoObligado", "pot/fraccion", "pot/top10", "pot/top10-total", 
@@ -109,10 +101,11 @@ define(function(require){
 
       // [3] create the graphs
       this.heatmap_a  	= new HeatMap({controller  : this, el : "#heatmap-a"});
-      //this.top10bars  	= new Top10bar({controller : this, el : "#top10bar"});
-      // this.top10bars_b  = new Top10bar({controller : this, el : "#top10bar-b"});
+      this.top10bars  	= new Top10bar({controller : this, el : "#treemap-a"});
+      this.top10bars_b  = new Top10bar({controller : this, el : "#treemap-b"});
+      this.timeline_b   = new Top10bar({controller : this, el : "#timeline-b"});
+      this.treemap_a   = new Top10bar({controller  : this, el : "#top10bar-b"});
       this.timeline_a 	= new Timeline({controller : this, el : "#timeline-a", section : "pot"});
-      // this.timeline_b 	= new Timeline({controller : this, el : "#timeline-b"});
       // this.treemap_a  	= new TreeMap({controller  : this, el : "#treemap-a"});
       // this.treemap_b  	= new TreeMap({controller  : this, el : "#treemap-b"});
 
@@ -122,11 +115,11 @@ define(function(require){
 
       // [5] load the data
       this.get_data(time, this.heatmap_a, URLS.heatmap);
-      //this.get_data(time, this.top10bars, URLS.top10bars);
-      // this.get_data(time, this.top10bars_b, URLS.top10bars);
+      this.get_data(time, this.top10bars, URLS.sujetoObligado);
+      this.get_data(time, this.top10bars_b, URLS.fraccion);
       this.get_data(time, this.timeline_a, URLS.linechart);
-      // this.get_data(time, this.timeline_b, URLS.timeline);
-      // this.get_data(time, this.treemap_a, URLS.treemap);
+      this.get_data(time, this.timeline_b, URLS.top10);
+      this.get_data(time, this.treemap_a, URLS.top10Total);
       // this.get_data(time, this.treemap_b, URLS.treemap);
       
       // [6] add a listener for the scroll, the ugly hack way

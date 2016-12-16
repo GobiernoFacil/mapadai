@@ -15,6 +15,9 @@ define(function(require){
       d3       = require("d3"),
       SVG      = require("common_views/main_svg_view"),
       Scale    = require("common_views/linear_scale_view"),
+      p=d3.scale.category10(),
+      r=["#225378","#3498DB", "#1695A3" , "#EB7F00", "#FF6138",  "#CE003C", "#79BD8F", "#00A388","#7E8AA2", "#2C3E50"],
+      s=d3.scale.ordinal().range(r),
       Color_r  = ["#225378","#3498DB", "#1695A3" , "#EB7F00", "#FF6138",  "#CE003C", "#79BD8F", "#00A388","#7E8AA2", "#2C3E50"],
 
   //
@@ -32,7 +35,8 @@ define(function(require){
     bottom   : 100, 
     left     : 30,
     padding  : 0,
-    oPadding : 15
+    oPadding : 15,
+    minWidth : 30
   };
 
   //
@@ -66,6 +70,15 @@ define(function(require){
     },
 
     render : function(data, range){
+      if(data[0].hits){
+        data.forEach(function(d){
+          d.total       = d.hits;
+          d.dependencia = d.sujeto_obligado || d.id_fraccion;
+        });
+
+        data = _.sortBy(data, function(d){return -d.hits});
+      }
+
       Current_range = range;
       var x_scale   = this.scale(data);
 
@@ -84,7 +97,7 @@ define(function(require){
         .attr("class", "bar")
         .style({
           background : function (d, i) {
-	          	return  Color_r[i];    		    
+	          	return  s(i);//Color_r[i];    		    
             },
           height : "30px",
           width : function(d){
@@ -109,7 +122,8 @@ define(function(require){
     },
 
     scale : function(data){
-      var x      = [Margins.left, Margins.width - Margins.left - Margins.right],
+      var min    = data[0].hits ? 5 : Margins.minWidth,
+          x      = [min, Margins.width - Margins.left - Margins.right],
           extent = d3.extent(data, function(d){
             return +d.total;
           }),
