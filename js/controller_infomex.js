@@ -42,17 +42,20 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   First_year = 2003,
-  BASE_URL   = "http://inai.skalas.mx/api/", //"http://localhost:8080/api/",
-  Endpoints  = ["heatmap", "treemap", "top10line", "top10", "usuarios/ocupacion", "usuarios/sexo-edad"],
+  BASE_URL   = "http://inai.skalas.mx/api/",
+  Endpoints  = ["heatmap", "treemap", "top10line", "top10", "usuarios/ocupacion", 
+                "usuarios/sexo-edad", "analisis/medioentrega", "analisis/respuesta"],
   Table      = "table=conteo_infomex_publico&", 
   RR         = "rr=2&",
   URLS       = {
-    //heatmap   : BASE_URL + Endpoints[0] + "?" + Table,
+    heatmap   : BASE_URL + Endpoints[0] + "?" + Table,
     treemap   : BASE_URL + Endpoints[1] + "?" + RR,
     timeline  : BASE_URL + Endpoints[2] + "?",
     top10bars : BASE_URL + Endpoints[3] + "?",
     occupation: BASE_URL + Endpoints[4] + "?",
-    gender    : BASE_URL + Endpoints[5] + "?"
+    gender    : BASE_URL + Endpoints[5] + "?",
+    medios    : BASE_URL + Endpoints[6] + "?",
+    respuesta : BASE_URL + Endpoints[7] + "?",
   },
 
   //
@@ -60,7 +63,7 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
 
-  Slider              = document.getElementById('slider');
+  Slider = document.getElementById('slider');
   	
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
@@ -104,9 +107,9 @@ define(function(require){
 
       // [2] setup the SLIDER
       this.slider = this.setup_slider(First_year, 3);
-      var time = this.slider.noUiSlider.get();
-      time[0] = +time[0];
-      time[1] = +time[1];
+      var time    = this.slider.noUiSlider.get();
+      time[0]     = +time[0];
+      time[1]     = +time[1];
 
       // [3] create the graphs
       //this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});

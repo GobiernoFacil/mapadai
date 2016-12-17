@@ -164,7 +164,7 @@ define(function(require){
       }
       else{
         from     = "from=" + parseInt(range[0]) + "-01-01";
-        to       = "to="   + parseInt(range[1]) + "-12-31";
+        to       = "to="   + (parseInt(range[1])-1) + "-12-31";
         endpoint = url + from + "&" + to;
       }
 
@@ -205,7 +205,7 @@ define(function(require){
       });
       slider.noUiSlider.set([now.getFullYear() - years_to_last, now.getFullYear()]);
       slider.noUiSlider.on("end", function(){
-        //that.get_data(this.get(), that.current_graph, that.current_url);
+        that.get_data(this.get(), that.current_graph, that.current_url);
       });
 
       return slider;
@@ -325,10 +325,12 @@ define(function(require){
 
     
 		switch (viz_type) {
-      case "profile_genre_content":
-        var viz_type = this.current_graph = this.gender; 
-        var viz_url  = URLS.sexoEdad;
-        var time_ui  = this.gender.get_range();
+      case "gender-bar":
+      console.log("!!!");
+        this.current_graph = this.gender; 
+        this.current_url   = URLS.sexoEdad;
+
+        var time_ui        = this.gender.get_range();
         break;
 
     /*
