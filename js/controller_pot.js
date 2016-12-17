@@ -32,16 +32,17 @@ define(function(require){
   // S E T U P   V A R S
   // --------------------------------------------------------------------------------
   //
-  First_year = 2003,
+  First_year = 2015,
   BASE_URL   = "http://inai.skalas.mx/api/",
-  Endpoints  = ["heatmap", "treemap", "top10line", "top10"],
-  Table      = "table=conteo_infomex_publico&", 
-  RR         = "rr=2&",
+  Endpoints  = ["pot/sujetoObligado", "pot/fraccion", "pot/top10", "pot/top10-total", 
+                "hits_pot/linechart", "hits_pot/heatmap"],
   URLS       = {
-    heatmap   : BASE_URL + Endpoints[0] + "?" + Table,
-    treemap   : BASE_URL + Endpoints[1] + "?" + RR,
-    timeline  : BASE_URL + Endpoints[2] + "?",
-    top10bars : BASE_URL + Endpoints[3] + "?",
+    sujetoObligado : BASE_URL + Endpoints[0] + "?",
+    fraccion       : BASE_URL + Endpoints[1] + "?",
+    top10          : BASE_URL + Endpoints[2] + "?",
+    top10Total     : BASE_URL + Endpoints[3] + "?",
+    linechart      : BASE_URL + Endpoints[4] + "?", // timeline_a
+    heatmap        : BASE_URL + Endpoints[5] + "?"
   },
 
   //
@@ -93,31 +94,32 @@ define(function(require){
 	    this.hide_stuff();
 
       // [2] setup the SLIDER
-      this.slider = this.setup_slider(First_year, 3);
+      this.slider = this.setup_slider(First_year, 1);
       var time = this.slider.noUiSlider.get();
       time[0] = +time[0];
       time[1] = +time[1];
 
       // [3] create the graphs
       this.heatmap_a  	= new HeatMap({controller  : this, el : "#heatmap-a"});
-      this.top10bars  	= new Top10bar({controller : this, el : "#top10bar"});
-      // this.top10bars_b  = new Top10bar({controller : this, el : "#top10bar-b"});
-      this.timeline_a 	= new Timeline({controller : this, el : "#timeline-a"});
-      // this.timeline_b 	= new Timeline({controller : this, el : "#timeline-b"});
+      this.top10bars  	= new Top10bar({controller : this, el : "#treemap-a"});
+      this.top10bars_b  = new Top10bar({controller : this, el : "#treemap-b"});
+      this.timeline_b   = new Top10bar({controller : this, el : "#timeline-b"});
+      this.treemap_a   = new Top10bar({controller  : this, el : "#top10bar-b"});
+      this.timeline_a 	= new Timeline({controller : this, el : "#timeline-a", section : "pot"});
       // this.treemap_a  	= new TreeMap({controller  : this, el : "#treemap-a"});
       // this.treemap_b  	= new TreeMap({controller  : this, el : "#treemap-b"});
 
       // [4] set the current graph and endpoint
       this.current_graph = this.timeline_a;
-      this.current_url   = URLS.timeline;
+      this.current_url   = URLS.linechart;
 
       // [5] load the data
       this.get_data(time, this.heatmap_a, URLS.heatmap);
-      this.get_data(time, this.top10bars, URLS.top10bars);
-      // this.get_data(time, this.top10bars_b, URLS.top10bars);
-      this.get_data(time, this.timeline_a, URLS.timeline);
-      // this.get_data(time, this.timeline_b, URLS.timeline);
-      // this.get_data(time, this.treemap_a, URLS.treemap);
+      this.get_data(time, this.top10bars, URLS.sujetoObligado);
+      this.get_data(time, this.top10bars_b, URLS.fraccion);
+      this.get_data(time, this.timeline_a, URLS.linechart);
+      this.get_data(time, this.timeline_b, URLS.top10);
+      this.get_data(time, this.treemap_a, URLS.top10Total);
       // this.get_data(time, this.treemap_b, URLS.treemap);
       
       // [6] add a listener for the scroll, the ugly hack way
@@ -143,7 +145,7 @@ define(function(require){
       }
       else{
         from     = "from=" + parseInt(range[0]) + "-01-01";
-        to       = "to="   + parseInt(range[1]) + "-12-31";
+        to       = "to="   + (parseInt(range[1])-1) + "-12-31";
         endpoint = url + from + "&" + to;
       }
 
@@ -304,10 +306,13 @@ define(function(require){
 	    	viz_url			= "";
 	   
 		switch (viz_type) {
+      // sessions_day
+      // sessions_time
 			case "timeline":
 				var viz_type = this.current_graph = this.timeline_a; 
 				var viz_url  = URLS.timeline;
 				var time_ui  = this.timeline_a.get_range();
+        break;
       /*
 			case "timeline-b":
 				var viz_type = this.current_graph = this.timeline_b; 
@@ -327,7 +332,7 @@ define(function(require){
 				var time_ui  = this.top10bars_b.get_range();
 				break;
       */
-			case "heatmap":
+			case "sessions_day":
 				var viz_type = this.current_graph = this.heatmap_a; 
 				var viz_url  = URLS.heatmap;
 				var time_ui  = this.heatmap_a.get_range();
@@ -357,7 +362,7 @@ define(function(require){
 		$(".sub_nav a").removeClass("current");
 		$(e.target).addClass('current');
 		
-		this.update_time_ui(time_ui);
+		// this.update_time_ui(time_ui);
     },
  
 

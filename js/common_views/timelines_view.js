@@ -83,7 +83,8 @@ define(function(require){
       this.first_time = true;
       this.dataURL    = settings.dataURL;
       this.currentLabels = [];
-      console.log("cats: ", Categories);
+      this.section = settings.section;
+      // console.log("cats: ", Categories);
     },
 
     //
@@ -93,8 +94,11 @@ define(function(require){
     render : function(data, range){
       Data  = data;
       var d = data;
+
+      this._data = Data;
+      this.__data = d;
       this.prepare_data(d);
-      console.log("cats update: ", Categories);
+      // console.log("cats update: ", Categories);
 
       if(this.first_time){
         this.set_scales(d);
@@ -150,15 +154,28 @@ define(function(require){
     //
     //
     prepare_data : function(data){
-      data.map(function(d, i){
-        if(Categories.indexOf(d.dependencia) == -1){
-          Categories.push(d.dependencia);
-        }
-        d.total = +d.total;
-        d.date  = new Date(d.year, d.month, 1);
-      }, this);
+      if(this.section == "pot"){
+        data.map(function(d, i){
+          if(Categories.indexOf(d.sujeto_obligado) == -1){
+            Categories.push(d.sujeto_obligado);
+          }
+          d.total = +d.hits;
+          d.date  = new Date(+d.year, +d.mes, 1);
+        }, this);
 
-      Current_data = data;
+        Current_data = data;
+      }
+      else{
+        data.map(function(d, i){
+          if(Categories.indexOf(d.dependencia) == -1){
+            Categories.push(d.dependencia);
+          }
+          d.total = +d.total;
+          d.date  = new Date(d.year, d.month, 1);
+        }, this);
+
+        Current_data = data;
+      }
     },
 
     //
@@ -215,6 +232,8 @@ define(function(require){
             .domain(ext)
             .range([Margins.left, Margins.width - Margins.left - Margins.right]);
             //.ticks(d3.time.year, 1);
+
+      // console.log(ext);
 
       this.scales = [x, y];
     },
