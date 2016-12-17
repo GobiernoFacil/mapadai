@@ -26,11 +26,21 @@ define(function(require){
   // S E T U P   V A R S
   // --------------------------------------------------------------------------------
   //
-  First_year = 2011,
+  /*
+  http://inai.skalas.mx/api/rr/total?from=2010-01-01&to=2016-01-02
+  http://inai.skalas.mx/api/rr/sujetoObligado?from=2010-01-01&to=2016-01-02
+  http://inai.skalas.mx/api/rr/top10?from=2010-01-01&to=2016-01-02
+  http://inai.skalas.mx/api/rr/top10-total?from=2010-01-01&to=2016-01-02
+  http://inai.skalas.mx/api/rr/comisionado?from=2010-01-01&to=2016-01-02
+  http://inai.skalas.mx/api/rr/sexo-edad?from=2010-01-01&to=2016-01-02
+  http://inai.skalas.mx/api/rr/ocupacion?from=2010-01-01&to=2016-01-02
+  */
+
+  First_year = 2007,
   BASE_URL   = "http://inai.skalas.mx/api/rr/",
   Endpoints  = ["total", "sujetoObligado", "top10", "top10-total", "comisionado", "sexo-edad", "ocupacion"],
-  Table      = "table=conteo_infomex_publico&", 
-  RR         = "rr=2&",
+  //Table      = "table=conteo_infomex_publico&", 
+  //RR         = "rr=2&",
   URLS       = {
     // Recursos de revisión por solicitudes de información: 2012 - 2015
     total          : BASE_URL + Endpoints[0] + "?",
@@ -109,7 +119,7 @@ define(function(require){
       // this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a"});
       // this.treemap_b   = new TreeMap({controller  : this, el : "#treemap-b"});
       // this.occupation  = new Occupation({controller : this, el : "#occupation-bar"});
-      // this.gender      = new Gender({controller : this, el : "#gender-bar"});
+      this.gender = new Gender({controller : this, el : "#gender-bar"});
       // this.xxx         = new Timeline({controller : this, el : "#timeline-b"});
 
       // [4] set the current graph and endpoint
@@ -123,7 +133,7 @@ define(function(require){
       // this.get_data(time, this.treemap_a, URLS.treemap);
       // this.get_data(time, this.treemap_b, URLS.treemap);
       // this.get_data(time, this.occupation, URLS.occupation);
-      // this.get_data(time, this.gender, URLS.gender);
+      this.get_data(time, this.gender, URLS.sexoEdad);
       // this.get_data(time, this.top10bars_b, URLS.top10bars);
 
       // this.get_data(time, this.xxx, URLS.timeline);
@@ -313,8 +323,15 @@ define(function(require){
 	    	viz_type		= $("#" + name_container).data('viz'),
 	    	viz_url			= "";
 
-    /*
+    
 		switch (viz_type) {
+      case "profile_genre_content":
+        var viz_type = this.current_graph = this.gender; 
+        var viz_url  = URLS.sexoEdad;
+        var time_ui  = this.gender.get_range();
+        break;
+
+    /*
 			case "timeline":
 				var viz_type = this.current_graph = this.timeline_a; 
 				var viz_url  = URLS.timeline;
@@ -348,8 +365,9 @@ define(function(require){
 				var viz_url  = URLS.occupation;
 				var time_ui  = this.occupation.get_range();
 				break;
+      */
 		}
-    */
+   
 		
 		//this.current_graph = viz_type;
 		//this.current_url   = viz_url;

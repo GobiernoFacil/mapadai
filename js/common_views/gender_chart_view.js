@@ -71,7 +71,14 @@ define(function(require){
     },
 
     render : function(data, range){
-      console.log(data, _.uniq(_.pluck(data,"grupo_edad")), range);
+      if(data[0].edadcat){
+        data.forEach(function(d){
+          d.grupo_edad = d.edadcat;
+          d.suma       = d.total;
+          d.genero     = d.sexo;
+        });
+      }
+
       Margins.height = (_.uniq(_.pluck(data,"grupo_edad")).length * Rect.slot) + Margins.top + Margins.bottom; 
       Current_range  = range;
       if(!this.svg){
@@ -83,7 +90,7 @@ define(function(require){
             .domain(ages)
             .rangePoints([Margins.top, Margins.height - Margins.bottom]),
           r_scale = d3.scale.linear().domain(d3.extent(data, function(d){
-            return +d.suma;
+            return +d.suma || +d.total;
           })).range([0, (Margins.width/2) - Margins.right]);
           wx_scale = this.scale(data, true),
           mx_scale = this.scale(data, false);
