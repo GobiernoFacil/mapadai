@@ -118,7 +118,7 @@ define(function(require){
       //this.timeline_a  = new Timeline({controller : this, el : "#timeline-a", dataURL : URLS.timeline});
       this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a", dataURL : URLS.treemap});
       //this.treemap_b = new TreeMap({controller  : this, el : "#treemap-b", dataURL : URLS.treemap});
-      this.occupation  = new Occupation({controller : this, el : "#occupation-bar", dataURL : URLS.ocupation});
+      this.occupation  = new Occupation({controller : this, el : "#occupation-bar", dataURL : URLS.occupation});
       this.gender      = new Gender({controller : this, el : "#gender-bar", dataURL : URLS.gender});
       this.xxx         = new Timeline({controller : this, el : "#timeline-b", dataURL : URLS.timeline});
 
@@ -158,7 +158,6 @@ define(function(require){
     //
     //
     get_data : function(range, graph, url){
-      console.log(range, graph, url);
       var endpoint, from, to, that = this;
       if(range.length === 1){
         from     = "from=" + parseInt(range[0]) + "-01-01";
@@ -233,7 +232,6 @@ define(function(require){
       slider.noUiSlider.on("end", function(){
 
         that.get_data(this.get(), that.current_graph, that.current_url);
-        console.log(this.get(), that.current_graph, that.current_url);
       });
 
       return slider;
@@ -352,11 +350,10 @@ define(function(require){
     
     dothat : function(e) {
 	    e.preventDefault();
-      //console.log(e.target);
 	    //var name_container  = $(e.target).data('container'),
       var name_container = e.target.getAttribute("data-container"),
-          vizType = document.getElementById(name_container),
-          vizName = vizType.getAttribute("data-graph");
+          vizType        = document.getElementById(name_container),
+          vizName        = vizType.getAttribute("data-graph");
       
       this.updateCurrentGraph(vizName);
 		  //show/hide container  

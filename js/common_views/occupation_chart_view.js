@@ -80,7 +80,9 @@ define(function(require){
 
       var x_scale = this.scale(data);
 
-      this.ticks = this.svg.selectAll("g").data(x_scale.ticks()).enter()
+      this.ticks = this.svg.selectAll("g").data(x_scale.ticks());
+
+      this.ticks.enter()
         .append("g")
         .attr("class", "occupation-ticks")
         .attr("transform", function(d){
@@ -95,9 +97,12 @@ define(function(require){
               "stroke" : "#ddd",
               "stroke-width" : 1
             });
+      this.ticks.exit().remove();
 
-      this.svg.selectAll(".occupation-ticks").append("text")
-          .attr("class", "occupation-tick-label")
+      this.ticks_top_labels = this.svg.selectAll(".occupation-ticks");
+      this.ticks_top_labels.selectAll(".occupation-tick-label-top").remove();
+      this.ticks_top_labels.append("text")
+          .attr("class", "occupation-tick-label-top")
           .attr("fill", "black")
           .attr("text-anchor", "middle")
           .text(function(d){
@@ -106,8 +111,11 @@ define(function(require){
           .attr("x", 0)
           .attr("y", 10);
 
-      this.svg.selectAll(".occupation-ticks").append("text")
-          .attr("class", "occupation-tick-label")
+      this.ticks_bottom_labels = this.svg.selectAll(".occupation-ticks");
+      this.ticks_bottom_labels.selectAll(".occupation-tick-label-bottom").remove();
+      
+      this.ticks_bottom_labels.append("text")
+          .attr("class", "occupation-tick-label-bottom")
           .attr("fill", "black")
           .attr("text-anchor", "middle")
           .text(function(d){
@@ -115,6 +123,8 @@ define(function(require){
           })
           .attr("x", 0)
           .attr("y", Margins.height - Margins.bottom);
+      
+
 
       this.bars = this.svg.selectAll(".occupation-rect-men").data(data).enter()
         .append("rect")
