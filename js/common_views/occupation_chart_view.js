@@ -19,7 +19,7 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   First_time = true,
-  Format     = d3.format(","),
+  Format     = d3.format(",s"),
   Current_range = null,
   Margins    = {
     width    : 600,
@@ -70,17 +70,26 @@ define(function(require){
     },
 
     render : function(data, range){
+      // map data
+      data.forEach(function(d){
+        d.suma = +d.suma;
+      });
+
       // update SVG size
       Margins.height = (data.length * Rect.slot) + Margins.top + Margins.bottom; 
       Current_range = range;
-      var data = _.sortBy(data, function(d){return d.ocupacion;});
+      
+      data = _.sortBy(data, function(d){return -d.suma;});
       if(!this.svg){
         this.svg = this.make_svg(Margins);
       }
 
       var x_scale = this.scale(data);
 
-      this.ticks = this.svg.selectAll("g").data(x_scale.ticks()).enter()
+      // Las líneas verticales
+      this.svg.selectAll(".occupation-ticks").remove();
+      this.ticks = this.svg.selectAll(".occupation-ticks").data(x_scale.ticks());
+      this.ticks.enter()
         .append("g")
         .attr("class", "occupation-ticks")
         .attr("transform", function(d){
@@ -95,9 +104,13 @@ define(function(require){
               "stroke" : "#ddd",
               "stroke-width" : 1
             });
+      this.ticks.exit().remove();
 
-      this.svg.selectAll(".occupation-ticks").append("text")
-          .attr("class", "occupation-tick-label")
+      // los números de las líneas verticales
+      this.ticks_top_labels = this.svg.selectAll(".occupation-ticks");
+      this.ticks_top_labels.selectAll(".occupation-tick-label-top").remove();
+      this.ticks_top_labels.append("text")
+          .attr("class", "occupation-tick-label-top")
           .attr("fill", "black")
           .attr("text-anchor", "middle")
           .text(function(d){
@@ -106,8 +119,11 @@ define(function(require){
           .attr("x", 0)
           .attr("y", 10);
 
-      this.svg.selectAll(".occupation-ticks").append("text")
-          .attr("class", "occupation-tick-label")
+      this.ticks_bottom_labels = this.svg.selectAll(".occupation-ticks");
+      this.ticks_bottom_labels.selectAll(".occupation-tick-label-bottom").remove();
+      
+      this.ticks_bottom_labels.append("text")
+          .attr("class", "occupation-tick-label-bottom")
           .attr("fill", "black")
           .attr("text-anchor", "middle")
           .text(function(d){
@@ -116,10 +132,11 @@ define(function(require){
           .attr("x", 0)
           .attr("y", Margins.height - Margins.bottom);
 
-      this.bars = this.svg.selectAll(".occupation-rect-men").data(data).enter()
+      this.bars2 = this.svg.selectAll(".occupation-rect-women").data(data);
+      this.bars2.enter()
         .append("rect")
-          .attr("class", "occupation-rect-men")
-          .attr("fill", Rect.fill)
+          .attr("class", "occupation-rect-women")
+          .attr("fill", Rect.fillw)
           .attr("width", function(d){
             return x_scale(+d.suma);
           })
@@ -129,20 +146,11 @@ define(function(require){
             return (Rect.slot * i) + Margins.top + 5;
           });
 
-      this.bars2 = this.svg.selectAll(".occupation-rect-women").data(data).enter()
-        .append("rect")
-          .attr("class", "2occupation-rect-women")
-          .attr("fill", Rect.fillw)
-          .attr("width", function(d){
-            return x_scale(+d.suma)/2;
-          })
-          .attr("height", Rect.height)
-          .attr("x", Margins.left)
-          .attr("y", function(d, i){
-            return (Rect.slot * i) + Margins.top + 5;
-          });
+      this.bars2.exit().remove();
 
-      this.svg.selectAll(".occupation-label").data(data).enter()
+      this.occupation_labels = this.svg.selectAll(".occupation-label").data(data);
+
+      this.occupation_labels.enter()
         .append("text")
           .attr("class", "occupation-label")
           .attr("fill", "black")
@@ -153,49 +161,14 @@ define(function(require){
           .attr("y", function(d, i){
             return (Rect.slot * i) + Margins.top;
           });
-      return;
 
-      if(First_time){
-        this.divs = d3.select(this.el).selectAll("div")
-                      .data(data)
-                      .enter()
-                      .append("div")
-                      .attr("class", "content-top");
-
-        this.divs.append("p")
-          .html(function(d){
-            return d.dependencia + ": " + Format(d.total);
-          });
-        this.divs.append("div")
-        .attr("class", "bar")
-        .style({
-          background : "#00c1a5",
-          height : "30px",
-          width : function(d){
-            return x_scale(d.total) + "px";
-          }
-        });
-        First_time = false;
-      }
-      else{
-        this.divs.data(data);
-        this.divs.select(".bar").transition().duration(500).ease("sin-in-out").style({
-          width : function(d){
-            return x_scale(d.total) + "px";
-          }
-        });
-        this.divs.select("p")
-          .html(function(d){
-            return d.dependencia + ": " + Format(d.total);
-          });
-      }
-      
+      this.occupation_labels.exit().remove();
     },
 
     scale : function(data){
       var x      = [Margins.left, Margins.width - Margins.left - Margins.right],
           extent = d3.extent(data, function(d){
-            return +d.suma;
+            return d.suma;
           }),
           scale = d3.scale.linear()
                     .domain(extent)

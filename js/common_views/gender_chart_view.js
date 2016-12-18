@@ -68,6 +68,18 @@ define(function(require){
       this.first_time = true;
       this.controller = settings.controller;
       this.dataURL    = settings.dataURL;
+      this.__data     = [];
+    },
+
+    _getH : function(){
+
+      var d = this.__data.filter(function(r){
+        return r.genero == "Hombre";
+      });
+
+      //_.sortBy(d, function(r){return +d.suma});
+
+      console.log(d);
     },
 
     render : function(data, range){
@@ -78,6 +90,8 @@ define(function(require){
           d.genero     = d.sexo;
         });
       }
+
+      this.__data = data;
 
       Margins.height = (_.uniq(_.pluck(data,"grupo_edad")).length * Rect.slot) + Margins.top + Margins.bottom; 
       Current_range  = range;
@@ -102,7 +116,11 @@ define(function(require){
          .attr("transform", "translate(" + (Margins.width - Margins.right) +", 0)")
          .call(right_axis);
       
-      this.wticks = this.svg.selectAll(".women-gender-ticks").data(wx_scale.ticks(5)).enter()
+      this.wticks = this.svg.selectAll(".women-gender-ticks").remove();
+
+      this.wticks = this.svg.selectAll(".women-gender-ticks").data(wx_scale.ticks(5));
+
+      this.wticks.enter()
         .append("g")
         .attr("class", "women-gender-ticks")
         .attr("transform", function(d){
@@ -128,7 +146,9 @@ define(function(require){
           .attr("x", 0)
           .attr("y", Margins.height - Margins.bottom - Margins.top + 15 /*lucky number!*/);
 
-      this.wbars = this.svg.selectAll(".gender-rect-women").data(_.where(data, {genero : "Mujer"})).enter()
+      this.wbars = this.svg.selectAll(".gender-rect-women").data(_.where(data, {genero : "Mujer"}));
+
+      this.wbars.enter()
         .append("rect")
           .attr("class", "gender-rect-women")
           .attr("fill", "#981F7C")
@@ -141,6 +161,14 @@ define(function(require){
             return y_scale(d.grupo_edad);
           });
 
+      this.wbars.attr("width", function(d){
+            return r_scale(+d.suma);
+          }).attr("y", function(d, i){
+            return y_scale(d.grupo_edad);
+          });
+
+      this.wbars.exit().remove();
+
       // MEN STUFF
       var left_axis = d3.svg.axis().scale(y_scale).orient("left");
       this.svg.append("g")
@@ -148,7 +176,11 @@ define(function(require){
          .attr("transform", "translate(" + (Margins.left) +", 0)")
          .call(left_axis);
 
-      this.mticks = this.svg.selectAll(".men-gender-ticks").data(wx_scale.ticks(5)).enter()
+      this.svg.selectAll(".men-gender-ticks").remove();
+
+      this.mticks = this.svg.selectAll(".men-gender-ticks").data(wx_scale.ticks(5));
+
+      this.mticks.enter()
         .append("g")
         .attr("class", "men-gender-ticks")
         .attr("transform", function(d){
@@ -174,7 +206,9 @@ define(function(require){
           .attr("x", 0)
           .attr("y", Margins.height - Margins.bottom  - Margins.top + 15);
 
-      this.mbars = this.svg.selectAll(".gender-rect-men").data(_.where(data, {genero : "Hombre"})).enter()
+      this.mbars = this.svg.selectAll(".gender-rect-men").data(_.where(data, {genero : "Hombre"}));
+
+      this.mbars.enter()
         .append("rect")
           .attr("class", "gender-rect-men")
           .attr("fill", "#3498DB")
@@ -188,6 +222,16 @@ define(function(require){
           .attr("y", function(d, i){
             return y_scale(d.grupo_edad);
           });
+
+      this.mbars.attr("x", function(d){
+            return Margins.width/2 - r_scale(+d.suma);
+          }).attr("y", function(d, i){
+            return y_scale(d.grupo_edad);
+          }).attr("width", function(d){
+            return r_scale(+d.suma);
+          });
+
+      this.mbars.exit().remove();
 
       return;
     },
