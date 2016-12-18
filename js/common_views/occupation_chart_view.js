@@ -75,7 +75,6 @@ define(function(require){
         d.suma = +d.suma;
       });
 
-      console.log(data);
       // update SVG size
       Margins.height = (data.length * Rect.slot) + Margins.top + Margins.bottom; 
       Current_range = range;
@@ -132,25 +131,7 @@ define(function(require){
           })
           .attr("x", 0)
           .attr("y", Margins.height - Margins.bottom);
-      
 
-/*
-      this.bars = this.svg.selectAll(".occupation-rect-men").data(data);
-
-      this.bars.enter()
-        .append("rect")
-          .attr("class", "occupation-rect-men")
-          .attr("fill", Rect.fill)
-          .attr("width", function(d){
-            return x_scale(+d.suma);
-          })
-          .attr("height", Rect.height)
-          .attr("x", Margins.left)
-          .attr("y", function(d, i){
-            return (Rect.slot * i) + Margins.top + 10;
-          });
-      this.bars.exit().remove();
-*/
       this.bars2 = this.svg.selectAll(".occupation-rect-women").data(data);
       this.bars2.enter()
         .append("rect")
@@ -182,45 +163,6 @@ define(function(require){
           });
 
       this.occupation_labels.exit().remove();
-      /*
-      return;
-
-      if(First_time){
-        this.divs = d3.select(this.el).selectAll("div")
-                      .data(data)
-                      .enter()
-                      .append("div")
-                      .attr("class", "content-top");
-
-        this.divs.append("p")
-          .html(function(d){
-            return d.dependencia + ": " + Format(d.total);
-          });
-        this.divs.append("div")
-        .attr("class", "bar")
-        .style({
-          background : "#00c1a5",
-          height : "30px",
-          width : function(d){
-            return x_scale(d.total) + "px";
-          }
-        });
-        First_time = false;
-      }
-      else{
-        this.divs.data(data);
-        this.divs.select(".bar").transition().duration(500).ease("sin-in-out").style({
-          width : function(d){
-            return x_scale(d.total) + "px";
-          }
-        });
-        this.divs.select("p")
-          .html(function(d){
-            return d.dependencia + ": " + Format(d.total);
-          });
-      }
-      */
-      
     },
 
     scale : function(data){
