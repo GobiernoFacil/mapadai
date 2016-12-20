@@ -1288,8 +1288,8 @@ span.color-label {
     border-bottom: 1px solid #eee;
     color: #fff;
     display: block;
-    font: 700 21px/1.4 "kelson_sans", Helvetica, Arial, sans-serif;
-    min-height: 100px;
+    font: 700 16px/1.4 "kelson_sans", Helvetica, Arial, sans-serif;
+    min-height: 80px;
     padding: 30px 8px;
     text-align: center; }
     .menu-list a:hover {
