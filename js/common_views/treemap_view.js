@@ -144,7 +144,7 @@ define(function(require){
 /* load in data, display root */
   function xxx(r) {
   root = {name : "mapadai", children: r[0].mapadai};
-  console.log("initialize", root);
+  //console.log("initialize", root);
   that.initialize_treemap(root);
   that.accumulate(root, "total");
   that.accumulate(root, "value");
@@ -197,7 +197,7 @@ define(function(require){
         .on("mouseover", function(d){
           that.controller.create_tooltip({
             title   : d.name,
-            content : "peticiones : " + Format(d.total) + " | fecha : " + Current_range[0] + " - " + Current_range[1]
+            content : "peticiones : " + Format(d.total) + " | fecha : " + Number(Current_range[0]) + " - " + Number(Current_range[1])
           });
         })
         .on("mouseout", function(d){
