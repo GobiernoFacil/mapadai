@@ -40,7 +40,8 @@ define(function(require){
   },
   Dot_style = {
     opacity : 0,
-    cursor : "pointer"
+    cursor  : "pointer",
+    r       : 5 
   },
   DotHover_style = {
     opacity : 1,
@@ -117,11 +118,12 @@ define(function(require){
     },
 
     update_render : function(){
+
       // [1] generate the helpers again
       this.set_scales(Current_data);
       this.get_line_generator();
       this.set_axis(true);
-      this.draw_lines(Current_data, true);
+      this.draw_lines(this.keep_data(), true);
       this.remove_dots();
       this.draw_dots(Current_data);
     },
@@ -184,6 +186,7 @@ define(function(require){
     //
     update_data : function(category, add){
       // [1] update the data
+      /*
       if(add && !_.findWhere(Current_data, {dependencia : category})){
         var d = _.where(Data, {dependencia : category});
         Current_data = Current_data.concat(d);
@@ -193,8 +196,27 @@ define(function(require){
           return val.dependencia != category;
         });
       }
+      */
 
       this.update_render();
+    },
+
+    //
+    // [ keep_data ]
+    //
+    //
+    keep_data : function(){
+      var items  = [].slice.call(document.querySelectorAll(".category-toggle")),
+          hidden = items.filter(function(item){
+            return item.classList.contains("disabled");
+          }).map(function(item){
+            return item.classList.contains("disabled") ? item.getAttribute('data-category') : false;
+          }),
+          data = Current_data.filter(function(d){
+            return hidden.indexOf(d.dependencia) == -1;
+          });
+
+      return data;
     },
 
     //
@@ -340,7 +362,7 @@ define(function(require){
       this.svg.selectAll(".dot").data(data).enter()
         .append("circle")
           .attr("class", "dot")
-          .attr("r", "4")
+          .attr("r", Dot_style.r)
           .attr("cx", function(d){
             return that.scales[0](d.date);
           })
