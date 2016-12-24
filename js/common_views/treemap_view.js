@@ -74,6 +74,7 @@ define(function(require){
       this.scales     = null;
       this.controller = settings.controller;
       this.dataURL    = settings.dataURL;
+      this.treeType   = settings.type;
       this.set_scales();
       
     },
@@ -89,6 +90,13 @@ define(function(require){
     },
 
     render : function(r, range){
+      if(this.treeType == "tipo_sujeto"){
+        var list = _.uniq(r.map(function(d){
+          return d.dependencia
+        }));
+        return;
+      }
+
       Current_range = range;
       if(this.svg) this._remove();
       var that   = this,
@@ -147,7 +155,6 @@ define(function(require){
 /* load in data, display root */
   function xxx(r) {
   root = {name : "mapadai", children: r[0].mapadai};
-  //console.log("initialize", root);
   that.initialize_treemap(root);
   that.accumulate(root, "total");
   that.accumulate(root, "value");
@@ -194,7 +201,6 @@ define(function(require){
         .on("click", function(d) { 
             if(!d.children){
                 // window.open(d.url); 
-                console.log("last child",d);
             }
         })
         .on("mouseover", function(d){
@@ -217,7 +223,6 @@ define(function(require){
         .on("click", function(d) { 
             if(!d.children){
                 //window.open(d.url); 
-                console.log("last child",d);
             }
         })
         .on("mouseover", function(d){
@@ -237,7 +242,6 @@ define(function(require){
 
     /* create transition function for transitions */
     function transition(d) {
-      console.log("transition", d);
       if (Transitioning || !d) return;
       Transitioning = true;
 

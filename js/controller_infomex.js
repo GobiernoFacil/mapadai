@@ -117,7 +117,7 @@ define(function(require){
       //this.top10bars_b = new Top10bar({controller : this, el : "#top10bar_b", dataURL : URLS.top10bars});
       //this.timeline_a  = new Timeline({controller : this, el : "#timeline-a", dataURL : URLS.timeline});
       this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a", dataURL : URLS.treemap});
-      //this.treemap_b = new TreeMap({controller  : this, el : "#treemap-b", dataURL : URLS.treemap});
+      this.treemap_b   = new TreeMap({controller  : this, el : "#treemap-b", dataURL : URLS.respuesta, type : "tipo_sujeto"});
       this.occupation  = new Occupation({controller : this, el : "#occupation-bar", dataURL : URLS.occupation});
       this.gender      = new Gender({controller : this, el : "#gender-bar", dataURL : URLS.gender});
       this.xxx         = new Timeline({controller : this, el : "#timeline-b", dataURL : URLS.timeline});
@@ -133,7 +133,7 @@ define(function(require){
       this.get_data(time, this.top10bars, URLS.top10bars);
       //this.get_data(time, this.timeline_a, URLS.timeline);
       this.get_data(time, this.treemap_a, URLS.treemap);
-      //this.get_data(time, this.treemap_b, URLS.treemap);
+      this.get_data(time, this.treemap_b, URLS.respuesta);
       this.get_data(time, this.occupation, URLS.occupation);
       this.get_data(time, this.gender, URLS.gender);
       //this.get_data(time, this.top10bars_b, URLS.top10bars);
