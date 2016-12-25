@@ -18,8 +18,8 @@ define(function(require){
   // D E F I N E   C O N S T A N T 'S
   // --------------------------------------------------------------------------------
   //
-  First_time = true,
-  Format     = d3.format(",s"),
+  First_time    = true,
+  Format        = d3.format(",s"),
   Current_range = null,
   Margins    = {
     width    : 600,
@@ -64,25 +64,90 @@ define(function(require){
     //
     //
     initialize : function(settings){
-      this.divs = null;
-      this.svg  = null;
+      this.divs       = null;
+      this.svg        = null;
       this.controller = settings.controller;
       this.dataURL    = settings.dataURL;
+      this.type       = settings.type;
     },
 
     render : function(data, range){
-
-      console.log(data);
-      return;
-      // map data
-      data.forEach(function(d){
-        d.suma = +d.suma;
-      });
-
-      // update SVG size
-      Margins.height = (data.length * Rect.slot) + Margins.top + Margins.bottom; 
+      var that = this;
       Current_range = range;
+      this.__data = data;
+      this.map_data();
+      this.scale = this._scale(this.data);;
       
+      Margins.height = (data.length * Rect.slot) + Margins.top + Margins.bottom;
+
+      if(!this.svg){
+        this.svg = this.make_svg(Margins);
+      }
+
+      // Las líneas verticales
+      this.svg.selectAll(".multicolor-ticks").remove();
+      this.ticks = this.svg.selectAll(".multicolor-ticks").data(this.scale.ticks());
+      this.ticks.enter()
+        .append("g")
+        .attr("class", "multicolor-ticks")
+        .attr("transform", function(d){
+          return "translate(" + that.scale(d) + ", 0)";
+        })
+          .append("line")
+            .attr("x0", 0)
+            .attr("x1",0)
+            .attr("y0", 30)
+            .attr("y1", Margins.height - Margins.bottom )
+            .style({
+              "stroke" : "#ddd",
+              "stroke-width" : 1
+            });
+      this.ticks.exit().remove();
+
+
+      this.ticks_top_labels = this.svg.selectAll(".multicolor-ticks");
+      this.ticks_top_labels.selectAll(".multicolor-tick-label-top").remove();
+      this.ticks_top_labels.append("text")
+          .attr("class", "multicolor-tick-label-top")
+          .attr("fill", "black")
+          .attr("text-anchor", "middle")
+          .text(function(d){
+            return Format(d);
+          })
+          .attr("x", 0)
+          .attr("y", 10);
+
+      this.ticks_bottom_labels = this.svg.selectAll(".multicolor-ticks");
+      this.ticks_bottom_labels.selectAll(".multicolor-tick-label-bottom").remove();
+      
+      this.ticks_bottom_labels.append("text")
+          .attr("class", "multicolor-tick-label-bottom")
+          .attr("fill", "black")
+          .attr("text-anchor", "middle")
+          .text(function(d){
+            return Format(d);
+          })
+          .attr("x", 0)
+          .attr("y", Margins.height - Margins.bottom);
+
+      this.bars = this.svg.selectAll(".multicolor-rect-media").data(data);
+      this.bars.enter()
+        .append("rect")
+          .attr("class", "multicolor-rect-media")
+          .attr("fill", Rect.fillw)
+          .attr("width", function(d){
+            return that.scale(d.total);
+          })
+          .attr("height", Rect.height)
+          .attr("x", Margins.left)
+          .attr("y", function(d, i){
+            return (Rect.slot * i) + Margins.top + 5;
+          });
+
+      this.bars.exit().remove();
+
+      return;
+      /*
       data = _.sortBy(data, function(d){return -d.suma;});
       if(!this.svg){
         this.svg = this.make_svg(Margins);
@@ -110,6 +175,7 @@ define(function(require){
             });
       this.ticks.exit().remove();
 
+      
       // los números de las líneas verticales
       this.ticks_top_labels = this.svg.selectAll(".occupation-ticks");
       this.ticks_top_labels.selectAll(".occupation-tick-label-top").remove();
@@ -136,6 +202,8 @@ define(function(require){
           .attr("x", 0)
           .attr("y", Margins.height - Margins.bottom);
 
+      
+
       this.bars2 = this.svg.selectAll(".occupation-rect-women").data(data);
       this.bars2.enter()
         .append("rect")
@@ -151,7 +219,7 @@ define(function(require){
           });
 
       this.bars2.exit().remove();
-
+*/
       this.occupation_labels = this.svg.selectAll(".occupation-label").data(data);
 
       this.occupation_labels.enter()
@@ -169,8 +237,20 @@ define(function(require){
       this.occupation_labels.exit().remove();
     },
 
-    scale : function(data){
-      var x      = [Margins.left, Margins.width - Margins.left - Margins.right],
+    _scale : function(data){
+      var x       = [Margins.left, Margins.width - Margins.left - Margins.right],
+          x_array = _.pluck(data, "total"),
+          extent  = d3.extent(x_array),
+          scale   = d3.scale.linear()
+                    .domain(extent)
+                    .range(x);
+
+          return scale;
+
+      // console.log(extent, x_array);
+      /*
+
+          x      = [Margins.left, Margins.width - Margins.left - Margins.right],
           extent = d3.extent(data, function(d){
             return d.suma;
           }),
@@ -178,6 +258,7 @@ define(function(require){
                     .domain(extent)
                     .range(x);
       return scale;
+      */
     },
 
     get_range : function(){
@@ -197,7 +278,52 @@ define(function(require){
           .attr("class", "main_container");
 
       return svg;
-    }
+    },
+
+    map_data : function(){
+      var solicitudes   = _.uniq(_.pluck(this.__data, "tiposolicitud")),
+          _dependencias = _.uniq(_.pluck(this.__data, "dependencia")),
+          dependencias  = _dependencias.map(function(d){
+            var r = {
+              dependencia : d,
+              data        : _.where(this.__data, {dependencia : d})
+            };
+
+            r.total = r.data.reduce(function(a, b){
+                        var a = a.total ? Number(a.total) : a;
+                        var b = b.total ? Number(b.total) : b;
+                        return a + b;
+                      }, 0);
+
+            /*
+            solicitudes.forEach(function(s){
+              r[s] = _.where(r.data, {tiposolicitud : s});
+            }, this);
+            */
+
+            return r;
+          }, this);
+
+      this.data    = dependencias;
+      this.options = solicitudes;
+
+      console.log(this.options, this.data);
+
+      /*
+      dependencia
+:
+"SECRETARÍA DE ENERGÍA"
+tiporespuesta
+:
+"Informacion disponible"
+tiposolicitud
+:
+"Datos Personales"
+total
+:
+"4"
+      */
+    },
   });
 
   //

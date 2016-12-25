@@ -31,6 +31,7 @@ define(function(require){
       noUiSlider = require("nouislider"),
       //HeatMap    = require("common_views/heat_map_view"),
       Top10bar   = require("common_views/top10chart_view"),
+      MultiBar   = require("common_views/multicolor_chart_view"),
       Timeline   = require("common_views/timelines_view"), 
       TreeMap    = require("common_views/treemap_view"),
       Occupation = require("common_views/occupation_chart_view"),
@@ -54,8 +55,8 @@ define(function(require){
     top10bars : BASE_URL + Endpoints[3] + "?",
     occupation: BASE_URL + Endpoints[4] + "?",
     gender    : BASE_URL + Endpoints[5] + "?",
-    medios    : BASE_URL + Endpoints[6] + "?",
-    respuesta : BASE_URL + Endpoints[7] + "?",
+    medios    : BASE_URL + Endpoints[6] + "?", // multicolor medio entrega
+    respuesta : BASE_URL + Endpoints[7] + "?", // multicolor tipo de respuesta
   },
 
   //
@@ -114,7 +115,8 @@ define(function(require){
       // [3] create the graphs
       //this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
       this.top10bars 	 = new Top10bar({controller : this, el : "#top10bar", dataURL : URLS.top10bars});
-      //this.top10bars_b = new Top10bar({controller : this, el : "#top10bar_b", dataURL : URLS.top10bars});
+      ////////this.colorBar_a  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.medios});
+      this.colorBar_b  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.respuesta, type : "respuesta"});
       //this.timeline_a  = new Timeline({controller : this, el : "#timeline-a", dataURL : URLS.timeline});
       this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a", dataURL : URLS.treemap});
       this.treemap_b   = new TreeMap({controller  : this, el : "#treemap-b", dataURL : URLS.respuesta, type : "tipo_sujeto"});
@@ -122,8 +124,7 @@ define(function(require){
       this.gender      = new Gender({controller : this, el : "#gender-bar", dataURL : URLS.gender});
       this.xxx         = new Timeline({controller : this, el : "#timeline-b", dataURL : URLS.timeline});
 
-      this.graphsCollection = [this.top10bars, 
-      this.treemap_a, this.occupation, this.gender, this.xxx];
+      this.graphsCollection = [this.top10bars, this.treemap_a, this.occupation, this.gender, this.xxx, this.colorBar_b];
       // [4] set the current graph and endpoint
       this.current_graph = this.xxx;
       this.current_url   = URLS.timeline;
@@ -131,7 +132,8 @@ define(function(require){
       // [5] load the data
       //this.get_data(time, this.heatmap_a, URLS.heatmap);
       this.get_data(time, this.top10bars, URLS.top10bars);
-      //this.get_data(time, this.timeline_a, URLS.timeline);
+      ////////this.get_data(time, this.colorBar_a, URLS.medios);
+      this.get_data(time, this.colorBar_b, URLS.respuesta);
       this.get_data(time, this.treemap_a, URLS.treemap);
       this.get_data(time, this.treemap_b, URLS.respuesta);
       this.get_data(time, this.occupation, URLS.occupation);
