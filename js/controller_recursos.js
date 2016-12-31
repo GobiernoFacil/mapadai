@@ -1,11 +1,26 @@
-// INAI - Recursos de Revisión MapaDAImx
+// INAI - Diagnósitco MapaDAImx
 // @package  : INAI
 // @location : /js
-// @file     : controller_recursos.js
+// @file     : controller_infomex.js
 // @author   : Gobierno fácil <howdy@gobiernofacil.com>
 // @url      : http://gobiernofacil.com
 
 define(function(require){
+
+  //
+  // E N D P O I N T S   L I S T
+  // --------------------------------------------------------------------------------
+  //
+  // api/heatmap
+  // api/treemap
+  // api/top10
+  // api/top10line
+  // api/usuarios/ocupacion
+  // api/usuarios/edad
+  // api/usuarios/sexo
+  // api/usuarios/sexo-edad
+  //
+
 
   //
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
@@ -16,6 +31,7 @@ define(function(require){
       noUiSlider = require("nouislider"),
       //HeatMap    = require("common_views/heat_map_view"),
       Top10bar   = require("common_views/top10chart_view"),
+      MultiBar   = require("common_views/multicolor_chart_view"),
       Timeline   = require("common_views/timelines_view"), 
       TreeMap    = require("common_views/treemap_view"),
       Occupation = require("common_views/occupation_chart_view"),
@@ -26,36 +42,18 @@ define(function(require){
   // S E T U P   V A R S
   // --------------------------------------------------------------------------------
   //
-  /*
-  http://inai.skalas.mx/api/rr/total?from=2010-01-01&to=2016-01-02
-  http://inai.skalas.mx/api/rr/sujetoObligado?from=2010-01-01&to=2016-01-02
-  http://inai.skalas.mx/api/rr/top10?from=2010-01-01&to=2016-01-02
-  http://inai.skalas.mx/api/rr/top10-total?from=2010-01-01&to=2016-01-02
-  http://inai.skalas.mx/api/rr/comisionado?from=2010-01-01&to=2016-01-02
-  http://inai.skalas.mx/api/rr/sexo-edad?from=2010-01-01&to=2016-01-02
-  http://inai.skalas.mx/api/rr/ocupacion?from=2010-01-01&to=2016-01-02
-  */
-
   First_year = 2007,
   BASE_URL   = "http://inai.skalas.mx/api/rr/",
   Endpoints  = ["total", "sujetoObligado", "top10", "top10-total", "comisionado", "sexo-edad", "ocupacion"],
-  //Table      = "table=conteo_infomex_publico&", 
-  //RR         = "rr=2&",
+  
   URLS       = {
-    // Recursos de revisión por solicitudes de información: 2012 - 2015
-    total          : BASE_URL + Endpoints[0] + "?",
-    // Volumen de recursos de revisión, por sujeto obligado y por sentido de la resolución: 2012 - 2015
-    sujetoObligado : BASE_URL + Endpoints[1] + "?",
-    // Top 10 de sujetos obligados por recursos de revisión: 2013 - 2015 (histórico)
-    top10          : BASE_URL + Endpoints[2] + "?",
-    //  Top 10 de sujetos obligados por recursos de revisión: 2013 - 2015 (total)
-    top10Total     : BASE_URL + Endpoints[3] + "?",
-    // Recursos por comisionado y sentido de la resolución: 2013 - 2015
-    comisionado    : BASE_URL + Endpoints[4] + "?",
-    // Recursos de revisión por sexo y grupo de edad
-    sexoEdad       : BASE_URL + Endpoints[5] + "?",
-    // Recursos de revisión por ocupación y sexo 2013 - 2015
-    ocupacion      : BASE_URL + Endpoints[6] + "?"
+    solicitudes    : BASE_URL + Endpoints[0] + "?", // Recursos de revisión por solicitudes de información: 2012 - 2015
+    sujetoObligado : BASE_URL + Endpoints[1] + "?", // Volumen de recursos de revisión, por sujeto obligado y por sentido de la resolución: 2012 - 2015
+    top10Historico : BASE_URL + Endpoints[2] + "?", // Top 10 de sujetos obligados por recursos de revisión: 2013 - 2015 (histórico)
+    top10Total     : BASE_URL + Endpoints[3] + "?", // Top 10 de sujetos obligados por recursos de revisión: 2013 - 2015 (total)
+    comisionados   : BASE_URL + Endpoints[4] + "?", // Recursos por comisionado y sentido de la resolución: 2013 - 2015
+    gender    : BASE_URL + Endpoints[5] + "?",
+    medios    : BASE_URL + Endpoints[6] + "?" // multicolor medio entrega
   },
 
   //
@@ -63,8 +61,8 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
 
-  Slider              = document.getElementById('slider');
-  	
+  Slider = document.getElementById('slider');
+    
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
   // --------------------------------------------------------------------------------
@@ -75,15 +73,15 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-		  // new top nav
-	    "click #viz_nav a"		: "doit",
-	    
-	    // sub_nav
-	    "click .sub_nav a"		: "dothat",
-		
-		  // dataviz
-		  'mouseenter svg .main_container path' : 'hover_path',
-		  'mouseleave svg .main_container path' : 'leave_path',
+     /// new top nav
+      "click #viz_nav a"    : "doit",
+      
+      /// sub_nav
+      "click .sub_nav a"    : "dothat",
+    
+    /// dataviz
+    'mouseenter svg .main_container path' : 'hover_path',
+    'mouseleave svg .main_container path' : 'leave_path',
     },
 
     //
@@ -103,7 +101,7 @@ define(function(require){
     //
     initialize : function(){
       // [1] hide the UI stuff
-	    this.hide_stuff();
+      this.hide_stuff();
 
       // [2] setup the SLIDER
       this.slider = this.setup_slider(First_year, 3);
@@ -113,37 +111,40 @@ define(function(require){
 
       // [3] create the graphs
       //this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
-      // this.top10bars 	 = new Top10bar({controller : this, el : "#top10bar"});
-      // this.top10bars_b = new Top10bar({controller : this, el : "#top10bar_b"});
-      // this.timeline_a  = new Timeline({controller : this, el : "#timeline-a"});
-      // this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a"});
-      // this.treemap_b   = new TreeMap({controller  : this, el : "#treemap-b"});
-      // this.occupation  = new Occupation({controller : this, el : "#occupation-bar"});
-      this.gender = new Gender({controller : this, el : "#gender-bar"});
-      // this.xxx         = new Timeline({controller : this, el : "#timeline-b"});
+      this.top10bars   = new Top10bar({controller : this, el : "#top10bar", dataURL : URLS.top10bars});
+      ////////this.colorBar_a  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.medios});
+      this.colorBar_b  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.respuesta, type : "respuesta"});
+      //this.timeline_a  = new Timeline({controller : this, el : "#timeline-a", dataURL : URLS.timeline});
+      this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a", dataURL : URLS.treemap});
+      this.treemap_b   = new TreeMap({controller  : this, el : "#treemap-b", dataURL : URLS.respuesta, type : "tipo_sujeto"});
+      this.occupation  = new Occupation({controller : this, el : "#occupation-bar", dataURL : URLS.occupation});
+      this.gender      = new Gender({controller : this, el : "#gender-bar", dataURL : URLS.gender});
+      this.xxx         = new Timeline({controller : this, el : "#timeline-b", dataURL : URLS.timeline});
 
+      this.graphsCollection = [this.top10bars, this.treemap_a, this.occupation, this.gender, this.xxx, this.colorBar_b];
       // [4] set the current graph and endpoint
-      // this.current_graph = this.timeline_a;
-      // this.current_url   = URLS.timeline;
+      this.current_graph = this.xxx;
+      this.current_url   = URLS.timeline;
 
       // [5] load the data
-      // this.get_data(time, this.heatmap_a, URLS.heatmap);
-      // this.get_data(time, this.top10bars, URLS.top10bars);
-      // this.get_data(time, this.timeline_a, URLS.timeline);
-      // this.get_data(time, this.treemap_a, URLS.treemap);
-      // this.get_data(time, this.treemap_b, URLS.treemap);
-      // this.get_data(time, this.occupation, URLS.occupation);
-      this.get_data(time, this.gender, URLS.sexoEdad);
-      // this.get_data(time, this.top10bars_b, URLS.top10bars);
+      //this.get_data(time, this.heatmap_a, URLS.heatmap);
+      this.get_data(time, this.top10bars, URLS.top10bars);
+      ////////this.get_data(time, this.colorBar_a, URLS.medios);
+      this.get_data(time, this.colorBar_b, URLS.respuesta);
+      this.get_data(time, this.treemap_a, URLS.treemap);
+      this.get_data(time, this.treemap_b, URLS.respuesta);
+      this.get_data(time, this.occupation, URLS.occupation);
+      this.get_data(time, this.gender, URLS.gender);
+      //this.get_data(time, this.top10bars_b, URLS.top10bars);
 
-      // this.get_data(time, this.xxx, URLS.timeline);
+      this.get_data(time, this.xxx, URLS.timeline);
 
 
 
       
       // [6] add a listener for the scroll, the ugly hack way
-      this.year_menu             = $.proxy(this.year_menu, this);
-      this.setupScrollEvents     = $.proxy(this.setupScrollEvents, this);
+      this.year_menu = $.proxy(this.year_menu, this);
+      this.setupScrollEvents = $.proxy(this.setupScrollEvents, this);
       this.fullExperiencieMobile = $.proxy(this.fullExperiencieMobile, this);
       
       window.onscroll   = this.year_menu;
@@ -183,19 +184,42 @@ define(function(require){
     //
     //
     setup_slider : function(first_year, years_to_last){
+      // setup variables
       var that   = this,
           slider = Slider,
-          now    = new Date();
-      
+          now    = new Date(),
+          years  = now.getFullYear() - first_year,
+          range  = {}; 
+
+      // make range obj
+      for(var i = 0; i <= years; i++){
+        if(i == 0){
+          range['min'] = first_year;
+        }
+        else if(i == years){
+          range['max'] = now.getFullYear();
+        }
+        else{
+          range[((100/years)*i).toString()] = first_year + i;
+        }
+      }
+
+      /*
+      'margin', 'limit', 'step', 'range', 'animate' and 'snap'
+      */
+
+      // make the slider
       noUiSlider.create(slider, {
         start: [first_year, now.getFullYear()],
         step : 1,
         connect: true,
+        //snap : true,
         // behaviour: 'tap',
+        margin : 1,
         range: {
-          'min': first_year,
-          'max': now.getFullYear()
-        },
+          min : first_year,
+          max : now.getFullYear()
+        },//range,
         pips : {
           mode : "values",
           values : d3.range(first_year, now.getFullYear() + 1, 1),
@@ -205,6 +229,7 @@ define(function(require){
       });
       slider.noUiSlider.set([now.getFullYear() - years_to_last, now.getFullYear()]);
       slider.noUiSlider.on("end", function(){
+
         that.get_data(this.get(), that.current_graph, that.current_url);
       });
 
@@ -250,22 +275,22 @@ define(function(require){
     remove_tooltip : function(){
       $(".tooltip-container").remove();
     },
-	
-	
-	  // ----------------------
+  
+  
+    // ----------------------
     // FIXED YEAR MENU
     // ----------------------
     //
     year_menu : function(e){
       if($(window).scrollTop() > 155){
-	    $('header').addClass('fixed_header');
-	    $('.nav-side').addClass('fixed_nav');
+      $('header').addClass('fixed_header');
+      $('.nav-side').addClass('fixed_nav');
         $('.infomex_menu').addClass('fix-year');
         $('.section_name').removeClass('hide');
       }
       else{
-	    $('header').removeClass('fixed_header');
-	    $('.nav-side').removeClass('fixed_nav');
+      $('header').removeClass('fixed_header');
+      $('.nav-side').removeClass('fixed_nav');
         $('.infomex_menu').removeClass('fix-year');
         $('.section_name').addClass('hide');
       }
@@ -275,19 +300,19 @@ define(function(require){
     // ROLLOVER SVG PATH 
     // -----------------
     //
-	  hover_path : function(e) { 
-		  $('svg .main_container path').attr("class","path_out");
-		  $(e.currentTarget).attr("class","path_hover");
-	  },
-	
-	  // -----------------
+    hover_path : function(e) { 
+      $('svg .main_container path').attr("class","path_out");
+      $(e.currentTarget).attr("class","path_hover");
+    },
+  
+    // -----------------
     // ROLLOUT SVG PATH 
     // -----------------
     //
-	  leave_path : function(e) { 
-		  $('svg .main_container path').attr("class","");
-		  $(e.currentTarget).attr("class","");
-	  },
+    leave_path : function(e) { 
+      $('svg .main_container path').attr("class","");
+      $(e.currentTarget).attr("class","");
+    },
     
     //
     // L O C A L   T R A N S I T I O N S
@@ -298,95 +323,59 @@ define(function(require){
     },
     
     doit : function(e){
-    	e.preventDefault();
-	    var name_container = $(e.target).data('container');
-	    
-	    ///show/hide container tab 
-	    $(".content-tab").addClass("hide");
-	    $("#" +  name_container).removeClass("hide");
+      e.preventDefault();
+      var name_container = e.target.getAttribute("data-container"),
+          container      = document.getElementById(name_container),
+          vizAnchor      = container.querySelector(".col-sm-12 .viz"),
+          vizName        = vizAnchor.getAttribute("data-graph"); 
 
-	    $(".viz").addClass("hide");	    
-	    $("#" + name_container).find(".col-sm-12 .viz").filter(":first").removeClass("hide");
-	    
-	    ///add class to current subtab
-		$(".sub_nav a").removeClass("current");
-	    $("#" + name_container).find(".sub_nav li a").filter(":first").addClass("current");
-	    
-	    ///add class to current tab
-	   $("#viz_nav a").removeClass("current");
-	   $(e.target).addClass('current');
-	},
+      this.updateCurrentGraph(vizName);
+      
+      ///show/hide container tab 
+      $(".content-tab").addClass("hide");
+      $("#" +  name_container).removeClass("hide");
+
+      $(".viz").addClass("hide");     
+      $("#" + name_container).find(".col-sm-12 .viz").filter(":first").removeClass("hide");
+      
+      ///add class to current subtab
+      $(".sub_nav a").removeClass("current");
+      $("#" + name_container).find(".sub_nav li a").filter(":first").addClass("current");
+      
+      ///add class to current tab
+     $("#viz_nav a").removeClass("current");
+     $(e.target).addClass('current');
+    },
     
     dothat : function(e) {
-	    e.preventDefault();
-	    var name_container  = $(e.target).data('container'),
-	    	viz_type		= $("#" + name_container).data('viz'),
-	    	viz_url			= "";
-
-    
-		switch (viz_type) {
-      case "gender-bar":
-      console.log("!!!");
-        this.current_graph = this.gender; 
-        this.current_url   = URLS.sexoEdad;
-
-        var time_ui        = this.gender.get_range();
-        break;
-
-    /*
-			case "timeline":
-				var viz_type = this.current_graph = this.timeline_a; 
-				var viz_url  = URLS.timeline;
-				var time_ui  = this.timeline_a.get_range();
-			
-			case "bar":
-				var viz_type = this.current_graph = this.top10bars; 
-				var viz_url  = URLS.top10bars;
-				var time_ui  = this.top10bars.get_range();
-				break;
-
-			case "heatmap":
-				var viz_type = this.current_graph = this.heatmap_a; 
-				var viz_url  = URLS.heatmap;
-				var time_ui  = this.heatmap_a.get_range();
-				break;
-			case "treemap":
-				var viz_type = this.current_graph = this.treemap_a; 
-				var viz_url  = URLS.treemap;
-				var time_ui  = this.treemap_a.get_range();
-				break;
-			
-			case "gender-bar":
-				var viz_type = this.current_graph = this.gender; 
-				var viz_url  = URLS.gender;
-				var time_ui  = this.gender.get_range();
-				break;
-					
-			case "occupation-bar":
-				var viz_type = this.current_graph = this.occupation; 
-				var viz_url  = URLS.occupation;
-				var time_ui  = this.occupation.get_range();
-				break;
-      */
-		}
-   
-		
-		//this.current_graph = viz_type;
-		//this.current_url   = viz_url;
-	   
-		///show/hide container  
-	    $(".viz").addClass("hide");
-	    $("#" +  name_container).removeClass("hide");
-	    
-		///add class to current tab
-		$(".sub_nav a").removeClass("current");
-		$(e.target).addClass('current');
-		
-		//this.update_time_ui(time_ui);
+      e.preventDefault();
+      //var name_container  = $(e.target).data('container'),
+      var name_container = e.target.getAttribute("data-container"),
+          vizType        = document.getElementById(name_container),
+          vizName        = vizType.getAttribute("data-graph");
+      
+      this.updateCurrentGraph(vizName);
+      //show/hide container  
+      $(".viz").addClass("hide");
+      $("#" +  name_container).removeClass("hide");
+      
+      //add class to current tab
+      $(".sub_nav a").removeClass("current");
+      $(e.target).addClass('current');
     },
+    
+    updateCurrentGraph : function(viz){
+      var g = this.graphsCollection.filter(function(graph){
+        return graph.el.id == viz;
+      });
 
-
-
+      if(g.length){
+        this.current_graph = g[0]; 
+        this.current_url   = g[0].dataURL;
+        this.update_time_ui(this.current_graph.get_range());
+      }
+    }
+    
   });
 
   //
