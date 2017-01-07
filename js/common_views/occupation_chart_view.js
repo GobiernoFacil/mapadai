@@ -72,7 +72,7 @@ define(function(require){
     render : function(data, range){
       // map data
       data.forEach(function(d){
-        d.suma = +d.suma;
+        d.suma = +(d.suma || d.total);
       });
 
       // update SVG size

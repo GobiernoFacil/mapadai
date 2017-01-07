@@ -156,13 +156,23 @@ define(function(require){
     //
     //
     prepare_data : function(data){
+      data.forEach(function(d){
+        d.year  = d.year || d.anio;
+        d.month = d.month || d.mes;
+        d.date  = new Date(+d.year, +d.month, 1);
+      });
+
+      data.sort(function(a, b){
+        return a.date - b.date;
+      });
+
       if(this.section == "pot"){
         data.map(function(d, i){
           if(Categories.indexOf(d.sujeto_obligado) == -1){
             Categories.push(d.sujeto_obligado);
           }
           d.total = +d.hits;
-          d.date  = new Date(+d.year, +d.mes, 1);
+          //d.date  = new Date(+d.year, +d.mes, 1);
         }, this);
 
         Current_data = data;
@@ -173,7 +183,7 @@ define(function(require){
             Categories.push(d.dependencia);
           }
           d.total = +d.total;
-          d.date  = new Date(d.year, d.month, 1);
+          //d.date  = new Date(d.year, d.month, 1);
         }, this);
 
         Current_data = data;

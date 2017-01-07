@@ -52,8 +52,8 @@ define(function(require){
     top10Historico : BASE_URL + Endpoints[2] + "?", // Top 10 de sujetos obligados por recursos de revisión: 2013 - 2015 (histórico)
     top10Total     : BASE_URL + Endpoints[3] + "?", // Top 10 de sujetos obligados por recursos de revisión: 2013 - 2015 (total)
     comisionados   : BASE_URL + Endpoints[4] + "?", // Recursos por comisionado y sentido de la resolución: 2013 - 2015
-    gender    : BASE_URL + Endpoints[5] + "?",
-    medios    : BASE_URL + Endpoints[6] + "?" // multicolor medio entrega
+    gender         : BASE_URL + Endpoints[5] + "?",
+    occupation     : BASE_URL + Endpoints[6] + "?" // multicolor medio entrega
   },
 
   //
@@ -111,33 +111,33 @@ define(function(require){
 
       // [3] create the graphs
       //this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
-      this.top10bars   = new Top10bar({controller : this, el : "#top10bar", dataURL : URLS.top10bars});
+      //this.top10bars   = new Top10bar({controller : this, el : "#top10bar", dataURL : URLS.top10bars});
       ////////this.colorBar_a  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.medios});
-      this.colorBar_b  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.respuesta, type : "respuesta"});
-      //this.timeline_a  = new Timeline({controller : this, el : "#timeline-a", dataURL : URLS.timeline});
-      this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a", dataURL : URLS.treemap});
-      this.treemap_b   = new TreeMap({controller  : this, el : "#treemap-b", dataURL : URLS.respuesta, type : "tipo_sujeto"});
+      //this.colorBar_b  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.respuesta, type : "respuesta"});
+      this.timeline  = new Timeline({controller : this, el : "#timeline-a", dataURL : URLS.top10Historico});
+      //this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a", dataURL : URLS.treemap});
+      //this.treemap_b   = new TreeMap({controller  : this, el : "#treemap-b", dataURL : URLS.respuesta, type : "tipo_sujeto"});
       this.occupation  = new Occupation({controller : this, el : "#occupation-bar", dataURL : URLS.occupation});
       this.gender      = new Gender({controller : this, el : "#gender-bar", dataURL : URLS.gender});
-      this.xxx         = new Timeline({controller : this, el : "#timeline-b", dataURL : URLS.timeline});
+      //this.occupation  = new Timeline({controller : this, el : "#timeline-b", dataURL : URLS.timeline});
 
-      this.graphsCollection = [this.top10bars, this.treemap_a, this.occupation, this.gender, this.xxx, this.colorBar_b];
+      this.graphsCollection = [this.top10bars, this.treemap_a, this.occupation, this.gender, this.occupation, this.colorBar_b];
       // [4] set the current graph and endpoint
-      this.current_graph = this.xxx;
+      this.current_graph = this.occupation;
       this.current_url   = URLS.timeline;
 
       // [5] load the data
       //this.get_data(time, this.heatmap_a, URLS.heatmap);
-      this.get_data(time, this.top10bars, URLS.top10bars);
+      //this.get_data(time, this.top10bars, URLS.top10bars);
       ////////this.get_data(time, this.colorBar_a, URLS.medios);
-      this.get_data(time, this.colorBar_b, URLS.respuesta);
-      this.get_data(time, this.treemap_a, URLS.treemap);
-      this.get_data(time, this.treemap_b, URLS.respuesta);
+      //this.get_data(time, this.colorBar_b, URLS.respuesta);
+      //this.get_data(time, this.treemap_a, URLS.treemap);
+      //this.get_data(time, this.treemap_b, URLS.respuesta);
       this.get_data(time, this.occupation, URLS.occupation);
       this.get_data(time, this.gender, URLS.gender);
       //this.get_data(time, this.top10bars_b, URLS.top10bars);
 
-      this.get_data(time, this.xxx, URLS.timeline);
+      this.get_data(time, this.timeline, URLS.top10Historico);
 
 
 
@@ -203,10 +203,6 @@ define(function(require){
           range[((100/years)*i).toString()] = first_year + i;
         }
       }
-
-      /*
-      'margin', 'limit', 'step', 'range', 'animate' and 'snap'
-      */
 
       // make the slider
       noUiSlider.create(slider, {
@@ -324,6 +320,7 @@ define(function(require){
     
     doit : function(e){
       e.preventDefault();
+      console.log(":D");
       var name_container = e.target.getAttribute("data-container"),
           container      = document.getElementById(name_container),
           vizAnchor      = container.querySelector(".col-sm-12 .viz"),
@@ -365,6 +362,7 @@ define(function(require){
     },
     
     updateCurrentGraph : function(viz){
+      return;
       var g = this.graphsCollection.filter(function(graph){
         return graph.el.id == viz;
       });
