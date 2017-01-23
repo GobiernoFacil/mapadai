@@ -1,7 +1,7 @@
 <div id="pot_fraccion" class="viz" data-viz="treemap-b">
 	<div class="row">
 		<div class="col-sm-12">
-			<h3>Volumen de consultas por fracción y por sujeto obligado</span>: <span class="year-range">2012 - 2015</span></h3>
+			<h3>Volumen de consultas por fracción y por sujeto obligado</span>: <span class="year-range">2015</span></h3>
 				<p class="lead">Consultas de cada fracción en el POT en un periodo de tiempo determinado.</p>
 			<!--<a href="#" class="download" download><b></b>Descargar datos</a>-->	
 		</div>

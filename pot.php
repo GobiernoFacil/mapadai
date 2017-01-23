@@ -51,7 +51,7 @@
 			<ul class="sub_nav">
 				<li><a href="#" class="current" data-container="sessions_number">Número de sesiones</a></li>
 				<li><a href="#" data-container="sessions_day">Por día y hora</a></li>
-				<li><a href="#" data-container="sessions_time">Tiempo por sesión</a></li>
+				<!--<li><a href="#" data-container="sessions_time">Tiempo por sesión</a></li>-->
 			</ul>
 		</nav>
 		
@@ -82,7 +82,7 @@
 				<li><a href="#" data-container="pot_total">Sujetos Obligados</a></li>
 			</ul>
 		</nav>
-		<div class="container">s
+		<div class="container">
 			<div class="row">			
 				<div class="col-sm-12">
 					<!--pot_volumen-->

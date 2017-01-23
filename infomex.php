@@ -64,7 +64,7 @@
 		<nav class="nav subnav re">
 			<ul class="sub_nav">
 				<li><a href="#" class="current" data-container="obligee_sujeto">Por Volumen</a></li>
-				<li><a href="#"  data-container="obligee_historico">Top 10</a></li>
+				<!--<li><a href="#"  data-container="obligee_historico">Top 10</a></li>-->
 				<li><a href="#" data-container="obligee_total">Por tipo de solicitud</a></li>
 			</ul>
 		</nav>

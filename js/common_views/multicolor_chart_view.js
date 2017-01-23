@@ -19,7 +19,7 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   First_time    = true,
-  Format        = d3.format(",s"),
+  Format        = d3.format(","),
   Current_range = null,
   Margins    = {
     width    : 600,
@@ -170,6 +170,23 @@ define(function(require){
           .attr("x", Margins.left)
           .attr("y", function(d, i){
             return (Rect.slot * i) + Margins.top + 5;
+          })
+          .on("mouseover", function(d){
+            that.controller.create_tooltip({
+              /*
+              "Datos Personales"
+              "Información Pública"
+              "Corrección a Datos Personales"
+              */
+              title   : "Datos personales",
+              content : Format(d.totalA) + " de " + Format(d.total)
+            });
+          })
+          .on("mousemove", function(d){
+            that.controller.move_tooltip();
+          })
+          .on("mouseout", function(d){
+            that.controller.remove_tooltip();
           });
 
          
@@ -199,7 +216,24 @@ define(function(require){
           })
           .attr("y", function(d, i){
             return (Rect.slot * i) + Margins.top + 5;
-          });
+          })
+          .on("mouseover", function(d){
+            that.controller.create_tooltip({
+              /*
+              "Datos Personales"
+              "Información Pública"
+              "Corrección a Datos Personales"
+              */
+              title   : "Infomación pública",
+              content : Format(d.totalB) + " de " + Format(d.total)
+            });
+          })
+          .on("mousemove", function(d){
+            that.controller.move_tooltip();
+          })
+          .on("mouseout", function(d){
+            that.controller.remove_tooltip();
+          });;
 
          
 
@@ -229,7 +263,24 @@ define(function(require){
           })
           .attr("y", function(d, i){
             return (Rect.slot * i) + Margins.top + 5;
-          });
+          })
+          .on("mouseover", function(d){
+            that.controller.create_tooltip({
+              /*
+              "Datos Personales"
+              "Información Pública"
+              "Corrección a Datos Personales"
+              */
+              title   : "Corrección a Datos Personales",
+              content : Format(d.totalC) + " de " + Format(d.total)
+            });
+          })
+          .on("mousemove", function(d){
+            that.controller.move_tooltip();
+          })
+          .on("mouseout", function(d){
+            that.controller.remove_tooltip();
+          });;
 
          
 
@@ -297,6 +348,7 @@ define(function(require){
       var that          = this,
           solicitudes   = _.uniq(_.pluck(this.__data, "tiposolicitud")),
           _dependencias = _.uniq(_.pluck(this.__data, "dependencia")),
+          _respuestas   = _.uniq(_.pluck(this.__data, "tiporespuesta")),
           dependencias  = _dependencias.map(function(d){
             var r = {
               dependencia : d,
@@ -326,8 +378,6 @@ define(function(require){
                            }), "total").reduce(function(a, b){
                              return Number(a) + Number(b);
                            }, 0);
-
-
             return r;
           }, this);
 

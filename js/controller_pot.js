@@ -33,6 +33,7 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   First_year = 2015,
+  Last_year  = 2015,
   BASE_URL   = "http://inai.skalas.mx/api/",
   Endpoints  = ["pot/sujetoObligado", "pot/fraccion", "pot/top10", "pot/top10-total", 
                 "hits_pot/linechart", "hits_pot/heatmap"],
@@ -94,18 +95,18 @@ define(function(require){
 	    this.hide_stuff();
 
       // [2] setup the SLIDER
-      this.slider = this.setup_slider(First_year, 1);
+      this.slider = this.setup_slider(First_year, 1, Last_year);
       var time = this.slider.noUiSlider.get();
       time[0] = +time[0];
       time[1] = +time[1];
 
       // [3] create the graphs
-      this.heatmap_a  	= new HeatMap({controller  : this, el : "#heatmap-a"});
-      this.top10bars  	= new Top10bar({controller : this, el : "#treemap-a"});
-      this.top10bars_b  = new Top10bar({controller : this, el : "#treemap-b"});
-      this.timeline_b   = new Top10bar({controller : this, el : "#timeline-b"});
+      this.heatmap_a   = new HeatMap({controller  : this, el : "#heatmap-a"});
+      this.top10bars   = new Top10bar({controller : this, el : "#treemap-a"});
+      this.top10bars_b = new Top10bar({controller : this, el : "#treemap-b"});
+      this.timeline_b  = new Top10bar({controller : this, el : "#timeline-b"});
       this.treemap_a   = new Top10bar({controller  : this, el : "#top10bar-b"});
-      this.timeline_a 	= new Timeline({controller : this, el : "#timeline-a", section : "pot"});
+      this.timeline_a  = new Top10bar({controller : this, el : "#timeline-a", section : "pot"});
       // this.treemap_a  	= new TreeMap({controller  : this, el : "#treemap-a"});
       // this.treemap_b  	= new TreeMap({controller  : this, el : "#treemap-b"});
 
@@ -114,12 +115,14 @@ define(function(require){
       this.current_url   = URLS.linechart;
 
       // [5] load the data
+      this.get_data(time, this.timeline_a, URLS.linechart);
+      
       this.get_data(time, this.heatmap_a, URLS.heatmap);
       this.get_data(time, this.top10bars, URLS.sujetoObligado);
       this.get_data(time, this.top10bars_b, URLS.fraccion);
-      this.get_data(time, this.timeline_a, URLS.linechart);
       this.get_data(time, this.timeline_b, URLS.top10);
       this.get_data(time, this.treemap_a, URLS.top10Total);
+      
       // this.get_data(time, this.treemap_b, URLS.treemap);
       
       // [6] add a listener for the scroll, the ugly hack way
@@ -163,28 +166,29 @@ define(function(require){
     // [ SETUP THE SLIDER ]
     //
     //
-    setup_slider : function(first_year, years_to_last){
+    setup_slider : function(first_year, years_to_last, last_year){
       var that   = this,
           slider = Slider,
-          now    = new Date();
+          now    = new Date(last_year, 11, 31),
+          last   = now.getFullYear() + 1;
       
       noUiSlider.create(slider, {
-        start: [first_year, now.getFullYear()],
+        start: [first_year, last],
         step : 1,
         connect: true,
         // behaviour: 'tap',
         range: {
           'min': first_year,
-          'max': now.getFullYear()
+          'max': last
         },
         pips : {
           mode : "values",
-          values : d3.range(first_year, now.getFullYear() + 1, 1),
+          values : d3.range(first_year, last + 1, 1),
           density : 12,
           stepped : true
         }
       });
-      slider.noUiSlider.set([now.getFullYear() - years_to_last, now.getFullYear()]);
+      slider.noUiSlider.set([last - years_to_last, last]);
       slider.noUiSlider.on("end", function(){
         that.get_data(this.get(), that.current_graph, that.current_url);
       });

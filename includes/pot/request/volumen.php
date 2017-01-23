@@ -1,7 +1,7 @@
 <div id="pot_volumen" class="viz" data-viz="treemap">
 	<div class="row">
 		<div class="col-sm-12">
-			<h3>Volumen de consultas por sujeto obligado y por fracción</span>: <span class="year-range">2012 - 2015</span></h3>
+			<h3>Volumen de consultas por sujeto obligado y por fracción</span>: <span class="year-range">2015</span></h3>
 				<p class="lead">Solicitudes que se realizan por sujeto obligado, tanto de acceso a la información como de datos personales</p>
 			<!--<a href="#" class="download" download><b></b>Descargar datos</a>-->	
 		</div>

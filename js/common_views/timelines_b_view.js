@@ -160,9 +160,10 @@ define(function(require){
     //
     prepare_data : function(data){
       if(this.type == "tipo_sujeto"){
+        console.log(":D");
         data.forEach(function(d){
           d.year        = d.anio;
-          d.month       = 0;
+          d.month       = 1;
           d.dependencia = d.medioentrega;
           //d.date  = new Date(+d.year, +d.month, 1);
         });
@@ -351,11 +352,11 @@ define(function(require){
             .append("path")
             .attr("d", this.line)
             .attr("id",  function (d, i) {
-	          	return  "g-" + [i];    		    
+              return  "g-" + [i];           
             })
             .attr("fill", "none")
             .attr("stroke", function (d, i) {
-	          	return  Color_r[i];    		    
+              return  Color_r[i];           
             })
             .attr("stroke-width", 1.5)
             .attr("opacity", 0.5);
@@ -396,19 +397,19 @@ define(function(require){
             d3.select(this).style(DotHover_style);
             $('svg .main_container path').attr("class","path_out");
             Categories.forEach(function(cat, i){
-	            if(cat == d.dependencia) {
-				$('svg .main_container path#g-'+ [i]).attr("class","path_hover");
-	            }
+              if(cat == d.dependencia) {
+        $('svg .main_container path#g-'+ [i]).attr("class","path_hover");
+              }
             });
           //  $(d.currentTarget).attr("class","path_hover");
             that.controller.create_tooltip({
               title   : d.dependencia,
-              content : "Peticiones : <strong>" + Format(d.total) + "</strong> | Fecha : " + (d.date.getMonth()+1) + "/" + d.date.getFullYear()
+              content : "Peticiones : <strong>" + Format(d.total) + "</strong> | Fecha : " + d.date.getFullYear()
             });
           })
           .on("mouseout", function(d){
             d3.select(this).style(Dot_style);
-		  $('svg .main_container path').attr("class","");
+      $('svg .main_container path').attr("class","");
             that.controller.remove_tooltip();
           })
     },
@@ -452,17 +453,17 @@ define(function(require){
     //
     //
     draw_list : function(){
-      var divrow 	= document.createElement("div"),
-      	  divcol 	= document.createElement("div"),
-       	  ul  		= document.createElement("ul");
-       	  
-     divrow.setAttribute("class", "row"); 	  
+      var divrow  = document.createElement("div"),
+          divcol  = document.createElement("div"),
+          ul      = document.createElement("ul");
+          
+     divrow.setAttribute("class", "row");     
       divcol.setAttribute("class", "col-sm-10 col-sm-offset-1"); 
       ul.setAttribute("id", "timeline-office-selector");
       ul.setAttribute("class", "row timeline list");
-	  
-	    $(divrow).append(divcol);
-	    $(divcol).append(ul);
+    
+      $(divrow).append(divcol);
+      $(divcol).append(ul);
 
       Categories.forEach(function(cat, i){
         var dt = {name : cat, i : Color_r[i]};

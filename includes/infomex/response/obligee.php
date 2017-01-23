@@ -1,7 +1,7 @@
-<div id="t_response_obligee" class="viz" data-viz="treemap"  data-graph="treemap-b">
+<div id="t_response_obligee" class="viz" data-viz="treemap"  data-graph="top10bar_b">
 	<div class="row">
 		<div class="col-sm-12">
-			<h3>Tipo de respuestas por sujetos obligados,  solicitudes y año</span>: <span class="year-range">2012 - 2015</span></h3>
+			<h3>Tipo de respuestas por sujetos obligados,  solicitudes y año</span>: <span class="year-range">2003 - 2015</span></h3>
 				<p class="lead">Respuestas a las solicitudes de acceso por tipo de solicitud, por año y por sujeto obligado</p>
 			<!--<a href="#" class="download" download><b></b>Descargar datos</a>-->	
 		</div>
@@ -11,7 +11,7 @@
 			</p>						
 		</div>
 	</div>
-	<section id="treemap-b"></section>
+	<section id="top10bar_b"></section>
 	<!--source-->
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">

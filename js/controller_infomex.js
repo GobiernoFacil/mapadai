@@ -33,6 +33,7 @@ define(function(require){
       Top10bar   = require("common_views/top10chart_view"),
       MultiBar   = require("common_views/multicolor_chart_view"),
       Timeline   = require("common_views/timelines_view"), 
+      TimelineB  = require("common_views/timelines_b_view"), 
       TreeMap    = require("common_views/treemap_view"),
       Occupation = require("common_views/occupation_chart_view"),
       Gender     = require("common_views/gender_chart_view"),
@@ -43,6 +44,7 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   First_year = 2003,
+  Last_year  = 2015,
   BASE_URL   = "http://inai.skalas.mx/api/",
   Endpoints  = ["heatmap", "treemap", "top10line", "top10", "usuarios/ocupacion", 
                 "usuarios/sexo-edad", "analisis/medioentrega", "analisis/respuesta"],
@@ -107,50 +109,47 @@ define(function(require){
 	    this.hide_stuff();
 
       // [2] setup the SLIDER
-      this.slider = this.setup_slider(First_year, 3);
+      this.slider = this.setup_slider(First_year, 3, Last_year);
       var time    = this.slider.noUiSlider.get();
       time[0]     = +time[0];
       time[1]     = +time[1];
 
       // [3] create the graphs
-      //this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
-      this.top10bars 	 = new Top10bar({controller : this, el : "#top10bar", dataURL : URLS.top10bars});
-      ////////this.colorBar_a  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.medios});
-      this.colorBar_b  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.respuesta, type : "respuesta"});
-      //this.timeline_a  = new Timeline({controller : this, el : "#timeline-a", dataURL : URLS.timeline});
+      // fecha
+      this.timeline_a  = new Timeline({controller : this, el : "#timeline-b", dataURL : URLS.timeline});
+      // sijeto obligado
       this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a", dataURL : URLS.treemap});
-      this.treemap_b   = new TreeMap({controller  : this, el : "#treemap-b", dataURL : URLS.respuesta, type : "tipo_sujeto"});
+      this.top10bars 	 = new Top10bar({controller : this, el : "#top10bar", dataURL : URLS.top10bars});
+      // tipo respuesta
+      this.colorBar_b  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.respuesta, type : "respuesta"});
+      this.timeline_b  = new TimelineB({controller  : this, el : "#treemap-b", dataURL : URLS.medios, type : "tipo_sujeto"});
+      // perfil
       this.occupation  = new Occupation({controller : this, el : "#occupation-bar", dataURL : URLS.occupation});
       this.gender      = new Gender({controller : this, el : "#gender-bar", dataURL : URLS.gender});
-      this.xxx         = new Timeline({controller : this, el : "#timeline-b", dataURL : URLS.timeline});
 
-      this.graphsCollection = [this.top10bars, this.treemap_a, this.occupation, this.gender, this.xxx, this.colorBar_b];
+
+      this.graphsCollection = [this.top10bars, this.treemap_a, this.occupation, this.gender, 
+                               this.timeline_a, this.colorBar_b, this.timeline_b];
+      
       // [4] set the current graph and endpoint
-      this.current_graph = this.xxx;
+      this.current_graph = this.timeline_a;
       this.current_url   = URLS.timeline;
 
       // [5] load the data
-      //this.get_data(time, this.heatmap_a, URLS.heatmap);
+      this.get_data(time, this.timeline_a, URLS.timeline);
+
       this.get_data(time, this.top10bars, URLS.top10bars);
-      ////////this.get_data(time, this.colorBar_a, URLS.medios);
       this.get_data(time, this.colorBar_b, URLS.respuesta);
       this.get_data(time, this.treemap_a, URLS.treemap);
-      this.get_data(time, this.treemap_b, URLS.respuesta);
+      this.get_data(time, this.timeline_b, URLS.medios);
       this.get_data(time, this.occupation, URLS.occupation);
       this.get_data(time, this.gender, URLS.gender);
-      //this.get_data(time, this.top10bars_b, URLS.top10bars);
 
-      this.get_data(time, this.xxx, URLS.timeline);
-
-
-
-      
       // [6] add a listener for the scroll, the ugly hack way
-      this.year_menu = $.proxy(this.year_menu, this);
-      this.setupScrollEvents = $.proxy(this.setupScrollEvents, this);
+      this.year_menu             = $.proxy(this.year_menu, this);
+      this.setupScrollEvents     = $.proxy(this.setupScrollEvents, this);
       this.fullExperiencieMobile = $.proxy(this.fullExperiencieMobile, this);
-      
-      window.onscroll   = this.year_menu;
+      window.onscroll            = this.year_menu;
       
       
     },
@@ -186,11 +185,11 @@ define(function(require){
     // [ SETUP THE SLIDER ]
     //
     //
-    setup_slider : function(first_year, years_to_last){
+    setup_slider : function(first_year, years_to_last, last_year){
       // setup variables
       var that   = this,
           slider = Slider,
-          now    = new Date(),
+          now    = new Date(last_year+1, 0, 1),
           years  = now.getFullYear() - first_year,
           range  = {}; 
 
@@ -269,6 +268,14 @@ define(function(require){
       });
 
       this.$el.append(el);
+    },
+
+    move_tooltip : function(data){
+      $(".tooltip-container").css({
+        left : d3.event.pageX + "px",
+        top  : d3.event.pageY + "px",
+        position: "absolute"
+      });
     },
 
     //

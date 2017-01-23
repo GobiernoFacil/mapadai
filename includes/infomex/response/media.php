@@ -1,12 +1,12 @@
-<div id="t_response_media" class="viz hide" data-viz="bar"  data-graph="top10bar_b">
+<div id="t_response_media" class="viz hide" data-viz="bar"  data-graph="treemap-b">
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
-			<h3>Medio de entrega de la información según lo requiera el solicitante (acceso a la información) por año. <span class="year-range">2013 - 2015</span></h3>
+			<h3>Medio de entrega de la información según lo requiera el solicitante (acceso a la información) por año. <span class="year-range">2003 - 2015</span></h3>
 			<!--<a href="#" class="download" download><b></b>Descargar datos</a>-->			
 			<p class="lead">Medio por el que el solicitante requiere se entregue la información</p>	
 		</div>
 	</div>
-	<section id="top10bar_b"></section>
+	<section id="treemap-b"></section>
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
 			<!--source-->

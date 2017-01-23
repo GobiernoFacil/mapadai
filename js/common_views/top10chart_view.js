@@ -67,6 +67,7 @@ define(function(require){
       this.first_time = true;
       this.controller = settings.controller;
       this.dataURL    = settings.dataURL;
+      this.section    = settings.section;
     },
 
     render : function(data, range){
