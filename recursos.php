@@ -23,8 +23,8 @@
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
 					<ul id="viz_nav">
-						<li><a href="#" data-container="bydate">Por fecha</a></li>
-						<li><a href="#" class="current" data-container="obligee">Por sujeto obligado</a></li>
+						<li><a href="#" class="current" data-container="bydate">Por fecha</a></li>
+						<li><a href="#" data-container="obligee">Por sujeto obligado</a></li>
 						<li><a href="#" data-container="commissioner">Por comisionado</a></li>
 						<li><a href="#" data-container="recurrent_profile">Perfil del recurrente</a></li>
 					</ul>
@@ -48,7 +48,7 @@
 <div class="content_graph">
 	
 	<!--Por fecha-->
-	<div id="bydate" class="content-tab hide">
+	<div id="bydate" class="content-tab">
 		<div class="container">
 			<div class="row">			
 				<div class="col-sm-12">
@@ -60,7 +60,7 @@
 	</div>
 	
 	<!-- sujeto obligado-->
-	<div id="obligee" class="content-tab">
+	<div id="obligee" class="content-tab hide">
 		<nav class="nav subnav re">
 			<ul class="sub_nav">
 				<li><a href="#" class="current" data-container="obligee_volumen">Volumen de recursos</a></li>

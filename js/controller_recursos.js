@@ -33,6 +33,7 @@ define(function(require){
       Top10bar   = require("common_views/top10chart_view"),
       MultiBar   = require("common_views/multicolor_chart_view"),
       Timeline   = require("common_views/timelines_view"), 
+      TimelineC  = require("common_views/timelines_c_view"), 
       TreeMap    = require("common_views/treemap_view"),
       Occupation = require("common_views/occupation_chart_view"),
       Gender     = require("common_views/gender_chart_view"),
@@ -43,6 +44,7 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   First_year = 2007,
+  Last_year  = 2015,
   BASE_URL   = "http://inai.skalas.mx/api/rr/",
   Endpoints  = ["total", "sujetoObligado", "top10", "top10-total", "comisionado", "sexo-edad", "ocupacion"],
   
@@ -73,15 +75,15 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-     /// new top nav
+      // new top nav
       "click #viz_nav a"    : "doit",
       
       /// sub_nav
       "click .sub_nav a"    : "dothat",
     
-    /// dataviz
-    'mouseenter svg .main_container path' : 'hover_path',
-    'mouseleave svg .main_container path' : 'leave_path',
+      // dataviz
+      'mouseenter svg .main_container path' : 'hover_path',
+      'mouseleave svg .main_container path' : 'leave_path',
     },
 
     //
@@ -104,7 +106,7 @@ define(function(require){
       this.hide_stuff();
 
       // [2] setup the SLIDER
-      this.slider = this.setup_slider(First_year, 3);
+      this.slider = this.setup_slider(First_year, 3, Last_year);
       var time    = this.slider.noUiSlider.get();
       time[0]     = +time[0];
       time[1]     = +time[1];
@@ -114,6 +116,7 @@ define(function(require){
       //this.top10bars   = new Top10bar({controller : this, el : "#top10bar", dataURL : URLS.top10bars});
       ////////this.colorBar_a  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.medios});
       //this.colorBar_b  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.respuesta, type : "respuesta"});
+      this.requests  = new TimelineC({controller : this, el : "#rr_total", dataURL : URLS.solicitudes});
       this.timeline  = new Timeline({controller : this, el : "#timeline-a", dataURL : URLS.top10Historico});
       //this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a", dataURL : URLS.treemap});
       //this.treemap_b   = new TreeMap({controller  : this, el : "#treemap-b", dataURL : URLS.respuesta, type : "tipo_sujeto"});
@@ -121,10 +124,10 @@ define(function(require){
       this.gender      = new Gender({controller : this, el : "#gender-bar", dataURL : URLS.gender});
       //this.occupation  = new Timeline({controller : this, el : "#timeline-b", dataURL : URLS.timeline});
 
-      this.graphsCollection = [this.top10bars, this.treemap_a, this.occupation, this.gender, this.occupation, this.colorBar_b];
+      this.graphsCollection = [this.requests, this.top10bars, this.treemap_a, this.occupation, this.gender, this.occupation, this.colorBar_b];
       // [4] set the current graph and endpoint
-      this.current_graph = this.occupation;
-      this.current_url   = URLS.timeline;
+      this.current_graph = this.requests;
+      this.current_url   = URLS.solicitudes;
 
       // [5] load the data
       //this.get_data(time, this.heatmap_a, URLS.heatmap);
@@ -133,6 +136,7 @@ define(function(require){
       //this.get_data(time, this.colorBar_b, URLS.respuesta);
       //this.get_data(time, this.treemap_a, URLS.treemap);
       //this.get_data(time, this.treemap_b, URLS.respuesta);
+      this.get_data(time, this.requests, URLS.solicitudes);
       this.get_data(time, this.occupation, URLS.occupation);
       this.get_data(time, this.gender, URLS.gender);
       //this.get_data(time, this.top10bars_b, URLS.top10bars);
@@ -183,11 +187,11 @@ define(function(require){
     // [ SETUP THE SLIDER ]
     //
     //
-    setup_slider : function(first_year, years_to_last){
+    setup_slider : function(first_year, years_to_last, last_year){
       // setup variables
       var that   = this,
           slider = Slider,
-          now    = new Date(),
+          now    = new Date(last_year+1, 0, 1),
           years  = now.getFullYear() - first_year,
           range  = {}; 
 

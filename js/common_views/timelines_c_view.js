@@ -1,0 +1,488 @@
+// INAI - Diagnósitco MapaDAImx
+// @package  : INAI
+// @location : /js/common_views
+// @file     : timelines_view.js
+// @author   : Gobierno fácil <howdy@gobiernofacil.com>
+// @url      : http://gobiernofacil.com
+
+define(function(require){
+
+  //
+  // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
+  // --------------------------------------------------------------------------------
+  //
+  var Backbone = require('backbone'),
+      d3       = require("d3"),
+      SVG      = require("common_views/main_svg_view"),
+      Color_r  = ["#225378","#3498DB", "#1695A3" , "#EB7F00", "#FF6138",  "#CE003C", "#79BD8F", "#00A388","#7E8AA2", "#2C3E50"],
+
+  //
+  // D E F I N E   C O N S T A N T 'S
+  // --------------------------------------------------------------------------------
+  //
+  Format        = d3.format(","),
+  Format2       = d3.format(".2%"),
+  Data          = null,
+  First_time    = true,
+  Current_data  = null,
+  Current_range = null,
+  Margins       = {
+    width    : 800,
+    height   : 500,
+    top      : 20,
+    right    : 30,
+    bottom   : 40, 
+    left     : 70,
+    numbers  : 10,
+    dates    : 0,
+    padding  : 0,
+    oPadding : 15
+  },
+  Dot_style = {
+    opacity : 0,
+    cursor  : "pointer",
+    r       : 5 
+  },
+  DotHover_style = {
+    opacity : 1,
+    fill : "rgba(0,0,0,0.3)"
+  };
+    
+  //
+  // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
+  // --------------------------------------------------------------------------------
+  //
+  var timeline = Backbone.View.extend({
+
+    //
+    // [ THE INITIALIZE FUNCTION ]
+    //
+    //
+    initialize : function(settings){
+      this.controller    = settings.controller;
+      this.svg           = new SVG(this.el, Margins);
+      this.first_time    = true;
+      this.dataURL       = settings.dataURL;
+      this.section       = settings.section;
+    },
+
+    //
+    // [ RENDER THE GRAPH ]
+    //
+    //
+    render : function(data, range){
+      Data  = data;
+      var d = data;
+
+      this._data = Data;
+      this.__data = d;
+      this.prepare_data(d);
+
+      if(this.first_time){
+        this.set_scales(d);
+        this.set_axis();
+        this.get_line_generator();
+        
+        this.draw_lines(d);
+        
+        this.draw_dots(d);
+        /*
+        this.draw_list();
+        */
+        this.first_time = false;
+
+      }
+      else{
+        this.update_render();
+      }
+
+      Current_range = range;
+    },
+
+    update_render : function(){
+
+      // [1] generate the helpers again
+      this.set_scales(Current_data);
+      this.get_line_generator();
+      this.set_axis(true);
+      this.draw_lines(this.keep_data(), true);
+      this.remove_dots();
+      this.draw_dots(Current_data);
+    },
+
+    //
+    // I N T E R A C T I O N   F U N C T I O N S
+    // --------------------------------------------------------------------------------
+    //
+    update_lines : function(e){
+      e.preventDefault();
+
+      if(e.currentTarget.classList.toggle("disabled")){
+        // hide the line
+        this.update_data(e.currentTarget.getAttribute("data-category"), true);
+      }
+      else{
+        // show the line
+        this.update_data(e.currentTarget.getAttribute("data-category"), true);
+      }
+    },
+
+
+    //
+    // D A T A   F U N C T I O N S
+    // --------------------------------------------------------------------------------
+    //
+
+    //
+    // [ DATA CONFIG ]
+    //
+    //
+    prepare_data : function(data){
+      data.forEach(function(d){
+        d.year  = d.year || d.anio;
+        d.month = d.month || d.mes;
+        d.date  = new Date(+d.year, +d.month, 1);
+      });
+
+      data.sort(function(a, b){
+        return a.date - b.date;
+      });
+
+      
+      data.map(function(d, i){
+        d.total  = +d.solicitudes;
+        d.total2 = +d.rr;
+      }, this);
+
+      Current_data = data;
+    },
+
+    //
+    // [ UPDATE DATA ]
+    //
+    //
+    update_data : function(category, add){
+
+      this.update_render();
+    },
+
+    //
+    // [ keep_data ]
+    //
+    //
+    keep_data : function(){
+      var items  = [].slice.call(document.querySelectorAll(".category-toggle")),
+          hidden = items.filter(function(item){
+            return item.classList.contains("disabled");
+          }).map(function(item){
+            return item.classList.contains("disabled") ? item.getAttribute('data-category') : false;
+          }),
+          data = Current_data.filter(function(d){
+            return hidden.indexOf(d.dependencia) == -1;
+          });
+
+      return data;
+    },
+
+    //
+    // [ PREPARE THE DATA FOR THE VERTICAL HOVER ]
+    //
+    //
+    prepare_vertical_labels_data : function(){
+    },
+
+    get_range : function(){
+      return Current_range;
+    },
+
+    //
+    // U I / U X   F U N C T I O N S
+    // --------------------------------------------------------------------------------
+    //
+
+    //
+    // [ GENERATE THE SCALES ]
+    //
+    //
+    set_scales : function(data){
+
+      var max = d3.max(data, function(d, i){
+        return +d.total;
+      }),
+      ext = d3.extent(data, function(d){
+        return d.date;
+      }),
+      y = d3.scale.linear()
+            .domain([0, max])
+            .range([Margins.height - Margins.bottom, Margins.top ]),
+      x = d3.time.scale()
+            .domain(ext)
+            .range([Margins.left, Margins.width - Margins.left - Margins.right]);
+            //.ticks(d3.time.year, 1);
+
+      // console.log(ext);
+
+      this.scales = [x, y];
+    },
+
+    //
+    // [ GENERATE THE AXIS ]
+    //
+    //
+    set_axis : function(update){
+      var x_axis = d3.svg.axis()
+                     .scale(this.scales[0])
+                     .orient("bottom")
+                     .tickValues(this.scales[0].ticks(d3.time.year, 1)),
+          y_axis = d3.svg.axis()
+                     .scale(this.scales[1])
+                     .orient("left")
+                     .tickFormat(d3.format("d"));
+
+      if(!update){
+        var Time = this.svg.append("g")
+         .attr("class", "x_axis")
+         .attr("transform", "translate(0," + (Margins.height - Margins.bottom )+")")
+         .call(x_axis),
+            Value = this.svg.append("g")
+         .attr("class", "y_axis")
+         .attr("transform", "translate(" + (Margins.left) +", 0)")
+         .call(y_axis);
+      }
+      else{
+        this.svg.select(".x_axis")
+        .transition().duration(500).ease("sin-in-out")
+        .call(x_axis); 
+        this.svg.select(".y_axis")
+        .transition().duration(500).ease("sin-in-out")
+        .call(y_axis); 
+      }
+    },
+
+    //
+    // [ GENERATE THE LINE FUNCTION ]
+    //
+    //
+    get_line_generator : function(){
+      var that = this,
+          line = d3.svg.line()
+                   .x(function(d){
+                    return that.scales[0](d.date);
+                   })
+                   .y(function(d){
+                    return that.scales[1](d.total);
+                   }),
+          line2 = d3.svg.line()
+                   .x(function(d){
+                    return that.scales[0](d.date);
+                   })
+                   .y(function(d){
+                    return that.scales[1](d.total2);
+                   });
+      
+      this.line  = line;
+      this.line2 = line2;
+    },
+
+    //
+    // [ DRAW LINES ]
+    //
+    //
+    draw_lines : function(data, update){
+      var that = this;
+      if(!update){
+        var container = this.svg.append("g").attr("class", "main_container");
+
+        this.lines = container.selectAll(".solicitudes-path")
+          .data([data]).enter()
+            .append("path")
+            .attr("d", this.line)
+            .attr("class", "solicitudes-path")
+            .attr("id",  function (d, i) {
+              return  "g-" + [i];           
+            })
+            .attr("fill", "none")
+            .attr("stroke", function (d, i) {
+              return  Color_r[0];           
+            })
+            .attr("stroke-width", 1.5)
+            .attr("opacity", 0.5);
+
+        this.lines2 = container.selectAll(".recursos-path")
+          .data([data]).enter()
+            .append("path")
+            .attr("d", this.line2)
+            .attr("class", "recursos-path")
+            .attr("id",  function (d, i) {
+              return  "g-" + [i];           
+            })
+            .attr("fill", "none")
+            .attr("stroke", function (d, i) {
+              return  Color_r[3];           
+            })
+            .attr("stroke-width", 1.5)
+            .attr("opacity", 0.5);
+      }
+      else{
+        this.lines.data([data]);
+        this.lines.transition().duration(500).ease("sin-in-out").attr("d", this.line);
+
+        this.lines2.data([data]);
+        this.lines2.transition().duration(500).ease("sin-in-out").attr("d", this.line2);
+      }
+    },
+
+    //
+    //
+    //
+    //
+    draw_dots : function(data){
+      var that = this;
+      
+      this.svg.selectAll(".dot").remove();
+      this.svg.selectAll(".dot").data(data).enter()
+        .append("circle")
+          .attr("class", "dot")
+          .attr("r", Dot_style.r)
+          .attr("cx", function(d){
+            return that.scales[0](d.date);
+          })
+          .attr("cy", function(d){
+            return that.scales[1](d.total);
+          })
+          .style(Dot_style)
+          .on("mouseover", function(d){
+            d3.select(this).style(DotHover_style);
+            //$('svg .main_container path').attr("class","path_out");
+            
+          //  $(d.currentTarget).attr("class","path_hover");
+            that.controller.create_tooltip({
+              title   : "Solicitudes",
+              content : "Total : <strong>" + Format(d.total) + "</strong>" + "<br>" +
+              "Fecha : " + (d.date.getMonth()+1) + "/" + d.date.getFullYear()
+            });
+          })
+          .on("mouseout", function(d){
+            d3.select(this).style(Dot_style);
+            $('svg .main_container path').attr("class","");
+            that.controller.remove_tooltip();
+          });
+
+      this.svg.selectAll(".dot2").remove();
+      this.svg.selectAll(".dot2").data(data).enter()
+        .append("circle")
+          .attr("class", "dot2")
+          .attr("r", Dot_style.r)
+          .attr("cx", function(d){
+            return that.scales[0](d.date);
+          })
+          .attr("cy", function(d){
+            return that.scales[1](d.total2);
+          })
+          .style(Dot_style)
+          .on("mouseover", function(d){
+            d3.select(this).style(DotHover_style);
+            //$('svg .main_container path').attr("class","path_out");
+            
+          //  $(d.currentTarget).attr("class","path_hover");
+            that.controller.create_tooltip({
+              title   : "Recursos de revisión",
+              content : "Total : <strong>" + Format(d.total2) + "</strong> | Porcentaje : " + Format2(d.porcentaje/100)+ "<br>" +
+              "Fecha : " + (d.date.getMonth()+1) + "/" + d.date.getFullYear()
+            });
+          })
+          .on("mouseout", function(d){
+            d3.select(this).style(Dot_style);
+            $('svg .main_container path').attr("class","");
+            that.controller.remove_tooltip();
+          });
+
+    },
+
+    remove_dots : function(){
+      d3.selectAll(".dot").remove();
+      d3.selectAll(".dot2").remove();
+    },
+
+
+    //
+    //
+    //
+    //
+    draw_vertical_labels : function(update){
+      var data = this.prepare_vertical_labels_data();
+      //this.svg.selectAll
+    },
+
+    //
+    //
+    //
+    //
+    draw_tooltips : function(data){
+      var that   = this,
+          labels = this.svg.selectAll(".amount").data(data).enter()
+                     .append("g")
+                       .attr("class", "amount")
+                       .attr("transform", function(d){
+                         var x   = that.scales[0](d.date),
+                             y   = that.scales[1](d.total),
+                             txt = "translate(" + x + ", " + y + ")"; 
+                         return txt;
+                       });
+      labels.append("text").text(function(d){
+        return Format(d.total);
+      });
+    },
+
+    //
+    // [ DRAW USERS LIST ]
+    //
+    //
+    draw_list : function(){
+      var divrow  = document.createElement("div"),
+          divcol  = document.createElement("div"),
+          ul      = document.createElement("ul");
+          
+     divrow.setAttribute("class", "row");     
+      divcol.setAttribute("class", "col-sm-10 col-sm-offset-1"); 
+      ul.setAttribute("id", "timeline-office-selector");
+      ul.setAttribute("class", "row timeline list");
+    
+      $(divrow).append(divcol);
+      $(divcol).append(ul);
+
+      Categories.forEach(function(cat, i){
+        var dt = {name : cat, i : Color_r[i]};
+        $(ul).append(this.li(dt));
+      }, this);
+      this.el.insertBefore(divrow, this.el.firstChild);
+    },
+
+    //
+    // [ DRAW GRAPH AXIS LABELS ]
+    //
+    //
+    draw_labels : function(svg){
+
+      svg.append("text")
+        .attr("class", "y-label")
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .attr("transform", "translate("+ Margins.numbers + ", " + Margins.height/2 + ")rotate(-90)")
+        .text("Peticiones");
+
+      svg.append("text")
+        .attr("class", "x-label")
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .attr("transform", "translate("+ Margins.width/2 + ", " + (Margins.height - Margins.dates) + ")")
+        .text("Año");
+    }
+  });
+
+  //
+  // R E T U R N   T H E   B A C K B O N E   " C O N T R O L L E R "
+  // --------------------------------------------------------------------------------
+  //
+  return timeline;
+});

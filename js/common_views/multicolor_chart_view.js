@@ -492,13 +492,6 @@ define(function(require){
                                 }, 0)
               },
             ];
-            console.log(r);
-            /*
-              "Sin respuesta por ciudadano"
-              "Sin respuesta"
-              "Sin respuesta por ley"
-              "Informacion disponible"
-            */
             return r;
           }, this);
 
