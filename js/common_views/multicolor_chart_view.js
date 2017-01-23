@@ -173,13 +173,12 @@ define(function(require){
           })
           .on("mouseover", function(d){
             that.controller.create_tooltip({
-              /*
-              "Datos Personales"
-              "Información Pública"
-              "Corrección a Datos Personales"
-              */
               title   : "Datos personales",
-              content : Format(d.totalA) + " de " + Format(d.total)
+              content : Format(d.totalA) + " de " + Format(d.total) + "<br>" + 
+                        "<strong>" + d.dataA[0].type + ":</strong> " + Format(d.dataA[0].num) + "<br>" + 
+                        "<strong>" + d.dataA[1].type + ":</strong> " + Format(d.dataA[1].num) + "<br>" + 
+                        "<strong>" + d.dataA[2].type + ":</strong> " + Format(d.dataA[2].num) + "<br>" + 
+                        "<strong>" + d.dataA[3].type + ":</strong> " + Format(d.dataA[3].num)
             });
           })
           .on("mousemove", function(d){
@@ -219,13 +218,13 @@ define(function(require){
           })
           .on("mouseover", function(d){
             that.controller.create_tooltip({
-              /*
-              "Datos Personales"
-              "Información Pública"
-              "Corrección a Datos Personales"
-              */
+              
               title   : "Infomación pública",
-              content : Format(d.totalB) + " de " + Format(d.total)
+              content : Format(d.totalB) + " de " + Format(d.total)+ "<br>" + 
+                        "<strong>" + d.dataB[0].type + ":</strong> " + Format(d.dataB[0].num) + "<br>" + 
+                        "<strong>" + d.dataB[1].type + ":</strong> " + Format(d.dataB[1].num) + "<br>" + 
+                        "<strong>" + d.dataB[2].type + ":</strong> " + Format(d.dataB[2].num) + "<br>" + 
+                        "<strong>" + d.dataB[3].type + ":</strong> " + Format(d.dataB[3].num)
             });
           })
           .on("mousemove", function(d){
@@ -266,13 +265,12 @@ define(function(require){
           })
           .on("mouseover", function(d){
             that.controller.create_tooltip({
-              /*
-              "Datos Personales"
-              "Información Pública"
-              "Corrección a Datos Personales"
-              */
               title   : "Corrección a Datos Personales",
-              content : Format(d.totalC) + " de " + Format(d.total)
+              content : Format(d.totalC) + " de " + Format(d.total)+ "<br>" + 
+                        "<strong>" + d.dataC[0].type + ":</strong> " + Format(d.dataC[0].num) + "<br>" + 
+                        "<strong>" + d.dataC[1].type + ":</strong> " + Format(d.dataC[1].num) + "<br>" + 
+                        "<strong>" + d.dataC[2].type + ":</strong> " + Format(d.dataC[2].num) + "<br>" + 
+                        "<strong>" + d.dataC[3].type + ":</strong> " + Format(d.dataC[3].num)
             });
           })
           .on("mousemove", function(d){
@@ -378,6 +376,129 @@ define(function(require){
                            }), "total").reduce(function(a, b){
                              return Number(a) + Number(b);
                            }, 0);
+            r.dataA = [
+              {
+                type : _respuestas[0],
+                num  :  _.pluck(r.data.filter(function(s){
+                                  return s.tiposolicitud == solicitudes[0] && s.tiporespuesta == _respuestas[0];
+                                }), "total")
+                                .reduce(function(a, b){
+                                  return Number(a) + Number(b);
+                                }, 0)
+              },
+              {
+                type : _respuestas[1],
+                num  :  _.pluck(r.data.filter(function(s){
+                                  return s.tiposolicitud == solicitudes[0] && s.tiporespuesta == _respuestas[1];
+                                }), "total")
+                                .reduce(function(a, b){
+                                  return Number(a) + Number(b);
+                                }, 0)
+              },
+              {
+                type : _respuestas[2],
+                num  :  _.pluck(r.data.filter(function(s){
+                                  return s.tiposolicitud == solicitudes[0] && s.tiporespuesta == _respuestas[2];
+                                }), "total")
+                                .reduce(function(a, b){
+                                  return Number(a) + Number(b);
+                                }, 0)
+              },
+              {
+                type : _respuestas[3],
+                num  :  _.pluck(r.data.filter(function(s){
+                                  return s.tiposolicitud == solicitudes[0] && s.tiporespuesta == _respuestas[3];
+                                }), "total")
+                                .reduce(function(a, b){
+                                  return Number(a) + Number(b);
+                                }, 0)
+              },
+            ];
+
+            r.dataB = [
+              {
+                type : _respuestas[0],
+                num  :  _.pluck(r.data.filter(function(s){
+                                  return s.tiposolicitud == solicitudes[1] && s.tiporespuesta == _respuestas[0];
+                                }), "total")
+                                .reduce(function(a, b){
+                                  return Number(a) + Number(b);
+                                }, 0)
+              },
+              {
+                type : _respuestas[1],
+                num  :  _.pluck(r.data.filter(function(s){
+                                  return s.tiposolicitud == solicitudes[1] && s.tiporespuesta == _respuestas[1];
+                                }), "total")
+                                .reduce(function(a, b){
+                                  return Number(a) + Number(b);
+                                }, 0)
+              },
+              {
+                type : _respuestas[2],
+                num  :  _.pluck(r.data.filter(function(s){
+                                  return s.tiposolicitud == solicitudes[1] && s.tiporespuesta == _respuestas[2];
+                                }), "total")
+                                .reduce(function(a, b){
+                                  return Number(a) + Number(b);
+                                }, 0)
+              },
+              {
+                type : _respuestas[3],
+                num  :  _.pluck(r.data.filter(function(s){
+                                  return s.tiposolicitud == solicitudes[1] && s.tiporespuesta == _respuestas[3];
+                                }), "total")
+                                .reduce(function(a, b){
+                                  return Number(a) + Number(b);
+                                }, 0)
+              },
+            ];
+
+            r.dataC = [
+              {
+                type : _respuestas[0],
+                num  :  _.pluck(r.data.filter(function(s){
+                                  return s.tiposolicitud == solicitudes[2] && s.tiporespuesta == _respuestas[0];
+                                }), "total")
+                                .reduce(function(a, b){
+                                  return Number(a) + Number(b);
+                                }, 0)
+              },
+              {
+                type : _respuestas[1],
+                num  :  _.pluck(r.data.filter(function(s){
+                                  return s.tiposolicitud == solicitudes[2] && s.tiporespuesta == _respuestas[1];
+                                }), "total")
+                                .reduce(function(a, b){
+                                  return Number(a) + Number(b);
+                                }, 0)
+              },
+              {
+                type : _respuestas[2],
+                num  :  _.pluck(r.data.filter(function(s){
+                                  return s.tiposolicitud == solicitudes[2] && s.tiporespuesta == _respuestas[2];
+                                }), "total")
+                                .reduce(function(a, b){
+                                  return Number(a) + Number(b);
+                                }, 0)
+              },
+              {
+                type : _respuestas[3],
+                num  :  _.pluck(r.data.filter(function(s){
+                                  return s.tiposolicitud == solicitudes[2] && s.tiporespuesta == _respuestas[3];
+                                }), "total")
+                                .reduce(function(a, b){
+                                  return Number(a) + Number(b);
+                                }, 0)
+              },
+            ];
+            console.log(r);
+            /*
+              "Sin respuesta por ciudadano"
+              "Sin respuesta"
+              "Sin respuesta por ley"
+              "Informacion disponible"
+            */
             return r;
           }, this);
 
