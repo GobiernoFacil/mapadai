@@ -1,4 +1,4 @@
-<div id="obligee_sujeto" class="viz" data-viz="treemap">
+<div id="obligee_volumen" class="viz" data-viz="treemap-a" data-graph="treemap-a">
 	<div class="row">
 		<div class="col-sm-12">
 			<h3>Volumen de recursos de revisión, por sujeto obligado y por sentido de la resolución: <span class="year-range">2012 - 2015</span></h3>

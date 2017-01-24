@@ -1,4 +1,4 @@
-<div id="profile_occupation" class="viz hide" data-viz="occupation-bar">
+<div id="profile_occupation" class="viz hide" data-viz="occupation-bar" data-graph="occupation-bar">
   <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
       <h3>Recursos de revisión por ocupación <span class="year-range">2007 - 2015</span></h3>

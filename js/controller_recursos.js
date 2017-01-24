@@ -32,9 +32,10 @@ define(function(require){
       //HeatMap    = require("common_views/heat_map_view"),
       Top10bar   = require("common_views/top10chart_view"),
       MultiBar   = require("common_views/multicolor_chart_view"),
+      MultiBarB  = require("common_views/multicolor_chart_b_view"),
       Timeline   = require("common_views/timelines_view"), 
       TimelineC  = require("common_views/timelines_c_view"), 
-      TreeMap    = require("common_views/treemap_view"),
+      TreeMapB   = require("common_views/treemap_b_view"),
       Occupation = require("common_views/occupation_chart_view"),
       Gender     = require("common_views/gender_chart_view"),
       Tooltip    = require("text!templates/tooltip-a.html"),
@@ -117,6 +118,8 @@ define(function(require){
       ////////this.colorBar_a  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.medios});
       //this.colorBar_b  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.respuesta, type : "respuesta"});
       this.requests  = new TimelineC({controller : this, el : "#rr_total", dataURL : URLS.solicitudes});
+      this.sujeto    = new TreeMapB({controller : this, el : "#treemap-a", dataURL : URLS.sujetoObligado});
+
       this.timeline  = new Timeline({controller : this, el : "#timeline-a", dataURL : URLS.top10Historico});
       //this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a", dataURL : URLS.treemap});
       //this.treemap_b   = new TreeMap({controller  : this, el : "#treemap-b", dataURL : URLS.respuesta, type : "tipo_sujeto"});
@@ -124,7 +127,8 @@ define(function(require){
       this.gender      = new Gender({controller : this, el : "#gender-bar", dataURL : URLS.gender});
       //this.occupation  = new Timeline({controller : this, el : "#timeline-b", dataURL : URLS.timeline});
 
-      this.graphsCollection = [this.requests, this.top10bars, this.treemap_a, this.occupation, this.gender, this.occupation, this.colorBar_b];
+      this.graphsCollection = [this.requests, this.sujeto, /*this.top10bars, this.treemap_a,*/ this.occupation, 
+                               this.gender, /*this.colorBar_b,*/ this.timeline];
       // [4] set the current graph and endpoint
       this.current_graph = this.requests;
       this.current_url   = URLS.solicitudes;
@@ -137,6 +141,8 @@ define(function(require){
       //this.get_data(time, this.treemap_a, URLS.treemap);
       //this.get_data(time, this.treemap_b, URLS.respuesta);
       this.get_data(time, this.requests, URLS.solicitudes);
+      this.get_data(time, this.sujeto, URLS.sujetoObligado);
+
       this.get_data(time, this.occupation, URLS.occupation);
       this.get_data(time, this.gender, URLS.gender);
       //this.get_data(time, this.top10bars_b, URLS.top10bars);
@@ -324,7 +330,6 @@ define(function(require){
     
     doit : function(e){
       e.preventDefault();
-      console.log(":D");
       var name_container = e.target.getAttribute("data-container"),
           container      = document.getElementById(name_container),
           vizAnchor      = container.querySelector(".col-sm-12 .viz"),
@@ -351,9 +356,10 @@ define(function(require){
     dothat : function(e) {
       e.preventDefault();
       //var name_container  = $(e.target).data('container'),
-      var name_container = e.target.getAttribute("data-container"),
-          vizType        = document.getElementById(name_container),
-          vizName        = vizType.getAttribute("data-graph");
+      var name_container = e.target.getAttribute("data-container");
+         var vizType        = document.getElementById(name_container);
+         console.log(name_container, vizType);
+          var vizName        = vizType.getAttribute("data-graph");
       
       this.updateCurrentGraph(vizName);
       //show/hide container  
@@ -366,8 +372,10 @@ define(function(require){
     },
     
     updateCurrentGraph : function(viz){
-      return;
+      //return;
+      console.log(viz);
       var g = this.graphsCollection.filter(function(graph){
+        console.log(graph);
         return graph.el.id == viz;
       });
 

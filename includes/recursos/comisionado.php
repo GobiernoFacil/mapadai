@@ -1,4 +1,4 @@
-<div id="t_response_media" class="viz hide" data-viz="bar">
+<div id="t_response_media" class="viz hide" data-viz="bar" data-graph="top10bar_b">
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
 			<h3>Recursos por comisionado y sentido de la resolución: <span class="year-range">2013 - 2015</span></h3>

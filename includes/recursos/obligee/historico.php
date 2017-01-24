@@ -1,4 +1,4 @@
-<div id="obligee_historico" class="viz hide" data-viz="timeline">
+<div id="obligee_historico" class="viz hide" data-viz="timeline" data-graph="timeline-a">
 	<div class="row">
 		<div class="col-sm-12">
 			<h3>Top 10 de sujetos obligados por recursos de revisión (histórico): 

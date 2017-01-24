@@ -1,4 +1,4 @@
-<div id="obligee_total" class="viz hide" data-viz="bar">
+<div id="obligee_total" class="viz hide" data-viz="bar" data-graph="top10bar">
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
 			<h3>Top 10 de sujetos obligados por recursos de revisión (total): <span class="year-range">2013 - 2015</span></h3>
