@@ -35,6 +35,7 @@ define(function(require){
     height : 10,
     fill   : "#3498DB",
     colors : ["#225378","#3498DB", "#1695A3" , "#EB7F00", "#FF6138",  "#CE003C", "#79BD8F", "#00A388","#7E8AA2", "#2C3E50", "#CCC"],
+    Resolutions : null,
     fillw  : "#981F7C",
     slot   : 30, // el espacio entre rectángulo y rectángulo
     empty  : "sin especificar" 
@@ -78,7 +79,7 @@ define(function(require){
       this.map_data();
 
 
-      return;
+      
 
       this.scale = this._scale(this.data);
       
@@ -134,6 +135,7 @@ define(function(require){
           .attr("x", 0)
           .attr("y", Margins.height - Margins.bottom);
 
+      /*
       this.bars = this.svg.selectAll(".multicolor-rect-media").data(this.data);
       this.bars.enter()
         .append("rect")
@@ -154,7 +156,87 @@ define(function(require){
          
 
       this.bars.exit().remove();
+      */
 
+
+      this.data.forEach(function(comisionado, i){
+        // Resolutions
+        var bleed = Margins.left;
+        
+        var b = this.svg.selectAll(".multicolor-rect-media-" + i).data(comisionado.data);
+        //comisionado.data.forEach(function(resolucion, j){
+
+          //console.log(resolucion);
+          /*
+          var b = this.svg.selectAll(".multicolor-rect-media-" + j).data(resoluciones);
+          
+          b.enter()
+           .append("rect")
+           .attr("class", "multicolor-rect-media" + j)
+           .attr("fill", colors[j])
+           .attr("width", function(d){
+            return that.scale(d.total);
+          })
+          .attr("height", Rect.height)
+          .attr("x", bleed)
+          .attr("y", function(d, i){
+            return (Rect.slot * i) + Margins.top + 5;
+          });
+
+          bleed+= this.scale();
+          */
+
+
+          /*
+          this.bars = this.svg.selectAll(".multicolor-rect-media").data(this.data);
+      this.bars.enter()
+        .append("rect")
+          .attr("class", "multicolor-rect-media")
+          .attr("fill", Rect.fillw)
+          .attr("width", function(d){
+            return that.scale(d.total);
+          })
+          .attr("height", Rect.height)
+          .attr("x", Margins.left)
+          .attr("y", function(d, i){
+            return (Rect.slot * i) + Margins.top + 5;
+          });
+
+      this.bars.attr("width", function(d){
+            return that.scale(d.total);
+          });
+         
+
+      this.bars.exit().remove();
+          */
+        //}, this);
+      }, this);
+
+
+      this.multicolor_labels = this.svg.selectAll(".multicolor-label").data(this.data);
+
+      this.multicolor_labels.enter()
+        .append("text")
+          .attr("class", "multicolor-label")
+          .attr("fill", "black")
+          .text(function(d){
+            return d.comisionado.trim() ? (d.comisionado + " : " + d.total) : Rect.empty;
+          })
+          .attr("x", Margins.left)
+          .attr("y", function(d, i){
+            return (Rect.slot * i) + Margins.top;
+          });
+
+      this.multicolor_labels
+          .text(function(d){
+            return d.comisionado.trim() ? (d.comisionado + " : " + d.total) : Rect.empty;
+          });
+
+      this.multicolor_labels.exit().remove();
+
+
+
+      return;
       /********/
       this.barsA = this.svg.selectAll(".A-rect-media").data(this.data);
 
@@ -291,28 +373,6 @@ define(function(require){
 
       /****/
 
-
-      this.multicolor_labels = this.svg.selectAll(".multicolor-label").data(this.data);
-
-      this.multicolor_labels.enter()
-        .append("text")
-          .attr("class", "multicolor-label")
-          .attr("fill", "black")
-          .text(function(d){
-            return d.dependencia.trim() ? (d.dependencia + " : " + d.total) : Rect.empty;
-          })
-          .attr("x", Margins.left)
-          .attr("y", function(d, i){
-            return (Rect.slot * i) + Margins.top;
-          });
-
-      this.multicolor_labels
-          .text(function(d){
-            return d.dependencia.trim() ? (d.dependencia + " : " + d.total) : Rect.empty;
-          });
-
-      this.multicolor_labels.exit().remove();
-
       return;
     },
 
@@ -354,13 +414,13 @@ define(function(require){
       //console.log(_.uniq(_.pluck(this.__data, "dependencia")));
 
       var that          = this,
-          _sentidos     = _.uniq(_.pluck(this.__data, "sentido_de_la_resolucion")), // solicitudes
-          _dependencias = _.uniq(_.pluck(this.__data, "dependencia")),
+          Resolutions   = _.uniq(_.pluck(this.__data, "sentido_de_la_resolucion")), // solicitudes
+          _comisionados = _.uniq(_.pluck(this.__data, "comisionado")),
           
-          dependencias  = _dependencias.map(function(d){
+          comisionados  = _comisionados.map(function(d){
             var r = {
-              dependencia : d,
-              data        : _.where(this.__data, {dependencia : d})
+              comisionado : d,
+              data        : _.where(this.__data, {comisionado : d})
             };
 
             
@@ -504,12 +564,16 @@ define(function(require){
               },
             ];
             */
+
+
             return r;
           }, this);
 
-      dependencias = _.sortBy(dependencias, function(s){return -s.total});
+      comisionados = _.sortBy(comisionados, function(s){return -s.total});
 
-      this.data    = dependencias;//.slice(0, 100);
+      this.data    = comisionados;//.slice(0, 100);
+
+
       //this.options = solicitudes;
     },
   });

@@ -113,39 +113,31 @@ define(function(require){
       time[1]     = +time[1];
 
       // [3] create the graphs
-      //this.heatmap_a  = new HeatMap({controller  : this, el : "#heatmap-a"});
-      //this.top10bars   = new Top10bar({controller : this, el : "#top10bar", dataURL : URLS.top10bars});
-      ////////this.colorBar_a  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.medios});
-      //this.colorBar_b  = new MultiBar({controller : this, el : "#top10bar_b", dataURL : URLS.respuesta, type : "respuesta"});
       this.requests  = new TimelineC({controller : this, el : "#rr_total", dataURL : URLS.solicitudes});
       this.sujeto    = new TreeMapB({controller : this, el : "#treemap-a", dataURL : URLS.sujetoObligado});
 
-      this.timeline  = new Timeline({controller : this, el : "#timeline-a", dataURL : URLS.top10Historico});
-      //this.treemap_a   = new TreeMap({controller  : this, el : "#treemap-a", dataURL : URLS.treemap});
-      //this.treemap_b   = new TreeMap({controller  : this, el : "#treemap-b", dataURL : URLS.respuesta, type : "tipo_sujeto"});
+      this.timeline     = new Timeline({controller : this, el : "#timeline-a", dataURL : URLS.top10Historico});
+      this.top10        = new Top10bar({controller : this, el : "#top10bar", dataURL : URLS.top10Total});
+      this.comisionados = new MultiBarB({controller : this, el : "#top10bar_b", dataURL : URLS.comisionados});
+     
       this.occupation  = new Occupation({controller : this, el : "#occupation-bar", dataURL : URLS.occupation});
       this.gender      = new Gender({controller : this, el : "#gender-bar", dataURL : URLS.gender});
-      //this.occupation  = new Timeline({controller : this, el : "#timeline-b", dataURL : URLS.timeline});
 
-      this.graphsCollection = [this.requests, this.sujeto, /*this.top10bars, this.treemap_a,*/ this.occupation, 
-                               this.gender, /*this.colorBar_b,*/ this.timeline];
+      this.graphsCollection = [this.requests, this.sujeto, this.comisionados,this.occupation, 
+                               this.gender, this.timeline, this.top10];
       // [4] set the current graph and endpoint
       this.current_graph = this.requests;
       this.current_url   = URLS.solicitudes;
 
       // [5] load the data
-      //this.get_data(time, this.heatmap_a, URLS.heatmap);
-      //this.get_data(time, this.top10bars, URLS.top10bars);
-      ////////this.get_data(time, this.colorBar_a, URLS.medios);
-      //this.get_data(time, this.colorBar_b, URLS.respuesta);
-      //this.get_data(time, this.treemap_a, URLS.treemap);
-      //this.get_data(time, this.treemap_b, URLS.respuesta);
+      
       this.get_data(time, this.requests, URLS.solicitudes);
       this.get_data(time, this.sujeto, URLS.sujetoObligado);
 
       this.get_data(time, this.occupation, URLS.occupation);
       this.get_data(time, this.gender, URLS.gender);
-      //this.get_data(time, this.top10bars_b, URLS.top10bars);
+      this.get_data(time, this.top10, URLS.top10Total);
+      this.get_data(time, this.comisionados, URLS.comisionados);
 
       this.get_data(time, this.timeline, URLS.top10Historico);
 
@@ -358,7 +350,6 @@ define(function(require){
       //var name_container  = $(e.target).data('container'),
       var name_container = e.target.getAttribute("data-container");
          var vizType        = document.getElementById(name_container);
-         console.log(name_container, vizType);
           var vizName        = vizType.getAttribute("data-graph");
       
       this.updateCurrentGraph(vizName);
@@ -373,9 +364,7 @@ define(function(require){
     
     updateCurrentGraph : function(viz){
       //return;
-      console.log(viz);
       var g = this.graphsCollection.filter(function(graph){
-        console.log(graph);
         return graph.el.id == viz;
       });
 
