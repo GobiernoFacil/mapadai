@@ -20,7 +20,9 @@ define(function(require){
   //
   First_time    = true,
   Format        = d3.format(","),
+  Format2       = d3.format(".2%"),
   Current_range = null,
+  Resolutions   = null,
   Margins    = {
     width    : 600,
     height   : 600,
@@ -35,7 +37,6 @@ define(function(require){
     height : 10,
     fill   : "#3498DB",
     colors : ["#225378","#3498DB", "#1695A3" , "#EB7F00", "#FF6138",  "#CE003C", "#79BD8F", "#00A388","#7E8AA2", "#2C3E50", "#CCC"],
-    Resolutions : null,
     fillw  : "#981F7C",
     slot   : 30, // el espacio entre rectángulo y rectángulo
     empty  : "sin especificar" 
@@ -88,6 +89,10 @@ define(function(require){
       if(!this.svg){
         this.svg = this.make_svg(Margins);
       }
+      else{
+        console.log("Q!!!!", Margins.height);
+        this.el.querySelector("svg").setAttribute("height", Margins.height);
+      }
 
       // Las líneas verticales
       this.svg.selectAll(".multicolor-ticks").remove();
@@ -135,81 +140,57 @@ define(function(require){
           .attr("x", 0)
           .attr("y", Margins.height - Margins.bottom);
 
-      /*
-      this.bars = this.svg.selectAll(".multicolor-rect-media").data(this.data);
-      this.bars.enter()
-        .append("rect")
-          .attr("class", "multicolor-rect-media")
-          .attr("fill", Rect.fillw)
-          .attr("width", function(d){
-            return that.scale(d.total);
-          })
-          .attr("height", Rect.height)
-          .attr("x", Margins.left)
-          .attr("y", function(d, i){
-            return (Rect.slot * i) + Margins.top + 5;
-          });
 
-      this.bars.attr("width", function(d){
-            return that.scale(d.total);
-          });
-         
-
-      this.bars.exit().remove();
-      */
-
+      this.svg.selectAll(".remove-me").remove();
 
       this.data.forEach(function(comisionado, i){
         // Resolutions
-        var bleed = Margins.left;
-        
+        this.svg.selectAll(".multicolor-rect-media-" + i).remove();
+
         var b = this.svg.selectAll(".multicolor-rect-media-" + i).data(comisionado.data);
-        //comisionado.data.forEach(function(resolucion, j){
 
-          //console.log(resolucion);
-          /*
-          var b = this.svg.selectAll(".multicolor-rect-media-" + j).data(resoluciones);
-          
-          b.enter()
+        b.enter()
            .append("rect")
-           .attr("class", "multicolor-rect-media" + j)
-           .attr("fill", colors[j])
+           .attr("class", function(d){
+            return "remove-me multicolor-rect-media-" + i;
+           })
+           .attr("fill", function(d, j){
+            return Rect.colors[Resolutions.indexOf(d.sentido_de_la_resolucion)];
+           })
            .attr("width", function(d){
+            //bleed+=that.scale(d.total);
             return that.scale(d.total);
           })
           .attr("height", Rect.height)
-          .attr("x", bleed)
-          .attr("y", function(d, i){
+          .attr("x", function(d,j){
+            var padding = Margins.left;
+            for(var k =0; k<j;k++){
+              padding+= that.scale(comisionado.data[k].total);
+            }
+
+            return padding;
+          })
+          .attr("y", function(d){
             return (Rect.slot * i) + Margins.top + 5;
-          });
+          })
 
-          bleed+= this.scale();
-          */
-
-
+          .on("mouseover", function(d){
+            that.controller.create_tooltip({
+              
+              title   : d.sentido_de_la_resolucion,
+              content : "resoluciones: " + Format(d.total) + "(" + Format2(d.total/comisionado.total) +")"
+            });
+          })
           /*
-          this.bars = this.svg.selectAll(".multicolor-rect-media").data(this.data);
-      this.bars.enter()
-        .append("rect")
-          .attr("class", "multicolor-rect-media")
-          .attr("fill", Rect.fillw)
-          .attr("width", function(d){
-            return that.scale(d.total);
+          .on("mousemove", function(d){
+            that.controller.move_tooltip();
           })
-          .attr("height", Rect.height)
-          .attr("x", Margins.left)
-          .attr("y", function(d, i){
-            return (Rect.slot * i) + Margins.top + 5;
-          });
-
-      this.bars.attr("width", function(d){
-            return that.scale(d.total);
-          });
-         
-
-      this.bars.exit().remove();
           */
-        //}, this);
+          .on("mouseout", function(d){
+            that.controller.remove_tooltip();
+          });
+
+        b.exit().remove();
       }, this);
 
 
@@ -233,146 +214,6 @@ define(function(require){
           });
 
       this.multicolor_labels.exit().remove();
-
-
-
-      return;
-      /********/
-      this.barsA = this.svg.selectAll(".A-rect-media").data(this.data);
-
-      this.barsA.attr("width", function(d){
-               return that.scale(d.totalA);
-          });
-
-      this.barsA.enter()
-        .append("rect")
-          .attr("class", "A-rect-media")
-          .attr("fill", Rect.colors[0])
-          //.attr("fill-opacity", "0.5")
-          .attr("width", function(d){
-               return that.scale(d.totalA);
-          })
-          .attr("height", Rect.height)
-          .attr("x", Margins.left)
-          .attr("y", function(d, i){
-            return (Rect.slot * i) + Margins.top + 5;
-          })
-          .on("mouseover", function(d){
-            that.controller.create_tooltip({
-              title   : "Datos personales",
-              content : Format(d.totalA) + " de " + Format(d.total) + "<br>" + 
-                        "<strong>" + d.dataA[0].type + ":</strong> " + Format(d.dataA[0].num) + "<br>" + 
-                        "<strong>" + d.dataA[1].type + ":</strong> " + Format(d.dataA[1].num) + "<br>" + 
-                        "<strong>" + d.dataA[2].type + ":</strong> " + Format(d.dataA[2].num) + "<br>" + 
-                        "<strong>" + d.dataA[3].type + ":</strong> " + Format(d.dataA[3].num)
-            });
-          })
-          .on("mousemove", function(d){
-            that.controller.move_tooltip();
-          })
-          .on("mouseout", function(d){
-            that.controller.remove_tooltip();
-          });
-
-         
-
-      this.barsA.exit().remove();
-
-
-      this.barsB = this.svg.selectAll(".B-rect-media").data(this.data);
-
-      this.barsB.attr("width", function(d){
-               return that.scale(d.totalB);
-          }).attr("x", function(d){
-            return Margins.left + that.scale(d.totalA)
-          });
-
-      this.barsB.enter()
-        .append("rect")
-          .attr("class", "B-rect-media")
-          .attr("fill", Rect.colors[1])
-          //.attr("fill-opacity", "0.5")
-          .attr("width", function(d){
-               return that.scale(d.totalB);
-          })
-          .attr("height", Rect.height)
-          .attr("x", function(d){
-            return Margins.left + that.scale(d.totalA)
-          })
-          .attr("y", function(d, i){
-            return (Rect.slot * i) + Margins.top + 5;
-          })
-          .on("mouseover", function(d){
-            that.controller.create_tooltip({
-              
-              title   : "Infomación pública",
-              content : Format(d.totalB) + " de " + Format(d.total)+ "<br>" + 
-                        "<strong>" + d.dataB[0].type + ":</strong> " + Format(d.dataB[0].num) + "<br>" + 
-                        "<strong>" + d.dataB[1].type + ":</strong> " + Format(d.dataB[1].num) + "<br>" + 
-                        "<strong>" + d.dataB[2].type + ":</strong> " + Format(d.dataB[2].num) + "<br>" + 
-                        "<strong>" + d.dataB[3].type + ":</strong> " + Format(d.dataB[3].num)
-            });
-          })
-          .on("mousemove", function(d){
-            that.controller.move_tooltip();
-          })
-          .on("mouseout", function(d){
-            that.controller.remove_tooltip();
-          });;
-
-         
-
-      this.barsB.exit().remove();
-
-
-
-      this.barsC = this.svg.selectAll(".C-rect-media").data(this.data);
-
-      this.barsC.attr("width", function(d){
-               return that.scale(d.totalC);
-          }).attr("x", function(d){
-            return Margins.left + that.scale(d.totalA) + that.scale(d.totalB)
-          });
-
-      this.barsC.enter()
-        .append("rect")
-          .attr("class", "C-rect-media")
-          .attr("fill", Rect.colors[2])
-          //.attr("fill-opacity", "0.5")
-          .attr("width", function(d){
-               return that.scale(d.totalC);
-          })
-          .attr("height", Rect.height)
-          .attr("x", function(d){
-            return Margins.left + that.scale(d.totalA) + that.scale(d.totalB)
-          })
-          .attr("y", function(d, i){
-            return (Rect.slot * i) + Margins.top + 5;
-          })
-          .on("mouseover", function(d){
-            that.controller.create_tooltip({
-              title   : "Corrección a Datos Personales",
-              content : Format(d.totalC) + " de " + Format(d.total)+ "<br>" + 
-                        "<strong>" + d.dataC[0].type + ":</strong> " + Format(d.dataC[0].num) + "<br>" + 
-                        "<strong>" + d.dataC[1].type + ":</strong> " + Format(d.dataC[1].num) + "<br>" + 
-                        "<strong>" + d.dataC[2].type + ":</strong> " + Format(d.dataC[2].num) + "<br>" + 
-                        "<strong>" + d.dataC[3].type + ":</strong> " + Format(d.dataC[3].num)
-            });
-          })
-          .on("mousemove", function(d){
-            that.controller.move_tooltip();
-          })
-          .on("mouseout", function(d){
-            that.controller.remove_tooltip();
-          });;
-
-         
-
-      this.barsC.exit().remove();
-
-
-      /****/
-
       return;
     },
 
@@ -408,19 +249,14 @@ define(function(require){
 
     map_data : function(){
 
-      // total
-      //console.log(_.uniq(_.pluck(this.__data, "sentido_de_la_resolucion")));
-      //console.log(_.uniq(_.pluck(this.__data, "sector")));
-      //console.log(_.uniq(_.pluck(this.__data, "dependencia")));
-
       var that          = this,
-          Resolutions   = _.uniq(_.pluck(this.__data, "sentido_de_la_resolucion")), // solicitudes
           _comisionados = _.uniq(_.pluck(this.__data, "comisionado")),
           
-          comisionados  = _comisionados.map(function(d){
+          comisionados  = _comisionados.map(function(d,i){
             var r = {
               comisionado : d,
-              data        : _.where(this.__data, {comisionado : d})
+              data        : _.sortBy(_.where(this.__data, {comisionado : d}), "sentido_de_la_resolucion"),
+              id          : d+i
             };
 
             
@@ -429,149 +265,13 @@ define(function(require){
                         var b = b.total ? Number(b.total) : b;
                         return a + b;
                       }, 0);
-/*
-            r.totalA = _.pluck(r.data.filter(function(s){
-                             return s.tiposolicitud == solicitudes[0];
-                           }), "total").reduce(function(a, b){
-                             return Number(a) + Number(b);
-                           }, 0);
-
-            r.totalB = _.pluck(r.data.filter(function(s){
-                             return s.tiposolicitud == solicitudes[1];
-                           }), "total").reduce(function(a, b){
-                             return Number(a) + Number(b);
-                           }, 0);
-
-            r.totalC = _.pluck(r.data.filter(function(s){
-                             return s.tiposolicitud == solicitudes[2];
-                           }), "total").reduce(function(a, b){
-                             return Number(a) + Number(b);
-                           }, 0);
-            r.dataA = [
-              {
-                type : _respuestas[0],
-                num  :  _.pluck(r.data.filter(function(s){
-                                  return s.tiposolicitud == solicitudes[0] && s.tiporespuesta == _respuestas[0];
-                                }), "total")
-                                .reduce(function(a, b){
-                                  return Number(a) + Number(b);
-                                }, 0)
-              },
-              {
-                type : _respuestas[1],
-                num  :  _.pluck(r.data.filter(function(s){
-                                  return s.tiposolicitud == solicitudes[0] && s.tiporespuesta == _respuestas[1];
-                                }), "total")
-                                .reduce(function(a, b){
-                                  return Number(a) + Number(b);
-                                }, 0)
-              },
-              {
-                type : _respuestas[2],
-                num  :  _.pluck(r.data.filter(function(s){
-                                  return s.tiposolicitud == solicitudes[0] && s.tiporespuesta == _respuestas[2];
-                                }), "total")
-                                .reduce(function(a, b){
-                                  return Number(a) + Number(b);
-                                }, 0)
-              },
-              {
-                type : _respuestas[3],
-                num  :  _.pluck(r.data.filter(function(s){
-                                  return s.tiposolicitud == solicitudes[0] && s.tiporespuesta == _respuestas[3];
-                                }), "total")
-                                .reduce(function(a, b){
-                                  return Number(a) + Number(b);
-                                }, 0)
-              },
-            ];
-
-            r.dataB = [
-              {
-                type : _respuestas[0],
-                num  :  _.pluck(r.data.filter(function(s){
-                                  return s.tiposolicitud == solicitudes[1] && s.tiporespuesta == _respuestas[0];
-                                }), "total")
-                                .reduce(function(a, b){
-                                  return Number(a) + Number(b);
-                                }, 0)
-              },
-              {
-                type : _respuestas[1],
-                num  :  _.pluck(r.data.filter(function(s){
-                                  return s.tiposolicitud == solicitudes[1] && s.tiporespuesta == _respuestas[1];
-                                }), "total")
-                                .reduce(function(a, b){
-                                  return Number(a) + Number(b);
-                                }, 0)
-              },
-              {
-                type : _respuestas[2],
-                num  :  _.pluck(r.data.filter(function(s){
-                                  return s.tiposolicitud == solicitudes[1] && s.tiporespuesta == _respuestas[2];
-                                }), "total")
-                                .reduce(function(a, b){
-                                  return Number(a) + Number(b);
-                                }, 0)
-              },
-              {
-                type : _respuestas[3],
-                num  :  _.pluck(r.data.filter(function(s){
-                                  return s.tiposolicitud == solicitudes[1] && s.tiporespuesta == _respuestas[3];
-                                }), "total")
-                                .reduce(function(a, b){
-                                  return Number(a) + Number(b);
-                                }, 0)
-              },
-            ];
-
-            r.dataC = [
-              {
-                type : _respuestas[0],
-                num  :  _.pluck(r.data.filter(function(s){
-                                  return s.tiposolicitud == solicitudes[2] && s.tiporespuesta == _respuestas[0];
-                                }), "total")
-                                .reduce(function(a, b){
-                                  return Number(a) + Number(b);
-                                }, 0)
-              },
-              {
-                type : _respuestas[1],
-                num  :  _.pluck(r.data.filter(function(s){
-                                  return s.tiposolicitud == solicitudes[2] && s.tiporespuesta == _respuestas[1];
-                                }), "total")
-                                .reduce(function(a, b){
-                                  return Number(a) + Number(b);
-                                }, 0)
-              },
-              {
-                type : _respuestas[2],
-                num  :  _.pluck(r.data.filter(function(s){
-                                  return s.tiposolicitud == solicitudes[2] && s.tiporespuesta == _respuestas[2];
-                                }), "total")
-                                .reduce(function(a, b){
-                                  return Number(a) + Number(b);
-                                }, 0)
-              },
-              {
-                type : _respuestas[3],
-                num  :  _.pluck(r.data.filter(function(s){
-                                  return s.tiposolicitud == solicitudes[2] && s.tiporespuesta == _respuestas[3];
-                                }), "total")
-                                .reduce(function(a, b){
-                                  return Number(a) + Number(b);
-                                }, 0)
-              },
-            ];
-            */
-
-
             return r;
           }, this);
 
       comisionados = _.sortBy(comisionados, function(s){return -s.total});
 
       this.data    = comisionados;//.slice(0, 100);
+      Resolutions  = _.uniq(_.pluck(this.__data, "sentido_de_la_resolucion")); // solicitudes
 
 
       //this.options = solicitudes;

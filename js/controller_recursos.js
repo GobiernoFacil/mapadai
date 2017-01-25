@@ -266,6 +266,14 @@ define(function(require){
       this.$el.append(el);
     },
 
+    move_tooltip : function(data){
+      $(".tooltip-container").css({
+        left : d3.event.pageX + "px",
+        top  : d3.event.pageY + "px",
+        position: "absolute"
+      });
+    },
+
     //
     // [ BYE TOOLTIP! ]
     //
