@@ -140,7 +140,7 @@
 										<p>Chihuahua</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 										<div class="status_ok">
@@ -195,7 +195,7 @@
 										<p>Durango</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 									</div>
@@ -232,7 +232,7 @@
 										<p>Guerrero</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 									</div>
@@ -269,7 +269,7 @@
 										<p>Michoacán</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 										<div class="status_ok">
@@ -312,7 +312,7 @@
 										<p>Nuevo León</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 									</div>
@@ -337,13 +337,13 @@
 										<p>Puebla</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 								</li>
 								<!--Querétaro-->
@@ -352,7 +352,7 @@
 										<p>Querétaro</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 									</div>
@@ -389,7 +389,7 @@
 										<p>Sinaloa</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 									</div>
@@ -414,7 +414,7 @@
 										<p>Tabasco</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 									</div>
@@ -451,13 +451,13 @@
 										<p>Veracruz</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 								</li>
 								<!--Yucatán-->
@@ -478,7 +478,7 @@
 										<p>Zacatecas</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 									</div>
