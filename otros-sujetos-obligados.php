@@ -68,7 +68,7 @@
 										<p>Auditoria Superior de la Federación</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 										<div class="status_ok">
@@ -99,7 +99,7 @@
 										<p>Banco de México</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 										<div class="status_ok">
@@ -133,7 +133,7 @@
 										<p>Instituto Nacional de Estadística y Geografía</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 										<div class="status_ok">
@@ -152,7 +152,7 @@
 										<p>Instituto Nacional para la Evaluación de la Educación</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 										<div class="status_ok">
@@ -171,10 +171,10 @@
 										<p>Comisión Federal de Competencia Económica</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 										<div class="status_ok">
@@ -188,10 +188,10 @@
 										<p>Instituto Federal de Telecomunicaciones</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 										<div class="status_ok">
@@ -217,7 +217,7 @@
 										<p>Tribunal Federal de Justicia Fiscal y Administrativa</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 										<div class="status_ok">
@@ -236,7 +236,7 @@
 										<p>Tribunal Superior Agrario</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 										<div class="status_ok">
@@ -267,7 +267,7 @@
 										<p>Tribunal Electoral del Poder Judicial de la Federación</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 										<div class="status_ok">
@@ -286,7 +286,7 @@
 										<p>Consejo de la Judicatura Federal</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 									</div>
@@ -299,7 +299,7 @@
 										<p>Universidad Nacional Autónoma de México</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 									</div>
@@ -312,7 +312,7 @@
 										<p>Universidad Autónoma de Chapingo</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 									</div>
@@ -325,7 +325,7 @@
 										<p>Instituto Nacional Electoral</p>
 									</div>
 									<div class="col-sm-2">
-										<div class="status_ok"></div>
+										<!--<div class="status_ok"></div>-->
 									</div>
 									<div class="col-sm-2">
 										<div class="status_ok">
