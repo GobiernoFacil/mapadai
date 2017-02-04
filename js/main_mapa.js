@@ -343,14 +343,74 @@ var appINAI = {
   fillSelect : function(){
     for(var prop in this.dataMap){
       if( this.dataMap.hasOwnProperty( prop ) ) {
-	   /*   switch (prop) {
-		      case "solicitudes":
-		      	prop = "Solicitudes de Información";
-		      	break;
-	      }*/
+
+        var innerHTML = null;
+
+        switch(prop){
+          case  "solicitudes":
+            innerHTML = "Solicitudes de acceso a la información";
+            break;
+          case  "recursos":
+            innerHTML = "Recursos de revisión";
+            break;
+          case  "indice":
+            innerHTML = "Índice de recurrencia";
+            break;
+          case  "percapita":
+            innerHTML = "Presupuesto asignado al órgano garante per cápita";
+            break;
+          case  "resolucion_sobreseer":
+            innerHTML = "Recursos de revisión sobreseídos";
+            break;
+          case  "resolucion_desechar":
+            innerHTML = "Recursos de revisión desechados";
+            break;
+          case  "resolucion_revocar":
+            innerHTML = "Resoluciones que revocan la respuesta del Sujeto Obligado";
+            break;
+          case  "resolucion_confirmar":
+            innerHTML = "Resoluciones que confirman la respuesta del Sujeto Obligado";
+            break;
+          case  "resolucion_modificar":
+            innerHTML = "Resoluciones que modifican la respuesta del Sujeto Obligado";
+            break;
+          case  "resolucion_tramite":
+            innerHTML = "Resoluciones reportadas en trámite (2014)";
+            break;
+          case  "resolucion_no_interpuesto":
+            innerHTML = "ecursos de revisión no interpuestos";
+            break;
+          case  "resolucion_orden_entregar":
+            innerHTML = "Resoluciones que ordenan entrega de información";
+            break;
+          case  "resolucion_revocar_parcial":
+            innerHTML = "Resoluciones que revocan parcialmente la respuesta del Sujeto Obligado";
+            break;
+          case  "resolucion_revocados":
+            innerHTML = "Resoluciones que revocan la respuesta del Sujeto Obligado";
+            break;
+          case  "resolucion_improcedente":
+            innerHTML = "Recursos de revisión desechados";
+            break;
+          case  "resolucion_desechado":
+            innerHTML = "Recursos de revisión desechados";
+            break;
+          case  "resolucion_confirmar_respuesta":
+            innerHTML = "Resoluciones que confirman la respuesta del Sujeto Obligado";
+            break;
+          case  "presupuesto":
+            innerHTML = "Presupuesto del órgano garante";
+            break;
+          default:
+            innerHTML = prop;
+            break;
+        }
+
 	      
         var opt = document.createElement("option");
-        opt.innerHTML = prop;
+        opt.innerHTML = innerHTML;//prop;
+        opt.value     = prop;
+        console.log(prop);
         this._select.appendChild(opt);
       } 
     }
