@@ -1,7 +1,7 @@
 <div id="bydate_solicitudes" class="viz" data-viz="new" data-graph="rr_total">
 	<div class="row">
 		<div class="col-sm-12">
-			<h3>Recursos de revisión por solicitudes de información: <span class="year-range">2012 - 2015</span></h3>
+			<h3>Recursos de revisión por solicitudes de información: <span class="year-range">2007 - 2015</span></h3>
 			<p class="lead">Estadísticas básicas sobre recursos de revisión</p>
 		</div>
 		<div class="col-sm-4 col-sm-offset-4">

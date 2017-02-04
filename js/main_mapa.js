@@ -410,7 +410,6 @@ var appINAI = {
         var opt = document.createElement("option");
         opt.innerHTML = innerHTML;//prop;
         opt.value     = prop;
-        console.log(prop);
         this._select.appendChild(opt);
       } 
     }
@@ -506,7 +505,6 @@ var appINAI = {
         d3.event.preventDefault();
 		$("a.year").removeClass("current");
 	    this.className = "year current";
-        console.log(that.index);
         that.updateMap(this.getAttribute("data-year"));
       });
   },

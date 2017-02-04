@@ -243,7 +243,9 @@ define(function(require){
     //
     //
     update_time_ui : function(r){
-      this.$(".year-range").html((+r[0]) + " - " + (+r[1]));
+      // esta función se comenta para no actualizar el título de la gráfica
+      // (y no confundir entre el total de datos disponibles y la selección actual)
+      //this.$(".year-range").html((+r[0]) + " - " + (+r[1]));
       this.slider.noUiSlider.set(r);
     },
 

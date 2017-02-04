@@ -88,7 +88,6 @@ define(function(require){
       this.currentLabels = [];
       this.section       = settings.section;
       this.type          = settings.type;
-      // console.log("cats: ", Categories);
     },
 
     //
@@ -102,7 +101,6 @@ define(function(require){
       this._data = Data;
       this.__data = d;
       this.prepare_data(d);
-      // console.log("cats update: ", Categories);
 
       if(this.first_time){
         this.set_scales(d);
@@ -160,7 +158,6 @@ define(function(require){
     //
     prepare_data : function(data){
       if(this.type == "tipo_sujeto"){
-        console.log(":D");
         data.forEach(function(d){
           d.year        = d.anio;
           d.month       = 1;
@@ -277,8 +274,6 @@ define(function(require){
             .domain(ext)
             .range([Margins.left, Margins.width - Margins.left - Margins.right]);
             //.ticks(d3.time.year, 1);
-
-      // console.log(ext);
 
       this.scales = [x, y];
     },

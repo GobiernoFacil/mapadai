@@ -1,7 +1,7 @@
 <div id="profile_genre_content" class="viz" data-viz="gender-bar" data-graph="gender-bar">
   <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
-      <h3>Recursos de revisión por sexo y grupo de edad <span class="year-range">2013 - 2015</span></h3>
+      <h3>Recursos de revisión por sexo y grupo de edad <span class="year-range">2007 - 2015</span></h3>
       <!--<a href="#" class="download" download><b></b>Descargar datos</a>-->     
       <p class="lead">Perfil de los recurrentes</p>  
     </div>
