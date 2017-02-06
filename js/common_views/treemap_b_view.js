@@ -90,6 +90,8 @@ define(function(require){
     },
 
     mapData : function(d){
+      this._data = d;
+      
       var sentidos     = _.uniq(_.pluck(d, "sentido_de_la_resolucion"));
       var sectores     = _.uniq(_.pluck(d, "sector"));
       var dependencias = _.filter(_.uniq(_.pluck(d, "dependencia")), function(fr){ return fr});
@@ -103,7 +105,7 @@ define(function(require){
 
       parent.children.forEach(function(ch){
         var data  = _.where(d, {sector : ch.name});
-        var names = _.pluck(data, "dependencia");
+        var names = _.uniq(_.pluck(data, "dependencia"));
         var children = names.map(function(name){
           return {
             name     : name
@@ -111,6 +113,12 @@ define(function(require){
         });
 
         children.forEach(function(_ch){
+
+          var _children = _.where(d, {sector : ch.name, dependencia: _ch.name}),
+              sentidos  = _.pluck(_children, "sentido_de_la_resolucion");
+
+              console.log(sentidos);
+
           _ch.children = _.where(d, {sector : ch.name, dependencia: _ch.name}).map(function(m){
             return {
               name  : m.sentido_de_la_resolucion,
