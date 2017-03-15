@@ -50,7 +50,7 @@
 		<nav class="nav subnav re">
 			<ul class="sub_nav">
 				<li><a href="#" class="current" data-container="sessions_number">Número de sesiones</a></li>
-				<li><a href="#" data-container="sessions_day">Por día y hora</a></li>
+				<!--<li><a href="#" data-container="sessions_day">Por día y hora</a></li>-->
 				<!--<li><a href="#" data-container="sessions_time">Tiempo por sesión</a></li>-->
 			</ul>
 		</nav>

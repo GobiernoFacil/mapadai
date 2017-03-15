@@ -17,7 +17,7 @@
 	<div class="selector_year">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-4">
+				<div class="col-xs-8">
 					<!-- los controles temporales -->
 					<form>
 					  <select>

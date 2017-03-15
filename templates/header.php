@@ -48,7 +48,7 @@
         <!--qué es-->
         <li><a href="/que-es.php" title="#MapaDAImx">¿Qué es #MapaDAImx?</a></li>
         <!--pot-->
-        <li><a href="/pot.php" title="POT">Portal de obligaciones y transparencia</a> </li>
+        <li><a href="/pot.php" title="POT">Portal de obligaciones de transparencia</a> </li>
         <!--INFOMEX-->
         <li><a href="/infomex.php" title="INFOMEX">Solicitudes de información</a></li>
         <!--Recursos de revisión-->

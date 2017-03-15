@@ -101,7 +101,8 @@ define(function(require){
       time[1] = +time[1];
 
       // [3] create the graphs
-      this.heatmap_a   = new HeatMap({controller  : this, el : "#heatmap-a"});
+      // se oculta el heatmap por falta de datos
+      //this.heatmap_a   = new HeatMap({controller  : this, el : "#heatmap-a"});
       this.top10bars   = new Top10bar({controller : this, el : "#treemap-a"});
       this.top10bars_b = new Top10bar({controller : this, el : "#treemap-b"});
       this.timeline_b  = new Top10bar({controller : this, el : "#timeline-b"});
@@ -117,7 +118,7 @@ define(function(require){
       // [5] load the data
       this.get_data(time, this.timeline_a, URLS.linechart);
       
-      this.get_data(time, this.heatmap_a, URLS.heatmap);
+      //this.get_data(time, this.heatmap_a, URLS.heatmap);
       this.get_data(time, this.top10bars, URLS.sujetoObligado);
       this.get_data(time, this.top10bars_b, URLS.fraccion);
       this.get_data(time, this.timeline_b, URLS.top10);
